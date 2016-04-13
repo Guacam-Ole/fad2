@@ -59,5 +59,15 @@ namespace fad2.UI.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] metro {
+            get {
+                object obj = ResourceManager.GetObject("metro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
