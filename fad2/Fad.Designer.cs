@@ -1,4 +1,4 @@
-﻿namespace fad2
+﻿namespace fad2.UI
 {
     partial class Fad
     {
@@ -31,10 +31,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cardSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fADSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.apiDocumentationforDevelopersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,8 +42,14 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BackPicture = new System.Windows.Forms.PictureBox();
+            this.ConnectionPanel = new MetroFramework.Controls.MetroPanel();
+            this.ConnectionHelp = new MetroFramework.Controls.MetroLabel();
+            this.ConnectionTile = new MetroFramework.Controls.MetroTile();
+            this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BackPicture)).BeginInit();
+            this.ConnectionPanel.SuspendLayout();
+            this.ConnectionTile.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -73,31 +79,31 @@
             this.cardSettingsToolStripMenuItem,
             this.fADSettingsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.closeToolStripMenuItem.Text = "Close";
             // 
             // cardSettingsToolStripMenuItem
             // 
             this.cardSettingsToolStripMenuItem.Name = "cardSettingsToolStripMenuItem";
-            this.cardSettingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cardSettingsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.cardSettingsToolStripMenuItem.Text = "Card Settings";
             // 
             // fADSettingsToolStripMenuItem
             // 
             this.fADSettingsToolStripMenuItem.Name = "fADSettingsToolStripMenuItem";
-            this.fADSettingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fADSettingsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.fADSettingsToolStripMenuItem.Text = "FAD Settings";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(113, 6);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.closeToolStripMenuItem.Text = "Close";
             // 
             // toolStripMenuItem2
             // 
@@ -152,19 +158,68 @@
             this.BackPicture.TabIndex = 1;
             this.BackPicture.TabStop = false;
             // 
+            // ConnectionPanel
+            // 
+            this.ConnectionPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ConnectionPanel.Controls.Add(this.ConnectionHelp);
+            this.ConnectionPanel.Controls.Add(this.ConnectionTile);
+            this.ConnectionPanel.HorizontalScrollbarBarColor = true;
+            this.ConnectionPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.ConnectionPanel.HorizontalScrollbarSize = 10;
+            this.ConnectionPanel.Location = new System.Drawing.Point(421, 261);
+            this.ConnectionPanel.Name = "ConnectionPanel";
+            this.ConnectionPanel.Size = new System.Drawing.Size(333, 131);
+            this.ConnectionPanel.TabIndex = 3;
+            this.ConnectionPanel.VerticalScrollbarBarColor = true;
+            this.ConnectionPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.ConnectionPanel.VerticalScrollbarSize = 10;
+            // 
+            // ConnectionHelp
+            // 
+            this.ConnectionHelp.AutoSize = true;
+            this.ConnectionHelp.Location = new System.Drawing.Point(3, 91);
+            this.ConnectionHelp.Name = "ConnectionHelp";
+            this.ConnectionHelp.Size = new System.Drawing.Size(324, 19);
+            this.ConnectionHelp.TabIndex = 5;
+            this.ConnectionHelp.Text = "Check the Help if you cannot Connect to your FlashAir";
+            this.ConnectionHelp.Visible = false;
+            // 
+            // ConnectionTile
+            // 
+            this.ConnectionTile.Controls.Add(this.metroProgressSpinner1);
+            this.ConnectionTile.Location = new System.Drawing.Point(3, 3);
+            this.ConnectionTile.Name = "ConnectionTile";
+            this.ConnectionTile.Size = new System.Drawing.Size(324, 73);
+            this.ConnectionTile.TabIndex = 4;
+            this.ConnectionTile.Text = "Connecting...";
+            // 
+            // metroProgressSpinner1
+            // 
+            this.metroProgressSpinner1.Location = new System.Drawing.Point(138, 17);
+            this.metroProgressSpinner1.Maximum = 100;
+            this.metroProgressSpinner1.Name = "metroProgressSpinner1";
+            this.metroProgressSpinner1.Size = new System.Drawing.Size(56, 30);
+            this.metroProgressSpinner1.TabIndex = 6;
+            // 
             // Fad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1188, 616);
+            this.Controls.Add(this.ConnectionPanel);
             this.Controls.Add(this.BackPicture);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(500, 350);
             this.Name = "Fad";
             this.Text = "FlashAirDownloader";
+            this.Resize += new System.EventHandler(this.Fad_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BackPicture)).EndInit();
+            this.ConnectionPanel.ResumeLayout(false);
+            this.ConnectionPanel.PerformLayout();
+            this.ConnectionTile.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,6 +241,10 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
         private System.Windows.Forms.PictureBox BackPicture;
+        private MetroFramework.Controls.MetroPanel ConnectionPanel;
+        private MetroFramework.Controls.MetroTile ConnectionTile;
+        private MetroFramework.Controls.MetroLabel ConnectionHelp;
+        private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
     }
 }
 

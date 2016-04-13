@@ -1,4 +1,5 @@
-﻿using System;
+﻿using fad.Backend;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,19 +10,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace fad2
+namespace fad2.UI
 {
     public partial class Fad : MetroFramework.Forms.MetroForm
     {
         private List<string> _imageLoop;
-        private string _currentBackImage;
         Timer _imageSwitchTimer;
         Random _random = new Random();
+        private int _failCount = 0;
+        private bool _connected = false;
 
         public Fad()
         {
             InitializeComponent();
             ImageSwitcher();
+            Application.DoEvents();
+            StartConnection();
         }
 
         private void ImageSwitcher()
@@ -70,13 +74,70 @@ namespace fad2
                 g.Save();
             }
 
-
             return image;
         }
 
         private void ChangeImage(string path)
         {
             BackPicture.Image = ResizedImage(path);
+        }
+
+        private void Fad_Resize(object sender, EventArgs e)
+        {
+            ChangeImage();
+        }
+
+
+        private void StartConnection()
+        {
+            _failCount = 1;
+            RetryConnection();
+           
+        }
+
+        private void RetryConnection()
+        {
+            _connected = false;
+            var worker = new System.ComponentModel.BackgroundWorker();
+            worker.DoWork += (sender, e) => TryToConnect();
+            worker.RunWorkerCompleted += (sender, e) => DisplayConnectionSuccess(sender, e);
+            worker.RunWorkerAsync();
+        }
+       
+
+        private void DisplayConnectionSuccess(object sender, RunWorkerCompletedEventArgs e)
+        {
+             if (_connected)
+            {
+                Action tileAction = () => ConnectionTile.Text = "Connection succeeded";
+                ConnectionTile.Invoke(tileAction);
+
+                Action helpAction = () => ConnectionHelp.Visible = false;
+                ConnectionHelp.Invoke(helpAction);
+
+                // TODO: Switch Panel
+            }
+            else
+            {
+                _failCount++;
+
+                Action tileAction = () => ConnectionTile.Text = $"Connecting (Attempt {_failCount})";
+                ConnectionTile.Invoke(tileAction);
+                if (_failCount > 1)
+                {
+                    Action helpAction = () => ConnectionHelp.Visible = true;
+                    ConnectionHelp.Invoke(helpAction);
+                }
+                RetryConnection();
+            }
+        }
+
+      
+
+        private void TryToConnect() {
+            var connection = new Connection();
+            _connected = connection.TestConnection();
+           
         }
     }
 }
