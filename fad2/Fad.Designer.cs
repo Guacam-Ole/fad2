@@ -79,7 +79,7 @@
             this.cardSettingsToolStripMenuItem,
             this.fADSettingsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // cardSettingsToolStripMenuItem
@@ -97,12 +97,12 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(113, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
             // 
             // toolStripMenuItem2
@@ -192,6 +192,7 @@
             this.ConnectionTile.Size = new System.Drawing.Size(324, 73);
             this.ConnectionTile.TabIndex = 4;
             this.ConnectionTile.Text = "Connecting...";
+            this.ConnectionTile.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             // 
             // metroProgressSpinner1
             // 

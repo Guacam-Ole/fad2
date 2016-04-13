@@ -104,12 +104,35 @@ namespace fad2.UI
             worker.RunWorkerAsync();
         }
        
+        private void ConnectionSuccessFull()
+        {
+            ConnectionTile.Text = "Connection succeeded";
+            ConnectionTile.Style = MetroFramework.MetroColorStyle.Green;
+            metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Green;
+            metroProgressSpinner1.Visible = false;
+        }
+
+        private void ConnectionFailed()
+        {
+            ConnectionTile.Text = $"Connecting (Attempt {_failCount})";
+
+            if (_failCount > 4)
+            {
+                ConnectionTile.Style = MetroFramework.MetroColorStyle.Red;
+                metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Red;
+            }
+            else if (_failCount>2)
+            {
+                ConnectionTile.Style = MetroFramework.MetroColorStyle.Orange;
+                metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Orange;
+            }   
+        }
 
         private void DisplayConnectionSuccess(object sender, RunWorkerCompletedEventArgs e)
         {
              if (_connected)
             {
-                Action tileAction = () => ConnectionTile.Text = "Connection succeeded";
+                Action tileAction = () => ConnectionSuccessFull();
                 ConnectionTile.Invoke(tileAction);
 
                 Action helpAction = () => ConnectionHelp.Visible = false;
@@ -121,7 +144,7 @@ namespace fad2.UI
             {
                 _failCount++;
 
-                Action tileAction = () => ConnectionTile.Text = $"Connecting (Attempt {_failCount})";
+                Action tileAction = () => ConnectionFailed();
                 ConnectionTile.Invoke(tileAction);
                 if (_failCount > 1)
                 {
