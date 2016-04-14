@@ -1,4 +1,4 @@
-﻿namespace fad2.UI
+﻿namespace fad2.UI.UserControls
 {
     partial class SettingsCombo
     {

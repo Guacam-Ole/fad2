@@ -11,11 +11,11 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Reflection;
 
-namespace fad2.UI
+namespace fad2.UI.UserControls
 {
-    public partial class SettingsSlider : MetroFramework.Controls.MetroUserControl
+    public partial class SettingsBoolean : MetroFramework.Controls.MetroUserControl
     {
-        public SettingsSlider()
+        public SettingsBoolean()
         {
             InitializeComponent();
             AddFont();
@@ -30,6 +30,7 @@ namespace fad2.UI
             }
         }
 
+
         private string _internalName;
         public string InternalName
         {
@@ -40,6 +41,7 @@ namespace fad2.UI
                 MetroToolTip.SetToolTip(SettingKey, value);
             }
         }
+      
 
         private string _warning;
         public string Key
@@ -53,40 +55,15 @@ namespace fad2.UI
                 SettingKey.Text = value;
             }
         }
-        public int Minimum
+        public bool Value
         {
             get
             {
-                return SettingValue.Minimum;
+                return SettingValue.Checked;
             }
             set
             {
-                SettingValue.Minimum = value;
-            }
-        }
-
-        public int Maximum
-        {
-            get
-            {
-                return SettingValue.Maximum;
-            }
-            set
-            {
-                SettingValue.Maximum = value;
-            }
-        }
-
-
-        public int Value
-        {
-            get
-            {
-                return SettingValue.Value;
-            }
-            set
-            {
-                SettingValue.Value = value;
+                SettingValue.Checked = value;
             }
         }
         public string RequiredVersion
@@ -101,7 +78,6 @@ namespace fad2.UI
                 Enabled &= UiSettings.HasFeature(value);
                
             }
-
         }
 
         
@@ -141,15 +117,5 @@ namespace fad2.UI
             PrivateFontCollection pfc = new PrivateFontCollection();
         }
 
-        protected virtual void SettingValue_Scroll(object sender, ScrollEventArgs e)
-        {
-            //Application.DoEvents();
-           
-        }
-
-        protected virtual void SettingValue_ValueChanged(object sender, EventArgs e)
-        {
-            MetroToolTip.SetToolTip(SettingValue, SettingValue.Value.ToString());
-        }
     }
 }

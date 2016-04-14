@@ -205,9 +205,10 @@
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(500, 350);
+            this.MinimumSize = new System.Drawing.Size(1050, 500);
             this.Name = "Fad";
             this.Text = "FlashAirDownloader 2";
+            this.Resize += new System.EventHandler(this.Fad_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

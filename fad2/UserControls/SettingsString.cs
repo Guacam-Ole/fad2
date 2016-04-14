@@ -11,13 +11,14 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Reflection;
 
-namespace fad2.UI
+namespace fad2.UI.UserControls
 {
-    public partial class SettingsCombo : MetroFramework.Controls.MetroUserControl
+    public partial class SettingsString : MetroFramework.Controls.MetroUserControl
     {
-        public SettingsCombo()
+        public SettingsString()
         {
             InitializeComponent();
+            AddFont();
             this.EnabledChanged += SettingsString_EnabledChanged;
         }
 
@@ -29,17 +30,6 @@ namespace fad2.UI
             }
         }
 
-       public object DataSource { get
-            {
-                return SettingValue.DataSource;
-
-            }
-        set
-            {
-                SettingValue.DataSource = value;
-            }
-        }
-
         private string _internalName;
         public string InternalName
         {
@@ -48,6 +38,24 @@ namespace fad2.UI
             {
                 _internalName = value;
                 MetroToolTip.SetToolTip(SettingKey, value);
+            }
+        }
+
+        public char PasswordChar
+        {
+            get { return SettingValue.PasswordChar; }
+            set { SettingValue.PasswordChar = value; }
+        }
+
+        public int MaxCharacters
+        {
+            get
+            {
+                return SettingValue.MaxLength;
+            }
+            set
+            {
+                SettingValue.MaxLength = value;
             }
         }
 
@@ -63,15 +71,15 @@ namespace fad2.UI
                 SettingKey.Text = value;
             }
         }
-        public object Value
+        public string Value
         {
             get
             {
-                return SettingValue.SelectedItem;
+                return SettingValue.Text;
             }
             set
             {
-                SettingValue.SelectedItem = value;
+                SettingValue.Text = value;
             }
         }
         public string RequiredVersion
@@ -121,7 +129,10 @@ namespace fad2.UI
             }
         }
 
-      
+        private void AddFont()
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+        }
 
     }
 }

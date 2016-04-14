@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace fad.Backend
+namespace fad2.Backend
 {
     public class Settings
     {

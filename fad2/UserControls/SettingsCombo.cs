@@ -11,14 +11,13 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Reflection;
 
-namespace fad2.UI
+namespace fad2.UI.UserControls
 {
-    public partial class SettingsBoolean : MetroFramework.Controls.MetroUserControl
+    public partial class SettingsCombo : MetroFramework.Controls.MetroUserControl
     {
-        public SettingsBoolean()
+        public SettingsCombo()
         {
             InitializeComponent();
-            AddFont();
             this.EnabledChanged += SettingsString_EnabledChanged;
         }
 
@@ -30,6 +29,16 @@ namespace fad2.UI
             }
         }
 
+       public object DataSource { get
+            {
+                return SettingValue.DataSource;
+
+            }
+        set
+            {
+                SettingValue.DataSource = value;
+            }
+        }
 
         private string _internalName;
         public string InternalName
@@ -41,7 +50,6 @@ namespace fad2.UI
                 MetroToolTip.SetToolTip(SettingKey, value);
             }
         }
-      
 
         private string _warning;
         public string Key
@@ -55,15 +63,15 @@ namespace fad2.UI
                 SettingKey.Text = value;
             }
         }
-        public bool Value
+        public object Value
         {
             get
             {
-                return SettingValue.Checked;
+                return SettingValue.SelectedItem;
             }
             set
             {
-                SettingValue.Checked = value;
+                SettingValue.SelectedItem = value;
             }
         }
         public string RequiredVersion
@@ -78,6 +86,7 @@ namespace fad2.UI
                 Enabled &= UiSettings.HasFeature(value);
                
             }
+
         }
 
         
@@ -112,10 +121,7 @@ namespace fad2.UI
             }
         }
 
-        private void AddFont()
-        {
-            PrivateFontCollection pfc = new PrivateFontCollection();
-        }
+      
 
     }
 }

@@ -1,4 +1,4 @@
-﻿using fad.Backend;
+﻿using fad2.Backend;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -47,6 +47,11 @@ namespace fad2.UI
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Fad_Resize(object sender, EventArgs e)
+        {
+            this.Text = $"{Width}x{Height}";
         }
     }
 }

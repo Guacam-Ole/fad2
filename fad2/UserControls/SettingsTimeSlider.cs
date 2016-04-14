@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace fad2.UI
+namespace fad2.UI.UserControls
 {
     public class SettingsTimeSlider      :SettingsSlider
     {

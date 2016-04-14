@@ -1,6 +1,6 @@
-﻿namespace fad2.UI
+﻿namespace fad2.UI.UserControls
 {
-    partial class SettingsSlider
+    partial class SettingsString
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,9 +30,9 @@
         {
             this.SettingKey = new MetroFramework.Controls.MetroLabel();
             this.SettingVersion = new MetroFramework.Controls.MetroLabel();
+            this.SettingValue = new MetroFramework.Controls.MetroTextBox();
             this.WarningLabel = new System.Windows.Forms.Label();
             this.MetroToolTip = new MetroFramework.Components.MetroToolTip();
-            this.SettingValue = new MetroFramework.Controls.MetroTrackBar();
             this.SuspendLayout();
             // 
             // SettingKey
@@ -50,6 +50,13 @@
             this.SettingVersion.TabIndex = 2;
             this.SettingVersion.Text = "0.0.0.0";
             // 
+            // SettingValue
+            // 
+            this.SettingValue.Location = new System.Drawing.Point(233, 4);
+            this.SettingValue.Name = "SettingValue";
+            this.SettingValue.Size = new System.Drawing.Size(383, 28);
+            this.SettingValue.TabIndex = 1;
+            // 
             // WarningLabel
             // 
             this.WarningLabel.AutoSize = true;
@@ -62,24 +69,15 @@
             this.WarningLabel.Text = "i";
             this.MetroToolTip.SetToolTip(this.WarningLabel, "\r\n");
             // 
-            // SettingValue
-            // 
-            this.SettingValue.BackColor = System.Drawing.Color.Transparent;
-            this.SettingValue.Location = new System.Drawing.Point(234, 4);
-            this.SettingValue.Name = "SettingValue";
-            this.SettingValue.Size = new System.Drawing.Size(382, 23);
-            this.SettingValue.TabIndex = 5;
-            this.SettingValue.ValueChanged += new System.EventHandler(this.SettingValue_ValueChanged);
-            // 
-            // SettingsSlider
+            // SettingsString
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.SettingValue);
             this.Controls.Add(this.WarningLabel);
             this.Controls.Add(this.SettingVersion);
+            this.Controls.Add(this.SettingValue);
             this.Controls.Add(this.SettingKey);
-            this.Name = "SettingsSlider";
+            this.Name = "SettingsString";
             this.Size = new System.Drawing.Size(765, 37);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -90,8 +88,8 @@
 
         public MetroFramework.Controls.MetroLabel SettingKey;
         private MetroFramework.Controls.MetroLabel SettingVersion;
+        private MetroFramework.Controls.MetroTextBox SettingValue;
         private System.Windows.Forms.Label WarningLabel;
-        protected MetroFramework.Components.MetroToolTip MetroToolTip;
-        protected MetroFramework.Controls.MetroTrackBar SettingValue;
+        private MetroFramework.Components.MetroToolTip MetroToolTip;
     }
 }

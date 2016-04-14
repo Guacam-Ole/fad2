@@ -72,31 +72,31 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsSlider.cs">
+    <Compile Include="UserControls\SettingsSlider.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SettingsSlider.Designer.cs">
+    <Compile Include="UserControls\SettingsSlider.Designer.cs">
       <DependentUpon>SettingsSlider.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsCombo.cs">
+    <Compile Include="UserControls\SettingsCombo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SettingsCombo.Designer.cs">
+    <Compile Include="UserControls\SettingsCombo.Designer.cs">
       <DependentUpon>SettingsCombo.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsBoolean.cs">
+    <Compile Include="UserControls\SettingsBoolean.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SettingsBoolean.Designer.cs">
+    <Compile Include="UserControls\SettingsBoolean.Designer.cs">
       <DependentUpon>SettingsBoolean.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsString.cs">
+    <Compile Include="UserControls\SettingsString.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SettingsString.Designer.cs">
+    <Compile Include="UserControls\SettingsString.Designer.cs">
       <DependentUpon>SettingsString.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsTimeSlider.cs">
+    <Compile Include="UserControls\SettingsTimeSlider.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="StartUp.cs">
@@ -122,16 +122,16 @@
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsSlider.resx">
+    <EmbeddedResource Include="UserControls\SettingsSlider.resx">
       <DependentUpon>SettingsSlider.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsCombo.resx">
+    <EmbeddedResource Include="UserControls\SettingsCombo.resx">
       <DependentUpon>SettingsCombo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsBoolean.resx">
+    <EmbeddedResource Include="UserControls\SettingsBoolean.resx">
       <DependentUpon>SettingsBoolean.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsString.resx">
+    <EmbeddedResource Include="UserControls\SettingsString.resx">
       <DependentUpon>SettingsString.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StartUp.resx">

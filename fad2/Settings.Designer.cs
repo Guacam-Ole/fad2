@@ -1,4 +1,6 @@
-﻿namespace fad2.UI
+﻿using fad2.UI.UserControls;
+
+namespace fad2.UI
 {
     partial class Settings
     {
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.SettingsPanel = new MetroFramework.Controls.MetroPanel();
             this.SaveSettings = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
@@ -37,62 +39,65 @@
             this.CardSettingsVendor = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.DontDoAnythingStupid = new MetroFramework.Controls.MetroLabel();
-            this.VendorWebDav = new fad2.UI.SettingsCombo();
-            this.VendorFirmware = new fad2.UI.SettingsString();
-            this.VendorCode = new fad2.UI.SettingsString();
-            this.VendorUploadEnabled = new fad2.UI.SettingsBoolean();
-            this.VendorUploadDir = new fad2.UI.SettingsString();
-            this.VendorTimezone = new fad2.UI.SettingsSlider();
-            this.VendorStaRetry = new fad2.UI.SettingsSlider();
-            this.VendorProductCode = new fad2.UI.SettingsString();
-            this.VendorNoiseCancel = new fad2.UI.SettingsBoolean();
-            this.VendorMasterCode = new fad2.UI.SettingsString();
-            this.VendorLuaWrite = new fad2.UI.SettingsString();
-            this.VendorLuaPathBoot = new fad2.UI.SettingsString();
-            this.VendorLock = new fad2.UI.SettingsBoolean();
-            this.VendorIfMode = new fad2.UI.SettingsBoolean();
-            this.VendorDns = new fad2.UI.SettingsCombo();
-            this.VendorBootScreenPath = new fad2.UI.SettingsString();
-            this.VendorAppMode = new fad2.UI.SettingsCombo();
-            this.VendorAppAutoTime = new fad2.UI.SettingsTimeSlider();
-            this.VendorCid = new fad2.UI.SettingsString();
-            this.VendorSSID = new fad2.UI.SettingsString();
-            this.VendorNetworkKey = new fad2.UI.SettingsString();
-            this.VendorAppname = new fad2.UI.SettingsString();
-            this.VendorAppInfo = new fad2.UI.SettingsString();
             this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
-            this.settingsString1 = new fad2.UI.SettingsString();
-            this.metroPanel1.SuspendLayout();
+            this.VendorWebDav = new fad2.UI.UserControls.SettingsCombo();
+            this.VendorFirmware = new fad2.UI.UserControls.SettingsString();
+            this.VendorCode = new fad2.UI.UserControls.SettingsString();
+            this.VendorUploadEnabled = new fad2.UI.UserControls.SettingsBoolean();
+            this.VendorUploadDir = new fad2.UI.UserControls.SettingsString();
+            this.VendorTimezone = new fad2.UI.UserControls.SettingsSlider();
+            this.VendorStaRetry = new fad2.UI.UserControls.SettingsSlider();
+            this.VendorProductCode = new fad2.UI.UserControls.SettingsString();
+            this.VendorNoiseCancel = new fad2.UI.UserControls.SettingsBoolean();
+            this.VendorMasterCode = new fad2.UI.UserControls.SettingsString();
+            this.VendorLuaWrite = new fad2.UI.UserControls.SettingsString();
+            this.VendorLuaPathBoot = new fad2.UI.UserControls.SettingsString();
+            this.VendorLock = new fad2.UI.UserControls.SettingsBoolean();
+            this.VendorIfMode = new fad2.UI.UserControls.SettingsBoolean();
+            this.VendorDns = new fad2.UI.UserControls.SettingsCombo();
+            this.VendorBootScreenPath = new fad2.UI.UserControls.SettingsString();
+            this.VendorAppMode = new fad2.UI.UserControls.SettingsCombo();
+            this.VendorAppAutoTime = new fad2.UI.UserControls.SettingsTimeSlider();
+            this.VendorCid = new fad2.UI.UserControls.SettingsString();
+            this.VendorSSID = new fad2.UI.UserControls.SettingsString();
+            this.VendorNetworkKey = new fad2.UI.UserControls.SettingsString();
+            this.VendorAppname = new fad2.UI.UserControls.SettingsString();
+            this.VendorAppInfo = new fad2.UI.UserControls.SettingsString();
+            this.settingsString1 = new fad2.UI.UserControls.SettingsString();
+            this.RightPanel = new MetroFramework.Controls.MetroPanel();
+            this.SettingsPanel.SuspendLayout();
             this.CardSettingsTab.SuspendLayout();
             this.CardSettingsVendor.SuspendLayout();
             this.CardSettingsNetwork.SuspendLayout();
             this.SuspendLayout();
             // 
-            // metroPanel1
+            // SettingsPanel
             // 
-            this.metroPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.SettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroPanel1.Controls.Add(this.SaveSettings);
-            this.metroPanel1.Controls.Add(this.metroLabel1);
-            this.metroPanel1.Controls.Add(this.metroButton2);
-            this.metroPanel1.Controls.Add(this.metroButton1);
-            this.metroPanel1.Controls.Add(this.CardSettingsTab);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 0);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(1200, 636);
-            this.metroPanel1.TabIndex = 5;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
+            this.SettingsPanel.Controls.Add(this.RightPanel);
+            this.SettingsPanel.Controls.Add(this.SaveSettings);
+            this.SettingsPanel.Controls.Add(this.metroLabel1);
+            this.SettingsPanel.Controls.Add(this.metroButton2);
+            this.SettingsPanel.Controls.Add(this.metroButton1);
+            this.SettingsPanel.Controls.Add(this.CardSettingsTab);
+            this.SettingsPanel.HorizontalScrollbarBarColor = true;
+            this.SettingsPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.SettingsPanel.HorizontalScrollbarSize = 10;
+            this.SettingsPanel.Location = new System.Drawing.Point(0, 0);
+            this.SettingsPanel.Name = "SettingsPanel";
+            this.SettingsPanel.Size = new System.Drawing.Size(1200, 636);
+            this.SettingsPanel.TabIndex = 5;
+            this.SettingsPanel.VerticalScrollbarBarColor = true;
+            this.SettingsPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.SettingsPanel.VerticalScrollbarSize = 10;
+            this.SettingsPanel.Resize += new System.EventHandler(this.SettingsPanel_Resize);
             // 
             // SaveSettings
             // 
-            this.SaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveSettings.Location = new System.Drawing.Point(1064, 598);
+            this.SaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SaveSettings.Location = new System.Drawing.Point(17, 578);
             this.SaveSettings.Name = "SaveSettings";
             this.SaveSettings.Size = new System.Drawing.Size(119, 23);
             this.SaveSettings.TabIndex = 13;
@@ -131,8 +136,8 @@
             this.CardSettingsTab.Controls.Add(this.CardSettingsNetwork);
             this.CardSettingsTab.Location = new System.Drawing.Point(172, 3);
             this.CardSettingsTab.Name = "CardSettingsTab";
-            this.CardSettingsTab.SelectedIndex = 1;
-            this.CardSettingsTab.Size = new System.Drawing.Size(834, 554);
+            this.CardSettingsTab.SelectedIndex = 0;
+            this.CardSettingsTab.Size = new System.Drawing.Size(834, 598);
             this.CardSettingsTab.TabIndex = 2;
             // 
             // CardSettingsVendor
@@ -167,7 +172,7 @@
             this.CardSettingsVendor.HorizontalScrollbarBarColor = true;
             this.CardSettingsVendor.Location = new System.Drawing.Point(4, 35);
             this.CardSettingsVendor.Name = "CardSettingsVendor";
-            this.CardSettingsVendor.Size = new System.Drawing.Size(192, 61);
+            this.CardSettingsVendor.Size = new System.Drawing.Size(826, 559);
             this.CardSettingsVendor.TabIndex = 0;
             this.CardSettingsVendor.Text = "Vendor";
             this.CardSettingsVendor.VerticalScrollbar = true;
@@ -176,7 +181,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(7, 36);
+            this.metroLabel2.Location = new System.Drawing.Point(7, 97);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(510, 19);
             this.metroLabel2.TabIndex = 32;
@@ -186,18 +191,29 @@
             // DontDoAnythingStupid
             // 
             this.DontDoAnythingStupid.AutoSize = true;
-            this.DontDoAnythingStupid.Location = new System.Drawing.Point(7, 17);
+            this.DontDoAnythingStupid.Location = new System.Drawing.Point(7, 78);
             this.DontDoAnythingStupid.Name = "DontDoAnythingStupid";
             this.DontDoAnythingStupid.Size = new System.Drawing.Size(459, 19);
             this.DontDoAnythingStupid.TabIndex = 31;
             this.DontDoAnythingStupid.Text = "Please be aware that you can really screw up here if you enter wrong values.. ";
+            // 
+            // CardSettingsNetwork
+            // 
+            this.CardSettingsNetwork.Controls.Add(this.settingsString1);
+            this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
+            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 35);
+            this.CardSettingsNetwork.Name = "CardSettingsNetwork";
+            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 559);
+            this.CardSettingsNetwork.TabIndex = 1;
+            this.CardSettingsNetwork.Text = "WLANSD";
+            this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
             // 
             // VendorWebDav
             // 
             this.VendorWebDav.DataSource = null;
             this.VendorWebDav.InternalName = "WEBDAV";
             this.VendorWebDav.Key = "WebDav";
-            this.VendorWebDav.Location = new System.Drawing.Point(3, 1006);
+            this.VendorWebDav.Location = new System.Drawing.Point(3, 1067);
             this.VendorWebDav.Name = "VendorWebDav";
             this.VendorWebDav.RequiredVersion = "3.00.00";
             this.VendorWebDav.Size = new System.Drawing.Size(765, 37);
@@ -210,7 +226,7 @@
             // 
             this.VendorFirmware.InternalName = "VERSION";
             this.VendorFirmware.Key = "Firmware version";
-            this.VendorFirmware.Location = new System.Drawing.Point(3, 963);
+            this.VendorFirmware.Location = new System.Drawing.Point(3, 1024);
             this.VendorFirmware.MaxCharacters = 32;
             this.VendorFirmware.Name = "VendorFirmware";
             this.VendorFirmware.PasswordChar = '\0';
@@ -225,7 +241,7 @@
             // 
             this.VendorCode.InternalName = "VENDOR";
             this.VendorCode.Key = "Vendor code";
-            this.VendorCode.Location = new System.Drawing.Point(3, 920);
+            this.VendorCode.Location = new System.Drawing.Point(3, 981);
             this.VendorCode.MaxCharacters = 32;
             this.VendorCode.Name = "VendorCode";
             this.VendorCode.PasswordChar = '\0';
@@ -240,7 +256,7 @@
             // 
             this.VendorUploadEnabled.InternalName = "UPLOAD";
             this.VendorUploadEnabled.Key = "Upload Enabled";
-            this.VendorUploadEnabled.Location = new System.Drawing.Point(3, 877);
+            this.VendorUploadEnabled.Location = new System.Drawing.Point(3, 938);
             this.VendorUploadEnabled.Name = "VendorUploadEnabled";
             this.VendorUploadEnabled.RequiredVersion = "1.00.00";
             this.VendorUploadEnabled.Size = new System.Drawing.Size(765, 37);
@@ -253,7 +269,7 @@
             // 
             this.VendorUploadDir.InternalName = "UPDIR";
             this.VendorUploadDir.Key = "Upload Directory";
-            this.VendorUploadDir.Location = new System.Drawing.Point(3, 834);
+            this.VendorUploadDir.Location = new System.Drawing.Point(3, 895);
             this.VendorUploadDir.MaxCharacters = 32;
             this.VendorUploadDir.Name = "VendorUploadDir";
             this.VendorUploadDir.PasswordChar = '\0';
@@ -268,7 +284,7 @@
             // 
             this.VendorTimezone.InternalName = "TIMEZONE";
             this.VendorTimezone.Key = "Time Zone";
-            this.VendorTimezone.Location = new System.Drawing.Point(3, 798);
+            this.VendorTimezone.Location = new System.Drawing.Point(3, 859);
             this.VendorTimezone.Maximum = 54;
             this.VendorTimezone.Minimum = -48;
             this.VendorTimezone.Name = "VendorTimezone";
@@ -283,7 +299,7 @@
             // 
             this.VendorStaRetry.InternalName = "STA_RETRY_CT";
             this.VendorStaRetry.Key = "STA connection retries";
-            this.VendorStaRetry.Location = new System.Drawing.Point(3, 755);
+            this.VendorStaRetry.Location = new System.Drawing.Point(3, 816);
             this.VendorStaRetry.Maximum = 10;
             this.VendorStaRetry.Minimum = 0;
             this.VendorStaRetry.Name = "VendorStaRetry";
@@ -298,7 +314,7 @@
             // 
             this.VendorProductCode.InternalName = "PRODUCT";
             this.VendorProductCode.Key = "Product Code";
-            this.VendorProductCode.Location = new System.Drawing.Point(3, 712);
+            this.VendorProductCode.Location = new System.Drawing.Point(3, 773);
             this.VendorProductCode.MaxCharacters = 32;
             this.VendorProductCode.Name = "VendorProductCode";
             this.VendorProductCode.PasswordChar = '\0';
@@ -313,7 +329,7 @@
             // 
             this.VendorNoiseCancel.InternalName = "NOISE_CANCEL";
             this.VendorNoiseCancel.Key = "Noise Cancel";
-            this.VendorNoiseCancel.Location = new System.Drawing.Point(3, 669);
+            this.VendorNoiseCancel.Location = new System.Drawing.Point(3, 730);
             this.VendorNoiseCancel.Name = "VendorNoiseCancel";
             this.VendorNoiseCancel.RequiredVersion = "2.00.03";
             this.VendorNoiseCancel.Size = new System.Drawing.Size(765, 37);
@@ -326,7 +342,7 @@
             // 
             this.VendorMasterCode.InternalName = "MASTERCODE";
             this.VendorMasterCode.Key = "Master Code";
-            this.VendorMasterCode.Location = new System.Drawing.Point(3, 626);
+            this.VendorMasterCode.Location = new System.Drawing.Point(3, 687);
             this.VendorMasterCode.MaxCharacters = 32;
             this.VendorMasterCode.Name = "VendorMasterCode";
             this.VendorMasterCode.PasswordChar = '\0';
@@ -342,7 +358,7 @@
             this.VendorLuaWrite.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.VendorLuaWrite.InternalName = "LUA_SD_EVENT";
             this.VendorLuaWrite.Key = "LUA Write Script";
-            this.VendorLuaWrite.Location = new System.Drawing.Point(3, 583);
+            this.VendorLuaWrite.Location = new System.Drawing.Point(3, 644);
             this.VendorLuaWrite.MaxCharacters = 32;
             this.VendorLuaWrite.Name = "VendorLuaWrite";
             this.VendorLuaWrite.PasswordChar = '\0';
@@ -357,7 +373,7 @@
             // 
             this.VendorLuaPathBoot.InternalName = "LUA_RUN_SCRIPT";
             this.VendorLuaPathBoot.Key = "LUA Boot Script";
-            this.VendorLuaPathBoot.Location = new System.Drawing.Point(3, 540);
+            this.VendorLuaPathBoot.Location = new System.Drawing.Point(3, 601);
             this.VendorLuaPathBoot.MaxCharacters = 32;
             this.VendorLuaPathBoot.Name = "VendorLuaPathBoot";
             this.VendorLuaPathBoot.PasswordChar = '\0';
@@ -372,7 +388,7 @@
             // 
             this.VendorLock.InternalName = "LOCK";
             this.VendorLock.Key = "Default Configured";
-            this.VendorLock.Location = new System.Drawing.Point(3, 497);
+            this.VendorLock.Location = new System.Drawing.Point(3, 558);
             this.VendorLock.Name = "VendorLock";
             this.VendorLock.RequiredVersion = "0.0.0.0";
             this.VendorLock.Size = new System.Drawing.Size(765, 37);
@@ -385,7 +401,7 @@
             // 
             this.VendorIfMode.InternalName = "IFMODE";
             this.VendorIfMode.Key = "SD Interface Enabled";
-            this.VendorIfMode.Location = new System.Drawing.Point(3, 451);
+            this.VendorIfMode.Location = new System.Drawing.Point(3, 512);
             this.VendorIfMode.Name = "VendorIfMode";
             this.VendorIfMode.RequiredVersion = "2.00.03";
             this.VendorIfMode.Size = new System.Drawing.Size(765, 37);
@@ -399,7 +415,7 @@
             this.VendorDns.DataSource = null;
             this.VendorDns.InternalName = "DNSMODE";
             this.VendorDns.Key = "DNS operation mode";
-            this.VendorDns.Location = new System.Drawing.Point(3, 408);
+            this.VendorDns.Location = new System.Drawing.Point(3, 469);
             this.VendorDns.Name = "VendorDns";
             this.VendorDns.RequiredVersion = "2.00.02";
             this.VendorDns.Size = new System.Drawing.Size(765, 37);
@@ -412,7 +428,7 @@
             // 
             this.VendorBootScreenPath.InternalName = "CIPATH";
             this.VendorBootScreenPath.Key = "Bootscreen path";
-            this.VendorBootScreenPath.Location = new System.Drawing.Point(3, 365);
+            this.VendorBootScreenPath.Location = new System.Drawing.Point(3, 426);
             this.VendorBootScreenPath.MaxCharacters = 32;
             this.VendorBootScreenPath.Name = "VendorBootScreenPath";
             this.VendorBootScreenPath.PasswordChar = '\0';
@@ -428,7 +444,7 @@
             this.VendorAppMode.DataSource = null;
             this.VendorAppMode.InternalName = "APPMODE";
             this.VendorAppMode.Key = "Wireless LAN Mode";
-            this.VendorAppMode.Location = new System.Drawing.Point(3, 150);
+            this.VendorAppMode.Location = new System.Drawing.Point(3, 211);
             this.VendorAppMode.Name = "VendorAppMode";
             this.VendorAppMode.RequiredVersion = "1.0.0.0";
             this.VendorAppMode.Size = new System.Drawing.Size(765, 37);
@@ -441,7 +457,7 @@
             // 
             this.VendorAppAutoTime.InternalName = "APPAUTOTIME";
             this.VendorAppAutoTime.Key = "Connection time-out";
-            this.VendorAppAutoTime.Location = new System.Drawing.Point(3, 64);
+            this.VendorAppAutoTime.Location = new System.Drawing.Point(3, 125);
             this.VendorAppAutoTime.Maximum = 120;
             this.VendorAppAutoTime.Minimum = 0;
             this.VendorAppAutoTime.Name = "VendorAppAutoTime";
@@ -450,14 +466,14 @@
             this.VendorAppAutoTime.TabIndex = 13;
             this.VendorAppAutoTime.ToolTip = null;
             this.VendorAppAutoTime.Value = 50;
-            this.VendorAppAutoTime.ValueType = fad2.UI.SettingsTimeSlider.ValueTypes.Second;
+            this.VendorAppAutoTime.ValueType = fad2.UI.UserControls.SettingsTimeSlider.ValueTypes.Second;
             this.VendorAppAutoTime.Warning = null;
             // 
             // VendorCid
             // 
             this.VendorCid.InternalName = "CID";
             this.VendorCid.Key = "Card ID";
-            this.VendorCid.Location = new System.Drawing.Point(3, 322);
+            this.VendorCid.Location = new System.Drawing.Point(3, 383);
             this.VendorCid.MaxCharacters = 32;
             this.VendorCid.Name = "VendorCid";
             this.VendorCid.PasswordChar = '\0';
@@ -472,7 +488,7 @@
             // 
             this.VendorSSID.InternalName = "APPSSID";
             this.VendorSSID.Key = "SSID";
-            this.VendorSSID.Location = new System.Drawing.Point(3, 279);
+            this.VendorSSID.Location = new System.Drawing.Point(3, 340);
             this.VendorSSID.MaxCharacters = 32;
             this.VendorSSID.Name = "VendorSSID";
             this.VendorSSID.PasswordChar = '\0';
@@ -487,7 +503,7 @@
             // 
             this.VendorNetworkKey.InternalName = "APPNETWORKKEY";
             this.VendorNetworkKey.Key = "Network security key";
-            this.VendorNetworkKey.Location = new System.Drawing.Point(3, 236);
+            this.VendorNetworkKey.Location = new System.Drawing.Point(3, 297);
             this.VendorNetworkKey.MaxCharacters = 63;
             this.VendorNetworkKey.Name = "VendorNetworkKey";
             this.VendorNetworkKey.PasswordChar = '*';
@@ -502,7 +518,7 @@
             // 
             this.VendorAppname.InternalName = "APPNAME";
             this.VendorAppname.Key = "NETBIOS / Bonjour - Name";
-            this.VendorAppname.Location = new System.Drawing.Point(3, 193);
+            this.VendorAppname.Location = new System.Drawing.Point(3, 254);
             this.VendorAppname.MaxCharacters = 15;
             this.VendorAppname.Name = "VendorAppname";
             this.VendorAppname.PasswordChar = '\0';
@@ -517,7 +533,7 @@
             // 
             this.VendorAppInfo.InternalName = "APPINFO";
             this.VendorAppInfo.Key = "App-Info";
-            this.VendorAppInfo.Location = new System.Drawing.Point(3, 107);
+            this.VendorAppInfo.Location = new System.Drawing.Point(3, 168);
             this.VendorAppInfo.MaxCharacters = 16;
             this.VendorAppInfo.Name = "VendorAppInfo";
             this.VendorAppInfo.PasswordChar = '\0';
@@ -527,17 +543,6 @@
             this.VendorAppInfo.ToolTip = "Application\'s unique information";
             this.VendorAppInfo.Value = "";
             this.VendorAppInfo.Warning = "Must be 1-16 characters ";
-            // 
-            // CardSettingsNetwork
-            // 
-            this.CardSettingsNetwork.Controls.Add(this.settingsString1);
-            this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
-            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 35);
-            this.CardSettingsNetwork.Name = "CardSettingsNetwork";
-            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 515);
-            this.CardSettingsNetwork.TabIndex = 1;
-            this.CardSettingsNetwork.Text = "WLANSD";
-            this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
             // 
             // settingsString1
             // 
@@ -554,15 +559,31 @@
             this.settingsString1.Value = "";
             this.settingsString1.Warning = null;
             // 
+            // RightPanel
+            // 
+            this.RightPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RightPanel.HorizontalScrollbarBarColor = true;
+            this.RightPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.RightPanel.HorizontalScrollbarSize = 10;
+            this.RightPanel.Location = new System.Drawing.Point(1013, 38);
+            this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Size = new System.Drawing.Size(184, 563);
+            this.RightPanel.TabIndex = 14;
+            this.RightPanel.VerticalScrollbarBarColor = true;
+            this.RightPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.RightPanel.VerticalScrollbarSize = 10;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.SettingsPanel);
             this.Name = "Settings";
             this.Size = new System.Drawing.Size(1200, 636);
-            this.metroPanel1.ResumeLayout(false);
-            this.metroPanel1.PerformLayout();
+            this.SettingsPanel.ResumeLayout(false);
+            this.SettingsPanel.PerformLayout();
             this.CardSettingsTab.ResumeLayout(false);
             this.CardSettingsVendor.ResumeLayout(false);
             this.CardSettingsVendor.PerformLayout();
@@ -573,7 +594,7 @@
 
         #endregion
 
-        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private MetroFramework.Controls.MetroPanel SettingsPanel;
         private MetroFramework.Controls.MetroButton SaveSettings;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroButton metroButton2;
@@ -607,5 +628,6 @@
         private SettingsString VendorAppInfo;
         private MetroFramework.Controls.MetroTabPage CardSettingsNetwork;
         private SettingsString settingsString1;
+        private MetroFramework.Controls.MetroPanel RightPanel;
     }
 }
