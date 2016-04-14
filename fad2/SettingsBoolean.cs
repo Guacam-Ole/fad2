@@ -13,9 +13,9 @@ using System.Reflection;
 
 namespace fad2.UI
 {
-    public partial class SettingsString : MetroFramework.Controls.MetroUserControl
+    public partial class SettingsBoolean : MetroFramework.Controls.MetroUserControl
     {
-        public SettingsString()
+        public SettingsBoolean()
         {
             InitializeComponent();
             AddFont();
@@ -30,6 +30,7 @@ namespace fad2.UI
             }
         }
 
+
         private string _internalName;
         public string InternalName
         {
@@ -40,24 +41,7 @@ namespace fad2.UI
                 MetroToolTip.SetToolTip(SettingKey, value);
             }
         }
-
-        public char PasswordChar
-        {
-            get { return SettingValue.PasswordChar; }
-            set { SettingValue.PasswordChar = value; }
-        }
-
-        public int MaxCharacters
-        {
-            get
-            {
-                return SettingValue.MaxLength;
-            }
-            set
-            {
-                SettingValue.MaxLength = value;
-            }
-        }
+      
 
         private string _warning;
         public string Key
@@ -71,15 +55,15 @@ namespace fad2.UI
                 SettingKey.Text = value;
             }
         }
-        public string Value
+        public bool Value
         {
             get
             {
-                return SettingValue.Text;
+                return SettingValue.Checked;
             }
             set
             {
-                SettingValue.Text = value;
+                SettingValue.Checked = value;
             }
         }
         public string RequiredVersion
@@ -94,7 +78,6 @@ namespace fad2.UI
                 Enabled &= UiSettings.HasFeature(value);
                
             }
-
         }
 
         

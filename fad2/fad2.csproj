@@ -66,11 +66,32 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsSlider.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsSlider.Designer.cs">
+      <DependentUpon>SettingsSlider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsCombo.Designer.cs">
+      <DependentUpon>SettingsCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsBoolean.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsBoolean.Designer.cs">
+      <DependentUpon>SettingsBoolean.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsString.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="SettingsString.Designer.cs">
       <DependentUpon>SettingsString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsTimeSlider.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UiSettings.cs" />
     <EmbeddedResource Include="Fad.resx">
@@ -86,6 +107,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SettingsSlider.resx">
+      <DependentUpon>SettingsSlider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsCombo.resx">
+      <DependentUpon>SettingsCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsBoolean.resx">
+      <DependentUpon>SettingsBoolean.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsString.resx">
       <DependentUpon>SettingsString.cs</DependentUpon>
     </EmbeddedResource>

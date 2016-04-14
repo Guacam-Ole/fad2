@@ -13,12 +13,11 @@ using System.Reflection;
 
 namespace fad2.UI
 {
-    public partial class SettingsString : MetroFramework.Controls.MetroUserControl
+    public partial class SettingsCombo : MetroFramework.Controls.MetroUserControl
     {
-        public SettingsString()
+        public SettingsCombo()
         {
             InitializeComponent();
-            AddFont();
             this.EnabledChanged += SettingsString_EnabledChanged;
         }
 
@@ -30,6 +29,17 @@ namespace fad2.UI
             }
         }
 
+       public object DataSource { get
+            {
+                return SettingValue.DataSource;
+
+            }
+        set
+            {
+                SettingValue.DataSource = value;
+            }
+        }
+
         private string _internalName;
         public string InternalName
         {
@@ -38,24 +48,6 @@ namespace fad2.UI
             {
                 _internalName = value;
                 MetroToolTip.SetToolTip(SettingKey, value);
-            }
-        }
-
-        public char PasswordChar
-        {
-            get { return SettingValue.PasswordChar; }
-            set { SettingValue.PasswordChar = value; }
-        }
-
-        public int MaxCharacters
-        {
-            get
-            {
-                return SettingValue.MaxLength;
-            }
-            set
-            {
-                SettingValue.MaxLength = value;
             }
         }
 
@@ -71,15 +63,15 @@ namespace fad2.UI
                 SettingKey.Text = value;
             }
         }
-        public string Value
+        public object Value
         {
             get
             {
-                return SettingValue.Text;
+                return SettingValue.SelectedItem;
             }
             set
             {
-                SettingValue.Text = value;
+                SettingValue.SelectedItem = value;
             }
         }
         public string RequiredVersion
@@ -129,10 +121,7 @@ namespace fad2.UI
             }
         }
 
-        private void AddFont()
-        {
-            PrivateFontCollection pfc = new PrivateFontCollection();
-        }
+      
 
     }
 }
