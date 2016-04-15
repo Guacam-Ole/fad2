@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using fad2.Backend;
 
 namespace fad2.UI.UserControls
 {
@@ -72,16 +73,16 @@ namespace fad2.UI.UserControls
         }
 
 
-        private string _mileStone;
-        public string MileStone
+        private string _pipeline;
+        public string Pipeline
         {
             get
             {
-                return _mileStone;
+                return _pipeline;
             }
             set
             {
-                _mileStone = value;
+                _pipeline = value;
                 SetMileStone();
 
             }
@@ -128,7 +129,7 @@ namespace fad2.UI.UserControls
             MileStoneNew.Style = MetroFramework.MetroColorStyle.Silver;
             MileStoneToDo.Style = MetroFramework.MetroColorStyle.Silver;
 
-            switch (_mileStone)
+            switch (_pipeline)
             {
                 case "Closed":
                     MileStoneClosed.Style = MetroFramework.MetroColorStyle.Green;

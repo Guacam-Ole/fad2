@@ -70,7 +70,6 @@
     <Compile Include="GitHub.Designer.cs">
       <DependentUpon>GitHub.cs</DependentUpon>
     </Compile>
-    <Compile Include="GitHubComment.cs" />
     <Compile Include="UserControls\IssueComment.cs">
       <SubType>UserControl</SubType>
     </Compile>

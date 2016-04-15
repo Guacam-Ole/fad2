@@ -165,7 +165,7 @@
             this.CommentPanel.HorizontalScrollbarSize = 10;
             this.CommentPanel.Location = new System.Drawing.Point(184, 229);
             this.CommentPanel.Name = "CommentPanel";
-            this.CommentPanel.Size = new System.Drawing.Size(616, 141);
+            this.CommentPanel.Size = new System.Drawing.Size(616, 15);
             this.CommentPanel.TabIndex = 16;
             this.CommentPanel.VerticalScrollbarBarColor = true;
             this.CommentPanel.VerticalScrollbarHighlightOnWheel = false;

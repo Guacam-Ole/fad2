@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using fad2.Backend;
 
 namespace fad2.UI.UserControls
 {

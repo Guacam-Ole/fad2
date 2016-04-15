@@ -22,7 +22,7 @@ namespace fad2.UI
            
             InitializeComponent();
            ShowLoader();
-          
+
          
         }
 

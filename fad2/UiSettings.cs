@@ -78,11 +78,6 @@ namespace fad2.UI
                 }
             }
             return destImage;
-
-
-
-
-             
         }
 
         public static Bitmap ResizedImage(string path, int alpha, int maxWidth, int maxHeight)
@@ -90,5 +85,6 @@ namespace fad2.UI
             var bitmap = new Bitmap(path);
             return ResizedImage(new Bitmap(path), alpha, maxWidth, maxHeight);
         }
+
     }
 }
