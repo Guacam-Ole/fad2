@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace fad2.UI
@@ -23,31 +26,69 @@ namespace fad2.UI
         }
 
 
-        public static Bitmap ResizedImage( int maxWidth, int maxHeight)
+        public static Bitmap ResizedImage( int maxWidth, int maxHeight, int alpha=100)
         {
             string path = RandomImageUrl();
-            int alpha = 150;
+            return ResizedImage(path, alpha, maxWidth, maxHeight);
+           
+        }
+
+        public static Bitmap ResizedImage(Uri url, int alpha, int maxWidth, int maxHeight)
+        {
+            try {
+                var request = WebRequest.Create(url.ToString());
+
+
+                using (var response = request.GetResponse())
+                using (var stream = response.GetResponseStream())
+                {
+                    return ResizedImage(Image.FromStream(stream), alpha, maxWidth, maxHeight);
+                }
+            } catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static Bitmap ResizedImage(Image image, int alpha, int maxWidth, int maxHeight)
+        {
+            var destRect = new Rectangle(0, 0, maxWidth, maxHeight);
+            var destImage = new Bitmap(maxWidth, maxHeight);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    if (alpha != 100)
+                    {
+                        ColorMatrix colormatrix = new ColorMatrix();
+                        colormatrix.Matrix33 = alpha/100F;
+                        wrapMode.SetColorMatrix(colormatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                    }
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+            return destImage;
+
+
+
+
+             
+        }
+
+        public static Bitmap ResizedImage(string path, int alpha, int maxWidth, int maxHeight)
+        {
             var bitmap = new Bitmap(path);
-            double aspectRatio = bitmap.Width / (double)bitmap.Height;
-          
-            int imageWidth = maxWidth;
-            int imageHeight = (int)(imageWidth / aspectRatio);
-            if (imageHeight < maxHeight)
-            {
-                imageHeight = maxHeight;
-                imageWidth = (int)(imageHeight * aspectRatio);
-            }
-
-            var image = new Bitmap(bitmap, new Size(imageWidth, imageHeight));
-
-            using (Graphics g = Graphics.FromImage(image))
-            {
-                Pen pen = new Pen(Color.FromArgb(alpha, 255, 255, 255), image.Width);
-                g.DrawLine(pen, -1, -1, image.Width, image.Height);
-                g.Save();
-            }
-
-            return image;
+            return ResizedImage(new Bitmap(path), alpha, maxWidth, maxHeight);
         }
     }
 }

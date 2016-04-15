@@ -47,7 +47,7 @@ namespace fad2.UI
 
         private void ChangeImage()
         {
-            BackPicture.Image = UiSettings.ResizedImage(BackPicture.Width, BackPicture.Height);
+            BackPicture.Image = UiSettings.ResizedImage(BackPicture.Width, BackPicture.Height, 45);
         }
 
 

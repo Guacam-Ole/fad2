@@ -37,6 +37,11 @@ namespace fad2.UI
             MainPanel.Controls.Clear();
             MainPanel.Controls.Add(new Settings { Dock = DockStyle.Fill });
         }
+        private void ShowIssues()
+        {
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new GitHub { Dock = DockStyle.Fill });
+        }
 
 
         private void cardSettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,6 +57,11 @@ namespace fad2.UI
         private void Fad_Resize(object sender, EventArgs e)
         {
             this.Text = $"{Width}x{Height}";
+        }
+
+        private void supportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowIssues();
         }
     }
 }

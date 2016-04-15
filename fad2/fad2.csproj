@@ -64,6 +64,25 @@
     <Compile Include="Fad.Designer.cs">
       <DependentUpon>Fad.cs</DependentUpon>
     </Compile>
+    <Compile Include="GitHub.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GitHub.Designer.cs">
+      <DependentUpon>GitHub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GitHubComment.cs" />
+    <Compile Include="UserControls\IssueComment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\IssueComment.Designer.cs">
+      <DependentUpon>IssueComment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\IssueStarter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\IssueStarter.Designer.cs">
+      <DependentUpon>IssueStarter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs">
@@ -109,6 +128,9 @@
     <EmbeddedResource Include="Fad.resx">
       <DependentUpon>Fad.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GitHub.resx">
+      <DependentUpon>GitHub.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -121,6 +143,12 @@
     </Compile>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\IssueComment.resx">
+      <DependentUpon>IssueComment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\IssueStarter.resx">
+      <DependentUpon>IssueStarter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SettingsSlider.resx">
       <DependentUpon>SettingsSlider.cs</DependentUpon>
