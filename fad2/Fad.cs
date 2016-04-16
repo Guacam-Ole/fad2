@@ -14,16 +14,16 @@ namespace fad2.UI
 {
     public partial class Fad : MetroFramework.Forms.MetroForm
     {
-        
+
+        string _flashAirVersion="2.0.0";
+       // private string _newIssueUrl = $"https://github.com/OleAlbers/GooglePlusOptimizer/issues/new?body=%60Program-Version%3A%20{Application.ProductVersion}%60%0A%60FlashAir-Version%3A%20{_flashAirVersion}1.0.0.0%60";
         
 
         public Fad()
         {
            
-            InitializeComponent();
+           InitializeComponent();
            ShowLoader();
-
-         
         }
 
         private void ShowLoader()
@@ -61,7 +61,24 @@ namespace fad2.UI
 
         private void supportToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CreateIssue.Visible = true;
             ShowIssues();
         }
+
+        private void CreateIssue_Click(object sender, EventArgs e)
+        {
+
+            string _newIssueUrl = $"https://github.com/OleAlbers/GooglePlusOptimizer/issues/new?body=%60Program-Version%3A%20{Application.ProductVersion}%60%0A%60FlashAir-Version%3A%20{_flashAirVersion}%60%0A%0A";
+
+
+        System.Diagnostics.Process.Start(_newIssueUrl);
+        }
+
+        private void FadMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            CreateIssue.Visible = false;
+        }
+
+      
     }
 }

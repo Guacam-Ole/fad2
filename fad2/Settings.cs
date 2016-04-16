@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using fad2.UI.UserControls;
 using MetroFramework.Controls;
 
 namespace fad2.UI
 {
     public partial class Settings : UserControl
     {
+        private const int _tileSize = 300;
+        private const int _tileMargin = 20;
 
         Random _random = new Random();
         Timer _backImageTimer;
-
 
         public Settings()
         {
@@ -55,24 +51,22 @@ namespace fad2.UI
         private void AddTiles()
         {
             RightPanel.Controls.Clear();
-            int xTileCount =1+ RightPanel.Width / 110;
-            int yTileCount =1+ RightPanel.Height / 110;
+            int xTileCount =1+ RightPanel.Width / _tileSize;
+            int yTileCount =1+ RightPanel.Height / _tileSize;
 
             for (int x=0; x<xTileCount; x++)
             {
                 for (int y=0; y<yTileCount; y++)
                 {
                     MetroTile tile = new MetroTile();
-                    tile.Left = 110 * x -5;
-                    tile.Top = 110 * y - 5;
+                    tile.Left = (_tileSize + _tileMargin) * x - _tileMargin / 2;
+                    tile.Top = (_tileSize + _tileMargin) * y - _tileMargin / 2;
                     tile.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                    tile.Width = 100;
-                    tile.Height = 100;
+                    tile.Width = _tileSize;
+                    tile.Height = _tileSize;
                     tile.Style = GetRandomStyle();
                     tile.TileImageAlign = ContentAlignment.MiddleCenter;
                     tile.UseTileImage = true;
-                    
-               //     tile.Text = $"{x},{y}";
                     RightPanel.Controls.Add(tile);
                     Application.DoEvents();
                 }
@@ -99,7 +93,7 @@ namespace fad2.UI
             {
                 foreach (MetroTile tile in RightPanel.Controls)
                 {
-                    tile.TileImage = UiSettings.ResizedImage(100, 100);
+                    tile.TileImage = UiSettings.ResizedImage(_tileSize, _tileSize);
                     Application.DoEvents();
                 }
             }
@@ -112,7 +106,7 @@ namespace fad2.UI
             {
                 int currentImage = _random.Next(RightPanel.Controls.Count);
                 var tile = ((MetroTile)RightPanel.Controls[currentImage]);
-                tile.TileImage = UiSettings.ResizedImage(100, 100);
+                tile.TileImage = UiSettings.ResizedImage(_tileSize, _tileSize);
                 tile.Refresh();
             }
         }

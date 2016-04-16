@@ -52,10 +52,12 @@
             // 
             // SettingValue
             // 
+            this.SettingValue.BackColor = System.Drawing.Color.Tomato;
             this.SettingValue.Location = new System.Drawing.Point(233, 4);
             this.SettingValue.Name = "SettingValue";
             this.SettingValue.Size = new System.Drawing.Size(383, 28);
             this.SettingValue.TabIndex = 1;
+            this.SettingValue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SettingValue_KeyDown);
             // 
             // WarningLabel
             // 
@@ -88,8 +90,8 @@
 
         public MetroFramework.Controls.MetroLabel SettingKey;
         private MetroFramework.Controls.MetroLabel SettingVersion;
-        private MetroFramework.Controls.MetroTextBox SettingValue;
         private System.Windows.Forms.Label WarningLabel;
-        private MetroFramework.Components.MetroToolTip MetroToolTip;
+        protected MetroFramework.Controls.MetroTextBox SettingValue;
+        protected MetroFramework.Components.MetroToolTip MetroToolTip;
     }
 }

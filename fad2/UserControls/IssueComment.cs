@@ -32,7 +32,7 @@ namespace fad2.UI.UserControls
             {
                 _date = value.Date;
                 //CommentGroup.Text=$"{_date:yyyy-MM-dd}";
-                Avatar.Text = value.Author;
+              //  Avatar.Text = value.Author;
                 Avatar.Tag = value.Picture;
                 AvatarName.SetToolTip(Avatar, value.Author);
                 Comment.Text = value.Comment;

@@ -30,8 +30,8 @@
         {
             this.AvatarName = new MetroFramework.Components.MetroToolTip();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.Avatar = new MetroFramework.Controls.MetroTile();
             this.Comment = new MetroFramework.Controls.MetroTextBox();
+            this.Avatar = new MetroFramework.Controls.MetroTile();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,6 +41,7 @@
             this.metroPanel1.Controls.Add(this.Comment);
             this.metroPanel1.Controls.Add(this.Avatar);
             this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.metroPanel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
@@ -52,13 +53,6 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // Avatar
-            // 
-            this.Avatar.Location = new System.Drawing.Point(13, 6);
-            this.Avatar.Name = "Avatar";
-            this.Avatar.Size = new System.Drawing.Size(39, 36);
-            this.Avatar.TabIndex = 20;
             // 
             // Comment
             // 
@@ -72,6 +66,13 @@
             this.Comment.TabIndex = 22;
             this.Comment.Text = "metroTextBox1";
             this.Comment.UseStyleColors = true;
+            // 
+            // Avatar
+            // 
+            this.Avatar.Location = new System.Drawing.Point(13, 6);
+            this.Avatar.Name = "Avatar";
+            this.Avatar.Size = new System.Drawing.Size(39, 36);
+            this.Avatar.TabIndex = 20;
             // 
             // IssueComment
             // 

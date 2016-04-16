@@ -15,6 +15,7 @@ namespace fad2.Backend
         {
             using (WebClient wc = new WebClient())
             {
+                wc.Encoding = Encoding.UTF8;
                 wc.Headers.Add("ContentType", "application/json");
                 wc.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36");
                 return wc.DownloadString(url);
@@ -37,12 +38,15 @@ namespace fad2.Backend
             if (File.Exists(cacheFileName))
             {
                 FileInfo cacheInfo = new FileInfo(cacheFileName);
-                if ((DateTime.Now - cacheInfo.LastWriteTime).TotalMinutes < 30)
+                if ((DateTime.Now - cacheInfo.LastWriteTime).TotalMinutes < 90)
                 {
                     using (StreamReader sr = cacheInfo.OpenText())
                     {
                         string githubContent = string.Empty;
-                        while ((githubContent = sr.ReadLine()) != null) { }
+                        string singleLine;
+                        while ((singleLine = sr.ReadLine()) != null) {
+                            githubContent += singleLine;
+                        }
                         return JsonConvert.DeserializeObject<List<GitHubIssue>>(githubContent);
                     }
                 }

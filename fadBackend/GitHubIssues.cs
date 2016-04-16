@@ -30,8 +30,9 @@ namespace fad2.Backend
         public int CommentCount { get; set; }
         [JsonProperty(PropertyName = "comments_url")]
         public string CommentsUrl { get; set; }
-
-       public List<GitHubIssue> Comments { get; set; }
+        [JsonProperty(PropertyName = "html_url")]
+        public string HtmlUrl { get; set; }
+        public List<GitHubIssue> Comments { get; set; }
 
         public bool IsBug { get; set; }
         public bool IsWish { get; set; }
@@ -43,7 +44,7 @@ namespace fad2.Backend
             {
                 return new GitHubComment
                 {
-                    Url = Url,
+                    Url = HtmlUrl,
                     Author = User?.Name,
                     Picture = User?.Avatar,
                     Title = Title,

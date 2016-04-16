@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.FadMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,24 +47,28 @@
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateIssue = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.menuStrip1.SuspendLayout();
+            this.FadMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // FadMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FadMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.toolStripMenuItem2});
-            this.menuStrip1.Location = new System.Drawing.Point(20, 60);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1072, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.toolStripMenuItem2,
+            this.CreateIssue});
+            this.FadMenu.Location = new System.Drawing.Point(20, 60);
+            this.FadMenu.Name = "FadMenu";
+            this.FadMenu.Size = new System.Drawing.Size(1072, 24);
+            this.FadMenu.TabIndex = 0;
+            this.FadMenu.Text = "menuStrip1";
+            this.FadMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.FadMenu_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectToolStripMenuItem,
             this.disconnectToolStripMenuItem,
@@ -78,15 +82,17 @@
             // 
             // connectToolStripMenuItem
             // 
+            this.connectToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.connectToolStripMenuItem.Text = "Connect";
             // 
             // disconnectToolStripMenuItem
             // 
+            this.disconnectToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.disconnectToolStripMenuItem.Enabled = false;
             this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.disconnectToolStripMenuItem.Text = "Disconnect";
             // 
             // toolStripMenuItem4
@@ -96,11 +102,12 @@
             // 
             // settingsToolStripMenuItem
             // 
+            this.settingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cardSettingsToolStripMenuItem,
             this.fADSettingsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // cardSettingsToolStripMenuItem
@@ -123,8 +130,9 @@
             // 
             // closeToolStripMenuItem
             // 
+            this.closeToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -183,6 +191,13 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
+            // CreateIssue
+            // 
+            this.CreateIssue.Name = "CreateIssue";
+            this.CreateIssue.Size = new System.Drawing.Size(107, 20);
+            this.CreateIssue.Text = "Create new Issue";
+            this.CreateIssue.Click += new System.EventHandler(this.CreateIssue_Click);
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -204,14 +219,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1112, 605);
             this.Controls.Add(this.MainPanel);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.FadMenu);
+            this.MainMenuStrip = this.FadMenu;
             this.MinimumSize = new System.Drawing.Size(1050, 500);
             this.Name = "Fad";
             this.Text = "FlashAirDownloader 2";
             this.Resize += new System.EventHandler(this.Fad_Resize);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.FadMenu.ResumeLayout(false);
+            this.FadMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,7 +234,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip FadMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cardSettingsToolStripMenuItem;
@@ -239,6 +254,7 @@
         private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.ToolStripMenuItem CreateIssue;
     }
 }
 

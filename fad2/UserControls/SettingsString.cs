@@ -10,6 +10,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace fad2.UI.UserControls
 {
@@ -29,6 +30,8 @@ namespace fad2.UI.UserControls
                 crtl.Enabled = this.Enabled;
             }
         }
+
+        public string Regex { get; set; }
 
         private string _internalName;
         public string InternalName
@@ -133,6 +136,22 @@ namespace fad2.UI.UserControls
         {
             PrivateFontCollection pfc = new PrivateFontCollection();
         }
+        protected bool _isValid = true;
+        public bool IsValid
+        {
+            get
+            {
+                return _isValid;
+            }
+        }
 
+        private void SettingValue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Regex!=null)
+            {
+                _isValid = new Regex(Regex).IsMatch(SettingValue.Text);
+                SettingValue.CustomBackground = !_isValid;
+            }
+        }
     }
 }

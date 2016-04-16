@@ -78,7 +78,7 @@
             this.Title.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.Title.Location = new System.Drawing.Point(164, 20);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(636, 23);
+            this.Title.Size = new System.Drawing.Size(636, 31);
             this.Title.TabIndex = 3;
             this.Title.Text = "Something is wrong in denmark!";
             // 
@@ -89,6 +89,7 @@
             this.WatchOnGitHub.Size = new System.Drawing.Size(112, 23);
             this.WatchOnGitHub.TabIndex = 5;
             this.WatchOnGitHub.Text = "Watch on GitHub";
+            this.WatchOnGitHub.Click += new System.EventHandler(this.WatchOnGitHub_Click);
             // 
             // MileStoneNew
             // 
@@ -165,7 +166,7 @@
             this.CommentPanel.HorizontalScrollbarSize = 10;
             this.CommentPanel.Location = new System.Drawing.Point(184, 229);
             this.CommentPanel.Name = "CommentPanel";
-            this.CommentPanel.Size = new System.Drawing.Size(616, 15);
+            this.CommentPanel.Size = new System.Drawing.Size(614, 15);
             this.CommentPanel.TabIndex = 16;
             this.CommentPanel.VerticalScrollbarBarColor = true;
             this.CommentPanel.VerticalScrollbarHighlightOnWheel = false;
@@ -175,10 +176,10 @@
             // 
             this.Content.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Content.Location = new System.Drawing.Point(164, 47);
+            this.Content.Location = new System.Drawing.Point(164, 54);
             this.Content.Multiline = true;
             this.Content.Name = "Content";
-            this.Content.Size = new System.Drawing.Size(636, 146);
+            this.Content.Size = new System.Drawing.Size(636, 139);
             this.Content.TabIndex = 19;
             this.Content.Text = "metroTextBox1";
             // 
@@ -187,6 +188,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoSize = true;
             this.Controls.Add(this.Content);
             this.Controls.Add(this.CommentPanel);
             this.Controls.Add(this.Date);
@@ -201,8 +203,9 @@
             this.Controls.Add(this.WishTag);
             this.Controls.Add(this.BugTag);
             this.Controls.Add(this.Avatar);
+            this.MinimumSize = new System.Drawing.Size(0, 300);
             this.Name = "IssueStarter";
-            this.Size = new System.Drawing.Size(820, 429);
+            this.Size = new System.Drawing.Size(820, 435);
             this.ResumeLayout(false);
             this.PerformLayout();
 

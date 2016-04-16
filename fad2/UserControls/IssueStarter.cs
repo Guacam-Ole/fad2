@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using fad2.Backend;
+using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
@@ -39,13 +40,12 @@ namespace fad2.UI.UserControls
                 _date = value.Date;
                 Date.Text = $"{_date:yyyy-MM-dd}";
                 WatchOnGitHub.Tag = value.Url;
-                Avatar.Text = value.Author;
                 Avatar.Tag = value.Picture;
                 AvatarName.SetToolTip(Avatar, value.Author);
                 ReloadAvatar();
                 RepaintComment();
             }
-        }
+        }      
 
         public bool IsBug
         {
@@ -103,6 +103,7 @@ namespace fad2.UI.UserControls
         {
 
             CommentPanel.Controls.Clear();
+            CommentPanel.Height = 10;
             if (_comments == null)
             {
                 return;
@@ -116,8 +117,8 @@ namespace fad2.UI.UserControls
                 issueComment.AutoSize = true;
                 issueComment.AutoSizeMode = AutoSizeMode.GrowAndShrink;
                 CommentPanel.Controls.Add(issueComment);
-                //     CommentPanel.AutoSize = true;
-                // CommentPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+              //      CommentPanel.AutoSize = true;
+              //   CommentPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             }
         }
 
@@ -175,6 +176,12 @@ namespace fad2.UI.UserControls
             ShowComments.Top = WatchOnGitHub.Top;
             CommentPanel.Top = WatchOnGitHub.Height + WatchOnGitHub.Top + 10;
 
+        }
+
+        private void WatchOnGitHub_Click(object sender, EventArgs e)
+        {
+            var button = (MetroLink)sender;
+            System.Diagnostics.Process.Start((string)button.Tag);
         }
     }
 }

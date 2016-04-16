@@ -90,6 +90,9 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SettingsIp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControls\SettingsSlider.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -149,6 +152,9 @@
     <EmbeddedResource Include="UserControls\IssueStarter.resx">
       <DependentUpon>IssueStarter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SettingsIp.resx">
+      <DependentUpon>SettingsIp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SettingsSlider.resx">
       <DependentUpon>SettingsSlider.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,11 +164,11 @@
     <EmbeddedResource Include="UserControls\SettingsBoolean.resx">
       <DependentUpon>SettingsBoolean.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\SettingsString.resx">
-      <DependentUpon>SettingsString.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="StartUp.resx">
       <DependentUpon>StartUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SettingsString.resx">
+      <DependentUpon>SettingsString.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -304,6 +310,7 @@
     </Content>
     <Content Include="MetroFramework.txt" />
     <Content Include="Resources\metro.ttf" />
+    <None Include="Resources\ypro.PNG" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\fadBackend\fadBackend.csproj">
