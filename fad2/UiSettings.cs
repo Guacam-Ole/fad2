@@ -16,7 +16,7 @@ namespace fad2.UI
         private static Random _random = new Random();
         public static bool HasFeature(string versionToCompare)
         {
-            return versionToCompare.CompareTo(CardVersion) >= 0;
+            return versionToCompare.CompareTo(CardVersion) <= 0;
         }
 
         public static string RandomImageUrl()

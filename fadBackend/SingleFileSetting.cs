@@ -1,4 +1,5 @@
-﻿using System;
+﻿using fad2.Backend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,18 +16,18 @@ namespace fad2.Backend
         public string Key { get; set; }
         public string Value { get; set; }
         public bool IsEmpty { get; set; }
-
+        public bool IsModified { get; set; }
+        public Settings Setting { get; set; }
         public SingleFileSetting() { }
+
+
         public SingleFileSetting(int pos, string line)
         {
             Line = pos;
             Original = line;
-            CheckLine();
         }
 
-        private string[] _allowedValues= new [] {"ID","DHCP_Enabled"}
-
-        private void CheckLine()
+        public void CheckLine()
         {
             if (string.IsNullOrWhiteSpace(Original))
             {
@@ -46,6 +47,38 @@ namespace fad2.Backend
             int divider = Original.IndexOf('=');
             Key = Original.Substring(0, divider);
             Value = Original.Substring(divider + 1);
+
+            var settingProperties = typeof(Settings).GetProperties();
+            foreach (var property in settingProperties)
+            {
+                var settingsAttributes = property.GetCustomAttributes(typeof(SettingAttribute), true);
+                if (settingsAttributes != null)
+                {
+                    var settingsAttribute = settingsAttributes.FirstOrDefault();
+                    if (settingsAttribute != null)
+                    {
+                        var attr = (SettingAttribute)settingsAttribute;
+                        if (attr.Name == Key)
+                        {
+                            if (property.PropertyType == typeof(int))
+                            {
+                                property.SetValue(Setting, int.Parse(Value), null);
+                            }
+                            else if (property.PropertyType == typeof(bool))
+                            {
+                                property.SetValue(Setting, Value == attr.TrueValue, null);
+                            }
+                            else
+                            {
+                                property.SetValue(Setting, Value, null);
+                            }
+
+                            IsKnown = true;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         private void GetTitle()
@@ -54,7 +87,7 @@ namespace fad2.Backend
             int titleStart = Original.IndexOf('[')+1;
             int titleEnd = Original.IndexOf(']')-1;
 
-            Value = Original.Substring(titleStart, titleEnd - titleStart);
+            Value = Original.Substring(titleStart, titleEnd - titleStart+1);
             switch (Value)
             {
                 case "Vendor":
@@ -63,6 +96,5 @@ namespace fad2.Backend
                     break;
             }
         }
-
     }
 }

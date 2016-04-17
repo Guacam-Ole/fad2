@@ -63,15 +63,16 @@ namespace fad2.UI.UserControls
                 SettingKey.Text = value;
             }
         }
-        public object Value
+        public int Value
         {
             get
             {
-                return SettingValue.SelectedItem;
+                return (int)SettingValue.SelectedValue;
             }
             set
             {
                 SettingValue.SelectedItem = value;
+                Enabled = UiSettings.HasFeature(SettingVersion.Text);
             }
         }
         public string RequiredVersion
@@ -83,7 +84,6 @@ namespace fad2.UI.UserControls
             set
             {
                 SettingVersion.Text = value;
-                Enabled &= UiSettings.HasFeature(value);
                
             }
 

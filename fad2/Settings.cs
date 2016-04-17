@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using MetroFramework.Controls;
 using System.IO;
+using fad2.Backend;
+using fad2.UI.UserControls;
 
 namespace fad2.UI
 {
@@ -126,8 +128,69 @@ namespace fad2.UI
 
         private void LoadSettingsFromFile(string filename)
         {
-
+            FileLoader fl = new FileLoader();
+            _settings = fl.LoadFromFile(filename);
+            DisplaySettings();
         }
+
+        Backend.Settings _settings;
+
+        private void DisplaySettings()
+        {
+            if (_settings==null)
+            {
+                DisableControls();
+                return;
+            }
+
+            UiSettings.CardVersion = _settings.Version;
+            VendorAppAutoTime.Value = _settings.AppAutoTime;
+            VendorAppInfo.Value = _settings.AppInfo;
+            VendorAppMode.Value = _settings.AppMode;
+            VendorAppname.Value = _settings.AppName;
+            VendorBootScreenPath.Value = _settings.CiPath;
+            VendorCid.Value = _settings.Cid;
+            VendorCode.Value = _settings.ProductCode;
+            VendorDns.Value = _settings.DnsAlways ? 1 : 0;
+            VendorFirmware.Value = _settings.FirmwareVersion;
+            VendorIfMode.Value = _settings.InterfaceEnabled;
+            VendorLock.Value = _settings.Locked;
+            VendorLuaPathBoot.Value = _settings.LuaRunScript;
+            VendorLuaWrite.Value = _settings.LuaSdEvent;
+            VendorMasterCode.Value = _settings.Mastercode;
+            if (_settings.AppMode==3 || _settings.AppMode==6)
+            {
+                VendorNetworkKey.Value = _settings.BrgNetworkKey;
+                VendorSSID.Value = _settings.BrgSsid;
+            } else
+            {
+                VendorNetworkKey.Value = _settings.AppNetworkKey;
+                VendorSSID.Value = _settings.AppSsid;
+            }
+            VendorNoiseCancel.Value = _settings.NoiseCancel;
+            VendorProductCode.Value = _settings.ProductCode;
+            VendorStaRetry.Value = _settings.StaRetries;
+            VendorTimezone.Value = _settings.TimeZone;
+            VendorUploadDir.Value = _settings.UploadDir;
+            VendorUploadEnabled.Value = _settings.UploadEnabled;
+            VendorWebDav.Value = _settings.WebDavMode;
+
+            WlansdDhcp.Value = _settings.WlanSdDhcpEnabled;
+            WlansdDns.Value = _settings.WlanSdPreferredDns;
+            WlansdDnsAlternate.Value = _settings.WlanSdAlternateDns;
+            WlansdGateway.Value = _settings.WlanSdDefaultGateway;
+            WlansdId.Value = _settings.WlanSdCardId;
+            WlansdIpAddress.Value = _settings.WlanSdIpAddress;
+            WlansdProxyPort.Value = _settings.WlanSdProxyAddress;
+            WlansdSubnet.Value = _settings.WlanSdSubnetMask;
+            WlansdUseProxy.Value = _settings.WlanSdProxyEnabled;
+            Wlansd_ProxyServer.Value = _settings.WlanSdProxyAddress;
+            
+            EnableControls();
+        }
+
+
+
 
         private void LoadSettingsFromFile()
         {
@@ -138,7 +201,8 @@ namespace fad2.UI
                 string drivePath = $"{drive}:";
                 string settingsPath = $"{drivePath}\\SD_WLAN";
                 string settingsFile = $"{settingsPath}\\CONFIG";
-                try {
+                try
+                {
                     LoadTile.Text = $"Search for File on {drivePath}";
                     Application.DoEvents();
                     if (Directory.Exists($"{drivePath}\\"))
@@ -154,20 +218,23 @@ namespace fad2.UI
                                 if (!settingsFileInfo.IsReadOnly)
                                 {
                                     SaveSettings.Enabled = true;
-                                } 
+                                }
 
                                 LoadTile.Visible = false;
                             }
                         }
-                                            
-                        
 
-                        
+
+
+
                     }
 
-                } catch {
-                // ignore non-existing drive
                 }
+                catch     
+                {
+                    // ignore non-existing drive
+                }
+            }
         }
 
         private void LoadFromFile_Click(object sender, EventArgs e)

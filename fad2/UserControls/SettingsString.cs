@@ -25,7 +25,7 @@ namespace fad2.UI.UserControls
 
         private void SettingsString_EnabledChanged(object sender, EventArgs e)
         {
-           foreach (Control crtl in this.Controls)
+            foreach (Control crtl in this.Controls)
             {
                 crtl.Enabled = this.Enabled;
             }
@@ -83,6 +83,7 @@ namespace fad2.UI.UserControls
             set
             {
                 SettingValue.Text = value;
+                Enabled = UiSettings.HasFeature(SettingVersion.Text);
             }
         }
         public string RequiredVersion
@@ -94,19 +95,14 @@ namespace fad2.UI.UserControls
             set
             {
                 SettingVersion.Text = value;
-                Enabled &= UiSettings.HasFeature(value);
-               
-            }
+           
 
+            }
         }
 
-        
-
-
-      
         public string Warning
         {
-               get
+            get
             {
                 return _warning;
             }
@@ -117,10 +113,11 @@ namespace fad2.UI.UserControls
                 MetroToolTip.SetToolTip(WarningLabel, _warning);
             }
         }
+
         private string _toolTip;
         public string ToolTip
         {
-                      get
+            get
             {
                 return _toolTip;
             }
@@ -147,7 +144,7 @@ namespace fad2.UI.UserControls
 
         private void SettingValue_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Regex!=null)
+            if (Regex != null)
             {
                 _isValid = new Regex(Regex).IsMatch(SettingValue.Text);
                 SettingValue.CustomBackground = !_isValid;

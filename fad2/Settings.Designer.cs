@@ -258,7 +258,6 @@ namespace fad2.UI
             this.VendorWebDav.Size = new System.Drawing.Size(765, 37);
             this.VendorWebDav.TabIndex = 30;
             this.VendorWebDav.ToolTip = null;
-            this.VendorWebDav.Value = null;
             this.VendorWebDav.Warning = "Upload must be enabled, too to allow writing";
             // 
             // VendorFirmware
@@ -436,7 +435,7 @@ namespace fad2.UI
             this.VendorLock.Key = "Default Configured";
             this.VendorLock.Location = new System.Drawing.Point(3, 491);
             this.VendorLock.Name = "VendorLock";
-            this.VendorLock.RequiredVersion = "0.0.0.0";
+            this.VendorLock.RequiredVersion = "1.00.00";
             this.VendorLock.Size = new System.Drawing.Size(765, 37);
             this.VendorLock.TabIndex = 18;
             this.VendorLock.ToolTip = "If set to true, Network settings will be reconfigured on browser";
@@ -467,7 +466,6 @@ namespace fad2.UI
             this.VendorDns.Size = new System.Drawing.Size(765, 37);
             this.VendorDns.TabIndex = 16;
             this.VendorDns.ToolTip = null;
-            this.VendorDns.Value = null;
             this.VendorDns.Warning = "";
             // 
             // VendorBootScreenPath
@@ -497,7 +495,6 @@ namespace fad2.UI
             this.VendorAppMode.Size = new System.Drawing.Size(765, 37);
             this.VendorAppMode.TabIndex = 14;
             this.VendorAppMode.ToolTip = null;
-            this.VendorAppMode.Value = null;
             this.VendorAppMode.Warning = "Pass-Thru-Mode requires V2.00.02 or higher";
             // 
             // VendorAppAutoTime

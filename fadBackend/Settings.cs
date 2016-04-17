@@ -82,6 +82,19 @@ namespace fad2.Backend
         [Setting("WEBDAVr")]
         public int WebDavMode { get; set; }
 
+
+        public string Version
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(FirmwareVersion) || FirmwareVersion.Length<7)
+                {
+                    return "1.00.00";
+                }
+                return FirmwareVersion.Substring(FirmwareVersion.Length - 7);
+            }
+        }
+
         public Settings()
         {
             Url = "http://flashair";

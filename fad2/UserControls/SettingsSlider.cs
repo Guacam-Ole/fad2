@@ -87,6 +87,8 @@ namespace fad2.UI.UserControls
             set
             {
                 SettingValue.Value = value;
+                Enabled = UiSettings.HasFeature(SettingVersion.Text);
+
             }
         }
         public string RequiredVersion
@@ -98,7 +100,6 @@ namespace fad2.UI.UserControls
             set
             {
                 SettingVersion.Text = value;
-                Enabled &= UiSettings.HasFeature(value);
                
             }
 
