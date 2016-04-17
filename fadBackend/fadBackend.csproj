@@ -45,13 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
+    <Compile Include="FileLoader.cs" />
     <Compile Include="GitHub.cs" />
     <Compile Include="GitHubComment.cs" />
     <Compile Include="GitHubIssues.cs" />
     <Compile Include="GitHubLabel.cs" />
     <Compile Include="GitHubUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingAttribute.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="SingleFileSetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

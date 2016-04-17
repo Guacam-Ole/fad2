@@ -31,16 +31,17 @@ namespace fad2.UI
         private void InitializeComponent()
         {
             this.SettingsPanel = new MetroFramework.Controls.MetroPanel();
+            this.LoadTile = new MetroFramework.Controls.MetroTile();
+            this.LoadSpinner = new MetroFramework.Controls.MetroProgressSpinner();
             this.RightPanel = new MetroFramework.Controls.MetroPanel();
             this.SaveSettings = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroButton2 = new MetroFramework.Controls.MetroButton();
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.LoadFromFile = new MetroFramework.Controls.MetroButton();
             this.CardSettingsTab = new MetroFramework.Controls.MetroTabControl();
             this.CardSettingsVendor = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.DontDoAnythingStupid = new MetroFramework.Controls.MetroLabel();
-            this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
             this.VendorWebDav = new fad2.UI.UserControls.SettingsCombo();
             this.VendorFirmware = new fad2.UI.UserControls.SettingsString();
             this.VendorCode = new fad2.UI.UserControls.SettingsString();
@@ -64,6 +65,7 @@ namespace fad2.UI
             this.VendorNetworkKey = new fad2.UI.UserControls.SettingsString();
             this.VendorAppname = new fad2.UI.UserControls.SettingsString();
             this.VendorAppInfo = new fad2.UI.UserControls.SettingsString();
+            this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
             this.WlansdProxyPort = new fad2.UI.UserControls.SettingsString();
             this.Wlansd_ProxyServer = new fad2.UI.UserControls.SettingsString();
             this.WlansdUseProxy = new fad2.UI.UserControls.SettingsBoolean();
@@ -75,6 +77,7 @@ namespace fad2.UI
             this.WlansdDhcp = new fad2.UI.UserControls.SettingsBoolean();
             this.WlansdId = new fad2.UI.UserControls.SettingsString();
             this.SettingsPanel.SuspendLayout();
+            this.LoadTile.SuspendLayout();
             this.CardSettingsTab.SuspendLayout();
             this.CardSettingsVendor.SuspendLayout();
             this.CardSettingsNetwork.SuspendLayout();
@@ -85,11 +88,12 @@ namespace fad2.UI
             this.SettingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.SettingsPanel.Controls.Add(this.LoadTile);
             this.SettingsPanel.Controls.Add(this.RightPanel);
             this.SettingsPanel.Controls.Add(this.SaveSettings);
             this.SettingsPanel.Controls.Add(this.metroLabel1);
             this.SettingsPanel.Controls.Add(this.metroButton2);
-            this.SettingsPanel.Controls.Add(this.metroButton1);
+            this.SettingsPanel.Controls.Add(this.LoadFromFile);
             this.SettingsPanel.Controls.Add(this.CardSettingsTab);
             this.SettingsPanel.HorizontalScrollbarBarColor = true;
             this.SettingsPanel.HorizontalScrollbarHighlightOnWheel = false;
@@ -102,6 +106,24 @@ namespace fad2.UI
             this.SettingsPanel.VerticalScrollbarHighlightOnWheel = false;
             this.SettingsPanel.VerticalScrollbarSize = 10;
             this.SettingsPanel.Resize += new System.EventHandler(this.SettingsPanel_Resize);
+            // 
+            // LoadTile
+            // 
+            this.LoadTile.Controls.Add(this.LoadSpinner);
+            this.LoadTile.Location = new System.Drawing.Point(17, 155);
+            this.LoadTile.Name = "LoadTile";
+            this.LoadTile.Size = new System.Drawing.Size(119, 110);
+            this.LoadTile.TabIndex = 15;
+            this.LoadTile.Text = "Loading....";
+            this.LoadTile.Visible = false;
+            // 
+            // LoadSpinner
+            // 
+            this.LoadSpinner.Location = new System.Drawing.Point(3, 3);
+            this.LoadSpinner.Maximum = 100;
+            this.LoadSpinner.Name = "LoadSpinner";
+            this.LoadSpinner.Size = new System.Drawing.Size(107, 88);
+            this.LoadSpinner.TabIndex = 0;
             // 
             // RightPanel
             // 
@@ -122,6 +144,7 @@ namespace fad2.UI
             // SaveSettings
             // 
             this.SaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SaveSettings.Enabled = false;
             this.SaveSettings.Location = new System.Drawing.Point(17, 578);
             this.SaveSettings.Name = "SaveSettings";
             this.SaveSettings.Size = new System.Drawing.Size(119, 23);
@@ -145,13 +168,14 @@ namespace fad2.UI
             this.metroButton2.TabIndex = 4;
             this.metroButton2.Text = "Use Network";
             // 
-            // metroButton1
+            // LoadFromFile
             // 
-            this.metroButton1.Location = new System.Drawing.Point(17, 97);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(119, 23);
-            this.metroButton1.TabIndex = 3;
-            this.metroButton1.Text = "Use Local SDCard";
+            this.LoadFromFile.Location = new System.Drawing.Point(17, 97);
+            this.LoadFromFile.Name = "LoadFromFile";
+            this.LoadFromFile.Size = new System.Drawing.Size(119, 23);
+            this.LoadFromFile.TabIndex = 3;
+            this.LoadFromFile.Text = "Use Local SDCard";
+            this.LoadFromFile.Click += new System.EventHandler(this.LoadFromFile_Click);
             // 
             // CardSettingsTab
             // 
@@ -159,6 +183,7 @@ namespace fad2.UI
             | System.Windows.Forms.AnchorStyles.Left)));
             this.CardSettingsTab.Controls.Add(this.CardSettingsVendor);
             this.CardSettingsTab.Controls.Add(this.CardSettingsNetwork);
+            this.CardSettingsTab.Enabled = false;
             this.CardSettingsTab.Location = new System.Drawing.Point(172, 3);
             this.CardSettingsTab.Name = "CardSettingsTab";
             this.CardSettingsTab.SelectedIndex = 0;
@@ -221,26 +246,6 @@ namespace fad2.UI
             this.DontDoAnythingStupid.Size = new System.Drawing.Size(459, 19);
             this.DontDoAnythingStupid.TabIndex = 31;
             this.DontDoAnythingStupid.Text = "Please be aware that you can really screw up here if you enter wrong values.. ";
-            // 
-            // CardSettingsNetwork
-            // 
-            this.CardSettingsNetwork.Controls.Add(this.WlansdProxyPort);
-            this.CardSettingsNetwork.Controls.Add(this.Wlansd_ProxyServer);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdUseProxy);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDnsAlternate);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDns);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdGateway);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdSubnet);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdIpAddress);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDhcp);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdId);
-            this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
-            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 35);
-            this.CardSettingsNetwork.Name = "CardSettingsNetwork";
-            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 559);
-            this.CardSettingsNetwork.TabIndex = 1;
-            this.CardSettingsNetwork.Text = "WLANSD";
-            this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
             // 
             // VendorWebDav
             // 
@@ -591,6 +596,26 @@ namespace fad2.UI
             this.VendorAppInfo.Value = "";
             this.VendorAppInfo.Warning = "Must be 1-16 characters ";
             // 
+            // CardSettingsNetwork
+            // 
+            this.CardSettingsNetwork.Controls.Add(this.WlansdProxyPort);
+            this.CardSettingsNetwork.Controls.Add(this.Wlansd_ProxyServer);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdUseProxy);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDnsAlternate);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDns);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdGateway);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdSubnet);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdIpAddress);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDhcp);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdId);
+            this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
+            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 35);
+            this.CardSettingsNetwork.Name = "CardSettingsNetwork";
+            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 559);
+            this.CardSettingsNetwork.TabIndex = 1;
+            this.CardSettingsNetwork.Text = "WLANSD";
+            this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
+            // 
             // WlansdProxyPort
             // 
             this.WlansdProxyPort.InternalName = "Port_Number";
@@ -755,6 +780,7 @@ namespace fad2.UI
             this.Size = new System.Drawing.Size(1200, 636);
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
+            this.LoadTile.ResumeLayout(false);
             this.CardSettingsTab.ResumeLayout(false);
             this.CardSettingsVendor.ResumeLayout(false);
             this.CardSettingsVendor.PerformLayout();
@@ -769,7 +795,7 @@ namespace fad2.UI
         private MetroFramework.Controls.MetroButton SaveSettings;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroButton metroButton2;
-        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton LoadFromFile;
         private MetroFramework.Controls.MetroTabControl CardSettingsTab;
         private MetroFramework.Controls.MetroTabPage CardSettingsVendor;
         private MetroFramework.Controls.MetroLabel metroLabel2;
@@ -809,5 +835,7 @@ namespace fad2.UI
         private SettingsIp WlansdSubnet;
         private SettingsIp WlansdIpAddress;
         private SettingsString WlansdProxyPort;
+        private MetroFramework.Controls.MetroTile LoadTile;
+        private MetroFramework.Controls.MetroProgressSpinner LoadSpinner;
     }
 }

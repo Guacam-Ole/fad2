@@ -132,5 +132,10 @@ namespace fad2.UI
         {
             ChangeImage();
         }
+
+        private void StartUp_Load(object sender, EventArgs e)
+        {
+            ChangeImage();
+        }
     }
 }

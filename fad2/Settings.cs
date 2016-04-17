@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using MetroFramework.Controls;
+using System.IO;
 
 namespace fad2.UI
 {
@@ -109,6 +110,69 @@ namespace fad2.UI
                 tile.TileImage = UiSettings.ResizedImage(_tileSize, _tileSize);
                 tile.Refresh();
             }
+        }
+
+        private void DisableControls()
+        {
+            SaveSettings.Enabled = false;
+            CardSettingsTab.Enabled = false;
+        }
+
+        private void EnableControls()
+        {
+            SaveSettings.Enabled = true;
+            CardSettingsTab.Enabled = true;
+        }
+
+        private void LoadSettingsFromFile(string filename)
+        {
+
+        }
+
+        private void LoadSettingsFromFile()
+        {
+            LoadTile.Text = "Search for File...";
+            Application.DoEvents();
+            for (char drive = 'D'; drive <= 'Z'; drive++)
+            {
+                string drivePath = $"{drive}:";
+                string settingsPath = $"{drivePath}\\SD_WLAN";
+                string settingsFile = $"{settingsPath}\\CONFIG";
+                try {
+                    LoadTile.Text = $"Search for File on {drivePath}";
+                    Application.DoEvents();
+                    if (Directory.Exists($"{drivePath}\\"))
+                    {
+                        if (Directory.Exists(settingsPath))
+                        {
+                            if (File.Exists(settingsFile))
+                            {
+                                LoadTile.Text = "Loading Settings";
+                                Application.DoEvents();
+                                LoadSettingsFromFile(settingsFile);
+                                var settingsFileInfo = new FileInfo(settingsFile);
+                                if (!settingsFileInfo.IsReadOnly)
+                                {
+                                    SaveSettings.Enabled = true;
+                                } 
+
+                                LoadTile.Visible = false;
+                            }
+                        }
+                                            
+                        
+
+                        
+                    }
+
+                } catch {
+                // ignore non-existing drive
+                }
+        }
+
+        private void LoadFromFile_Click(object sender, EventArgs e)
+        {
+            LoadSettingsFromFile();
         }
     }
 }

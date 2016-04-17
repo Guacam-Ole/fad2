@@ -104,6 +104,7 @@
             this.Controls.Add(this.BackPicture);
             this.Name = "StartUp";
             this.Size = new System.Drawing.Size(1174, 652);
+            this.Load += new System.EventHandler(this.StartUp_Load);
             this.Resize += new System.EventHandler(this.StartUp_Resize);
             this.ConnectionPanel.ResumeLayout(false);
             this.ConnectionPanel.PerformLayout();
