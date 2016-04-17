@@ -36,12 +36,12 @@ namespace fad2.UI
             this.RightPanel = new MetroFramework.Controls.MetroPanel();
             this.SaveSettings = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroButton2 = new MetroFramework.Controls.MetroButton();
             this.LoadFromFile = new MetroFramework.Controls.MetroButton();
             this.CardSettingsTab = new MetroFramework.Controls.MetroTabControl();
             this.CardSettingsVendor = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.DontDoAnythingStupid = new MetroFramework.Controls.MetroLabel();
+            this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
             this.VendorWebDav = new fad2.UI.UserControls.SettingsCombo();
             this.VendorFirmware = new fad2.UI.UserControls.SettingsString();
             this.VendorCode = new fad2.UI.UserControls.SettingsString();
@@ -65,7 +65,6 @@ namespace fad2.UI
             this.VendorNetworkKey = new fad2.UI.UserControls.SettingsString();
             this.VendorAppname = new fad2.UI.UserControls.SettingsString();
             this.VendorAppInfo = new fad2.UI.UserControls.SettingsString();
-            this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
             this.WlansdProxyPort = new fad2.UI.UserControls.SettingsString();
             this.Wlansd_ProxyServer = new fad2.UI.UserControls.SettingsString();
             this.WlansdUseProxy = new fad2.UI.UserControls.SettingsBoolean();
@@ -92,7 +91,6 @@ namespace fad2.UI
             this.SettingsPanel.Controls.Add(this.RightPanel);
             this.SettingsPanel.Controls.Add(this.SaveSettings);
             this.SettingsPanel.Controls.Add(this.metroLabel1);
-            this.SettingsPanel.Controls.Add(this.metroButton2);
             this.SettingsPanel.Controls.Add(this.LoadFromFile);
             this.SettingsPanel.Controls.Add(this.CardSettingsTab);
             this.SettingsPanel.HorizontalScrollbarBarColor = true;
@@ -110,7 +108,7 @@ namespace fad2.UI
             // LoadTile
             // 
             this.LoadTile.Controls.Add(this.LoadSpinner);
-            this.LoadTile.Location = new System.Drawing.Point(17, 155);
+            this.LoadTile.Location = new System.Drawing.Point(17, 126);
             this.LoadTile.Name = "LoadTile";
             this.LoadTile.Size = new System.Drawing.Size(119, 110);
             this.LoadTile.TabIndex = 15;
@@ -122,7 +120,7 @@ namespace fad2.UI
             this.LoadSpinner.Location = new System.Drawing.Point(3, 3);
             this.LoadSpinner.Maximum = 100;
             this.LoadSpinner.Name = "LoadSpinner";
-            this.LoadSpinner.Size = new System.Drawing.Size(107, 88);
+            this.LoadSpinner.Size = new System.Drawing.Size(116, 88);
             this.LoadSpinner.TabIndex = 0;
             // 
             // RightPanel
@@ -160,21 +158,13 @@ namespace fad2.UI
             this.metroLabel1.TabIndex = 5;
             this.metroLabel1.Text = "Settings Location:";
             // 
-            // metroButton2
-            // 
-            this.metroButton2.Location = new System.Drawing.Point(17, 126);
-            this.metroButton2.Name = "metroButton2";
-            this.metroButton2.Size = new System.Drawing.Size(119, 23);
-            this.metroButton2.TabIndex = 4;
-            this.metroButton2.Text = "Use Network";
-            // 
             // LoadFromFile
             // 
             this.LoadFromFile.Location = new System.Drawing.Point(17, 97);
             this.LoadFromFile.Name = "LoadFromFile";
             this.LoadFromFile.Size = new System.Drawing.Size(119, 23);
             this.LoadFromFile.TabIndex = 3;
-            this.LoadFromFile.Text = "Use Local SDCard";
+            this.LoadFromFile.Text = "Load";
             this.LoadFromFile.Click += new System.EventHandler(this.LoadFromFile_Click);
             // 
             // CardSettingsTab
@@ -231,7 +221,7 @@ namespace fad2.UI
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(7, 33);
+            this.metroLabel2.Location = new System.Drawing.Point(7, 30);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(510, 19);
             this.metroLabel2.TabIndex = 32;
@@ -241,357 +231,11 @@ namespace fad2.UI
             // DontDoAnythingStupid
             // 
             this.DontDoAnythingStupid.AutoSize = true;
-            this.DontDoAnythingStupid.Location = new System.Drawing.Point(7, 14);
+            this.DontDoAnythingStupid.Location = new System.Drawing.Point(7, 11);
             this.DontDoAnythingStupid.Name = "DontDoAnythingStupid";
             this.DontDoAnythingStupid.Size = new System.Drawing.Size(459, 19);
             this.DontDoAnythingStupid.TabIndex = 31;
             this.DontDoAnythingStupid.Text = "Please be aware that you can really screw up here if you enter wrong values.. ";
-            // 
-            // VendorWebDav
-            // 
-            this.VendorWebDav.DataSource = null;
-            this.VendorWebDav.InternalName = "WEBDAV";
-            this.VendorWebDav.Key = "WebDav";
-            this.VendorWebDav.Location = new System.Drawing.Point(3, 1007);
-            this.VendorWebDav.Name = "VendorWebDav";
-            this.VendorWebDav.RequiredVersion = "3.00.00";
-            this.VendorWebDav.Size = new System.Drawing.Size(765, 37);
-            this.VendorWebDav.TabIndex = 30;
-            this.VendorWebDav.ToolTip = null;
-            this.VendorWebDav.Warning = "Upload must be enabled, too to allow writing";
-            // 
-            // VendorFirmware
-            // 
-            this.VendorFirmware.InternalName = "VERSION";
-            this.VendorFirmware.Key = "Firmware version";
-            this.VendorFirmware.Location = new System.Drawing.Point(3, 964);
-            this.VendorFirmware.MaxCharacters = 32;
-            this.VendorFirmware.Name = "VendorFirmware";
-            this.VendorFirmware.PasswordChar = '\0';
-            this.VendorFirmware.Regex = null;
-            this.VendorFirmware.RequiredVersion = "1.00.00";
-            this.VendorFirmware.Size = new System.Drawing.Size(765, 37);
-            this.VendorFirmware.TabIndex = 29;
-            this.VendorFirmware.ToolTip = "";
-            this.VendorFirmware.Value = "";
-            this.VendorFirmware.Warning = "";
-            // 
-            // VendorCode
-            // 
-            this.VendorCode.InternalName = "VENDOR";
-            this.VendorCode.Key = "Vendor code";
-            this.VendorCode.Location = new System.Drawing.Point(3, 921);
-            this.VendorCode.MaxCharacters = 32;
-            this.VendorCode.Name = "VendorCode";
-            this.VendorCode.PasswordChar = '\0';
-            this.VendorCode.Regex = null;
-            this.VendorCode.RequiredVersion = "1.00.00";
-            this.VendorCode.Size = new System.Drawing.Size(765, 37);
-            this.VendorCode.TabIndex = 28;
-            this.VendorCode.ToolTip = "";
-            this.VendorCode.Value = "";
-            this.VendorCode.Warning = "";
-            // 
-            // VendorUploadEnabled
-            // 
-            this.VendorUploadEnabled.InternalName = "UPLOAD";
-            this.VendorUploadEnabled.Key = "Upload Enabled";
-            this.VendorUploadEnabled.Location = new System.Drawing.Point(3, 878);
-            this.VendorUploadEnabled.Name = "VendorUploadEnabled";
-            this.VendorUploadEnabled.RequiredVersion = "1.00.00";
-            this.VendorUploadEnabled.Size = new System.Drawing.Size(765, 37);
-            this.VendorUploadEnabled.TabIndex = 27;
-            this.VendorUploadEnabled.ToolTip = "";
-            this.VendorUploadEnabled.Value = false;
-            this.VendorUploadEnabled.Warning = "MUST be enabled to allow writing of data or configuration";
-            // 
-            // VendorUploadDir
-            // 
-            this.VendorUploadDir.InternalName = "UPDIR";
-            this.VendorUploadDir.Key = "Upload Directory";
-            this.VendorUploadDir.Location = new System.Drawing.Point(3, 835);
-            this.VendorUploadDir.MaxCharacters = 32;
-            this.VendorUploadDir.Name = "VendorUploadDir";
-            this.VendorUploadDir.PasswordChar = '\0';
-            this.VendorUploadDir.Regex = null;
-            this.VendorUploadDir.RequiredVersion = "2.00.03";
-            this.VendorUploadDir.Size = new System.Drawing.Size(765, 37);
-            this.VendorUploadDir.TabIndex = 26;
-            this.VendorUploadDir.ToolTip = "";
-            this.VendorUploadDir.Value = "";
-            this.VendorUploadDir.Warning = "";
-            // 
-            // VendorTimezone
-            // 
-            this.VendorTimezone.InternalName = "TIMEZONE";
-            this.VendorTimezone.Key = "Time Zone";
-            this.VendorTimezone.Location = new System.Drawing.Point(3, 792);
-            this.VendorTimezone.Maximum = 54;
-            this.VendorTimezone.Minimum = -48;
-            this.VendorTimezone.Name = "VendorTimezone";
-            this.VendorTimezone.RequiredVersion = "3.00.00";
-            this.VendorTimezone.Size = new System.Drawing.Size(765, 37);
-            this.VendorTimezone.TabIndex = 25;
-            this.VendorTimezone.ToolTip = "UTC = 0";
-            this.VendorTimezone.Value = 10;
-            this.VendorTimezone.Warning = null;
-            // 
-            // VendorStaRetry
-            // 
-            this.VendorStaRetry.InternalName = "STA_RETRY_CT";
-            this.VendorStaRetry.Key = "STA connection retries";
-            this.VendorStaRetry.Location = new System.Drawing.Point(3, 749);
-            this.VendorStaRetry.Maximum = 10;
-            this.VendorStaRetry.Minimum = 0;
-            this.VendorStaRetry.Name = "VendorStaRetry";
-            this.VendorStaRetry.RequiredVersion = "3.00.00";
-            this.VendorStaRetry.Size = new System.Drawing.Size(765, 37);
-            this.VendorStaRetry.TabIndex = 24;
-            this.VendorStaRetry.ToolTip = null;
-            this.VendorStaRetry.Value = 10;
-            this.VendorStaRetry.Warning = null;
-            // 
-            // VendorProductCode
-            // 
-            this.VendorProductCode.InternalName = "PRODUCT";
-            this.VendorProductCode.Key = "Product Code";
-            this.VendorProductCode.Location = new System.Drawing.Point(0, 706);
-            this.VendorProductCode.MaxCharacters = 32;
-            this.VendorProductCode.Name = "VendorProductCode";
-            this.VendorProductCode.PasswordChar = '\0';
-            this.VendorProductCode.Regex = null;
-            this.VendorProductCode.RequiredVersion = "1.00.00";
-            this.VendorProductCode.Size = new System.Drawing.Size(765, 37);
-            this.VendorProductCode.TabIndex = 23;
-            this.VendorProductCode.ToolTip = "Product name of the FlashAir";
-            this.VendorProductCode.Value = "";
-            this.VendorProductCode.Warning = "";
-            // 
-            // VendorNoiseCancel
-            // 
-            this.VendorNoiseCancel.InternalName = "NOISE_CANCEL";
-            this.VendorNoiseCancel.Key = "Noise Cancel";
-            this.VendorNoiseCancel.Location = new System.Drawing.Point(3, 663);
-            this.VendorNoiseCancel.Name = "VendorNoiseCancel";
-            this.VendorNoiseCancel.RequiredVersion = "2.00.03";
-            this.VendorNoiseCancel.Size = new System.Drawing.Size(765, 37);
-            this.VendorNoiseCancel.TabIndex = 22;
-            this.VendorNoiseCancel.ToolTip = "Improve connection at the cost of range and signal";
-            this.VendorNoiseCancel.Value = false;
-            this.VendorNoiseCancel.Warning = "";
-            // 
-            // VendorMasterCode
-            // 
-            this.VendorMasterCode.InternalName = "MASTERCODE";
-            this.VendorMasterCode.Key = "Master Code";
-            this.VendorMasterCode.Location = new System.Drawing.Point(3, 620);
-            this.VendorMasterCode.MaxCharacters = 32;
-            this.VendorMasterCode.Name = "VendorMasterCode";
-            this.VendorMasterCode.PasswordChar = '\0';
-            this.VendorMasterCode.Regex = null;
-            this.VendorMasterCode.RequiredVersion = "1.00.00";
-            this.VendorMasterCode.Size = new System.Drawing.Size(765, 37);
-            this.VendorMasterCode.TabIndex = 21;
-            this.VendorMasterCode.ToolTip = "Used as a password to set the SSID and Network key";
-            this.VendorMasterCode.Value = "";
-            this.VendorMasterCode.Warning = "Must be a HEX value with 12 characters";
-            // 
-            // VendorLuaWrite
-            // 
-            this.VendorLuaWrite.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.VendorLuaWrite.InternalName = "LUA_SD_EVENT";
-            this.VendorLuaWrite.Key = "LUA Write Script";
-            this.VendorLuaWrite.Location = new System.Drawing.Point(3, 577);
-            this.VendorLuaWrite.MaxCharacters = 32;
-            this.VendorLuaWrite.Name = "VendorLuaWrite";
-            this.VendorLuaWrite.PasswordChar = '\0';
-            this.VendorLuaWrite.Regex = null;
-            this.VendorLuaWrite.RequiredVersion = "3.00.00";
-            this.VendorLuaWrite.Size = new System.Drawing.Size(765, 37);
-            this.VendorLuaWrite.TabIndex = 20;
-            this.VendorLuaWrite.ToolTip = "";
-            this.VendorLuaWrite.Value = "";
-            this.VendorLuaWrite.Warning = "";
-            // 
-            // VendorLuaPathBoot
-            // 
-            this.VendorLuaPathBoot.InternalName = "LUA_RUN_SCRIPT";
-            this.VendorLuaPathBoot.Key = "LUA Boot Script";
-            this.VendorLuaPathBoot.Location = new System.Drawing.Point(3, 534);
-            this.VendorLuaPathBoot.MaxCharacters = 32;
-            this.VendorLuaPathBoot.Name = "VendorLuaPathBoot";
-            this.VendorLuaPathBoot.PasswordChar = '\0';
-            this.VendorLuaPathBoot.Regex = null;
-            this.VendorLuaPathBoot.RequiredVersion = "3.00.00";
-            this.VendorLuaPathBoot.Size = new System.Drawing.Size(765, 37);
-            this.VendorLuaPathBoot.TabIndex = 19;
-            this.VendorLuaPathBoot.ToolTip = "";
-            this.VendorLuaPathBoot.Value = "";
-            this.VendorLuaPathBoot.Warning = "";
-            // 
-            // VendorLock
-            // 
-            this.VendorLock.InternalName = "LOCK";
-            this.VendorLock.Key = "Default Configured";
-            this.VendorLock.Location = new System.Drawing.Point(3, 491);
-            this.VendorLock.Name = "VendorLock";
-            this.VendorLock.RequiredVersion = "1.00.00";
-            this.VendorLock.Size = new System.Drawing.Size(765, 37);
-            this.VendorLock.TabIndex = 18;
-            this.VendorLock.ToolTip = "If set to true, Network settings will be reconfigured on browser";
-            this.VendorLock.Value = false;
-            this.VendorLock.Warning = "";
-            // 
-            // VendorIfMode
-            // 
-            this.VendorIfMode.InternalName = "IFMODE";
-            this.VendorIfMode.Key = "SD Interface Enabled";
-            this.VendorIfMode.Location = new System.Drawing.Point(3, 448);
-            this.VendorIfMode.Name = "VendorIfMode";
-            this.VendorIfMode.RequiredVersion = "2.00.03";
-            this.VendorIfMode.Size = new System.Drawing.Size(765, 37);
-            this.VendorIfMode.TabIndex = 17;
-            this.VendorIfMode.ToolTip = "Enable the usage of the SD Interface User I/O";
-            this.VendorIfMode.Value = false;
-            this.VendorIfMode.Warning = "Check the API for more information";
-            // 
-            // VendorDns
-            // 
-            this.VendorDns.DataSource = null;
-            this.VendorDns.InternalName = "DNSMODE";
-            this.VendorDns.Key = "DNS operation mode";
-            this.VendorDns.Location = new System.Drawing.Point(3, 405);
-            this.VendorDns.Name = "VendorDns";
-            this.VendorDns.RequiredVersion = "2.00.02";
-            this.VendorDns.Size = new System.Drawing.Size(765, 37);
-            this.VendorDns.TabIndex = 16;
-            this.VendorDns.ToolTip = null;
-            this.VendorDns.Warning = "";
-            // 
-            // VendorBootScreenPath
-            // 
-            this.VendorBootScreenPath.InternalName = "CIPATH";
-            this.VendorBootScreenPath.Key = "Bootscreen path";
-            this.VendorBootScreenPath.Location = new System.Drawing.Point(3, 362);
-            this.VendorBootScreenPath.MaxCharacters = 32;
-            this.VendorBootScreenPath.Name = "VendorBootScreenPath";
-            this.VendorBootScreenPath.PasswordChar = '\0';
-            this.VendorBootScreenPath.Regex = null;
-            this.VendorBootScreenPath.RequiredVersion = "1.00.00";
-            this.VendorBootScreenPath.Size = new System.Drawing.Size(765, 37);
-            this.VendorBootScreenPath.TabIndex = 15;
-            this.VendorBootScreenPath.ToolTip = "";
-            this.VendorBootScreenPath.Value = "";
-            this.VendorBootScreenPath.Warning = "";
-            // 
-            // VendorAppMode
-            // 
-            this.VendorAppMode.DataSource = null;
-            this.VendorAppMode.InternalName = "APPMODE";
-            this.VendorAppMode.Key = "Wireless LAN Mode";
-            this.VendorAppMode.Location = new System.Drawing.Point(3, 147);
-            this.VendorAppMode.Name = "VendorAppMode";
-            this.VendorAppMode.RequiredVersion = "1.00.00";
-            this.VendorAppMode.Size = new System.Drawing.Size(765, 37);
-            this.VendorAppMode.TabIndex = 14;
-            this.VendorAppMode.ToolTip = null;
-            this.VendorAppMode.Warning = "Pass-Thru-Mode requires V2.00.02 or higher";
-            // 
-            // VendorAppAutoTime
-            // 
-            this.VendorAppAutoTime.InternalName = "APPAUTOTIME";
-            this.VendorAppAutoTime.Key = "Connection time-out";
-            this.VendorAppAutoTime.Location = new System.Drawing.Point(3, 61);
-            this.VendorAppAutoTime.Maximum = 120;
-            this.VendorAppAutoTime.Minimum = 0;
-            this.VendorAppAutoTime.Name = "VendorAppAutoTime";
-            this.VendorAppAutoTime.RequiredVersion = "1.0.0.0";
-            this.VendorAppAutoTime.Size = new System.Drawing.Size(765, 37);
-            this.VendorAppAutoTime.TabIndex = 13;
-            this.VendorAppAutoTime.ToolTip = null;
-            this.VendorAppAutoTime.Value = 50;
-            this.VendorAppAutoTime.ValueType = fad2.UI.UserControls.SettingsTimeSlider.ValueTypes.Second;
-            this.VendorAppAutoTime.Warning = null;
-            // 
-            // VendorCid
-            // 
-            this.VendorCid.InternalName = "CID";
-            this.VendorCid.Key = "Card ID";
-            this.VendorCid.Location = new System.Drawing.Point(3, 319);
-            this.VendorCid.MaxCharacters = 32;
-            this.VendorCid.Name = "VendorCid";
-            this.VendorCid.PasswordChar = '\0';
-            this.VendorCid.Regex = null;
-            this.VendorCid.RequiredVersion = "1.00.00";
-            this.VendorCid.Size = new System.Drawing.Size(765, 37);
-            this.VendorCid.TabIndex = 12;
-            this.VendorCid.ToolTip = "Card Identifier specified by the SD standard";
-            this.VendorCid.Value = "";
-            this.VendorCid.Warning = "Must be a HEX value with exactly 32 characters";
-            // 
-            // VendorSSID
-            // 
-            this.VendorSSID.InternalName = "APPSSID";
-            this.VendorSSID.Key = "SSID";
-            this.VendorSSID.Location = new System.Drawing.Point(3, 276);
-            this.VendorSSID.MaxCharacters = 32;
-            this.VendorSSID.Name = "VendorSSID";
-            this.VendorSSID.PasswordChar = '\0';
-            this.VendorSSID.Regex = null;
-            this.VendorSSID.RequiredVersion = "1.00.00";
-            this.VendorSSID.Size = new System.Drawing.Size(765, 37);
-            this.VendorSSID.TabIndex = 11;
-            this.VendorSSID.ToolTip = "";
-            this.VendorSSID.Value = "";
-            this.VendorSSID.Warning = "";
-            // 
-            // VendorNetworkKey
-            // 
-            this.VendorNetworkKey.InternalName = "APPNETWORKKEY";
-            this.VendorNetworkKey.Key = "Network security key";
-            this.VendorNetworkKey.Location = new System.Drawing.Point(3, 233);
-            this.VendorNetworkKey.MaxCharacters = 63;
-            this.VendorNetworkKey.Name = "VendorNetworkKey";
-            this.VendorNetworkKey.PasswordChar = '*';
-            this.VendorNetworkKey.Regex = null;
-            this.VendorNetworkKey.RequiredVersion = "1.00.00";
-            this.VendorNetworkKey.Size = new System.Drawing.Size(765, 37);
-            this.VendorNetworkKey.TabIndex = 10;
-            this.VendorNetworkKey.ToolTip = "";
-            this.VendorNetworkKey.Value = "";
-            this.VendorNetworkKey.Warning = "Enter at least 8 Characters";
-            // 
-            // VendorAppname
-            // 
-            this.VendorAppname.InternalName = "APPNAME";
-            this.VendorAppname.Key = "NETBIOS / Bonjour - Name";
-            this.VendorAppname.Location = new System.Drawing.Point(3, 190);
-            this.VendorAppname.MaxCharacters = 15;
-            this.VendorAppname.Name = "VendorAppname";
-            this.VendorAppname.PasswordChar = '\0';
-            this.VendorAppname.Regex = null;
-            this.VendorAppname.RequiredVersion = "1.00.00";
-            this.VendorAppname.Size = new System.Drawing.Size(765, 37);
-            this.VendorAppname.TabIndex = 9;
-            this.VendorAppname.ToolTip = "";
-            this.VendorAppname.Value = "";
-            this.VendorAppname.Warning = "";
-            // 
-            // VendorAppInfo
-            // 
-            this.VendorAppInfo.InternalName = "APPINFO";
-            this.VendorAppInfo.Key = "App-Info";
-            this.VendorAppInfo.Location = new System.Drawing.Point(3, 104);
-            this.VendorAppInfo.MaxCharacters = 16;
-            this.VendorAppInfo.Name = "VendorAppInfo";
-            this.VendorAppInfo.PasswordChar = '\0';
-            this.VendorAppInfo.Regex = null;
-            this.VendorAppInfo.RequiredVersion = "1.00.00";
-            this.VendorAppInfo.Size = new System.Drawing.Size(765, 37);
-            this.VendorAppInfo.TabIndex = 6;
-            this.VendorAppInfo.ToolTip = "Application\'s unique information";
-            this.VendorAppInfo.Value = "";
-            this.VendorAppInfo.Warning = "Must be 1-16 characters ";
             // 
             // CardSettingsNetwork
             // 
@@ -612,6 +256,352 @@ namespace fad2.UI
             this.CardSettingsNetwork.TabIndex = 1;
             this.CardSettingsNetwork.Text = "WLANSD";
             this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
+            // 
+            // VendorWebDav
+            // 
+            this.VendorWebDav.DataSource = null;
+            this.VendorWebDav.InternalName = "WEBDAV";
+            this.VendorWebDav.Key = "WebDav";
+            this.VendorWebDav.Location = new System.Drawing.Point(3, 1004);
+            this.VendorWebDav.Name = "VendorWebDav";
+            this.VendorWebDav.RequiredVersion = "3.00.00";
+            this.VendorWebDav.Size = new System.Drawing.Size(765, 37);
+            this.VendorWebDav.TabIndex = 30;
+            this.VendorWebDav.ToolTip = null;
+            this.VendorWebDav.Warning = "Upload must be enabled, too to allow writing";
+            // 
+            // VendorFirmware
+            // 
+            this.VendorFirmware.InternalName = "VERSION";
+            this.VendorFirmware.Key = "Firmware version";
+            this.VendorFirmware.Location = new System.Drawing.Point(3, 961);
+            this.VendorFirmware.MaxCharacters = 32;
+            this.VendorFirmware.Name = "VendorFirmware";
+            this.VendorFirmware.PasswordChar = '\0';
+            this.VendorFirmware.Regex = null;
+            this.VendorFirmware.RequiredVersion = "1.00.00";
+            this.VendorFirmware.Size = new System.Drawing.Size(765, 37);
+            this.VendorFirmware.TabIndex = 29;
+            this.VendorFirmware.ToolTip = "";
+            this.VendorFirmware.Value = "";
+            this.VendorFirmware.Warning = "";
+            // 
+            // VendorCode
+            // 
+            this.VendorCode.InternalName = "VENDOR";
+            this.VendorCode.Key = "Vendor code";
+            this.VendorCode.Location = new System.Drawing.Point(3, 918);
+            this.VendorCode.MaxCharacters = 32;
+            this.VendorCode.Name = "VendorCode";
+            this.VendorCode.PasswordChar = '\0';
+            this.VendorCode.Regex = null;
+            this.VendorCode.RequiredVersion = "1.00.00";
+            this.VendorCode.Size = new System.Drawing.Size(765, 37);
+            this.VendorCode.TabIndex = 28;
+            this.VendorCode.ToolTip = "";
+            this.VendorCode.Value = "";
+            this.VendorCode.Warning = "";
+            // 
+            // VendorUploadEnabled
+            // 
+            this.VendorUploadEnabled.InternalName = "UPLOAD";
+            this.VendorUploadEnabled.Key = "Upload Enabled";
+            this.VendorUploadEnabled.Location = new System.Drawing.Point(3, 875);
+            this.VendorUploadEnabled.Name = "VendorUploadEnabled";
+            this.VendorUploadEnabled.RequiredVersion = "1.00.00";
+            this.VendorUploadEnabled.Size = new System.Drawing.Size(765, 37);
+            this.VendorUploadEnabled.TabIndex = 27;
+            this.VendorUploadEnabled.ToolTip = "";
+            this.VendorUploadEnabled.Value = false;
+            this.VendorUploadEnabled.Warning = "MUST be enabled to allow writing of data or configuration";
+            // 
+            // VendorUploadDir
+            // 
+            this.VendorUploadDir.InternalName = "UPDIR";
+            this.VendorUploadDir.Key = "Upload Directory";
+            this.VendorUploadDir.Location = new System.Drawing.Point(3, 832);
+            this.VendorUploadDir.MaxCharacters = 32;
+            this.VendorUploadDir.Name = "VendorUploadDir";
+            this.VendorUploadDir.PasswordChar = '\0';
+            this.VendorUploadDir.Regex = null;
+            this.VendorUploadDir.RequiredVersion = "2.00.03";
+            this.VendorUploadDir.Size = new System.Drawing.Size(765, 37);
+            this.VendorUploadDir.TabIndex = 26;
+            this.VendorUploadDir.ToolTip = "";
+            this.VendorUploadDir.Value = "";
+            this.VendorUploadDir.Warning = "";
+            // 
+            // VendorTimezone
+            // 
+            this.VendorTimezone.InternalName = "TIMEZONE";
+            this.VendorTimezone.Key = "Time Zone";
+            this.VendorTimezone.Location = new System.Drawing.Point(3, 789);
+            this.VendorTimezone.Maximum = 54;
+            this.VendorTimezone.Minimum = -48;
+            this.VendorTimezone.Name = "VendorTimezone";
+            this.VendorTimezone.RequiredVersion = "3.00.00";
+            this.VendorTimezone.Size = new System.Drawing.Size(765, 37);
+            this.VendorTimezone.TabIndex = 25;
+            this.VendorTimezone.ToolTip = "UTC = 0";
+            this.VendorTimezone.Value = 10;
+            this.VendorTimezone.Warning = null;
+            // 
+            // VendorStaRetry
+            // 
+            this.VendorStaRetry.InternalName = "STA_RETRY_CT";
+            this.VendorStaRetry.Key = "STA connection retries";
+            this.VendorStaRetry.Location = new System.Drawing.Point(3, 746);
+            this.VendorStaRetry.Maximum = 10;
+            this.VendorStaRetry.Minimum = 0;
+            this.VendorStaRetry.Name = "VendorStaRetry";
+            this.VendorStaRetry.RequiredVersion = "3.00.00";
+            this.VendorStaRetry.Size = new System.Drawing.Size(765, 37);
+            this.VendorStaRetry.TabIndex = 24;
+            this.VendorStaRetry.ToolTip = null;
+            this.VendorStaRetry.Value = 10;
+            this.VendorStaRetry.Warning = null;
+            // 
+            // VendorProductCode
+            // 
+            this.VendorProductCode.InternalName = "PRODUCT";
+            this.VendorProductCode.Key = "Product Code";
+            this.VendorProductCode.Location = new System.Drawing.Point(0, 703);
+            this.VendorProductCode.MaxCharacters = 32;
+            this.VendorProductCode.Name = "VendorProductCode";
+            this.VendorProductCode.PasswordChar = '\0';
+            this.VendorProductCode.Regex = null;
+            this.VendorProductCode.RequiredVersion = "1.00.00";
+            this.VendorProductCode.Size = new System.Drawing.Size(765, 37);
+            this.VendorProductCode.TabIndex = 23;
+            this.VendorProductCode.ToolTip = "Product name of the FlashAir";
+            this.VendorProductCode.Value = "";
+            this.VendorProductCode.Warning = "";
+            // 
+            // VendorNoiseCancel
+            // 
+            this.VendorNoiseCancel.InternalName = "NOISE_CANCEL";
+            this.VendorNoiseCancel.Key = "Noise Cancel";
+            this.VendorNoiseCancel.Location = new System.Drawing.Point(3, 660);
+            this.VendorNoiseCancel.Name = "VendorNoiseCancel";
+            this.VendorNoiseCancel.RequiredVersion = "2.00.03";
+            this.VendorNoiseCancel.Size = new System.Drawing.Size(765, 37);
+            this.VendorNoiseCancel.TabIndex = 22;
+            this.VendorNoiseCancel.ToolTip = "Improve connection at the cost of range and signal";
+            this.VendorNoiseCancel.Value = false;
+            this.VendorNoiseCancel.Warning = "";
+            // 
+            // VendorMasterCode
+            // 
+            this.VendorMasterCode.InternalName = "MASTERCODE";
+            this.VendorMasterCode.Key = "Master Code";
+            this.VendorMasterCode.Location = new System.Drawing.Point(3, 617);
+            this.VendorMasterCode.MaxCharacters = 32;
+            this.VendorMasterCode.Name = "VendorMasterCode";
+            this.VendorMasterCode.PasswordChar = '\0';
+            this.VendorMasterCode.Regex = null;
+            this.VendorMasterCode.RequiredVersion = "1.00.00";
+            this.VendorMasterCode.Size = new System.Drawing.Size(765, 37);
+            this.VendorMasterCode.TabIndex = 21;
+            this.VendorMasterCode.ToolTip = "Used as a password to set the SSID and Network key";
+            this.VendorMasterCode.Value = "";
+            this.VendorMasterCode.Warning = "Must be a HEX value with 12 characters";
+            // 
+            // VendorLuaWrite
+            // 
+            this.VendorLuaWrite.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.VendorLuaWrite.InternalName = "LUA_SD_EVENT";
+            this.VendorLuaWrite.Key = "LUA Write Script";
+            this.VendorLuaWrite.Location = new System.Drawing.Point(3, 574);
+            this.VendorLuaWrite.MaxCharacters = 32;
+            this.VendorLuaWrite.Name = "VendorLuaWrite";
+            this.VendorLuaWrite.PasswordChar = '\0';
+            this.VendorLuaWrite.Regex = null;
+            this.VendorLuaWrite.RequiredVersion = "3.00.00";
+            this.VendorLuaWrite.Size = new System.Drawing.Size(765, 37);
+            this.VendorLuaWrite.TabIndex = 20;
+            this.VendorLuaWrite.ToolTip = "";
+            this.VendorLuaWrite.Value = "";
+            this.VendorLuaWrite.Warning = "";
+            // 
+            // VendorLuaPathBoot
+            // 
+            this.VendorLuaPathBoot.InternalName = "LUA_RUN_SCRIPT";
+            this.VendorLuaPathBoot.Key = "LUA Boot Script";
+            this.VendorLuaPathBoot.Location = new System.Drawing.Point(3, 531);
+            this.VendorLuaPathBoot.MaxCharacters = 32;
+            this.VendorLuaPathBoot.Name = "VendorLuaPathBoot";
+            this.VendorLuaPathBoot.PasswordChar = '\0';
+            this.VendorLuaPathBoot.Regex = null;
+            this.VendorLuaPathBoot.RequiredVersion = "3.00.00";
+            this.VendorLuaPathBoot.Size = new System.Drawing.Size(765, 37);
+            this.VendorLuaPathBoot.TabIndex = 19;
+            this.VendorLuaPathBoot.ToolTip = "";
+            this.VendorLuaPathBoot.Value = "";
+            this.VendorLuaPathBoot.Warning = "";
+            // 
+            // VendorLock
+            // 
+            this.VendorLock.InternalName = "LOCK";
+            this.VendorLock.Key = "Default Configured";
+            this.VendorLock.Location = new System.Drawing.Point(3, 488);
+            this.VendorLock.Name = "VendorLock";
+            this.VendorLock.RequiredVersion = "1.00.00";
+            this.VendorLock.Size = new System.Drawing.Size(765, 37);
+            this.VendorLock.TabIndex = 18;
+            this.VendorLock.ToolTip = "If set to true, Network settings will be reconfigured on browser";
+            this.VendorLock.Value = false;
+            this.VendorLock.Warning = "";
+            // 
+            // VendorIfMode
+            // 
+            this.VendorIfMode.InternalName = "IFMODE";
+            this.VendorIfMode.Key = "SD Interface Enabled";
+            this.VendorIfMode.Location = new System.Drawing.Point(3, 445);
+            this.VendorIfMode.Name = "VendorIfMode";
+            this.VendorIfMode.RequiredVersion = "2.00.03";
+            this.VendorIfMode.Size = new System.Drawing.Size(765, 37);
+            this.VendorIfMode.TabIndex = 17;
+            this.VendorIfMode.ToolTip = "Enable the usage of the SD Interface User I/O";
+            this.VendorIfMode.Value = false;
+            this.VendorIfMode.Warning = "Check the API for more information";
+            // 
+            // VendorDns
+            // 
+            this.VendorDns.DataSource = null;
+            this.VendorDns.InternalName = "DNSMODE";
+            this.VendorDns.Key = "DNS operation mode";
+            this.VendorDns.Location = new System.Drawing.Point(3, 402);
+            this.VendorDns.Name = "VendorDns";
+            this.VendorDns.RequiredVersion = "2.00.02";
+            this.VendorDns.Size = new System.Drawing.Size(765, 37);
+            this.VendorDns.TabIndex = 16;
+            this.VendorDns.ToolTip = null;
+            this.VendorDns.Warning = "";
+            // 
+            // VendorBootScreenPath
+            // 
+            this.VendorBootScreenPath.InternalName = "CIPATH";
+            this.VendorBootScreenPath.Key = "Bootscreen path";
+            this.VendorBootScreenPath.Location = new System.Drawing.Point(3, 359);
+            this.VendorBootScreenPath.MaxCharacters = 32;
+            this.VendorBootScreenPath.Name = "VendorBootScreenPath";
+            this.VendorBootScreenPath.PasswordChar = '\0';
+            this.VendorBootScreenPath.Regex = null;
+            this.VendorBootScreenPath.RequiredVersion = "1.00.00";
+            this.VendorBootScreenPath.Size = new System.Drawing.Size(765, 37);
+            this.VendorBootScreenPath.TabIndex = 15;
+            this.VendorBootScreenPath.ToolTip = "";
+            this.VendorBootScreenPath.Value = "";
+            this.VendorBootScreenPath.Warning = "";
+            // 
+            // VendorAppMode
+            // 
+            this.VendorAppMode.DataSource = null;
+            this.VendorAppMode.InternalName = "APPMODE";
+            this.VendorAppMode.Key = "Wireless LAN Mode";
+            this.VendorAppMode.Location = new System.Drawing.Point(3, 144);
+            this.VendorAppMode.Name = "VendorAppMode";
+            this.VendorAppMode.RequiredVersion = "1.00.00";
+            this.VendorAppMode.Size = new System.Drawing.Size(765, 37);
+            this.VendorAppMode.TabIndex = 14;
+            this.VendorAppMode.ToolTip = null;
+            this.VendorAppMode.Warning = "Pass-Thru-Mode requires V2.00.02 or higher";
+            // 
+            // VendorAppAutoTime
+            // 
+            this.VendorAppAutoTime.InternalName = "APPAUTOTIME";
+            this.VendorAppAutoTime.Key = "Connection time-out";
+            this.VendorAppAutoTime.Location = new System.Drawing.Point(3, 58);
+            this.VendorAppAutoTime.Maximum = 120;
+            this.VendorAppAutoTime.Minimum = 0;
+            this.VendorAppAutoTime.Name = "VendorAppAutoTime";
+            this.VendorAppAutoTime.RequiredVersion = "1.0.0.0";
+            this.VendorAppAutoTime.Size = new System.Drawing.Size(765, 37);
+            this.VendorAppAutoTime.TabIndex = 13;
+            this.VendorAppAutoTime.ToolTip = null;
+            this.VendorAppAutoTime.Value = 50;
+            this.VendorAppAutoTime.ValueType = fad2.UI.UserControls.SettingsTimeSlider.ValueTypes.Second;
+            this.VendorAppAutoTime.Warning = null;
+            // 
+            // VendorCid
+            // 
+            this.VendorCid.InternalName = "CID";
+            this.VendorCid.Key = "Card ID";
+            this.VendorCid.Location = new System.Drawing.Point(3, 316);
+            this.VendorCid.MaxCharacters = 32;
+            this.VendorCid.Name = "VendorCid";
+            this.VendorCid.PasswordChar = '\0';
+            this.VendorCid.Regex = null;
+            this.VendorCid.RequiredVersion = "1.00.00";
+            this.VendorCid.Size = new System.Drawing.Size(765, 37);
+            this.VendorCid.TabIndex = 12;
+            this.VendorCid.ToolTip = "Card Identifier specified by the SD standard";
+            this.VendorCid.Value = "";
+            this.VendorCid.Warning = "Must be a HEX value with exactly 32 characters";
+            // 
+            // VendorSSID
+            // 
+            this.VendorSSID.InternalName = "APPSSID";
+            this.VendorSSID.Key = "SSID";
+            this.VendorSSID.Location = new System.Drawing.Point(3, 273);
+            this.VendorSSID.MaxCharacters = 32;
+            this.VendorSSID.Name = "VendorSSID";
+            this.VendorSSID.PasswordChar = '\0';
+            this.VendorSSID.Regex = null;
+            this.VendorSSID.RequiredVersion = "1.00.00";
+            this.VendorSSID.Size = new System.Drawing.Size(765, 37);
+            this.VendorSSID.TabIndex = 11;
+            this.VendorSSID.ToolTip = "";
+            this.VendorSSID.Value = "";
+            this.VendorSSID.Warning = "";
+            // 
+            // VendorNetworkKey
+            // 
+            this.VendorNetworkKey.InternalName = "APPNETWORKKEY";
+            this.VendorNetworkKey.Key = "Network security key";
+            this.VendorNetworkKey.Location = new System.Drawing.Point(3, 230);
+            this.VendorNetworkKey.MaxCharacters = 63;
+            this.VendorNetworkKey.Name = "VendorNetworkKey";
+            this.VendorNetworkKey.PasswordChar = '*';
+            this.VendorNetworkKey.Regex = null;
+            this.VendorNetworkKey.RequiredVersion = "1.00.00";
+            this.VendorNetworkKey.Size = new System.Drawing.Size(765, 37);
+            this.VendorNetworkKey.TabIndex = 10;
+            this.VendorNetworkKey.ToolTip = "";
+            this.VendorNetworkKey.Value = "";
+            this.VendorNetworkKey.Warning = "Enter at least 8 Characters";
+            // 
+            // VendorAppname
+            // 
+            this.VendorAppname.InternalName = "APPNAME";
+            this.VendorAppname.Key = "NETBIOS / Bonjour - Name";
+            this.VendorAppname.Location = new System.Drawing.Point(3, 187);
+            this.VendorAppname.MaxCharacters = 15;
+            this.VendorAppname.Name = "VendorAppname";
+            this.VendorAppname.PasswordChar = '\0';
+            this.VendorAppname.Regex = null;
+            this.VendorAppname.RequiredVersion = "1.00.00";
+            this.VendorAppname.Size = new System.Drawing.Size(765, 37);
+            this.VendorAppname.TabIndex = 9;
+            this.VendorAppname.ToolTip = "";
+            this.VendorAppname.Value = "";
+            this.VendorAppname.Warning = "";
+            // 
+            // VendorAppInfo
+            // 
+            this.VendorAppInfo.InternalName = "APPINFO";
+            this.VendorAppInfo.Key = "App-Info";
+            this.VendorAppInfo.Location = new System.Drawing.Point(3, 101);
+            this.VendorAppInfo.MaxCharacters = 16;
+            this.VendorAppInfo.Name = "VendorAppInfo";
+            this.VendorAppInfo.PasswordChar = '\0';
+            this.VendorAppInfo.Regex = null;
+            this.VendorAppInfo.RequiredVersion = "1.00.00";
+            this.VendorAppInfo.Size = new System.Drawing.Size(765, 37);
+            this.VendorAppInfo.TabIndex = 6;
+            this.VendorAppInfo.ToolTip = "Application\'s unique information";
+            this.VendorAppInfo.Value = "";
+            this.VendorAppInfo.Warning = "Must be 1-16 characters ";
             // 
             // WlansdProxyPort
             // 
@@ -791,7 +781,6 @@ namespace fad2.UI
         private MetroFramework.Controls.MetroPanel SettingsPanel;
         private MetroFramework.Controls.MetroButton SaveSettings;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroButton metroButton2;
         private MetroFramework.Controls.MetroButton LoadFromFile;
         private MetroFramework.Controls.MetroTabControl CardSettingsTab;
         private MetroFramework.Controls.MetroTabPage CardSettingsVendor;

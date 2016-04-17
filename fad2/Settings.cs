@@ -194,6 +194,9 @@ namespace fad2.UI
 
         private void LoadSettingsFromFile()
         {
+            LoadTile.Visible = true;
+            LoadSpinner.Visible = true;
+            LoadTile.Style = MetroFramework.MetroColorStyle.Default;
             LoadTile.Text = "Search for File...";
             Application.DoEvents();
             for (char drive = 'D'; drive <= 'Z'; drive++)
@@ -221,12 +224,9 @@ namespace fad2.UI
                                 }
 
                                 LoadTile.Visible = false;
+                                return;
                             }
                         }
-
-
-
-
                     }
 
                 }
@@ -235,6 +235,9 @@ namespace fad2.UI
                     // ignore non-existing drive
                 }
             }
+            LoadTile.Style = MetroFramework.MetroColorStyle.Orange;
+            LoadSpinner.Visible = false;
+            LoadTile.Text = "File not found";
         }
 
         private void LoadFromFile_Click(object sender, EventArgs e)
