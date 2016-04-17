@@ -8,6 +8,7 @@ using fad2.Backend;
 using fad2.UI.UserControls;
 using System.Linq;
 using log4net;
+using System.Reflection;
 
 namespace fad2.UI
 {
@@ -138,6 +139,45 @@ namespace fad2.UI
 
         Backend.Settings _settings;
 
+
+        private void ReadSettings()
+        {
+            if (_settings == null)
+            {
+                DisableControls();
+                return;
+            }
+            foreach (var property in _settings.GetType().GetProperties())
+            {
+                try
+                {
+
+                    var customAttribute = (SettingAttribute)property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
+                    if (customAttribute != null)
+                    {
+                        string internalName = customAttribute.Name;
+                        if (_ignoreProperties.Contains(internalName))
+                        {
+                            continue;
+                        }
+                     //   string trueValue = customAttribute.TrueValue;
+                       // var value = property.GetValue(_settings, null);
+                        var newSetting = GetControlValue(internalName);
+                        if (newSetting==null)
+                        {
+                            continue;   // No changes made
+                        }
+                        property.SetValue(_settings, newSetting, null);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex);
+                }
+            }
+        }
+
+        private string[] _ignoreProperties = new string[] { "DNSMODE", "BRGNETWORKKEY", "BRGSSID", "APPNETWORKKEY", "APPSSID" };
         private void DisplaySettings()
         {
             if (_settings==null)
@@ -146,7 +186,6 @@ namespace fad2.UI
                 return;
             }
 
-            string[] ignoreProperties = new string[] { "DNSMODE", "BRGNETWORKKEY", "BRGSSID", "APPNETWORKKEY", "APPSSID" };
             UiSettings.CardVersion = _settings.Version;
             foreach (var property in _settings.GetType().GetProperties())
             {    try
@@ -156,13 +195,13 @@ namespace fad2.UI
                     if (customAttribute != null)
                     {
                         string internalName = customAttribute.Name;
-                        if (ignoreProperties.Contains(internalName))
+                        if (_ignoreProperties.Contains(internalName))
                         {
                             continue;
                         }
                         string trueValue = customAttribute.TrueValue;
                         var value = property.GetValue(_settings, null);
-                        SetControlValue(internalName, value, trueValue);
+                        SetControlValue(internalName, value);
                     }
                 } catch(Exception ex)
                 {
@@ -186,9 +225,7 @@ namespace fad2.UI
         }
 
 
-
-
-        private void LoadSettingsFromFile()
+        private string GetSettingsFile()
         {
             LoadTile.Visible = true;
             LoadSpinner.Visible = true;
@@ -210,27 +247,61 @@ namespace fad2.UI
                         {
                             if (File.Exists(settingsFile))
                             {
-                                LoadTile.Text = "Loading Settings";
-                                Application.DoEvents();
-                                LoadSettingsFromFile(settingsFile);
-                                var settingsFileInfo = new FileInfo(settingsFile);
-                                if (!settingsFileInfo.IsReadOnly)
-                                {
-                                    SaveSettings.Enabled = true;
-                                }
+                                return settingsFile;
 
-                                LoadTile.Visible = false;
-                                return;
                             }
                         }
                     }
-
                 }
-                catch     
+                catch
                 {
                     // ignore non-existing drive
                 }
             }
+            return null;
+        }
+
+        private void SaveSettingsToFile(string fileName)
+        {
+            ReadSettings();
+            FileLoader fl = new FileLoader();
+            fl.SaveToFile(Application.ProductVersion, fileName, _settings);
+        }
+
+        private void SaveSettingsToFile()
+        {
+            string settingsFile = GetSettingsFile();
+            if (settingsFile != null)
+            {
+                LoadTile.Text = "Saving Settings";
+                Application.DoEvents();
+                SaveSettingsToFile(settingsFile);
+                LoadTile.Visible = false;
+                return;
+            }
+            LoadTile.Style = MetroFramework.MetroColorStyle.Orange;
+            LoadSpinner.Visible = false;
+            LoadTile.Text = "File not found";
+        }
+
+        private void LoadSettingsFromFile()
+        {
+            string settingsFile = GetSettingsFile();
+            if (settingsFile != null)
+            {
+                LoadTile.Text = "Loading Settings";
+                Application.DoEvents();
+                LoadSettingsFromFile(settingsFile);
+                var settingsFileInfo = new FileInfo(settingsFile);
+                if (!settingsFileInfo.IsReadOnly)
+                {
+                    SaveSettings.Enabled = true;
+                }
+
+                LoadTile.Visible = false;
+                return;
+            }
+
             LoadTile.Style = MetroFramework.MetroColorStyle.Orange;
             LoadSpinner.Visible = false;
             LoadTile.Text = "File not found";
@@ -243,10 +314,35 @@ namespace fad2.UI
 
         private void SaveSettings_Click(object sender, EventArgs e)
         {
-           
+            SaveSettingsToFile();
         }
 
-        private void SetControlValue(string internalName, object value, string trueValue)
+        private object GetControlValue(string internalName)
+        {
+            Control targetControl = FindControlByInternalName(internalName);
+            if (targetControl == null)
+            {
+                return null;
+            }
+
+            PropertyInfo valueChangedProperty = targetControl.GetType().GetProperty("ValueChanged");
+            PropertyInfo valueProperty = targetControl.GetType().GetProperty("Value");
+
+            if (valueChangedProperty==null || valueProperty==null)
+            {
+                return null;
+            }
+
+            bool hasChanged = (bool)valueChangedProperty.GetValue(targetControl, null);
+            if (!hasChanged)
+            {
+                return null;
+            }
+
+            return valueProperty.GetValue(targetControl, null);
+        }
+
+        private void SetControlValue(string internalName, object value)
         {
             Control targetControl = FindControlByInternalName(internalName);
             if (targetControl==null)
@@ -284,7 +380,7 @@ namespace fad2.UI
             }
             foreach (Control setting in CardSettingsNetwork.Controls)
             {
-                var nameProperty = setting.GetType().GetProperty("InternalName");
+                PropertyInfo nameProperty = setting.GetType().GetProperty("InternalName");
                 if (nameProperty != null)
                 {
                     string namePropertyValue = (string)nameProperty.GetValue(setting, null);

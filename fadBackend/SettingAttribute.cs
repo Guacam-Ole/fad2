@@ -12,6 +12,7 @@ namespace fad2.Backend
         public string FalseValue { get; set; }
         public bool CanSetThroughAir { get; set; }
         public string Default { get; set; }
+        public string Parent { get; set; }
 
         public SettingAttribute(string name)
         {

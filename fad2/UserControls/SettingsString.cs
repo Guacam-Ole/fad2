@@ -158,6 +158,7 @@ namespace fad2.UI.UserControls
                 _isValid = new Regex(Regex).IsMatch(SettingValue.Text);
                 SettingValue.CustomBackground = !_isValid;
             }
+            _valueChanged = true;
         }
     }
 }

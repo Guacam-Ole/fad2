@@ -15,7 +15,7 @@ namespace fad2.UI.UserControls
             Minute,
             Hour
         }
-        public ValueTypes ValueType { get; set; } = ValueTypes.Second;
+        public ValueTypes ValueType { get; set; } = ValueTypes.Millisecond;
 
         protected override void SettingValue_ValueChanged(object sender, EventArgs e)
         {
