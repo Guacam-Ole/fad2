@@ -41,7 +41,6 @@ namespace fad2.UI
             this.CardSettingsVendor = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.DontDoAnythingStupid = new MetroFramework.Controls.MetroLabel();
-            this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
             this.VendorWebDav = new fad2.UI.UserControls.SettingsCombo();
             this.VendorFirmware = new fad2.UI.UserControls.SettingsString();
             this.VendorCode = new fad2.UI.UserControls.SettingsString();
@@ -65,6 +64,7 @@ namespace fad2.UI
             this.VendorNetworkKey = new fad2.UI.UserControls.SettingsString();
             this.VendorAppname = new fad2.UI.UserControls.SettingsString();
             this.VendorAppInfo = new fad2.UI.UserControls.SettingsString();
+            this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
             this.WlansdProxyPort = new fad2.UI.UserControls.SettingsString();
             this.Wlansd_ProxyServer = new fad2.UI.UserControls.SettingsString();
             this.WlansdUseProxy = new fad2.UI.UserControls.SettingsBoolean();
@@ -148,6 +148,7 @@ namespace fad2.UI
             this.SaveSettings.Size = new System.Drawing.Size(119, 23);
             this.SaveSettings.TabIndex = 13;
             this.SaveSettings.Text = "Save";
+            this.SaveSettings.Click += new System.EventHandler(this.SaveSettings_Click);
             // 
             // metroLabel1
             // 
@@ -236,26 +237,6 @@ namespace fad2.UI
             this.DontDoAnythingStupid.Size = new System.Drawing.Size(459, 19);
             this.DontDoAnythingStupid.TabIndex = 31;
             this.DontDoAnythingStupid.Text = "Please be aware that you can really screw up here if you enter wrong values.. ";
-            // 
-            // CardSettingsNetwork
-            // 
-            this.CardSettingsNetwork.Controls.Add(this.WlansdProxyPort);
-            this.CardSettingsNetwork.Controls.Add(this.Wlansd_ProxyServer);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdUseProxy);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDnsAlternate);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDns);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdGateway);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdSubnet);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdIpAddress);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDhcp);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdId);
-            this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
-            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 35);
-            this.CardSettingsNetwork.Name = "CardSettingsNetwork";
-            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 559);
-            this.CardSettingsNetwork.TabIndex = 1;
-            this.CardSettingsNetwork.Text = "WLANSD";
-            this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
             // 
             // VendorWebDav
             // 
@@ -602,6 +583,26 @@ namespace fad2.UI
             this.VendorAppInfo.ToolTip = "Application\'s unique information";
             this.VendorAppInfo.Value = "";
             this.VendorAppInfo.Warning = "Must be 1-16 characters ";
+            // 
+            // CardSettingsNetwork
+            // 
+            this.CardSettingsNetwork.Controls.Add(this.WlansdProxyPort);
+            this.CardSettingsNetwork.Controls.Add(this.Wlansd_ProxyServer);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdUseProxy);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDnsAlternate);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDns);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdGateway);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdSubnet);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdIpAddress);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDhcp);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdId);
+            this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
+            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 35);
+            this.CardSettingsNetwork.Name = "CardSettingsNetwork";
+            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 559);
+            this.CardSettingsNetwork.TabIndex = 1;
+            this.CardSettingsNetwork.Text = "WLANSD";
+            this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
             // 
             // WlansdProxyPort
             // 

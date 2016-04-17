@@ -6,11 +6,14 @@ using MetroFramework.Controls;
 using System.IO;
 using fad2.Backend;
 using fad2.UI.UserControls;
+using System.Linq;
+using log4net;
 
 namespace fad2.UI
 {
     public partial class Settings : UserControl
     {
+        private ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const int _tileSize = 300;
         private const int _tileMargin = 20;
 
@@ -143,49 +146,42 @@ namespace fad2.UI
                 return;
             }
 
+            string[] ignoreProperties = new string[] { "DNSMODE", "BRGNETWORKKEY", "BRGSSID", "APPNETWORKKEY", "APPSSID" };
             UiSettings.CardVersion = _settings.Version;
-            VendorAppAutoTime.Value = _settings.AppAutoTime;
-            VendorAppInfo.Value = _settings.AppInfo;
-            VendorAppMode.Value = _settings.AppMode;
-            VendorAppname.Value = _settings.AppName;
-            VendorBootScreenPath.Value = _settings.CiPath;
-            VendorCid.Value = _settings.Cid;
-            VendorCode.Value = _settings.ProductCode;
+            foreach (var property in _settings.GetType().GetProperties())
+            {    try
+                {      
+                    
+                    var customAttribute = (SettingAttribute)property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
+                    if (customAttribute != null)
+                    {
+                        string internalName = customAttribute.Name;
+                        if (ignoreProperties.Contains(internalName))
+                        {
+                            continue;
+                        }
+                        string trueValue = customAttribute.TrueValue;
+                        var value = property.GetValue(_settings, null);
+                        SetControlValue(internalName, value, trueValue);
+                    }
+                } catch(Exception ex)
+                {
+                    _log.Error(ex);
+                }
+            }
+
             VendorDns.Value = _settings.DnsAlways ? 1 : 0;
-            VendorFirmware.Value = _settings.FirmwareVersion;
-            VendorIfMode.Value = _settings.InterfaceEnabled;
-            VendorLock.Value = _settings.Locked;
-            VendorLuaPathBoot.Value = _settings.LuaRunScript;
-            VendorLuaWrite.Value = _settings.LuaSdEvent;
-            VendorMasterCode.Value = _settings.Mastercode;
-            if (_settings.AppMode==3 || _settings.AppMode==6)
+            if (_settings.AppMode == 3 || _settings.AppMode == 6)
             {
                 VendorNetworkKey.Value = _settings.BrgNetworkKey;
                 VendorSSID.Value = _settings.BrgSsid;
-            } else
+            }
+            else
             {
                 VendorNetworkKey.Value = _settings.AppNetworkKey;
                 VendorSSID.Value = _settings.AppSsid;
             }
-            VendorNoiseCancel.Value = _settings.NoiseCancel;
-            VendorProductCode.Value = _settings.ProductCode;
-            VendorStaRetry.Value = _settings.StaRetries;
-            VendorTimezone.Value = _settings.TimeZone;
-            VendorUploadDir.Value = _settings.UploadDir;
-            VendorUploadEnabled.Value = _settings.UploadEnabled;
-            VendorWebDav.Value = _settings.WebDavMode;
 
-            WlansdDhcp.Value = _settings.WlanSdDhcpEnabled;
-            WlansdDns.Value = _settings.WlanSdPreferredDns;
-            WlansdDnsAlternate.Value = _settings.WlanSdAlternateDns;
-            WlansdGateway.Value = _settings.WlanSdDefaultGateway;
-            WlansdId.Value = _settings.WlanSdCardId;
-            WlansdIpAddress.Value = _settings.WlanSdIpAddress;
-            WlansdProxyPort.Value = _settings.WlanSdProxyAddress;
-            WlansdSubnet.Value = _settings.WlanSdSubnetMask;
-            WlansdUseProxy.Value = _settings.WlanSdProxyEnabled;
-            Wlansd_ProxyServer.Value = _settings.WlanSdProxyAddress;
-            
             EnableControls();
         }
 
@@ -243,6 +239,62 @@ namespace fad2.UI
         private void LoadFromFile_Click(object sender, EventArgs e)
         {
             LoadSettingsFromFile();
+        }
+
+        private void SaveSettings_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void SetControlValue(string internalName, object value, string trueValue)
+        {
+            Control targetControl = FindControlByInternalName(internalName);
+            if (targetControl==null)
+            {
+                return;
+            }
+            if (targetControl is SettingsBoolean)
+            {
+                ((SettingsBoolean)targetControl).Value = (bool)value ;
+            } else if (targetControl is SettingsCombo)
+            {
+                ((SettingsCombo)targetControl).Value = (int)value;
+            } else if (targetControl is SettingsIp || targetControl is SettingsString)
+            {
+                ((SettingsString)targetControl).Value = value as string;
+            } else if (targetControl is SettingsSlider || targetControl is SettingsTimeSlider)
+            {
+                ((SettingsSlider)targetControl).Value = (int)value;
+            }
+        }
+
+        private Control FindControlByInternalName(string internalName)
+        {
+            foreach (Control setting in CardSettingsVendor.Controls)
+            {
+                var nameProperty = setting.GetType().GetProperty("InternalName");
+                if (nameProperty != null)
+                {
+                    string namePropertyValue = (string)nameProperty.GetValue(setting, null);
+                    if (namePropertyValue == internalName)
+                    {
+                        return setting;
+                    }
+                }
+            }
+            foreach (Control setting in CardSettingsNetwork.Controls)
+            {
+                var nameProperty = setting.GetType().GetProperty("InternalName");
+                if (nameProperty != null)
+                {
+                    string namePropertyValue = (string)nameProperty.GetValue(setting, null);
+                    if (namePropertyValue == internalName)
+                    {
+                        return setting;
+                    }
+                }
+            }
+            return null;
         }
     }
 }
