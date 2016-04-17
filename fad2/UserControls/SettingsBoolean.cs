@@ -22,6 +22,15 @@ namespace fad2.UI.UserControls
             this.EnabledChanged += SettingsString_EnabledChanged;
         }
 
+        private bool _valueChanged;
+        public bool ValueChanged
+        {
+            get
+            {
+                return _valueChanged;
+            }
+        }
+
         private void SettingsString_EnabledChanged(object sender, EventArgs e)
         {
            foreach (Control crtl in this.Controls)
@@ -118,5 +127,9 @@ namespace fad2.UI.UserControls
             PrivateFontCollection pfc = new PrivateFontCollection();
         }
 
+        private void SettingValue_Click(object sender, EventArgs e)
+        {
+            _valueChanged = true;
+        }
     }
 }

@@ -71,6 +71,7 @@
             this.SettingValue.TabIndex = 5;
             this.SettingValue.Text = "Aus";
             this.SettingValue.UseVisualStyleBackColor = true;
+            this.SettingValue.Click += new System.EventHandler(this.SettingValue_Click);
             // 
             // SettingsBoolean
             // 

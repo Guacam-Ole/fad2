@@ -26,8 +26,11 @@ namespace fad2.UI.UserControls
 
         }
 
+      
+
         private void SettingValue_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
+            _valueChanged = true;
             IPAddress ipAddress;
             if (string.IsNullOrWhiteSpace(SettingValue.Text) || IPAddress.TryParse(SettingValue.Text, out ipAddress))
             {
@@ -41,6 +44,7 @@ namespace fad2.UI.UserControls
                 SettingValue.CustomBackground = true;
                 _isValid = false;
             }
+            
         }
     }
 }

@@ -142,6 +142,15 @@ namespace fad2.UI.UserControls
             }
         }
 
+        protected bool _valueChanged;
+        public bool ValueChanged
+        {
+            get
+            {
+                return _valueChanged;
+            }
+        }
+
         private void SettingValue_KeyDown(object sender, KeyEventArgs e)
         {
             if (Regex != null)

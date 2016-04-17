@@ -105,10 +105,18 @@ namespace fad2.UI.UserControls
 
         }
 
-        
+
+        private bool _valueChanged;
+        public bool ValueChanged
+        {
+            get
+            {
+                return _valueChanged;
+            }
+        }
 
 
-      
+
         public string Warning
         {
                get
@@ -151,6 +159,11 @@ namespace fad2.UI.UserControls
         protected virtual void SettingValue_ValueChanged(object sender, EventArgs e)
         {
             MetroToolTip.SetToolTip(SettingValue, SettingValue.Value.ToString());
+        }
+
+        private void SettingsSlider_Click(object sender, EventArgs e)
+        {
+            _valueChanged = true;
         }
     }
 }

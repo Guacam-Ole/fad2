@@ -81,6 +81,7 @@
             this.Controls.Add(this.SettingKey);
             this.Name = "SettingsSlider";
             this.Size = new System.Drawing.Size(765, 37);
+            this.Click += new System.EventHandler(this.SettingsSlider_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 

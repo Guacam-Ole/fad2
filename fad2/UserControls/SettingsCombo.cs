@@ -89,10 +89,17 @@ namespace fad2.UI.UserControls
 
         }
 
-        
+        private bool _valueChanged;
+        public bool ValueChanged
+        {
+            get
+            {
+                return _valueChanged;
+            }
+        }
 
 
-      
+
         public string Warning
         {
                get
@@ -121,7 +128,11 @@ namespace fad2.UI.UserControls
             }
         }
 
-      
+        
 
+        private void SettingValue_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _valueChanged = true;
+        }
     }
 }

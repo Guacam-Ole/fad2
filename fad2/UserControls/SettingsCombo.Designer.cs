@@ -76,6 +76,7 @@
             this.SettingValue.Size = new System.Drawing.Size(383, 29);
             this.SettingValue.TabIndex = 5;
             this.SettingValue.ValueMember = "Key";
+            this.SettingValue.SelectionChangeCommitted += new System.EventHandler(this.SettingValue_SelectionChangeCommitted);
             // 
             // SettingsCombo
             // 
