@@ -3,39 +3,42 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Net;
-using System.Text;
 
 namespace fad2.UI
 {
     public static class UiSettings
     {
         public static List<string> ImageLoop;
+        private static readonly Random _random = new Random();
         public static string CardVersion { get; set; }
-        private static Random _random = new Random();
+
         public static bool HasFeature(string versionToCompare)
         {
+            if (string.IsNullOrEmpty(versionToCompare))
+            {
+                return true;
+            }
             return versionToCompare.CompareTo(CardVersion) <= 0;
         }
 
         public static string RandomImageUrl()
         {
-            int randomImageId = _random.Next(ImageLoop.Count);
+            var randomImageId = _random.Next(ImageLoop.Count);
             return ImageLoop[randomImageId];
         }
 
 
-        public static Bitmap ResizedImage( int maxWidth, int maxHeight, int alpha=100)
+        public static Bitmap ResizedImage(int maxWidth, int maxHeight, int alpha = 100)
         {
-            string path = RandomImageUrl();
+            var path = RandomImageUrl();
             return ResizedImage(path, alpha, maxWidth, maxHeight);
-           
         }
 
         public static Bitmap ResizedImage(Uri url, int alpha, int maxWidth, int maxHeight)
         {
-            try {
+            try
+            {
                 var request = WebRequest.Create(url.ToString());
 
 
@@ -44,7 +47,8 @@ namespace fad2.UI
                 {
                     return ResizedImage(Image.FromStream(stream), alpha, maxWidth, maxHeight);
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return null;
             }
@@ -70,7 +74,7 @@ namespace fad2.UI
                     wrapMode.SetWrapMode(WrapMode.TileFlipXY);
                     if (alpha != 100)
                     {
-                        ColorMatrix colormatrix = new ColorMatrix();
+                        var colormatrix = new ColorMatrix();
                         colormatrix.Matrix33 = alpha/100F;
                         wrapMode.SetColorMatrix(colormatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                     }
@@ -85,6 +89,5 @@ namespace fad2.UI
             var bitmap = new Bitmap(path);
             return ResizedImage(new Bitmap(path), alpha, maxWidth, maxHeight);
         }
-
     }
 }

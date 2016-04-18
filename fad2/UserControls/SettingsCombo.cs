@@ -1,46 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Text;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Reflection;
+using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
-    public partial class SettingsCombo : MetroFramework.Controls.MetroUserControl
+    public partial class SettingsCombo : MetroUserControl
     {
+        private string _internalName;
+        private string _toolTip;
+
+        private string _warning;
+
         public SettingsCombo()
         {
             InitializeComponent();
-            this.EnabledChanged += SettingsString_EnabledChanged;
+            EnabledChanged += SettingsString_EnabledChanged;
+            SettingValue.SelectedIndexChanged += Combo_Changed;
         }
 
-        private void SettingsString_EnabledChanged(object sender, EventArgs e)
+        public object DataSource
         {
-           foreach (Control crtl in this.Controls)
-            {
-                crtl.Enabled = this.Enabled;
-            }
+            get { return SettingValue.DataSource; }
+            set { SettingValue.DataSource = value; }
         }
 
-       public object DataSource { get
-            {
-                return SettingValue.DataSource;
-
-            }
-        set
-            {
-                SettingValue.DataSource = value;
-            }
-        }
-
-        private string _internalName;
         public string InternalName
         {
             get { return _internalName; }
@@ -51,61 +34,34 @@ namespace fad2.UI.UserControls
             }
         }
 
-        private string _warning;
         public string Key
         {
-            get
-            {
-                return SettingKey.Text;
-            }
-            set
-            {
-                SettingKey.Text = value;
-            }
+            get { return SettingKey.Text; }
+            set { SettingKey.Text = value; }
         }
-        public int Value
+
+        public int? Value
         {
-            get
-            {
-                return (int)SettingValue.SelectedValue;
-            }
+            get { return (int?) SettingValue?.SelectedValue; }
             set
             {
                 SettingValue.SelectedItem = value;
                 Enabled = UiSettings.HasFeature(SettingVersion.Text);
             }
         }
+
         public string RequiredVersion
         {
-            get
-            {
-                return SettingVersion.Text;
-            }
-            set
-            {
-                SettingVersion.Text = value;
-               
-            }
-
+            get { return SettingVersion.Text; }
+            set { SettingVersion.Text = value; }
         }
 
-        private bool _valueChanged;
-        public bool ValueChanged
-        {
-            get
-            {
-                return _valueChanged;
-            }
-        }
-
+        public bool ValueChanged { get; private set; }
 
 
         public string Warning
         {
-               get
-            {
-                return _warning;
-            }
+            get { return _warning; }
             set
             {
                 _warning = value;
@@ -113,13 +69,10 @@ namespace fad2.UI.UserControls
                 MetroToolTip.SetToolTip(WarningLabel, _warning);
             }
         }
-        private string _toolTip;
+
         public string ToolTip
         {
-                      get
-            {
-                return _toolTip;
-            }
+            get { return _toolTip; }
 
             set
             {
@@ -128,11 +81,25 @@ namespace fad2.UI.UserControls
             }
         }
 
-        
+        public event EventHandler ComboChanged;
+
+        private void Combo_Changed(object sender, EventArgs e)
+        {
+            ComboChanged?.Invoke(this, e);
+        }
+
+        private void SettingsString_EnabledChanged(object sender, EventArgs e)
+        {
+            foreach (Control crtl in Controls)
+            {
+                crtl.Enabled = Enabled;
+            }
+        }
+
 
         private void SettingValue_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            _valueChanged = true;
+            ValueChanged = true;
         }
     }
 }

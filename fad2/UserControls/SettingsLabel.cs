@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
-    public partial class SettingsSlider : MetroUserControl
+    public partial class SettingsLabel : MetroUserControl
     {
         private string _internalName;
+        protected bool _isValid = true;
+
         private string _toolTip;
+
+        protected bool _valueChanged;
 
 
         private string _warning;
 
-        public SettingsSlider()
+        public SettingsLabel()
         {
             InitializeComponent();
             AddFont();
             EnabledChanged += SettingsString_EnabledChanged;
         }
+
+        public string Regex { get; set; }
 
         public string InternalName
         {
@@ -36,25 +43,12 @@ namespace fad2.UI.UserControls
             set { SettingKey.Text = value; }
         }
 
-        public int Minimum
+        public string Value
         {
-            get { return SettingValue.Minimum; }
-            set { SettingValue.Minimum = value; }
-        }
-
-        public int Maximum
-        {
-            get { return SettingValue.Maximum; }
-            set { SettingValue.Maximum = value; }
-        }
-
-
-        public int Value
-        {
-            get { return SettingValue.Value; }
+            get { return SettingValue.Text; }
             set
             {
-                SettingValue.Value = value;
+                SettingValue.Text = value;
                 Enabled = UiSettings.HasFeature(SettingVersion.Text);
             }
         }
@@ -64,9 +58,6 @@ namespace fad2.UI.UserControls
             get { return SettingVersion.Text; }
             set { SettingVersion.Text = value; }
         }
-
-        public bool ValueChanged { get; private set; }
-
 
         public string Warning
         {
@@ -90,6 +81,16 @@ namespace fad2.UI.UserControls
             }
         }
 
+        public bool IsValid
+        {
+            get { return _isValid; }
+        }
+
+        public bool ValueChanged
+        {
+            get { return _valueChanged; }
+        }
+
         private void SettingsString_EnabledChanged(object sender, EventArgs e)
         {
             foreach (Control crtl in Controls)
@@ -103,19 +104,14 @@ namespace fad2.UI.UserControls
             var pfc = new PrivateFontCollection();
         }
 
-        protected virtual void SettingValue_Scroll(object sender, ScrollEventArgs e)
+        private void SettingValue_KeyDown(object sender, KeyEventArgs e)
         {
-            //Application.DoEvents();
-        }
-
-        protected virtual void SettingValue_ValueChanged(object sender, EventArgs e)
-        {
-            MetroToolTip.SetToolTip(SettingValue, SettingValue.Value.ToString());
-        }
-
-        private void SettingsSlider_Click(object sender, EventArgs e)
-        {
-            ValueChanged = true;
+            if (Regex != null)
+            {
+                _isValid = new Regex(Regex).IsMatch(SettingValue.Text);
+                SettingValue.CustomBackground = !_isValid;
+            }
+            _valueChanged = true;
         }
     }
 }

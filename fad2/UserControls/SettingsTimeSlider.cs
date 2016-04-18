@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace fad2.UI.UserControls
 {
-    public class SettingsTimeSlider      :SettingsSlider
+    public class SettingsTimeSlider : SettingsSlider
     {
         public enum ValueTypes
         {
@@ -15,6 +12,7 @@ namespace fad2.UI.UserControls
             Minute,
             Hour
         }
+
         public ValueTypes ValueType { get; set; } = ValueTypes.Millisecond;
 
         protected override void SettingValue_ValueChanged(object sender, EventArgs e)
@@ -25,8 +23,8 @@ namespace fad2.UI.UserControls
 
         public string GetToolTip()
         {
-            TimeSpan ts = new TimeSpan();
-                 switch (ValueType)
+            var ts = new TimeSpan();
+            switch (ValueType)
             {
                 case ValueTypes.Millisecond:
                     ts = TimeSpan.FromMilliseconds(Value);
@@ -43,6 +41,5 @@ namespace fad2.UI.UserControls
             }
             return $"{ts:hh\\:mm\\.ss}";
         }
-
     }
 }

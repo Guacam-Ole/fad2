@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Drawing;
 using System.Net;
-using System.Text;
+using System.Windows.Forms;
 
 namespace fad2.UI.UserControls
 {
@@ -10,25 +8,23 @@ namespace fad2.UI.UserControls
     {
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // SettingValue
             // 
-            this.SettingValue.BackColor = System.Drawing.Color.Tomato;
-            this.SettingValue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SettingValue_KeyDown);
+            SettingValue.BackColor = Color.Tomato;
+            SettingValue.KeyDown += SettingValue_KeyDown;
             // 
             // SettingsIp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Name = "SettingsIp";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(6F, 13F);
+            Name = "SettingsIp";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
-      
 
-        private void SettingValue_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void SettingValue_KeyDown(object sender, KeyEventArgs e)
         {
             _valueChanged = true;
             IPAddress ipAddress;
@@ -44,7 +40,6 @@ namespace fad2.UI.UserControls
                 SettingValue.CustomBackground = true;
                 _isValid = false;
             }
-            
         }
     }
 }

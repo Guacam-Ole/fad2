@@ -6,23 +6,25 @@ using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
-    public partial class SettingsString : MetroUserControl
+    public partial class SettingsFile : MetroUserControl
     {
         private string _internalName;
         protected bool _isValid = true;
+
 
         private string _toolTip;
 
         protected bool _valueChanged;
 
-        private string _warning;
-
-        public SettingsString()
+        public SettingsFile()
         {
             InitializeComponent();
             AddFont();
             EnabledChanged += SettingsString_EnabledChanged;
         }
+
+        public string Filter { get; set; }
+        public bool DirectoryOnly { get; set; }
 
         public string Regex { get; set; }
 
@@ -57,28 +59,7 @@ namespace fad2.UI.UserControls
         public string Value
         {
             get { return SettingValue.Text; }
-            set
-            {
-                SettingValue.Text = value;
-                Enabled = UiSettings.HasFeature(SettingVersion.Text);
-            }
-        }
-
-        public string RequiredVersion
-        {
-            get { return SettingVersion.Text; }
-            set { SettingVersion.Text = value; }
-        }
-
-        public string Warning
-        {
-            get { return _warning; }
-            set
-            {
-                _warning = value;
-                WarningLabel.Visible = !string.IsNullOrWhiteSpace(_warning);
-                MetroToolTip.SetToolTip(WarningLabel, _warning);
-            }
+            set { SettingValue.Text = value; }
         }
 
         public string ToolTip
@@ -123,6 +104,23 @@ namespace fad2.UI.UserControls
                 SettingValue.CustomBackground = !_isValid;
             }
             _valueChanged = true;
+        }
+
+        private void SelectFile_Click(object sender, EventArgs e)
+        {
+            if (DirectoryOnly)
+            {
+                var dlg = new FolderBrowserDialog();
+                dlg.ShowDialog();
+                SettingValue.Text = dlg.SelectedPath + "\\";
+            }
+            else
+            {
+                var fld = new OpenFileDialog();
+                fld.Filter = Filter;
+                fld.ShowDialog();
+                SettingValue.Text = fld.FileName;
+            }
         }
     }
 }

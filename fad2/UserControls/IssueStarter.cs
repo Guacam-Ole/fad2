@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using fad2.Backend;
+using MetroFramework;
 using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
     public partial class IssueStarter : UserControl
     {
+        private List<GitHubComment> _comments;
+
+        private DateTime _date;
+
+
+        private string _pipeline;
+
         public IssueStarter()
         {
             InitializeComponent();
         }
-
-        private DateTime _date;
 
         public GitHubComment IssueComment
         {
@@ -29,8 +32,8 @@ namespace fad2.UI.UserControls
                     Title = Title.Text,
                     Comment = Content.Text,
                     Date = _date,
-                    Picture = (string)Avatar.Tag,
-                    Url = (string)WatchOnGitHub.Tag
+                    Picture = (string) Avatar.Tag,
+                    Url = (string) WatchOnGitHub.Tag
                 };
             }
             set
@@ -45,50 +48,30 @@ namespace fad2.UI.UserControls
                 ReloadAvatar();
                 RepaintComment();
             }
-        }      
+        }
 
         public bool IsBug
         {
-            get
-            {
-                return BugTag.Visible;
-            }
-            set
-            {
-                BugTag.Visible = value;
-            }
-
+            get { return BugTag.Visible; }
+            set { BugTag.Visible = value; }
         }
 
         public bool IsFeatureRequest
         {
-            get
-            {
-                return WishTag.Visible;
-            }
-            set
-            {
-                WishTag.Visible = value;
-            }
+            get { return WishTag.Visible; }
+            set { WishTag.Visible = value; }
         }
 
-
-        private string _pipeline;
         public string Pipeline
         {
-            get
-            {
-                return _pipeline;
-            }
+            get { return _pipeline; }
             set
             {
                 _pipeline = value;
                 SetMileStone();
-
             }
         }
 
-        private List<GitHubComment> _comments;
         public List<GitHubComment> Comments
         {
             get { return _comments; }
@@ -101,51 +84,50 @@ namespace fad2.UI.UserControls
 
         private void LoadComments()
         {
-
             CommentPanel.Controls.Clear();
             CommentPanel.Height = 10;
             if (_comments == null)
             {
                 return;
             }
-            foreach (GitHubComment comment in _comments.OrderByDescending(cm => cm.Date))
+            foreach (var comment in _comments.OrderByDescending(cm => cm.Date))
             {
-                var issueComment = new UserControls.IssueComment();
+                var issueComment = new IssueComment();
                 issueComment.Dock = DockStyle.Top;
                 //    issueComment.Margin.Top = 20;
                 issueComment.Container = comment;
                 issueComment.AutoSize = true;
                 issueComment.AutoSizeMode = AutoSizeMode.GrowAndShrink;
                 CommentPanel.Controls.Add(issueComment);
-              //      CommentPanel.AutoSize = true;
-              //   CommentPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                //      CommentPanel.AutoSize = true;
+                //   CommentPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             }
         }
 
         private void SetMileStone()
         {
-            MileStoneClosed.Style = MetroFramework.MetroColorStyle.Silver;
-            MileStoneDone.Style = MetroFramework.MetroColorStyle.Silver;
-            MileStoneInProgress.Style = MetroFramework.MetroColorStyle.Silver;
-            MileStoneNew.Style = MetroFramework.MetroColorStyle.Silver;
-            MileStoneToDo.Style = MetroFramework.MetroColorStyle.Silver;
+            MileStoneClosed.Style = MetroColorStyle.Silver;
+            MileStoneDone.Style = MetroColorStyle.Silver;
+            MileStoneInProgress.Style = MetroColorStyle.Silver;
+            MileStoneNew.Style = MetroColorStyle.Silver;
+            MileStoneToDo.Style = MetroColorStyle.Silver;
 
             switch (_pipeline)
             {
                 case "Closed":
-                    MileStoneClosed.Style = MetroFramework.MetroColorStyle.Green;
+                    MileStoneClosed.Style = MetroColorStyle.Green;
                     break;
                 case "Done":
-                    MileStoneDone.Style = MetroFramework.MetroColorStyle.Green;
+                    MileStoneDone.Style = MetroColorStyle.Green;
                     break;
                 case "In Progress":
-                    MileStoneInProgress.Style = MetroFramework.MetroColorStyle.Green;
+                    MileStoneInProgress.Style = MetroColorStyle.Green;
                     break;
                 case "New":
-                    MileStoneNew.Style = MetroFramework.MetroColorStyle.Green;
+                    MileStoneNew.Style = MetroColorStyle.Green;
                     break;
                 case "ToDo":
-                    MileStoneToDo.Style = MetroFramework.MetroColorStyle.Green;
+                    MileStoneToDo.Style = MetroColorStyle.Green;
                     break;
             }
         }
@@ -153,9 +135,9 @@ namespace fad2.UI.UserControls
 
         private void ReloadAvatar()
         {
-            string tag = (string)Avatar.Tag;
+            var tag = (string) Avatar.Tag;
             if (tag != null && Uri.IsWellFormedUriString(tag, UriKind.Absolute))
-                {
+            {
                 var image = UiSettings.ResizedImage(new Uri(tag), 255, Avatar.Width, Avatar.Height);
                 if (image != null)
                 {
@@ -163,25 +145,24 @@ namespace fad2.UI.UserControls
                     Avatar.UseTileImage = true;
                 }
             }
-        } 
+        }
 
         private void RepaintComment()
         {
-            using (Graphics g = CreateGraphics())
+            using (var g = CreateGraphics())
             {
-                SizeF size = g.MeasureString(Content.Text, Content.Font, Content.Width);
-                Content.Height = (int)Math.Ceiling(size.Height) + 20;
+                var size = g.MeasureString(Content.Text, Content.Font, Content.Width);
+                Content.Height = (int) Math.Ceiling(size.Height) + 20;
             }
-            WatchOnGitHub.Top= Content.Height + Content.Top + 10;
+            WatchOnGitHub.Top = Content.Height + Content.Top + 10;
             ShowComments.Top = WatchOnGitHub.Top;
             CommentPanel.Top = WatchOnGitHub.Height + WatchOnGitHub.Top + 10;
-
         }
 
         private void WatchOnGitHub_Click(object sender, EventArgs e)
         {
-            var button = (MetroLink)sender;
-            System.Diagnostics.Process.Start((string)button.Tag);
+            var button = (MetroLink) sender;
+            Process.Start((string) button.Tag);
         }
     }
 }

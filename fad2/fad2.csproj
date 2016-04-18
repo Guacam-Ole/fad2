@@ -99,6 +99,12 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SettingsComboButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SettingsComboButton.Designer.cs">
+      <DependentUpon>SettingsComboButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SettingsIp.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,18 @@
     </Compile>
     <Compile Include="UserControls\SettingsBoolean.Designer.cs">
       <DependentUpon>SettingsBoolean.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SettingsFile.Designer.cs">
+      <DependentUpon>SettingsFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SettingsLabel.Designer.cs">
+      <DependentUpon>SettingsLabel.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SettingsString.cs">
       <SubType>UserControl</SubType>
@@ -156,6 +174,9 @@
     <EmbeddedResource Include="UserControls\IssueStarter.resx">
       <DependentUpon>IssueStarter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SettingsComboButton.resx">
+      <DependentUpon>SettingsComboButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SettingsIp.resx">
       <DependentUpon>SettingsIp.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +191,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StartUp.resx">
       <DependentUpon>StartUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SettingsFile.resx">
+      <DependentUpon>SettingsFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SettingsLabel.resx">
+      <DependentUpon>SettingsLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SettingsString.resx">
       <DependentUpon>SettingsString.cs</DependentUpon>

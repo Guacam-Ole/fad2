@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace fad2.Backend
 {
     public class Connection
     {
-        private int _maxAttempts;
         private int _currentAttempt;
+        private int _maxAttempts;
         private Timer _retryTimer;
         private Settings _settings;
 
@@ -19,12 +15,13 @@ namespace fad2.Backend
         public bool TestConnection()
         {
             _settings = new Settings();
-            try {
-                string result = OpenUrl(_settings.Url);
-                return true;
-            } catch (Exception ex)
+            try
             {
-
+                var result = OpenUrl(_settings.Url);
+                return true;
+            }
+            catch (Exception ex)
+            {
                 // TODO: LOG
                 return false;
             }
@@ -32,7 +29,7 @@ namespace fad2.Backend
 
 
         /// <summary>
-        /// Url öffnen
+        ///     Url öffnen
         /// </summary>
         /// <param name="url">Url</param>
         /// <returns>Returnwert der Url</returns>
@@ -40,7 +37,5 @@ namespace fad2.Backend
         {
             return new WebClient().DownloadString(url);
         }
-
-
     }
 }

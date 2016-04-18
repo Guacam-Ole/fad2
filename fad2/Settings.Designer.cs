@@ -38,10 +38,27 @@ namespace fad2.UI
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.LoadFromFile = new MetroFramework.Controls.MetroButton();
             this.CardSettingsTab = new MetroFramework.Controls.MetroTabControl();
+            this.ApplicationSettings = new MetroFramework.Controls.MetroTabPage();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.CustomDirHelp = new MetroFramework.Controls.MetroLink();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.CardSettingsVendor = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.DontDoAnythingStupid = new MetroFramework.Controls.MetroLabel();
             this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
+            this.DeleteFiles = new fad2.UI.UserControls.SettingsBoolean();
+            this.ServiceInterval = new fad2.UI.UserControls.SettingsTimeSlider();
+            this.ServiceActions = new fad2.UI.UserControls.SettingsComboButton();
+            this.CurrentServiceStatus = new fad2.UI.UserControls.SettingsLabel();
+            this.FilesExist = new fad2.UI.UserControls.SettingsCombo();
+            this.PathPreview = new fad2.UI.UserControls.SettingsLabel();
+            this.CustomFolderCreation = new fad2.UI.UserControls.SettingsString();
+            this.DateCreation = new fad2.UI.UserControls.SettingsCombo();
+            this.MultiCards = new fad2.UI.UserControls.SettingsCombo();
+            this.LocalPath = new fad2.UI.UserControls.SettingsFile();
+            this.ApplicationUrl = new fad2.UI.UserControls.SettingsString();
             this.VendorWebDav = new fad2.UI.UserControls.SettingsCombo();
             this.VendorFirmware = new fad2.UI.UserControls.SettingsString();
             this.VendorCode = new fad2.UI.UserControls.SettingsString();
@@ -75,11 +92,21 @@ namespace fad2.UI
             this.WlansdIpAddress = new fad2.UI.UserControls.SettingsIp();
             this.WlansdDhcp = new fad2.UI.UserControls.SettingsBoolean();
             this.WlansdId = new fad2.UI.UserControls.SettingsString();
+            this.CardSettingsDisable = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.DisableDownload = new fad2.UI.UserControls.SettingsBoolean();
+            this.DisableCommand = new fad2.UI.UserControls.SettingsBoolean();
+            this.DisableThumbnails = new fad2.UI.UserControls.SettingsBoolean();
+            this.DisableUploads = new fad2.UI.UserControls.SettingsBoolean();
             this.SettingsPanel.SuspendLayout();
             this.LoadTile.SuspendLayout();
             this.CardSettingsTab.SuspendLayout();
+            this.ApplicationSettings.SuspendLayout();
+            this.metroPanel2.SuspendLayout();
+            this.metroPanel1.SuspendLayout();
             this.CardSettingsVendor.SuspendLayout();
             this.CardSettingsNetwork.SuspendLayout();
+            this.CardSettingsDisable.SuspendLayout();
             this.SuspendLayout();
             // 
             // SettingsPanel
@@ -141,9 +168,8 @@ namespace fad2.UI
             // 
             // SaveSettings
             // 
-            this.SaveSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SaveSettings.Enabled = false;
-            this.SaveSettings.Location = new System.Drawing.Point(17, 578);
+            this.SaveSettings.Location = new System.Drawing.Point(20, 257);
             this.SaveSettings.Name = "SaveSettings";
             this.SaveSettings.Size = new System.Drawing.Size(119, 23);
             this.SaveSettings.TabIndex = 13;
@@ -155,9 +181,9 @@ namespace fad2.UI
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(17, 72);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(110, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(90, 19);
             this.metroLabel1.TabIndex = 5;
-            this.metroLabel1.Text = "Settings Location:";
+            this.metroLabel1.Text = "Card Settings:";
             // 
             // LoadFromFile
             // 
@@ -172,14 +198,98 @@ namespace fad2.UI
             // 
             this.CardSettingsTab.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.CardSettingsTab.Controls.Add(this.ApplicationSettings);
             this.CardSettingsTab.Controls.Add(this.CardSettingsVendor);
             this.CardSettingsTab.Controls.Add(this.CardSettingsNetwork);
-            this.CardSettingsTab.Enabled = false;
-            this.CardSettingsTab.Location = new System.Drawing.Point(172, 3);
+            this.CardSettingsTab.Controls.Add(this.CardSettingsDisable);
+            this.CardSettingsTab.Location = new System.Drawing.Point(173, 3);
             this.CardSettingsTab.Name = "CardSettingsTab";
-            this.CardSettingsTab.SelectedIndex = 0;
+            this.CardSettingsTab.SelectedIndex = 3;
             this.CardSettingsTab.Size = new System.Drawing.Size(834, 598);
             this.CardSettingsTab.TabIndex = 2;
+            // 
+            // ApplicationSettings
+            // 
+            this.ApplicationSettings.AutoScroll = true;
+            this.ApplicationSettings.Controls.Add(this.DeleteFiles);
+            this.ApplicationSettings.Controls.Add(this.metroPanel2);
+            this.ApplicationSettings.Controls.Add(this.FilesExist);
+            this.ApplicationSettings.Controls.Add(this.metroPanel1);
+            this.ApplicationSettings.Controls.Add(this.LocalPath);
+            this.ApplicationSettings.Controls.Add(this.ApplicationUrl);
+            this.ApplicationSettings.HorizontalScrollbar = true;
+            this.ApplicationSettings.HorizontalScrollbarBarColor = true;
+            this.ApplicationSettings.Location = new System.Drawing.Point(4, 35);
+            this.ApplicationSettings.Name = "ApplicationSettings";
+            this.ApplicationSettings.Size = new System.Drawing.Size(826, 559);
+            this.ApplicationSettings.TabIndex = 2;
+            this.ApplicationSettings.Text = "Application Settings";
+            this.ApplicationSettings.VerticalScrollbar = true;
+            this.ApplicationSettings.VerticalScrollbarBarColor = true;
+            // 
+            // metroPanel2
+            // 
+            this.metroPanel2.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
+            this.metroPanel2.Controls.Add(this.ServiceInterval);
+            this.metroPanel2.Controls.Add(this.ServiceActions);
+            this.metroPanel2.Controls.Add(this.CurrentServiceStatus);
+            this.metroPanel2.Controls.Add(this.metroLabel5);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(0, 425);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(793, 192);
+            this.metroPanel2.TabIndex = 21;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(8, 0);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(89, 19);
+            this.metroLabel5.TabIndex = 14;
+            this.metroLabel5.Text = "FAD2 Service:";
+            // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
+            this.metroPanel1.Controls.Add(this.PathPreview);
+            this.metroPanel1.Controls.Add(this.CustomDirHelp);
+            this.metroPanel1.Controls.Add(this.CustomFolderCreation);
+            this.metroPanel1.Controls.Add(this.DateCreation);
+            this.metroPanel1.Controls.Add(this.metroLabel3);
+            this.metroPanel1.Controls.Add(this.MultiCards);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(0, 206);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(793, 213);
+            this.metroPanel1.TabIndex = 12;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // CustomDirHelp
+            // 
+            this.CustomDirHelp.Location = new System.Drawing.Point(632, 137);
+            this.CustomDirHelp.Name = "CustomDirHelp";
+            this.CustomDirHelp.Size = new System.Drawing.Size(75, 23);
+            this.CustomDirHelp.TabIndex = 19;
+            this.CustomDirHelp.Text = "Help";
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(8, -3);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(162, 19);
+            this.metroLabel3.TabIndex = 13;
+            this.metroLabel3.Text = "Automatic folder creation:";
             // 
             // CardSettingsVendor
             // 
@@ -258,6 +368,170 @@ namespace fad2.UI
             this.CardSettingsNetwork.Text = "WLANSD";
             this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
             // 
+            // DeleteFiles
+            // 
+            this.DeleteFiles.InternalName = null;
+            this.DeleteFiles.Key = "Delete files after downloading:";
+            this.DeleteFiles.Location = new System.Drawing.Point(3, 142);
+            this.DeleteFiles.Name = "DeleteFiles";
+            this.DeleteFiles.RequiredVersion = "";
+            this.DeleteFiles.Size = new System.Drawing.Size(765, 37);
+            this.DeleteFiles.TabIndex = 22;
+            this.DeleteFiles.ToolTip = null;
+            this.DeleteFiles.Value = false;
+            this.DeleteFiles.Warning = null;
+            // 
+            // ServiceInterval
+            // 
+            this.ServiceInterval.InternalName = null;
+            this.ServiceInterval.Key = "Filecheck interval:";
+            this.ServiceInterval.Location = new System.Drawing.Point(8, 108);
+            this.ServiceInterval.Maximum = 300;
+            this.ServiceInterval.Minimum = 10;
+            this.ServiceInterval.Name = "ServiceInterval";
+            this.ServiceInterval.RequiredVersion = "";
+            this.ServiceInterval.Size = new System.Drawing.Size(765, 37);
+            this.ServiceInterval.TabIndex = 17;
+            this.ServiceInterval.ToolTip = null;
+            this.ServiceInterval.Value = 50;
+            this.ServiceInterval.ValueType = fad2.UI.UserControls.SettingsTimeSlider.ValueTypes.Second;
+            this.ServiceInterval.Warning = null;
+            // 
+            // ServiceActions
+            // 
+            this.ServiceActions.ButtonText = "GO";
+            this.ServiceActions.DataSource = null;
+            this.ServiceActions.InternalName = null;
+            this.ServiceActions.Key = "Change Service:";
+            this.ServiceActions.Location = new System.Drawing.Point(8, 65);
+            this.ServiceActions.Name = "ServiceActions";
+            this.ServiceActions.Size = new System.Drawing.Size(765, 37);
+            this.ServiceActions.TabIndex = 16;
+            this.ServiceActions.ToolTip = null;
+            this.ServiceActions.Value = null;
+            this.ServiceActions.Warning = null;
+            // 
+            // CurrentServiceStatus
+            // 
+            this.CurrentServiceStatus.InternalName = null;
+            this.CurrentServiceStatus.Key = "Current Status:";
+            this.CurrentServiceStatus.Location = new System.Drawing.Point(8, 22);
+            this.CurrentServiceStatus.Name = "CurrentServiceStatus";
+            this.CurrentServiceStatus.Regex = null;
+            this.CurrentServiceStatus.RequiredVersion = "";
+            this.CurrentServiceStatus.Size = new System.Drawing.Size(765, 37);
+            this.CurrentServiceStatus.TabIndex = 15;
+            this.CurrentServiceStatus.ToolTip = null;
+            this.CurrentServiceStatus.Value = "Not Installed";
+            this.CurrentServiceStatus.Warning = null;
+            // 
+            // FilesExist
+            // 
+            this.FilesExist.DataSource = null;
+            this.FilesExist.InternalName = null;
+            this.FilesExist.Key = "Existing Files:";
+            this.FilesExist.Location = new System.Drawing.Point(3, 102);
+            this.FilesExist.Name = "FilesExist";
+            this.FilesExist.RequiredVersion = "";
+            this.FilesExist.Size = new System.Drawing.Size(765, 37);
+            this.FilesExist.TabIndex = 20;
+            this.FilesExist.ToolTip = null;
+            this.FilesExist.Value = null;
+            this.FilesExist.Warning = null;
+            // 
+            // PathPreview
+            // 
+            this.PathPreview.InternalName = null;
+            this.PathPreview.Key = "Preview:";
+            this.PathPreview.Location = new System.Drawing.Point(8, 173);
+            this.PathPreview.Name = "PathPreview";
+            this.PathPreview.Regex = null;
+            this.PathPreview.RequiredVersion = "";
+            this.PathPreview.Size = new System.Drawing.Size(765, 37);
+            this.PathPreview.TabIndex = 20;
+            this.PathPreview.ToolTip = null;
+            this.PathPreview.Value = "D:\\Images\\APPID\\2016-12-31\\Image.png";
+            this.PathPreview.Warning = null;
+            // 
+            // CustomFolderCreation
+            // 
+            this.CustomFolderCreation.Enabled = false;
+            this.CustomFolderCreation.InternalName = "ID";
+            this.CustomFolderCreation.Key = "Custom:";
+            this.CustomFolderCreation.Location = new System.Drawing.Point(3, 130);
+            this.CustomFolderCreation.MaxCharacters = 16;
+            this.CustomFolderCreation.Name = "CustomFolderCreation";
+            this.CustomFolderCreation.PasswordChar = '\0';
+            this.CustomFolderCreation.Regex = null;
+            this.CustomFolderCreation.RequiredVersion = "";
+            this.CustomFolderCreation.Size = new System.Drawing.Size(765, 37);
+            this.CustomFolderCreation.TabIndex = 16;
+            this.CustomFolderCreation.ToolTip = "";
+            this.CustomFolderCreation.Value = "";
+            this.CustomFolderCreation.Warning = null;
+            // 
+            // DateCreation
+            // 
+            this.DateCreation.DataSource = null;
+            this.DateCreation.InternalName = null;
+            this.DateCreation.Key = "Create by date:";
+            this.DateCreation.Location = new System.Drawing.Point(3, 87);
+            this.DateCreation.Name = "DateCreation";
+            this.DateCreation.RequiredVersion = "";
+            this.DateCreation.Size = new System.Drawing.Size(765, 37);
+            this.DateCreation.TabIndex = 15;
+            this.DateCreation.ToolTip = null;
+            this.DateCreation.Value = null;
+            this.DateCreation.Warning = null;
+            this.DateCreation.ComboChanged += new System.EventHandler(this.DateCreation_ComboChanged);
+            // 
+            // MultiCards
+            // 
+            this.MultiCards.DataSource = null;
+            this.MultiCards.InternalName = null;
+            this.MultiCards.Key = "Multiple Cards:";
+            this.MultiCards.Location = new System.Drawing.Point(3, 44);
+            this.MultiCards.Name = "MultiCards";
+            this.MultiCards.RequiredVersion = "";
+            this.MultiCards.Size = new System.Drawing.Size(765, 37);
+            this.MultiCards.TabIndex = 12;
+            this.MultiCards.ToolTip = null;
+            this.MultiCards.Value = null;
+            this.MultiCards.Warning = null;
+            this.MultiCards.ComboChanged += new System.EventHandler(this.MultiCards_ComboChanged);
+            // 
+            // LocalPath
+            // 
+            this.LocalPath.DirectoryOnly = true;
+            this.LocalPath.Filter = null;
+            this.LocalPath.InternalName = null;
+            this.LocalPath.Key = "Local path";
+            this.LocalPath.Location = new System.Drawing.Point(3, 59);
+            this.LocalPath.MaxCharacters = 32767;
+            this.LocalPath.Name = "LocalPath";
+            this.LocalPath.PasswordChar = '\0';
+            this.LocalPath.Regex = null;
+            this.LocalPath.Size = new System.Drawing.Size(765, 37);
+            this.LocalPath.TabIndex = 10;
+            this.LocalPath.ToolTip = null;
+            this.LocalPath.Value = "";
+            // 
+            // ApplicationUrl
+            // 
+            this.ApplicationUrl.InternalName = "ID";
+            this.ApplicationUrl.Key = "FlashAir Url";
+            this.ApplicationUrl.Location = new System.Drawing.Point(3, 16);
+            this.ApplicationUrl.MaxCharacters = 16;
+            this.ApplicationUrl.Name = "ApplicationUrl";
+            this.ApplicationUrl.PasswordChar = '\0';
+            this.ApplicationUrl.Regex = null;
+            this.ApplicationUrl.RequiredVersion = "";
+            this.ApplicationUrl.Size = new System.Drawing.Size(765, 37);
+            this.ApplicationUrl.TabIndex = 9;
+            this.ApplicationUrl.ToolTip = "";
+            this.ApplicationUrl.Value = "http://flashair";
+            this.ApplicationUrl.Warning = null;
+            // 
             // VendorWebDav
             // 
             this.VendorWebDav.DataSource = null;
@@ -269,6 +543,7 @@ namespace fad2.UI
             this.VendorWebDav.Size = new System.Drawing.Size(765, 37);
             this.VendorWebDav.TabIndex = 30;
             this.VendorWebDav.ToolTip = null;
+            this.VendorWebDav.Value = null;
             this.VendorWebDav.Warning = "Upload must be enabled, too to allow writing";
             // 
             // VendorFirmware
@@ -477,6 +752,7 @@ namespace fad2.UI
             this.VendorDns.Size = new System.Drawing.Size(765, 37);
             this.VendorDns.TabIndex = 16;
             this.VendorDns.ToolTip = null;
+            this.VendorDns.Value = null;
             this.VendorDns.Warning = "";
             // 
             // VendorBootScreenPath
@@ -506,6 +782,7 @@ namespace fad2.UI
             this.VendorAppMode.Size = new System.Drawing.Size(765, 37);
             this.VendorAppMode.TabIndex = 14;
             this.VendorAppMode.ToolTip = null;
+            this.VendorAppMode.Value = null;
             this.VendorAppMode.Warning = "Pass-Thru-Mode requires V2.00.02 or higher";
             // 
             // VendorAppAutoTime
@@ -759,6 +1036,84 @@ namespace fad2.UI
             this.WlansdId.Value = "";
             this.WlansdId.Warning = null;
             // 
+            // CardSettingsDisable
+            // 
+            this.CardSettingsDisable.Controls.Add(this.DisableUploads);
+            this.CardSettingsDisable.Controls.Add(this.DisableThumbnails);
+            this.CardSettingsDisable.Controls.Add(this.DisableCommand);
+            this.CardSettingsDisable.Controls.Add(this.DisableDownload);
+            this.CardSettingsDisable.Controls.Add(this.metroLabel6);
+            this.CardSettingsDisable.HorizontalScrollbarBarColor = true;
+            this.CardSettingsDisable.Location = new System.Drawing.Point(4, 35);
+            this.CardSettingsDisable.Name = "CardSettingsDisable";
+            this.CardSettingsDisable.Size = new System.Drawing.Size(826, 559);
+            this.CardSettingsDisable.TabIndex = 3;
+            this.CardSettingsDisable.Text = "Disable Functions";
+            this.CardSettingsDisable.VerticalScrollbarBarColor = true;
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(3, 16);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(464, 19);
+            this.metroLabel6.TabIndex = 33;
+            this.metroLabel6.Text = "For security reasons you can disable single functions over WiFi for the FlashAir." +
+    "";
+            // 
+            // DisableDownload
+            // 
+            this.DisableDownload.InternalName = null;
+            this.DisableDownload.Key = "Disable Downloads";
+            this.DisableDownload.Location = new System.Drawing.Point(3, 45);
+            this.DisableDownload.Name = "DisableDownload";
+            this.DisableDownload.RequiredVersion = "2.00.02";
+            this.DisableDownload.Size = new System.Drawing.Size(765, 37);
+            this.DisableDownload.TabIndex = 34;
+            this.DisableDownload.ToolTip = null;
+            this.DisableDownload.Value = false;
+            this.DisableDownload.Warning = "Makes this program pretty useless (obviously)";
+            // 
+            // DisableCommand
+            // 
+            this.DisableCommand.InternalName = null;
+            this.DisableCommand.Key = "Disable Commands";
+            this.DisableCommand.Location = new System.Drawing.Point(3, 91);
+            this.DisableCommand.Name = "DisableCommand";
+            this.DisableCommand.RequiredVersion = "2.00.02";
+            this.DisableCommand.Size = new System.Drawing.Size(765, 37);
+            this.DisableCommand.TabIndex = 35;
+            this.DisableCommand.Tag = "";
+            this.DisableCommand.ToolTip = "These allow configurations without physical access to the card";
+            this.DisableCommand.Value = false;
+            this.DisableCommand.Warning = "";
+            // 
+            // DisableThumbnails
+            // 
+            this.DisableThumbnails.InternalName = null;
+            this.DisableThumbnails.Key = "Disable Thumbnails";
+            this.DisableThumbnails.Location = new System.Drawing.Point(3, 142);
+            this.DisableThumbnails.Name = "DisableThumbnails";
+            this.DisableThumbnails.RequiredVersion = "2.00.02";
+            this.DisableThumbnails.Size = new System.Drawing.Size(765, 37);
+            this.DisableThumbnails.TabIndex = 36;
+            this.DisableThumbnails.ToolTip = null;
+            this.DisableThumbnails.Value = false;
+            this.DisableThumbnails.Warning = "Makes this application a bit ugly...";
+            // 
+            // DisableUploads
+            // 
+            this.DisableUploads.InternalName = null;
+            this.DisableUploads.Key = "Disable Uploads";
+            this.DisableUploads.Location = new System.Drawing.Point(3, 185);
+            this.DisableUploads.Name = "DisableUploads";
+            this.DisableUploads.RequiredVersion = "2.00.02";
+            this.DisableUploads.Size = new System.Drawing.Size(765, 37);
+            this.DisableUploads.TabIndex = 37;
+            this.DisableUploads.ToolTip = null;
+            this.DisableUploads.Value = false;
+            this.DisableUploads.Warning = "Also disables Delete-Functioniality";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -770,9 +1125,16 @@ namespace fad2.UI
             this.SettingsPanel.PerformLayout();
             this.LoadTile.ResumeLayout(false);
             this.CardSettingsTab.ResumeLayout(false);
+            this.ApplicationSettings.ResumeLayout(false);
+            this.metroPanel2.ResumeLayout(false);
+            this.metroPanel2.PerformLayout();
+            this.metroPanel1.ResumeLayout(false);
+            this.metroPanel1.PerformLayout();
             this.CardSettingsVendor.ResumeLayout(false);
             this.CardSettingsVendor.PerformLayout();
             this.CardSettingsNetwork.ResumeLayout(false);
+            this.CardSettingsDisable.ResumeLayout(false);
+            this.CardSettingsDisable.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -824,5 +1186,28 @@ namespace fad2.UI
         private SettingsString WlansdProxyPort;
         private MetroFramework.Controls.MetroTile LoadTile;
         private MetroFramework.Controls.MetroProgressSpinner LoadSpinner;
+        private MetroFramework.Controls.MetroTabPage ApplicationSettings;
+        private SettingsFile LocalPath;
+        private SettingsString ApplicationUrl;
+        private MetroFramework.Controls.MetroPanel metroPanel1;
+        private SettingsCombo DateCreation;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private SettingsCombo MultiCards;
+        private SettingsCombo FilesExist;
+        private MetroFramework.Controls.MetroLink CustomDirHelp;
+        private SettingsString CustomFolderCreation;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private SettingsLabel CurrentServiceStatus;
+        private SettingsComboButton ServiceActions;
+        private SettingsBoolean DeleteFiles;
+        private SettingsTimeSlider ServiceInterval;
+        private SettingsLabel PathPreview;
+        private MetroFramework.Controls.MetroTabPage CardSettingsDisable;
+        private SettingsBoolean DisableUploads;
+        private SettingsBoolean DisableThumbnails;
+        private SettingsBoolean DisableCommand;
+        private SettingsBoolean DisableDownload;
+        private MetroFramework.Controls.MetroLabel metroLabel6;
     }
 }

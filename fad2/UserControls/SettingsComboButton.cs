@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Drawing.Text;
 using System.Windows.Forms;
 using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
-    public partial class SettingsSlider : MetroUserControl
+    public delegate void ClickEventHandler(object sender, EventArgs e);
+
+    public partial class SettingsComboButton : MetroUserControl
     {
         private string _internalName;
         private string _toolTip;
@@ -13,11 +14,24 @@ namespace fad2.UI.UserControls
 
         private string _warning;
 
-        public SettingsSlider()
+        public SettingsComboButton()
         {
             InitializeComponent();
-            AddFont();
             EnabledChanged += SettingsString_EnabledChanged;
+            Action.Click += Action_Click;
+        }
+
+
+        public string ButtonText
+        {
+            get { return Action.Text; }
+            set { Action.Text = value; }
+        }
+
+        public object DataSource
+        {
+            get { return SettingValue.DataSource; }
+            set { SettingValue.DataSource = value; }
         }
 
         public string InternalName
@@ -36,33 +50,10 @@ namespace fad2.UI.UserControls
             set { SettingKey.Text = value; }
         }
 
-        public int Minimum
+        public int? Value
         {
-            get { return SettingValue.Minimum; }
-            set { SettingValue.Minimum = value; }
-        }
-
-        public int Maximum
-        {
-            get { return SettingValue.Maximum; }
-            set { SettingValue.Maximum = value; }
-        }
-
-
-        public int Value
-        {
-            get { return SettingValue.Value; }
-            set
-            {
-                SettingValue.Value = value;
-                Enabled = UiSettings.HasFeature(SettingVersion.Text);
-            }
-        }
-
-        public string RequiredVersion
-        {
-            get { return SettingVersion.Text; }
-            set { SettingVersion.Text = value; }
+            get { return (int?) SettingValue?.SelectedValue; }
+            set { SettingValue.SelectedItem = value; }
         }
 
         public bool ValueChanged { get; private set; }
@@ -90,6 +81,13 @@ namespace fad2.UI.UserControls
             }
         }
 
+        public event ClickEventHandler ButtonClicked;
+
+        private void Action_Click(object sender, EventArgs e)
+        {
+            ButtonClicked?.Invoke(this, e);
+        }
+
         private void SettingsString_EnabledChanged(object sender, EventArgs e)
         {
             foreach (Control crtl in Controls)
@@ -98,22 +96,8 @@ namespace fad2.UI.UserControls
             }
         }
 
-        private void AddFont()
-        {
-            var pfc = new PrivateFontCollection();
-        }
 
-        protected virtual void SettingValue_Scroll(object sender, ScrollEventArgs e)
-        {
-            //Application.DoEvents();
-        }
-
-        protected virtual void SettingValue_ValueChanged(object sender, EventArgs e)
-        {
-            MetroToolTip.SetToolTip(SettingValue, SettingValue.Value.ToString());
-        }
-
-        private void SettingsSlider_Click(object sender, EventArgs e)
+        private void SettingValue_SelectionChangeCommitted(object sender, EventArgs e)
         {
             ValueChanged = true;
         }

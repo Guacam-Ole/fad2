@@ -59,5 +59,41 @@ namespace fad2.UI.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File not found.
+        /// </summary>
+        internal static string FileNotFound {
+            get {
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading Settings.
+        /// </summary>
+        internal static string LoadingSettings {
+            get {
+                return ResourceManager.GetString("LoadingSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving Settings.
+        /// </summary>
+        internal static string SavingSettings {
+            get {
+                return ResourceManager.GetString("SavingSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for File....
+        /// </summary>
+        internal static string SearchForFile {
+            get {
+                return ResourceManager.GetString("SearchForFile", resourceCulture);
+            }
+        }
     }
 }

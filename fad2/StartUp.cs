@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using fad2.Backend;
+using MetroFramework;
 
 namespace fad2.UI
 {
     public partial class StartUp : UserControl
     {
-       
-        Timer _imageSwitchTimer;
-       
-        private int _failCount = 0;
-        private bool _connected = false;
+        private bool _connected;
+
+        private int _failCount;
+
+        private Timer _imageSwitchTimer;
 
 
         public StartUp()
@@ -33,7 +30,7 @@ namespace fad2.UI
             // TODO: Allow local Images
             UiSettings.ImageLoop = Directory.GetFiles($"{Application.StartupPath}\\examplepix").ToList();
             _imageSwitchTimer = new Timer();
-            _imageSwitchTimer.Interval = 10000;  // TODO: From Settings
+            _imageSwitchTimer.Interval = 10000; // TODO: From Settings
             _imageSwitchTimer.Tick += _imageSwitchTimer_Tick;
             _imageSwitchTimer.Start();
             ChangeImage();
@@ -55,13 +52,12 @@ namespace fad2.UI
         {
             _failCount = 1;
             RetryConnection();
-
         }
 
         private void RetryConnection()
         {
             _connected = false;
-            var worker = new System.ComponentModel.BackgroundWorker();
+            var worker = new BackgroundWorker();
             worker.DoWork += (sender, e) => TryToConnect();
             worker.RunWorkerCompleted += (sender, e) => DisplayConnectionSuccess(sender, e);
             worker.RunWorkerAsync();
@@ -70,8 +66,8 @@ namespace fad2.UI
         private void ConnectionSuccessFull()
         {
             ConnectionTile.Text = "Connection succeeded";
-            ConnectionTile.Style = MetroFramework.MetroColorStyle.Green;
-            metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Green;
+            ConnectionTile.Style = MetroColorStyle.Green;
+            metroProgressSpinner1.Style = MetroColorStyle.Green;
             metroProgressSpinner1.Visible = false;
         }
 
@@ -81,13 +77,13 @@ namespace fad2.UI
 
             if (_failCount > 4)
             {
-                ConnectionTile.Style = MetroFramework.MetroColorStyle.Red;
-                metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Red;
+                ConnectionTile.Style = MetroColorStyle.Red;
+                metroProgressSpinner1.Style = MetroColorStyle.Red;
             }
             else if (_failCount > 2)
             {
-                ConnectionTile.Style = MetroFramework.MetroColorStyle.Orange;
-                metroProgressSpinner1.Style = MetroFramework.MetroColorStyle.Orange;
+                ConnectionTile.Style = MetroColorStyle.Orange;
+                metroProgressSpinner1.Style = MetroColorStyle.Orange;
             }
         }
 
@@ -119,13 +115,10 @@ namespace fad2.UI
         }
 
 
-
-
         private void TryToConnect()
         {
             var connection = new Connection();
             _connected = connection.TestConnection();
-
         }
 
         private void StartUp_Resize(object sender, EventArgs e)

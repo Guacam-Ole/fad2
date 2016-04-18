@@ -1,33 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
-using MetroFramework.Controls;
 using System.IO;
-using fad2.Backend;
-using fad2.UI.UserControls;
 using System.Linq;
-using log4net;
 using System.Reflection;
+using System.Text;
+using System.Windows.Forms;
+using fad2.Backend;
+using fad2.UI.Properties;
+using fad2.UI.UserControls;
+using log4net;
+using MetroFramework;
+using MetroFramework.Controls;
 
 namespace fad2.UI
 {
     public partial class Settings : UserControl
     {
-        private ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const int _tileSize = 300;
-        private const int _tileMargin = 20;
+        private const int TileSize = 300;
+        private const int TileMargin = 20;
 
-        Random _random = new Random();
-        Timer _backImageTimer;
+        private string _formatString;
+
+        private readonly string[] _ignoreProperties =
+        {
+            "DNSMODE", "BRGNETWORKKEY", "BRGSSID", "APPNETWORKKEY", "APPSSID"
+        };
+
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private string _previewString;
+        private readonly Random _random = new Random();
+
+        private Backend.Settings _settings;
 
         public Settings()
         {
             InitializeComponent();
             SetCombos();
-            _backImageTimer = new Timer();
-            _backImageTimer.Interval = 5000;
-            _backImageTimer.Tick += _backImageTimer_Tick;     _backImageTimer.Start();
+            var backImageTimer = new Timer {Interval = 5000};
+            backImageTimer.Tick += _backImageTimer_Tick;
+            backImageTimer.Start();
+
+            DisableControls();
         }
 
         private void _backImageTimer_Tick(object sender, EventArgs e)
@@ -37,54 +51,97 @@ namespace fad2.UI
 
         private void SetCombos()
         {
-            var appModes = new List<KeyValuePair<int, string>>();
-            appModes.Add(new KeyValuePair<int, string>(4, "AP (Access Point) mode "));
-            appModes.Add(new KeyValuePair<int, string>(5, "STA (Station) mode "));
-            appModes.Add(new KeyValuePair<int, string>(6, "Pass-Thru mode"));
+            var appModes = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>(4, "AP (Access Point) mode "),
+                new KeyValuePair<int, string>(5, "STA (Station) mode "),
+                new KeyValuePair<int, string>(6, "Pass-Thru mode")
+            };
             VendorAppMode.DataSource = appModes;
 
-            var dnsModes = new List<KeyValuePair<int, string>>();
-            dnsModes.Add(new KeyValuePair<int, string>(0, "Return IP Only if request is done with APPNAME"));
-            dnsModes.Add(new KeyValuePair<int, string>(1, "Always return IP to DNS requests (default)"));
+            var dnsModes = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>(0, "Return IP Only if request is done with APPNAME"),
+                new KeyValuePair<int, string>(1, "Always return IP to DNS requests (default)")
+            };
             VendorDns.DataSource = dnsModes;
 
-            var webdavModes = new List<KeyValuePair<int, string>>();
-            webdavModes.Add(new KeyValuePair<int, string>(0, "Disable FlashAir Drive"));
-            webdavModes.Add(new KeyValuePair<int, string>(1, "Read only - mode"));
-            webdavModes.Add(new KeyValuePair<int, string>(2, "Read/write - mode"));
+            var webdavModes = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>(0, "Disable FlashAir Drive"),
+                new KeyValuePair<int, string>(1, "Read only - mode"),
+                new KeyValuePair<int, string>(2, "Read/write - mode")
+            };
             VendorWebDav.DataSource = webdavModes;
+
+            var perCardDirectory = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>(0, "No Subdirectory per Card"),
+                new KeyValuePair<int, string>(1, "Use Card Id"),
+                new KeyValuePair<int, string>(2, "Use Application Name")
+            };
+            MultiCards.DataSource = perCardDirectory;
+
+            var dateCreation = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>(0, "Don't create Subfolder"),
+                new KeyValuePair<int, string>(1, "Year"),
+                new KeyValuePair<int, string>(2, "Year-Month"),
+                new KeyValuePair<int, string>(3, "Year-Day"),
+                new KeyValuePair<int, string>(4, "Custom")
+            };
+            DateCreation.DataSource = dateCreation;
+
+            var existingFiles = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>(0, "Never Overwrite"),
+                new KeyValuePair<int, string>(1, "Overwrite if newer"),
+                new KeyValuePair<int, string>(2, "Always overwrite"),
+                new KeyValuePair<int, string>(3, "Create copy")
+            };
+            FilesExist.DataSource = existingFiles;
+
+            var serviceOptions = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>(0, "Install Service"),
+                new KeyValuePair<int, string>(1, "Uninstall Service"),
+                new KeyValuePair<int, string>(2, "Start Service"),
+                new KeyValuePair<int, string>(3, "Stop Service")
+            };
+            ServiceActions.DataSource = serviceOptions;
         }
 
         private void AddTiles()
         {
             RightPanel.Controls.Clear();
-            int xTileCount =1+ RightPanel.Width / _tileSize;
-            int yTileCount =1+ RightPanel.Height / _tileSize;
+            var xTileCount = 1 + RightPanel.Width/TileSize;
+            var yTileCount = 1 + RightPanel.Height/TileSize;
 
-            for (int x=0; x<xTileCount; x++)
+            for (var x = 0; x < xTileCount; x++)
             {
-                for (int y=0; y<yTileCount; y++)
+                for (var y = 0; y < yTileCount; y++)
                 {
-                    MetroTile tile = new MetroTile();
-                    tile.Left = (_tileSize + _tileMargin) * x - _tileMargin / 2;
-                    tile.Top = (_tileSize + _tileMargin) * y - _tileMargin / 2;
-                    tile.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                    tile.Width = _tileSize;
-                    tile.Height = _tileSize;
-                    tile.Style = GetRandomStyle();
-                    tile.TileImageAlign = ContentAlignment.MiddleCenter;
-                    tile.UseTileImage = true;
+                    var tile = new MetroTile
+                    {
+                        Left = (TileSize + TileMargin)*x - TileMargin/2,
+                        Top = (TileSize + TileMargin)*y - TileMargin/2,
+                        Anchor = AnchorStyles.Top | AnchorStyles.Left,
+                        Width = TileSize,
+                        Height = TileSize,
+                        Style = GetRandomStyle(),
+                        TileImageAlign = ContentAlignment.MiddleCenter,
+                        UseTileImage = true
+                    };
                     RightPanel.Controls.Add(tile);
                     Application.DoEvents();
                 }
             }
         }
 
-        private MetroFramework.MetroColorStyle GetRandomStyle()
+        private MetroColorStyle GetRandomStyle()
         {
-            string[] styles = Enum.GetNames(typeof(MetroFramework.MetroColorStyle));
-            return (MetroFramework.MetroColorStyle) Enum.Parse(typeof(MetroFramework.MetroColorStyle), styles[_random.Next(styles.Length)]);
-
+            var styles = Enum.GetNames(typeof(MetroColorStyle));
+            return (MetroColorStyle) Enum.Parse(typeof(MetroColorStyle), styles[_random.Next(styles.Length)]);
         }
 
         private void SettingsPanel_Resize(object sender, EventArgs e)
@@ -95,12 +152,11 @@ namespace fad2.UI
 
         private void ChangeImages()
         {
-
             if (RightPanel.Controls.Count > 0)
             {
                 foreach (MetroTile tile in RightPanel.Controls)
                 {
-                    tile.TileImage = UiSettings.ResizedImage(_tileSize, _tileSize);
+                    tile.TileImage = UiSettings.ResizedImage(TileSize, TileSize);
                     Application.DoEvents();
                 }
             }
@@ -109,35 +165,40 @@ namespace fad2.UI
 
         private void ChangeImage()
         {
-            if (RightPanel.Controls.Count > 0)
-            {
-                int currentImage = _random.Next(RightPanel.Controls.Count);
-                var tile = ((MetroTile)RightPanel.Controls[currentImage]);
-                tile.TileImage = UiSettings.ResizedImage(_tileSize, _tileSize);
-                tile.Refresh();
-            }
+            if (RightPanel.Controls.Count <= 0) return;
+            var currentImage = _random.Next(RightPanel.Controls.Count);
+            var tile = (MetroTile) RightPanel.Controls[currentImage];
+            tile.TileImage = UiSettings.ResizedImage(TileSize, TileSize);
+            tile.Refresh();
         }
+
+   
+
 
         private void DisableControls()
         {
             SaveSettings.Enabled = false;
-            CardSettingsTab.Enabled = false;
+            if (CardSettingsTab.TabPages.Count <= 1) return;
+            CardSettingsTab.TabPages.Remove(CardSettingsVendor);
+            CardSettingsTab.TabPages.Remove(CardSettingsNetwork);
+            CardSettingsTab.TabPages.Remove(CardSettingsDisable);
         }
 
         private void EnableControls()
         {
             SaveSettings.Enabled = true;
-            CardSettingsTab.Enabled = true;
+            if (CardSettingsTab.TabPages.Count != 1) return;
+            CardSettingsTab.TabPages.Add(CardSettingsVendor);
+            CardSettingsTab.TabPages.Add(CardSettingsNetwork);
+            CardSettingsTab.TabPages.Add(CardSettingsDisable);
         }
 
         private void LoadSettingsFromFile(string filename)
         {
-            FileLoader fl = new FileLoader();
+            var fl = new FileLoader();
             _settings = fl.LoadFromFile(filename);
             DisplaySettings();
         }
-
-        Backend.Settings _settings;
 
 
         private void ReadSettings()
@@ -151,36 +212,65 @@ namespace fad2.UI
             {
                 try
                 {
-
-                    var customAttribute = (SettingAttribute)property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
-                    if (customAttribute != null)
+                    var customAttribute =
+                        (SettingAttribute) property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
+                    if (customAttribute == null) continue;
+                    var internalName = customAttribute.Name;
+                    if (_ignoreProperties.Contains(internalName))
                     {
-                        string internalName = customAttribute.Name;
-                        if (_ignoreProperties.Contains(internalName))
-                        {
-                            continue;
-                        }
-                     //   string trueValue = customAttribute.TrueValue;
-                       // var value = property.GetValue(_settings, null);
-                        var newSetting = GetControlValue(internalName);
-                        if (newSetting==null)
-                        {
-                            continue;   // No changes made
-                        }
-                        property.SetValue(_settings, newSetting, null);
+                        continue;
                     }
+                    var newSetting = GetControlValue(internalName);
+                    if (newSetting == null)
+                    {
+                        continue; // No changes made
+                    }
+                    property.SetValue(_settings, newSetting, null);
                 }
                 catch (Exception ex)
                 {
                     _log.Error(ex);
                 }
             }
+
+            _settings.DnsAlways = VendorDns.Value == 1;
+            if (_settings.AppMode == 3 || _settings.AppMode == 6)
+            {
+                _settings.BrgNetworkKey = VendorNetworkKey.Value;
+                _settings.BrgSsid = VendorSSID.Value;
+            }
+            else
+            {
+                _settings.AppNetworkKey = VendorNetworkKey.Value;
+                _settings.AppSsid = VendorSSID.Value;
+            }
+
+            _settings.DisableCgi = string.Empty;
+            if (DisableDownload.Value)
+            {
+                _settings.DisableCgi += ",/";
+            }
+            if (DisableCommand.Value)
+            {
+                _settings.DisableCgi += ",/command.cgi";
+            }
+            if (DisableThumbnails.Value)
+            {
+                _settings.DisableCgi += ",/thumbnail.cgi";
+            }
+            if (DisableUploads.Value)
+            {
+                _settings.DisableCgi += ",/upload.cgi";
+            }
+            if (!string.IsNullOrWhiteSpace(_settings.DisableCgi))
+            {
+                _settings.DisableCgi = _settings.DisableCgi.Substring(1);
+            }
         }
 
-        private string[] _ignoreProperties = new string[] { "DNSMODE", "BRGNETWORKKEY", "BRGSSID", "APPNETWORKKEY", "APPSSID" };
         private void DisplaySettings()
         {
-            if (_settings==null)
+            if (_settings == null)
             {
                 DisableControls();
                 return;
@@ -188,22 +278,21 @@ namespace fad2.UI
 
             UiSettings.CardVersion = _settings.Version;
             foreach (var property in _settings.GetType().GetProperties())
-            {    try
-                {      
-                    
-                    var customAttribute = (SettingAttribute)property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
-                    if (customAttribute != null)
+            {
+                try
+                {
+                    var customAttribute =
+                        (SettingAttribute) property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
+                    if (customAttribute == null) continue;
+                    var internalName = customAttribute.Name;
+                    if (_ignoreProperties.Contains(internalName))
                     {
-                        string internalName = customAttribute.Name;
-                        if (_ignoreProperties.Contains(internalName))
-                        {
-                            continue;
-                        }
-                        string trueValue = customAttribute.TrueValue;
-                        var value = property.GetValue(_settings, null);
-                        SetControlValue(internalName, value);
+                        continue;
                     }
-                } catch(Exception ex)
+                    var value = property.GetValue(_settings, null);
+                    SetControlValue(internalName, value);
+                }
+                catch (Exception ex)
                 {
                     _log.Error(ex);
                 }
@@ -221,6 +310,27 @@ namespace fad2.UI
                 VendorSSID.Value = _settings.AppSsid;
             }
 
+            var disableDownload = false;
+            var disableCommand = false;
+            var disableUpload = false;
+            var disableThumbnails = false;
+
+            if (!string.IsNullOrWhiteSpace(_settings.DisableCgi))
+            {
+                var disabledCgis = _settings.DisableCgi.Split(',');
+                foreach (var disabledCgi in disabledCgis)
+                {
+                    disableDownload |= disabledCgi == "/";
+                    disableCommand |= disabledCgi == "/command.cgi";
+                    disableUpload |= disabledCgi == "/upload.cgi";
+                    disableThumbnails |= disabledCgi == "/thumbnail.cgi";
+                }
+            }
+            DisableDownload.Value = disableDownload;
+            DisableCommand.Value = disableCommand;
+            DisableUploads.Value = disableUpload;
+            DisableThumbnails.Value = disableThumbnails;
+
             EnableControls();
         }
 
@@ -229,10 +339,10 @@ namespace fad2.UI
         {
             LoadTile.Visible = true;
             LoadSpinner.Visible = true;
-            LoadTile.Style = MetroFramework.MetroColorStyle.Default;
-            LoadTile.Text = "Search for File...";
+            LoadTile.Style = MetroColorStyle.Default;
+            LoadTile.Text = Resources.SearchForFile;
             Application.DoEvents();
-            for (char drive = 'D'; drive <= 'Z'; drive++)
+            for (var drive = 'D'; drive <= 'Z'; drive++)
             {
                 string drivePath = $"{drive}:";
                 string settingsPath = $"{drivePath}\\SD_WLAN";
@@ -248,7 +358,6 @@ namespace fad2.UI
                             if (File.Exists(settingsFile))
                             {
                                 return settingsFile;
-
                             }
                         }
                     }
@@ -264,32 +373,32 @@ namespace fad2.UI
         private void SaveSettingsToFile(string fileName)
         {
             ReadSettings();
-            FileLoader fl = new FileLoader();
+            var fl = new FileLoader();
             fl.SaveToFile(Application.ProductVersion, fileName, _settings);
         }
 
         private void SaveSettingsToFile()
         {
-            string settingsFile = GetSettingsFile();
+            var settingsFile = GetSettingsFile();
             if (settingsFile != null)
             {
-                LoadTile.Text = "Saving Settings";
+                LoadTile.Text = Resources.SavingSettings;
                 Application.DoEvents();
                 SaveSettingsToFile(settingsFile);
                 LoadTile.Visible = false;
                 return;
             }
-            LoadTile.Style = MetroFramework.MetroColorStyle.Orange;
+            LoadTile.Style = MetroColorStyle.Orange;
             LoadSpinner.Visible = false;
-            LoadTile.Text = "File not found";
+            LoadTile.Text = Resources.FileNotFound;
         }
 
         private void LoadSettingsFromFile()
         {
-            string settingsFile = GetSettingsFile();
+            var settingsFile = GetSettingsFile();
             if (settingsFile != null)
             {
-                LoadTile.Text = "Loading Settings";
+                LoadTile.Text = Resources.LoadingSettings;
                 Application.DoEvents();
                 LoadSettingsFromFile(settingsFile);
                 var settingsFileInfo = new FileInfo(settingsFile);
@@ -302,9 +411,9 @@ namespace fad2.UI
                 return;
             }
 
-            LoadTile.Style = MetroFramework.MetroColorStyle.Orange;
+            LoadTile.Style = MetroColorStyle.Orange;
             LoadSpinner.Visible = false;
-            LoadTile.Text = "File not found";
+            LoadTile.Text = Resources.FileNotFound;
         }
 
         private void LoadFromFile_Click(object sender, EventArgs e)
@@ -319,21 +428,21 @@ namespace fad2.UI
 
         private object GetControlValue(string internalName)
         {
-            Control targetControl = FindControlByInternalName(internalName);
+            var targetControl = FindControlByInternalName(internalName);
             if (targetControl == null)
             {
                 return null;
             }
 
-            PropertyInfo valueChangedProperty = targetControl.GetType().GetProperty("ValueChanged");
-            PropertyInfo valueProperty = targetControl.GetType().GetProperty("Value");
+            var valueChangedProperty = targetControl.GetType().GetProperty("ValueChanged");
+            var valueProperty = targetControl.GetType().GetProperty("Value");
 
-            if (valueChangedProperty==null || valueProperty==null)
+            if (valueChangedProperty == null || valueProperty == null)
             {
                 return null;
             }
 
-            bool hasChanged = (bool)valueChangedProperty.GetValue(targetControl, null);
+            var hasChanged = (bool) valueChangedProperty.GetValue(targetControl, null);
             if (!hasChanged)
             {
                 return null;
@@ -344,23 +453,26 @@ namespace fad2.UI
 
         private void SetControlValue(string internalName, object value)
         {
-            Control targetControl = FindControlByInternalName(internalName);
-            if (targetControl==null)
+            var targetControl = FindControlByInternalName(internalName);
+            if (targetControl == null)
             {
                 return;
             }
             if (targetControl is SettingsBoolean)
             {
-                ((SettingsBoolean)targetControl).Value = (bool)value ;
-            } else if (targetControl is SettingsCombo)
+                ((SettingsBoolean) targetControl).Value = (bool) value;
+            }
+            else if (targetControl is SettingsCombo)
             {
-                ((SettingsCombo)targetControl).Value = (int)value;
-            } else if (targetControl is SettingsIp || targetControl is SettingsString)
+                ((SettingsCombo) targetControl).Value = (int) value;
+            }
+            else if ( targetControl is SettingsString)
             {
-                ((SettingsString)targetControl).Value = value as string;
-            } else if (targetControl is SettingsSlider || targetControl is SettingsTimeSlider)
+                ((SettingsString) targetControl).Value = value as string;
+            }
+            else if (targetControl is SettingsSlider)
             {
-                ((SettingsSlider)targetControl).Value = (int)value;
+                ((SettingsSlider) targetControl).Value = (int) value;
             }
         }
 
@@ -369,28 +481,72 @@ namespace fad2.UI
             foreach (Control setting in CardSettingsVendor.Controls)
             {
                 var nameProperty = setting.GetType().GetProperty("InternalName");
-                if (nameProperty != null)
+                if (nameProperty == null) continue;
+                var namePropertyValue = (string) nameProperty.GetValue(setting, null);
+                if (namePropertyValue == internalName)
                 {
-                    string namePropertyValue = (string)nameProperty.GetValue(setting, null);
-                    if (namePropertyValue == internalName)
-                    {
-                        return setting;
-                    }
+                    return setting;
                 }
             }
             foreach (Control setting in CardSettingsNetwork.Controls)
             {
-                PropertyInfo nameProperty = setting.GetType().GetProperty("InternalName");
-                if (nameProperty != null)
+                var nameProperty = setting.GetType().GetProperty("InternalName");
+                if (nameProperty == null) continue;
+                var namePropertyValue = (string) nameProperty.GetValue(setting, null);
+                if (namePropertyValue == internalName)
                 {
-                    string namePropertyValue = (string)nameProperty.GetValue(setting, null);
-                    if (namePropertyValue == internalName)
-                    {
-                        return setting;
-                    }
+                    return setting;
                 }
             }
             return null;
+        }
+
+        private void DateCreation_ComboChanged(object sender, EventArgs e)
+        {
+            ShowFolderSetting();
+        }
+
+        private void ShowFolderSetting()
+        {
+            CustomFolderCreation.Enabled = DateCreation.Value == 4;
+            switch (MultiCards.Value)
+            {
+                case 1:
+                    _formatString = "{0}\\";
+                    break;
+                case 2:
+                    _formatString = "{1}\\";
+                    break;
+                default:
+                    _formatString = string.Empty;
+                    break;
+            }
+            switch (DateCreation.Value)
+            {
+                case 0:
+                    // No Subfolder
+                    break;
+                case 1:
+                    // year
+                    _formatString += "{2:yyyy}";
+                    break;
+                case 2:
+                    // month:
+                    _formatString += "{2:yyyy-MM}";
+                    break;
+                case 3:
+                case 4:
+                    // day
+                    _formatString += "{2:yyyy-MM-dd}";
+                    break;
+            }
+            _previewString = string.Format(LocalPath.Value + _formatString, "CARDID", "APPID", DateTime.Now);
+            PathPreview.Value = _previewString;
+        }
+
+        private void MultiCards_ComboChanged(object sender, EventArgs e)
+        {
+            ShowFolderSetting();
         }
     }
 }

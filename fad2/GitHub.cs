@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 using fad2.UI.UserControls;
 
@@ -17,10 +16,11 @@ namespace fad2.UI
         private void LoadGitHubValues()
         {
             Controls.Clear();
-            var allIssues=Backend.GitHub.GetIssues($"{Application.StartupPath}\\github.cache","OleAlbers", "GooglePlusOptimizer");
+            var allIssues = Backend.GitHub.GetIssues($"{Application.StartupPath}\\github.cache", "OleAlbers",
+                "GooglePlusOptimizer");
             if (allIssues != null)
             {
-                int counter = 0;
+                var counter = 0;
                 ProgressLoad.Value = 0;
                 ProgressLoad.Maximum = allIssues.Count;
                 foreach (var issue in allIssues)

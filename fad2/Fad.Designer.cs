@@ -35,8 +35,6 @@
             this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cardSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fADSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,7 +82,7 @@
             // 
             this.connectToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.connectToolStripMenuItem.Text = "Connect";
             // 
             // disconnectToolStripMenuItem
@@ -92,47 +90,32 @@
             this.disconnectToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.disconnectToolStripMenuItem.Enabled = false;
             this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.disconnectToolStripMenuItem.Text = "Disconnect";
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(130, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 6);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cardSettingsToolStripMenuItem,
-            this.fADSettingsToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // cardSettingsToolStripMenuItem
-            // 
-            this.cardSettingsToolStripMenuItem.Name = "cardSettingsToolStripMenuItem";
-            this.cardSettingsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.cardSettingsToolStripMenuItem.Text = "Card Settings";
-            this.cardSettingsToolStripMenuItem.Click += new System.EventHandler(this.cardSettingsToolStripMenuItem_Click);
-            // 
-            // fADSettingsToolStripMenuItem
-            // 
-            this.fADSettingsToolStripMenuItem.Name = "fADSettingsToolStripMenuItem";
-            this.fADSettingsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.fADSettingsToolStripMenuItem.Text = "FAD Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(130, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -224,7 +207,7 @@
             this.MainMenuStrip = this.FadMenu;
             this.MinimumSize = new System.Drawing.Size(1050, 500);
             this.Name = "Fad";
-            this.Text = "FlashAirDownloader 2";
+            this.Text = "FlashAir Downloader";
             this.Resize += new System.EventHandler(this.Fad_Resize);
             this.FadMenu.ResumeLayout(false);
             this.FadMenu.PerformLayout();
@@ -238,8 +221,6 @@
         private System.Windows.Forms.MenuStrip FadMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cardSettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fADSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;

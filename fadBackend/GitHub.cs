@@ -1,23 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace fad2.Backend
 {
     public static class GitHub
     {
-
         private static string GetStringFromUrl(string url)
         {
-            using (WebClient wc = new WebClient())
+            using (var wc = new WebClient())
             {
                 wc.Encoding = Encoding.UTF8;
                 wc.Headers.Add("ContentType", "application/json");
-                wc.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36");
+                wc.Headers.Add("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36");
                 return wc.DownloadString(url);
             }
         }
@@ -37,14 +37,15 @@ namespace fad2.Backend
         {
             if (File.Exists(cacheFileName))
             {
-                FileInfo cacheInfo = new FileInfo(cacheFileName);
+                var cacheInfo = new FileInfo(cacheFileName);
                 if ((DateTime.Now - cacheInfo.LastWriteTime).TotalMinutes < 90)
                 {
-                    using (StreamReader sr = cacheInfo.OpenText())
+                    using (var sr = cacheInfo.OpenText())
                     {
-                        string githubContent = string.Empty;
+                        var githubContent = string.Empty;
                         string singleLine;
-                        while ((singleLine = sr.ReadLine()) != null) {
+                        while ((singleLine = sr.ReadLine()) != null)
+                        {
                             githubContent += singleLine;
                         }
                         return JsonConvert.DeserializeObject<List<GitHubIssue>>(githubContent);
@@ -56,11 +57,11 @@ namespace fad2.Backend
 
         public static void WriteCachedIssues(string cacheFileName, List<GitHubIssue> issues)
         {
-            FileInfo cacheInfo = new FileInfo(cacheFileName);
-            string stringData = JsonConvert.SerializeObject(issues, Formatting.Indented);
-            using (FileStream fs = cacheInfo.Create())
+            var cacheInfo = new FileInfo(cacheFileName);
+            var stringData = JsonConvert.SerializeObject(issues, Formatting.Indented);
+            using (var fs = cacheInfo.Create())
             {
-                Byte[] info = new UTF8Encoding(true).GetBytes(stringData);
+                var info = new UTF8Encoding(true).GetBytes(stringData);
                 fs.Write(info, 0, info.Length);
                 fs.Close();
             }
@@ -69,7 +70,7 @@ namespace fad2.Backend
         public static List<GitHubIssue> GetIssues(string cacheFileName, string user, string repo, bool useZenhub = false)
         {
             var allComments = GetCachedIssues(cacheFileName);
-            if (allComments!=null)
+            if (allComments != null)
             {
                 return allComments;
             }
@@ -82,14 +83,14 @@ namespace fad2.Backend
                 foreach (var issue in issues)
                 {
                     issue.User = GetUserFromUrl(issue.User.Url);
-                    
+
                     if (issue.CommentCount > 0)
                     {
                         var jsonComments = GetStringFromUrl(issue.CommentsUrl);
                         issue.Comments = JsonConvert.DeserializeObject<List<GitHubIssue>>(jsonComments);
-                        if (issue.Comments!=null)
+                        if (issue.Comments != null)
                         {
-                            foreach(var comment in issue.Comments)
+                            foreach (var comment in issue.Comments)
                             {
                                 comment.User = GetUserFromUrl(comment.User.Url);
                             }
@@ -119,7 +120,6 @@ namespace fad2.Backend
                     {
                         issue.Pipeline = "New";
                     }
-
                 }
                 WriteCachedIssues(cacheFileName, issues);
                 return issues;
