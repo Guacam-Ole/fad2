@@ -2,12 +2,9 @@
 {
     public class Settings
     {
-        public Settings()
-        {
-            Url = "http://flashair";
-        }
+     
 
-        public string Url { get; set; }
+      
 
         [Setting("ID", Parent = "WLANSD")]
         public string WlanSdCardId { get; set; }

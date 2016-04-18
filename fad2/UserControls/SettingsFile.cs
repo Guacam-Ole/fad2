@@ -112,12 +112,15 @@ namespace fad2.UI.UserControls
             {
                 var dlg = new FolderBrowserDialog();
                 dlg.ShowDialog();
-                SettingValue.Text = dlg.SelectedPath + "\\";
+                SettingValue.Text = dlg.SelectedPath;
+                if (!string.IsNullOrWhiteSpace(SettingValue.Text) && !SettingValue.Text.EndsWith("\\"))
+                {
+                    SettingValue.Text += @"\";
+                }
             }
             else
             {
-                var fld = new OpenFileDialog();
-                fld.Filter = Filter;
+                var fld = new OpenFileDialog {Filter = Filter};
                 fld.ShowDialog();
                 SettingValue.Text = fld.FileName;
             }

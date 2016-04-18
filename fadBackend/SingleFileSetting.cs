@@ -53,32 +53,25 @@ namespace fad2.Backend
             foreach (var property in settingProperties)
             {
                 var settingsAttributes = property.GetCustomAttributes(typeof(SettingAttribute), true);
-                if (settingsAttributes != null)
+                var settingsAttribute = settingsAttributes.FirstOrDefault();
+                if (settingsAttribute == null) continue;
+                var attr = (SettingAttribute) settingsAttribute;
+                if (attr.Name != Key) continue;
+                if (property.PropertyType == typeof(int))
                 {
-                    var settingsAttribute = settingsAttributes.FirstOrDefault();
-                    if (settingsAttribute != null)
-                    {
-                        var attr = (SettingAttribute) settingsAttribute;
-                        if (attr.Name == Key)
-                        {
-                            if (property.PropertyType == typeof(int))
-                            {
-                                property.SetValue(Setting, int.Parse(Value), null);
-                            }
-                            else if (property.PropertyType == typeof(bool))
-                            {
-                                property.SetValue(Setting, Value == attr.TrueValue, null);
-                            }
-                            else
-                            {
-                                property.SetValue(Setting, Value, null);
-                            }
-
-                            IsKnown = true;
-                            break;
-                        }
-                    }
+                    property.SetValue(Setting, int.Parse(Value), null);
                 }
+                else if (property.PropertyType == typeof(bool))
+                {
+                    property.SetValue(Setting, Value == attr.TrueValue, null);
+                }
+                else
+                {
+                    property.SetValue(Setting, Value, null);
+                }
+
+                IsKnown = true;
+                break;
             }
         }
 

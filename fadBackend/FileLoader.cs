@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using log4net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
 
 namespace fad2.Backend
 {
@@ -37,6 +39,30 @@ namespace fad2.Backend
             return setting;
         }
 
+        public void SaveProgramSettings(ProgramSettings settings, string filename)
+        {
+            File.WriteAllText(filename, JsonConvert.SerializeObject(settings));
+        }
+
+        public ProgramSettings LoadProgramSettings(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                return JsonConvert.DeserializeObject<ProgramSettings>(File.ReadAllText(filename));
+            }
+            else
+            {
+                return new ProgramSettings
+                {
+                    FlashAirUrl = "http://flashair",
+                    LocalPath = "C:\\",
+                    CreateByDate = (int) ProgramSettings.DateModes.Month,
+                    FileCheckInterval = 60,
+                    FolderFomat = "{2:yyyy-MM-dd}"
+                };
+            }
+        }
+
         public void SaveToFile(string version, string fileName, Settings settings)
         {
             var configFileContent = new List<string>();
@@ -51,19 +77,13 @@ namespace fad2.Backend
             if (vendorValues.Count > 0)
             {
                 configFileContent.Add("[Vendor]");
-                foreach (var pair in vendorValues)
-                {
-                    configFileContent.Add($"{pair.Key}={pair.Value}");
-                }
+                configFileContent.AddRange(vendorValues.Select(pair => $"{pair.Key}={pair.Value}"));
                 configFileContent.Add(string.Empty);
             }
             if (sdWlanValues.Count > 0)
             {
                 configFileContent.Add("[WLANSD]");
-                foreach (var pair in sdWlanValues)
-                {
-                    configFileContent.Add($"{pair.Key}={pair.Value}");
-                }
+                configFileContent.AddRange(sdWlanValues.Select(pair => $"{pair.Key}={pair.Value}"));
                 configFileContent.Add(string.Empty);
             }
             File.WriteAllLines(fileName, configFileContent);
@@ -79,36 +99,34 @@ namespace fad2.Backend
             {
                 var customAttribute =
                     (SettingAttribute) property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
-                if (customAttribute != null)
+                if (customAttribute == null) continue;
+                var value = property.GetValue(settings, null);
+                string strValue = null;
+                if (value == null)
                 {
-                    var value = property.GetValue(settings, null);
-                    string strValue = null;
-                    if (value == null)
-                    {
-                        continue;
-                    }
-                    if (!string.IsNullOrWhiteSpace(customAttribute.TrueValue))
-                    {
-                        strValue = (bool) value ? customAttribute.TrueValue : customAttribute.FalseValue;
-                    }
-                    else
-                    {
-                        strValue = value.ToString();
-                    }
+                    continue;
+                }
+                if (!string.IsNullOrWhiteSpace(customAttribute.TrueValue))
+                {
+                    strValue = (bool) value ? customAttribute.TrueValue : customAttribute.FalseValue;
+                }
+                else
+                {
+                    strValue = value.ToString();
+                }
 
-                    if (strValue == customAttribute.Default)
-                    {
-                        continue; // system default. No need to save that
-                    }
+                if (strValue == customAttribute.Default)
+                {
+                    continue; // system default. No need to save that
+                }
 
-                    if (customAttribute.Parent == "Vendor")
-                    {
-                        vendorValues.Add(customAttribute.Name, strValue);
-                    }
-                    else
-                    {
-                        sdWlanValues.Add(customAttribute.Name, strValue);
-                    }
+                if (customAttribute.Parent == "Vendor")
+                {
+                    vendorValues.Add(customAttribute.Name, strValue);
+                }
+                else
+                {
+                    sdWlanValues.Add(customAttribute.Name, strValue);
                 }
             }
         }

@@ -18,25 +18,25 @@ namespace fad2.UI
             Controls.Clear();
             var allIssues = Backend.GitHub.GetIssues($"{Application.StartupPath}\\github.cache", "OleAlbers",
                 "GooglePlusOptimizer");
-            if (allIssues != null)
+            if (allIssues == null) return;
+            var counter = 0;
+            ProgressLoad.Value = 0;
+            ProgressLoad.Maximum = allIssues.Count;
+            foreach (var issue in allIssues)
             {
-                var counter = 0;
-                ProgressLoad.Value = 0;
-                ProgressLoad.Maximum = allIssues.Count;
-                foreach (var issue in allIssues)
+                counter++;
+                var starter = new IssueStarter
                 {
-                    counter++;
-                    var starter = new IssueStarter();
-                    starter.IsBug = issue.IsBug;
-                    starter.IsFeatureRequest = issue.IsWish;
-                    starter.IssueComment = issue.Comment;
-                    starter.Pipeline = issue.Pipeline;
-                    starter.Comments = issue.Comments?.Select(cm => cm.Comment).ToList();
-                    starter.Dock = DockStyle.Top;
-                    Controls.Add(starter);
-                    ProgressLoad.Value = counter;
-                    Application.DoEvents();
-                }
+                    IsBug = issue.IsBug,
+                    IsFeatureRequest = issue.IsWish,
+                    IssueComment = issue.Comment,
+                    Pipeline = issue.Pipeline,
+                    Comments = issue.Comments?.Select(cm => cm.Comment).ToList(),
+                    Dock = DockStyle.Top
+                };
+                Controls.Add(starter);
+                ProgressLoad.Value = counter;
+                Application.DoEvents();
             }
         }
     }

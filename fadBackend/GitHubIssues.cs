@@ -48,20 +48,14 @@ namespace fad2.Backend
         public bool IsWish { get; set; }
         public string Pipeline { get; set; }
 
-        public GitHubComment Comment
+        public GitHubComment Comment => new GitHubComment
         {
-            get
-            {
-                return new GitHubComment
-                {
-                    Url = HtmlUrl,
-                    Author = User?.Name,
-                    Picture = User?.Avatar,
-                    Title = Title,
-                    Comment = Body,
-                    Date = CreatedAt
-                };
-            }
-        }
+            Url = HtmlUrl,
+            Author = User?.Name,
+            Picture = User?.Avatar,
+            Title = Title,
+            Comment = Body,
+            Date = CreatedAt
+        };
     }
 }

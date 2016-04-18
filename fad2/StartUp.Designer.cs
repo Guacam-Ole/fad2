@@ -33,6 +33,8 @@
             this.ConnectionTile = new MetroFramework.Controls.MetroTile();
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.BackPicture = new System.Windows.Forms.PictureBox();
+            this.AutoDownload = new MetroFramework.Controls.MetroTile();
+            this.FileExplorer = new MetroFramework.Controls.MetroTile();
             this.ConnectionPanel.SuspendLayout();
             this.ConnectionTile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BackPicture)).BeginInit();
@@ -41,6 +43,8 @@
             // ConnectionPanel
             // 
             this.ConnectionPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ConnectionPanel.Controls.Add(this.FileExplorer);
+            this.ConnectionPanel.Controls.Add(this.AutoDownload);
             this.ConnectionPanel.Controls.Add(this.ConnectionHelp);
             this.ConnectionPanel.Controls.Add(this.ConnectionTile);
             this.ConnectionPanel.HorizontalScrollbarBarColor = true;
@@ -48,7 +52,7 @@
             this.ConnectionPanel.HorizontalScrollbarSize = 10;
             this.ConnectionPanel.Location = new System.Drawing.Point(378, 258);
             this.ConnectionPanel.Name = "ConnectionPanel";
-            this.ConnectionPanel.Size = new System.Drawing.Size(333, 131);
+            this.ConnectionPanel.Size = new System.Drawing.Size(333, 274);
             this.ConnectionPanel.TabIndex = 5;
             this.ConnectionPanel.VerticalScrollbarBarColor = true;
             this.ConnectionPanel.VerticalScrollbarHighlightOnWheel = false;
@@ -96,6 +100,28 @@
             this.BackPicture.TabIndex = 4;
             this.BackPicture.TabStop = false;
             // 
+            // AutoDownload
+            // 
+            this.AutoDownload.Location = new System.Drawing.Point(3, 127);
+            this.AutoDownload.Name = "AutoDownload";
+            this.AutoDownload.Size = new System.Drawing.Size(143, 144);
+            this.AutoDownload.TabIndex = 6;
+            this.AutoDownload.Text = "Auto Mode";
+            this.AutoDownload.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.AutoDownload.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.AutoDownload.Visible = false;
+            // 
+            // FileExplorer
+            // 
+            this.FileExplorer.Location = new System.Drawing.Point(184, 127);
+            this.FileExplorer.Name = "FileExplorer";
+            this.FileExplorer.Size = new System.Drawing.Size(143, 144);
+            this.FileExplorer.TabIndex = 7;
+            this.FileExplorer.Text = "File Explorer";
+            this.FileExplorer.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.FileExplorer.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.FileExplorer.Visible = false;
+            // 
             // StartUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,5 +147,7 @@
         private MetroFramework.Controls.MetroTile ConnectionTile;
         private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
         private System.Windows.Forms.PictureBox BackPicture;
+        private MetroFramework.Controls.MetroTile FileExplorer;
+        private MetroFramework.Controls.MetroTile AutoDownload;
     }
 }

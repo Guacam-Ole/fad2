@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Net;
-using System.Timers;
 
 namespace fad2.Backend
 {
     public class Connection
     {
-        private int _currentAttempt;
-        private int _maxAttempts;
-        private Timer _retryTimer;
-        private Settings _settings;
-
+        public Connection(string settingsfile)
+        {
+            _settings= new FileLoader().LoadProgramSettings(settingsfile);
+        }
+        private ProgramSettings _settings;
 
         public bool TestConnection()
         {
-            _settings = new Settings();
+           // _settings = new ProgramSettings();
             try
             {
-                var result = OpenUrl(_settings.Url);
+                var result = OpenUrl(_settings.FlashAirUrl);
                 return true;
             }
             catch (Exception ex)

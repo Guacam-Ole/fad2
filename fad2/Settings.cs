@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using fad2.Backend;
 using fad2.UI.Properties;
@@ -20,16 +19,19 @@ namespace fad2.UI
         private const int TileSize = 300;
         private const int TileMargin = 20;
 
-        private string _formatString;
-
         private readonly string[] _ignoreProperties =
         {
             "DNSMODE", "BRGNETWORKKEY", "BRGSSID", "APPNETWORKKEY", "APPSSID"
         };
 
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private string _previewString;
+        private readonly string _programSettingsFile = Application.StartupPath + "\\fad2.json";
         private readonly Random _random = new Random();
+
+        private string _formatString;
+        private string _previewString;
+
+        private ProgramSettings _programSettings;
 
         private Backend.Settings _settings;
 
@@ -40,9 +42,24 @@ namespace fad2.UI
             var backImageTimer = new Timer {Interval = 5000};
             backImageTimer.Tick += _backImageTimer_Tick;
             backImageTimer.Start();
+            LoadProgramSettings();
 
             DisableControls();
         }
+
+        private void LoadProgramSettings()
+        {
+            _programSettings = new FileLoader().LoadProgramSettings(_programSettingsFile);
+            ApplicationUrl.Text = _programSettings.FlashAirUrl;
+            LocalPath.Value = _programSettings.LocalPath;
+            FilesExist.Value = _programSettings.ExistingFiles;
+            DeleteFiles.Value = _programSettings.DeleteFiles;
+            MultiCards.Value = _programSettings.MultiCardsFolder;
+            DateCreation.Value = _programSettings.CreateByDate;
+            CustomFolderCreation.Value = _programSettings.FolderFomat;
+            ServiceInterval.Value = _programSettings.FileCheckInterval;
+        }
+
 
         private void _backImageTimer_Tick(object sender, EventArgs e)
         {
@@ -53,60 +70,62 @@ namespace fad2.UI
         {
             var appModes = new List<KeyValuePair<int, string>>
             {
-                new KeyValuePair<int, string>(4, "AP (Access Point) mode "),
-                new KeyValuePair<int, string>(5, "STA (Station) mode "),
-                new KeyValuePair<int, string>(6, "Pass-Thru mode")
+                new KeyValuePair<int, string>((int) ProgramSettings.AppModes.AccessPoint, "AP (Access Point) mode "),
+                new KeyValuePair<int, string>((int) ProgramSettings.AppModes.Station, "STA (Station) mode "),
+                new KeyValuePair<int, string>((int) ProgramSettings.AppModes.PassThru, "Pass-Thru mode")
             };
             VendorAppMode.DataSource = appModes;
 
             var dnsModes = new List<KeyValuePair<int, string>>
             {
-                new KeyValuePair<int, string>(0, "Return IP Only if request is done with APPNAME"),
-                new KeyValuePair<int, string>(1, "Always return IP to DNS requests (default)")
+                new KeyValuePair<int, string>((int) ProgramSettings.DnsModes.OnlyAppName,
+                    "Return IP Only if request is done with APPNAME"),
+                new KeyValuePair<int, string>((int) ProgramSettings.DnsModes.Always,
+                    "Always return IP to DNS requests (default)")
             };
             VendorDns.DataSource = dnsModes;
 
             var webdavModes = new List<KeyValuePair<int, string>>
             {
-                new KeyValuePair<int, string>(0, "Disable FlashAir Drive"),
-                new KeyValuePair<int, string>(1, "Read only - mode"),
-                new KeyValuePair<int, string>(2, "Read/write - mode")
+                new KeyValuePair<int, string>((int) ProgramSettings.WebDavModes.Disable, "Disable FlashAir Drive"),
+                new KeyValuePair<int, string>((int) ProgramSettings.WebDavModes.ReadOnly, "Read only - mode"),
+                new KeyValuePair<int, string>((int) ProgramSettings.WebDavModes.ReadWrite, "Read/write - mode")
             };
             VendorWebDav.DataSource = webdavModes;
 
             var perCardDirectory = new List<KeyValuePair<int, string>>
             {
-                new KeyValuePair<int, string>(0, "No Subdirectory per Card"),
-                new KeyValuePair<int, string>(1, "Use Card Id"),
-                new KeyValuePair<int, string>(2, "Use Application Name")
+                new KeyValuePair<int, string>((int) ProgramSettings.CardDirModes.NoDirectory, "No Subdirectory per Card"),
+                new KeyValuePair<int, string>((int) ProgramSettings.CardDirModes.CardId, "Use Card Id"),
+                new KeyValuePair<int, string>((int) ProgramSettings.CardDirModes.ApplicationName, "Use Application Name")
             };
             MultiCards.DataSource = perCardDirectory;
 
             var dateCreation = new List<KeyValuePair<int, string>>
             {
-                new KeyValuePair<int, string>(0, "Don't create Subfolder"),
-                new KeyValuePair<int, string>(1, "Year"),
-                new KeyValuePair<int, string>(2, "Year-Month"),
-                new KeyValuePair<int, string>(3, "Year-Day"),
-                new KeyValuePair<int, string>(4, "Custom")
+                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.NoDirectory, "Don't create Subfolder"),
+                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.Year, "Year"),
+                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.Month, "Year-Month"),
+                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.Day, "Year-Month-Day"),
+                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.Custom, "Custom")
             };
             DateCreation.DataSource = dateCreation;
 
             var existingFiles = new List<KeyValuePair<int, string>>
             {
-                new KeyValuePair<int, string>(0, "Never Overwrite"),
-                new KeyValuePair<int, string>(1, "Overwrite if newer"),
-                new KeyValuePair<int, string>(2, "Always overwrite"),
-                new KeyValuePair<int, string>(3, "Create copy")
+                new KeyValuePair<int, string>((int) ProgramSettings.OverwriteModes.Never, "Never Overwrite"),
+                new KeyValuePair<int, string>((int) ProgramSettings.OverwriteModes.Newer, "Overwrite if newer"),
+                new KeyValuePair<int, string>((int) ProgramSettings.OverwriteModes.Always, "Always overwrite"),
+                new KeyValuePair<int, string>((int) ProgramSettings.OverwriteModes.Copy, "Create copy")
             };
             FilesExist.DataSource = existingFiles;
 
             var serviceOptions = new List<KeyValuePair<int, string>>
             {
-                new KeyValuePair<int, string>(0, "Install Service"),
-                new KeyValuePair<int, string>(1, "Uninstall Service"),
-                new KeyValuePair<int, string>(2, "Start Service"),
-                new KeyValuePair<int, string>(3, "Stop Service")
+                new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Install, "Install Service"),
+                new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Uninstall, "Uninstall Service"),
+                new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Start, "Start Service"),
+                new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Stop, "Stop Service")
             };
             ServiceActions.DataSource = serviceOptions;
         }
@@ -167,13 +186,15 @@ namespace fad2.UI
         {
             if (RightPanel.Controls.Count <= 0) return;
             var currentImage = _random.Next(RightPanel.Controls.Count);
-            var tile = (MetroTile) RightPanel.Controls[currentImage];
-            tile.TileImage = UiSettings.ResizedImage(TileSize, TileSize);
-            tile.Refresh();
+            var imageControl = RightPanel.Controls[currentImage];
+            if (imageControl is MetroTile)
+            {
+
+                var tile = (MetroTile) RightPanel.Controls[currentImage];
+                tile.TileImage = UiSettings.ResizedImage(TileSize, TileSize);
+                tile.Refresh();
+            }
         }
-
-   
-
 
         private void DisableControls()
         {
@@ -443,12 +464,7 @@ namespace fad2.UI
             }
 
             var hasChanged = (bool) valueChangedProperty.GetValue(targetControl, null);
-            if (!hasChanged)
-            {
-                return null;
-            }
-
-            return valueProperty.GetValue(targetControl, null);
+            return !hasChanged ? null : valueProperty.GetValue(targetControl, null);
         }
 
         private void SetControlValue(string internalName, object value)
@@ -466,7 +482,7 @@ namespace fad2.UI
             {
                 ((SettingsCombo) targetControl).Value = (int) value;
             }
-            else if ( targetControl is SettingsString)
+            else if (targetControl is SettingsString)
             {
                 ((SettingsString) targetControl).Value = value as string;
             }
@@ -541,12 +557,33 @@ namespace fad2.UI
                     break;
             }
             _previewString = string.Format(LocalPath.Value + _formatString, "CARDID", "APPID", DateTime.Now);
+            CustomFolderCreation.Value = _formatString;
             PathPreview.Value = _previewString;
         }
 
         private void MultiCards_ComboChanged(object sender, EventArgs e)
         {
             ShowFolderSetting();
+        }
+
+
+        private void SaveProgramSettings()
+        {
+            _programSettings.LocalPath = LocalPath.Value;
+            _programSettings.CreateByDate = DateCreation.Value ?? 0;
+            _programSettings.DeleteFiles = DeleteFiles.Value;
+            _programSettings.ExistingFiles = FilesExist.Value ?? 0;
+            _programSettings.FileCheckInterval = ServiceInterval.Value;
+            _programSettings.FlashAirUrl = ApplicationUrl.Value;
+            _programSettings.FolderFomat = CustomFolderCreation.Value;
+            _programSettings.MultiCardsFolder = MultiCards.Value ?? 0;
+
+            new FileLoader().SaveProgramSettings(_programSettings, _programSettingsFile);
+        }
+
+        private void SaveProgSettings_Click(object sender, EventArgs e)
+        {
+            SaveProgramSettings();
         }
     }
 }

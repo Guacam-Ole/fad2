@@ -45,7 +45,7 @@ namespace fad2.UI.UserControls
             get { return (int?) SettingValue?.SelectedValue; }
             set
             {
-                SettingValue.SelectedItem = value;
+                SettingValue.SelectedIndex = value??0;
                 Enabled = UiSettings.HasFeature(SettingVersion.Text);
             }
         }

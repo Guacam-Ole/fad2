@@ -15,11 +15,13 @@ namespace fad2.UI
         private int _failCount;
 
         private Timer _imageSwitchTimer;
-
+        private readonly string _programSettingsFile = Application.StartupPath + "\\fad2.json";
 
         public StartUp()
         {
             InitializeComponent();
+            AutoDownload.Visible = false;
+            FileExplorer.Visible = false;
             ImageSwitcher();
             Application.DoEvents();
             StartConnection();
@@ -91,19 +93,21 @@ namespace fad2.UI
         {
             if (_connected)
             {
-                Action tileAction = () => ConnectionSuccessFull();
-                ConnectionTile.Invoke(tileAction);
 
-                Action helpAction = () => ConnectionHelp.Visible = false;
+                Action helpAction = () =>
+                {
+                    ConnectionSuccessFull();
+                    ConnectionHelp.Visible = false;
+                    AutoDownload.Visible = true;
+                    FileExplorer.Visible = true;
+                };
                 ConnectionHelp.Invoke(helpAction);
-
-                // TODO: Switch Panel
             }
             else
             {
                 _failCount++;
 
-                Action tileAction = () => ConnectionFailed();
+                Action tileAction = ConnectionFailed;
                 ConnectionTile.Invoke(tileAction);
                 if (_failCount > 1)
                 {
@@ -117,7 +121,7 @@ namespace fad2.UI
 
         private void TryToConnect()
         {
-            var connection = new Connection();
+            var connection = new Connection(_programSettingsFile);
             _connected = connection.TestConnection();
         }
 
