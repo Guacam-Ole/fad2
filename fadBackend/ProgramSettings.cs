@@ -16,6 +16,8 @@ namespace fad2.Backend
         public string FolderFomat { get; set; }
         public int FileCheckInterval { get; set; }
 
+        public int LastTimeout { get; set; } = 300000;
+
         public enum AppModes
         {
             AccessPoint=4,

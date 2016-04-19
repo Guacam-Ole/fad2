@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.ConnectionPanel = new MetroFramework.Controls.MetroPanel();
+            this.FileExplorer = new MetroFramework.Controls.MetroTile();
+            this.AutoDownload = new MetroFramework.Controls.MetroTile();
             this.ConnectionHelp = new MetroFramework.Controls.MetroLabel();
             this.ConnectionTile = new MetroFramework.Controls.MetroTile();
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
             this.BackPicture = new System.Windows.Forms.PictureBox();
-            this.AutoDownload = new MetroFramework.Controls.MetroTile();
-            this.FileExplorer = new MetroFramework.Controls.MetroTile();
             this.ConnectionPanel.SuspendLayout();
             this.ConnectionTile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BackPicture)).BeginInit();
@@ -57,6 +57,29 @@
             this.ConnectionPanel.VerticalScrollbarBarColor = true;
             this.ConnectionPanel.VerticalScrollbarHighlightOnWheel = false;
             this.ConnectionPanel.VerticalScrollbarSize = 10;
+            // 
+            // FileExplorer
+            // 
+            this.FileExplorer.Location = new System.Drawing.Point(184, 127);
+            this.FileExplorer.Name = "FileExplorer";
+            this.FileExplorer.Size = new System.Drawing.Size(143, 144);
+            this.FileExplorer.TabIndex = 7;
+            this.FileExplorer.Text = "File Explorer";
+            this.FileExplorer.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.FileExplorer.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.FileExplorer.Visible = false;
+            // 
+            // AutoDownload
+            // 
+            this.AutoDownload.Location = new System.Drawing.Point(3, 127);
+            this.AutoDownload.Name = "AutoDownload";
+            this.AutoDownload.Size = new System.Drawing.Size(143, 144);
+            this.AutoDownload.TabIndex = 6;
+            this.AutoDownload.Text = "Auto Mode";
+            this.AutoDownload.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.AutoDownload.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.AutoDownload.Visible = false;
+            this.AutoDownload.Click += new System.EventHandler(this.AutoDownload_Click);
             // 
             // ConnectionHelp
             // 
@@ -99,28 +122,6 @@
             this.BackPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.BackPicture.TabIndex = 4;
             this.BackPicture.TabStop = false;
-            // 
-            // AutoDownload
-            // 
-            this.AutoDownload.Location = new System.Drawing.Point(3, 127);
-            this.AutoDownload.Name = "AutoDownload";
-            this.AutoDownload.Size = new System.Drawing.Size(143, 144);
-            this.AutoDownload.TabIndex = 6;
-            this.AutoDownload.Text = "Auto Mode";
-            this.AutoDownload.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.AutoDownload.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.AutoDownload.Visible = false;
-            // 
-            // FileExplorer
-            // 
-            this.FileExplorer.Location = new System.Drawing.Point(184, 127);
-            this.FileExplorer.Name = "FileExplorer";
-            this.FileExplorer.Size = new System.Drawing.Size(143, 144);
-            this.FileExplorer.TabIndex = 7;
-            this.FileExplorer.Text = "File Explorer";
-            this.FileExplorer.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
-            this.FileExplorer.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
-            this.FileExplorer.Visible = false;
             // 
             // StartUp
             // 

@@ -22,5 +22,32 @@ namespace fad2.UI.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("OleAlbers")]
+        public string GIthubAuthor {
+            get {
+                return ((string)(this["GIthubAuthor"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GooglePlusOptimizer")]
+        public string GithubRepo {
+            get {
+                return ((string)(this["GithubRepo"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("fad2.json")]
+        public string ProgramSettingsFile {
+            get {
+                return ((string)(this["ProgramSettingsFile"]));
+            }
+        }
     }
 }

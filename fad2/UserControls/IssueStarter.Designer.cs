@@ -33,12 +33,11 @@
             this.WishTag = new MetroFramework.Controls.MetroTile();
             this.Title = new MetroFramework.Controls.MetroLabel();
             this.WatchOnGitHub = new MetroFramework.Controls.MetroLink();
-            this.MileStoneNew = new MetroFramework.Controls.MetroTile();
-            this.MileStoneToDo = new MetroFramework.Controls.MetroTile();
-            this.MileStoneInProgress = new MetroFramework.Controls.MetroTile();
-            this.MileStoneDone = new MetroFramework.Controls.MetroTile();
-            this.MileStoneClosed = new MetroFramework.Controls.MetroTile();
-            this.ShowComments = new MetroFramework.Controls.MetroLink();
+            this.PipelineNew = new MetroFramework.Controls.MetroTile();
+            this.PipelineTodo = new MetroFramework.Controls.MetroTile();
+            this.PipelineInProgress = new MetroFramework.Controls.MetroTile();
+            this.PipelineDone = new MetroFramework.Controls.MetroTile();
+            this.PipelineReleased = new MetroFramework.Controls.MetroTile();
             this.Date = new MetroFramework.Controls.MetroLabel();
             this.CommentPanel = new MetroFramework.Controls.MetroPanel();
             this.AvatarName = new MetroFramework.Components.MetroToolTip();
@@ -91,60 +90,50 @@
             this.WatchOnGitHub.Text = "Watch on GitHub";
             this.WatchOnGitHub.Click += new System.EventHandler(this.WatchOnGitHub_Click);
             // 
-            // MileStoneNew
+            // PipelineNew
             // 
-            this.MileStoneNew.Location = new System.Drawing.Point(52, 125);
-            this.MileStoneNew.Name = "MileStoneNew";
-            this.MileStoneNew.Size = new System.Drawing.Size(88, 19);
-            this.MileStoneNew.Style = MetroFramework.MetroColorStyle.Silver;
-            this.MileStoneNew.TabIndex = 6;
-            this.MileStoneNew.Text = "New";
+            this.PipelineNew.Location = new System.Drawing.Point(52, 125);
+            this.PipelineNew.Name = "PipelineNew";
+            this.PipelineNew.Size = new System.Drawing.Size(88, 19);
+            this.PipelineNew.Style = MetroFramework.MetroColorStyle.Silver;
+            this.PipelineNew.TabIndex = 6;
+            this.PipelineNew.Text = "New";
             // 
-            // MileStoneToDo
+            // PipelineTodo
             // 
-            this.MileStoneToDo.Location = new System.Drawing.Point(52, 150);
-            this.MileStoneToDo.Name = "MileStoneToDo";
-            this.MileStoneToDo.Size = new System.Drawing.Size(88, 19);
-            this.MileStoneToDo.Style = MetroFramework.MetroColorStyle.Green;
-            this.MileStoneToDo.TabIndex = 7;
-            this.MileStoneToDo.Text = "ToDo";
+            this.PipelineTodo.Location = new System.Drawing.Point(52, 150);
+            this.PipelineTodo.Name = "PipelineTodo";
+            this.PipelineTodo.Size = new System.Drawing.Size(88, 19);
+            this.PipelineTodo.Style = MetroFramework.MetroColorStyle.Green;
+            this.PipelineTodo.TabIndex = 7;
+            this.PipelineTodo.Text = "ToDo";
             // 
-            // MileStoneInProgress
+            // PipelineInProgress
             // 
-            this.MileStoneInProgress.Location = new System.Drawing.Point(52, 175);
-            this.MileStoneInProgress.Name = "MileStoneInProgress";
-            this.MileStoneInProgress.Size = new System.Drawing.Size(89, 19);
-            this.MileStoneInProgress.Style = MetroFramework.MetroColorStyle.Silver;
-            this.MileStoneInProgress.TabIndex = 8;
-            this.MileStoneInProgress.Text = "In Progress";
+            this.PipelineInProgress.Location = new System.Drawing.Point(52, 175);
+            this.PipelineInProgress.Name = "PipelineInProgress";
+            this.PipelineInProgress.Size = new System.Drawing.Size(89, 19);
+            this.PipelineInProgress.Style = MetroFramework.MetroColorStyle.Silver;
+            this.PipelineInProgress.TabIndex = 8;
+            this.PipelineInProgress.Text = "In Progress";
             // 
-            // MileStoneDone
+            // PipelineDone
             // 
-            this.MileStoneDone.Location = new System.Drawing.Point(52, 200);
-            this.MileStoneDone.Name = "MileStoneDone";
-            this.MileStoneDone.Size = new System.Drawing.Size(89, 19);
-            this.MileStoneDone.Style = MetroFramework.MetroColorStyle.Silver;
-            this.MileStoneDone.TabIndex = 9;
-            this.MileStoneDone.Text = "Done";
+            this.PipelineDone.Location = new System.Drawing.Point(52, 200);
+            this.PipelineDone.Name = "PipelineDone";
+            this.PipelineDone.Size = new System.Drawing.Size(89, 19);
+            this.PipelineDone.Style = MetroFramework.MetroColorStyle.Silver;
+            this.PipelineDone.TabIndex = 9;
+            this.PipelineDone.Text = "Done";
             // 
-            // MileStoneClosed
+            // PipelineReleased
             // 
-            this.MileStoneClosed.Location = new System.Drawing.Point(52, 225);
-            this.MileStoneClosed.Name = "MileStoneClosed";
-            this.MileStoneClosed.Size = new System.Drawing.Size(89, 19);
-            this.MileStoneClosed.Style = MetroFramework.MetroColorStyle.Silver;
-            this.MileStoneClosed.TabIndex = 10;
-            this.MileStoneClosed.Text = "Closed";
-            // 
-            // ShowComments
-            // 
-            this.ShowComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShowComments.Location = new System.Drawing.Point(664, 200);
-            this.ShowComments.Name = "ShowComments";
-            this.ShowComments.Size = new System.Drawing.Size(134, 23);
-            this.ShowComments.TabIndex = 14;
-            this.ShowComments.Text = "Show 45 Comments";
-            this.ShowComments.Visible = false;
+            this.PipelineReleased.Location = new System.Drawing.Point(52, 225);
+            this.PipelineReleased.Name = "PipelineReleased";
+            this.PipelineReleased.Size = new System.Drawing.Size(89, 19);
+            this.PipelineReleased.Style = MetroFramework.MetroColorStyle.Silver;
+            this.PipelineReleased.TabIndex = 10;
+            this.PipelineReleased.Text = "Released";
             // 
             // Date
             // 
@@ -192,12 +181,11 @@
             this.Controls.Add(this.Content);
             this.Controls.Add(this.CommentPanel);
             this.Controls.Add(this.Date);
-            this.Controls.Add(this.ShowComments);
-            this.Controls.Add(this.MileStoneClosed);
-            this.Controls.Add(this.MileStoneDone);
-            this.Controls.Add(this.MileStoneInProgress);
-            this.Controls.Add(this.MileStoneToDo);
-            this.Controls.Add(this.MileStoneNew);
+            this.Controls.Add(this.PipelineReleased);
+            this.Controls.Add(this.PipelineDone);
+            this.Controls.Add(this.PipelineInProgress);
+            this.Controls.Add(this.PipelineTodo);
+            this.Controls.Add(this.PipelineNew);
             this.Controls.Add(this.WatchOnGitHub);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.WishTag);
@@ -218,12 +206,11 @@
         private MetroFramework.Controls.MetroTile WishTag;
         private MetroFramework.Controls.MetroLabel Title;
         private MetroFramework.Controls.MetroLink WatchOnGitHub;
-        private MetroFramework.Controls.MetroTile MileStoneNew;
-        private MetroFramework.Controls.MetroTile MileStoneToDo;
-        private MetroFramework.Controls.MetroTile MileStoneInProgress;
-        private MetroFramework.Controls.MetroTile MileStoneDone;
-        private MetroFramework.Controls.MetroTile MileStoneClosed;
-        private MetroFramework.Controls.MetroLink ShowComments;
+        private MetroFramework.Controls.MetroTile PipelineNew;
+        private MetroFramework.Controls.MetroTile PipelineTodo;
+        private MetroFramework.Controls.MetroTile PipelineInProgress;
+        private MetroFramework.Controls.MetroTile PipelineDone;
+        private MetroFramework.Controls.MetroTile PipelineReleased;
         private MetroFramework.Controls.MetroLabel Date;
         private MetroFramework.Controls.MetroPanel CommentPanel;
         private MetroFramework.Components.MetroToolTip AvatarName;

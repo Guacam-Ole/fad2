@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,20 +51,30 @@
   <ItemGroup>
     <Compile Include="Connection.cs" />
     <Compile Include="FileLoader.cs" />
-    <Compile Include="GitHub.cs" />
-    <Compile Include="GitHubComment.cs" />
-    <Compile Include="GitHubIssues.cs" />
-    <Compile Include="GitHubLabel.cs" />
-    <Compile Include="GitHubUser.cs" />
+    <Compile Include="FlashAirFileInformation.cs" />
+    <Compile Include="Github\GitHub.cs" />
+    <Compile Include="Github\GitHubComment.cs" />
+    <Compile Include="Github\GitHubIssues.cs" />
+    <Compile Include="Github\GitHubLabel.cs" />
+    <Compile Include="Github\GitHubUser.cs" />
+    <Compile Include="Github\ZenHubBoard.cs" />
+    <Compile Include="Github\ZenhubPlus1.cs" />
+    <Compile Include="LongRunningWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ProgramSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingAttribute.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SingleFileSetting.cs" />
+    <Compile Include="Github\ZenhubEstimate.cs" />
+    <Compile Include="Github\ZenhubIssue.cs" />
+    <Compile Include="Github\ZenhubPipeline.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

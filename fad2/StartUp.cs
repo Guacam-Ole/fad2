@@ -15,9 +15,11 @@ namespace fad2.UI
         private int _failCount;
 
         private Timer _imageSwitchTimer;
-        private readonly string _programSettingsFile = Application.StartupPath + "\\fad2.json";
 
-        public StartUp()
+        private readonly string _programSettingsFile =
+            $"{Application.StartupPath}\\{Properties.Settings.Default.ProgramSettingsFile}";
+
+    public StartUp()
         {
             InitializeComponent();
             AutoDownload.Visible = false;
@@ -133,6 +135,14 @@ namespace fad2.UI
         private void StartUp_Load(object sender, EventArgs e)
         {
             ChangeImage();
+        }
+
+        private void AutoDownload_Click(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            AutoMode auto = new AutoMode {Dock = DockStyle.Fill};
+            this.Controls.Add(auto);
+            auto.LoadContents("/", @"C:\Users\Ole\Pictures");
         }
     }
 }

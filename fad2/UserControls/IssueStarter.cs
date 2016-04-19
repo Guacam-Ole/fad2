@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using fad2.Backend;
+using log4net;
 using MetroFramework;
 using MetroFramework.Controls;
 
@@ -12,7 +14,7 @@ namespace fad2.UI.UserControls
     public partial class IssueStarter : UserControl
     {
         private List<GitHubComment> _comments;
-
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private DateTime _date;
 
 
@@ -38,15 +40,22 @@ namespace fad2.UI.UserControls
             }
             set
             {
-                Title.Text = value.Title;
-                Content.Text = value.Comment;
-                _date = value.Date;
-                Date.Text = $"{_date:yyyy-MM-dd}";
-                WatchOnGitHub.Tag = value.Url;
-                Avatar.Tag = value.Picture;
-                AvatarName.SetToolTip(Avatar, value.Author);
-                ReloadAvatar();
-                RepaintComment();
+                try
+                {
+                    Title.Text = value.Title;
+                    Content.Text = value.Comment;
+                    _date = value.Date;
+                    Date.Text = $"{_date:yyyy-MM-dd}";
+                    WatchOnGitHub.Tag = value.Url;
+                    Avatar.Tag = value.Picture;
+                    AvatarName.SetToolTip(Avatar, value.Author);
+                    ReloadAvatar();
+                    RepaintComment();
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex);
+                }
             }
         }
 
@@ -68,7 +77,7 @@ namespace fad2.UI.UserControls
             set
             {
                 _pipeline = value;
-                SetMileStone();
+                SetPipeline();
             }
         }
 
@@ -84,50 +93,56 @@ namespace fad2.UI.UserControls
 
         private void LoadComments()
         {
-            CommentPanel.Controls.Clear();
-            CommentPanel.Height = 10;
-            if (_comments == null)
+            try
             {
-                return;
+                CommentPanel.Controls.Clear();
+                CommentPanel.Height = 10;
+                if (_comments == null)
+                {
+                    return;
+                }
+                foreach (var comment in _comments.OrderByDescending(cm => cm.Date))
+                {
+                    var issueComment = new IssueComment
+                    {
+                        Dock = DockStyle.Top,
+                        Container = comment,
+                        AutoSize = true,
+                        AutoSizeMode = AutoSizeMode.GrowAndShrink
+                    };
+                    CommentPanel.Controls.Add(issueComment);
+                }
             }
-            foreach (var comment in _comments.OrderByDescending(cm => cm.Date))
+            catch (Exception ex)
             {
-                var issueComment = new IssueComment();
-                issueComment.Dock = DockStyle.Top;
-                //    issueComment.Margin.Top = 20;
-                issueComment.Container = comment;
-                issueComment.AutoSize = true;
-                issueComment.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                CommentPanel.Controls.Add(issueComment);
-                //      CommentPanel.AutoSize = true;
-                //   CommentPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                _log.Error(ex);
             }
         }
 
-        private void SetMileStone()
+        private void SetPipeline()
         {
-            MileStoneClosed.Style = MetroColorStyle.Silver;
-            MileStoneDone.Style = MetroColorStyle.Silver;
-            MileStoneInProgress.Style = MetroColorStyle.Silver;
-            MileStoneNew.Style = MetroColorStyle.Silver;
-            MileStoneToDo.Style = MetroColorStyle.Silver;
+            PipelineReleased.Style = MetroColorStyle.Silver;
+            PipelineDone.Style = MetroColorStyle.Silver;
+            PipelineInProgress.Style = MetroColorStyle.Silver;
+            PipelineNew.Style = MetroColorStyle.Silver;
+            PipelineTodo.Style = MetroColorStyle.Silver;
 
             switch (_pipeline)
             {
-                case "Closed":
-                    MileStoneClosed.Style = MetroColorStyle.Green;
+                case "Released":
+                    PipelineReleased.Style = MetroColorStyle.Green;
                     break;
                 case "Done":
-                    MileStoneDone.Style = MetroColorStyle.Green;
+                    PipelineDone.Style = MetroColorStyle.Green;
                     break;
                 case "In Progress":
-                    MileStoneInProgress.Style = MetroColorStyle.Green;
+                    PipelineInProgress.Style = MetroColorStyle.Green;
                     break;
-                case "New":
-                    MileStoneNew.Style = MetroColorStyle.Green;
+                case "New Issues":
+                    PipelineNew.Style = MetroColorStyle.Green;
                     break;
-                case "ToDo":
-                    MileStoneToDo.Style = MetroColorStyle.Green;
+                case "To Do":
+                    PipelineTodo.Style = MetroColorStyle.Green;
                     break;
             }
         }
@@ -155,7 +170,6 @@ namespace fad2.UI.UserControls
                 Content.Height = (int) Math.Ceiling(size.Height) + 20;
             }
             WatchOnGitHub.Top = Content.Height + Content.Top + 10;
-            ShowComments.Top = WatchOnGitHub.Top;
             CommentPanel.Top = WatchOnGitHub.Height + WatchOnGitHub.Top + 10;
         }
 

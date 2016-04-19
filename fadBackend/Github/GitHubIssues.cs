@@ -6,6 +6,9 @@ namespace fad2.Backend
 {
     public class GitHubIssue
     {
+        [JsonProperty(PropertyName = "number")]
+        public  int Number { get; set; }
+
         [JsonProperty(PropertyName = "url")]
         public string Url { get; set; }
 
@@ -41,6 +44,8 @@ namespace fad2.Backend
 
         [JsonProperty(PropertyName = "html_url")]
         public string HtmlUrl { get; set; }
+
+        public ZenhubIssue ZenhubIssue { get; set; }
 
         public List<GitHubIssue> Comments { get; set; }
 

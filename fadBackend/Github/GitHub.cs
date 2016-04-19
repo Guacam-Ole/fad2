@@ -4,20 +4,22 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using fad2.Backend.Github;
 using Newtonsoft.Json;
 
 namespace fad2.Backend
 {
     public static class GitHub
     {
+        private const int _cacheDuration = 60;
+
         private static string GetStringFromUrl(string url)
         {
-            using (var wc = new WebClient())
+            using (var wc = new LongRunningWebClient())
             {
                 wc.Encoding = Encoding.UTF8;
                 wc.Headers.Add("ContentType", "application/json");
-                wc.Headers.Add("User-Agent",
-                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36");
+                wc.Headers.Add("User-Agent",  "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36");
                 return wc.DownloadString(url);
             }
         }
@@ -33,32 +35,52 @@ namespace fad2.Backend
             return user;
         }
 
+        private static ZenHubBoard GetCachedBoard(string cacheFileName)
+        {
+            return (ZenHubBoard) GetCache(cacheFileName, typeof(ZenHubBoard));
+        }
+
         private static List<GitHubIssue> GetCachedIssues(string cacheFileName)
+        {
+            return (List<GitHubIssue>) GetCache(cacheFileName, typeof(List<GitHubIssue>));
+        }
+
+        private static object GetCache(string cacheFileName, Type cacheType)
         {
             if (File.Exists(cacheFileName))
             {
                 var cacheInfo = new FileInfo(cacheFileName);
-                if ((DateTime.Now - cacheInfo.LastWriteTime).TotalMinutes < 90)
+                if ((DateTime.Now - cacheInfo.LastWriteTime).TotalMinutes < _cacheDuration)
                 {
                     using (var sr = cacheInfo.OpenText())
                     {
-                        var githubContent = string.Empty;
+                        var content = string.Empty;
                         string singleLine;
                         while ((singleLine = sr.ReadLine()) != null)
                         {
-                            githubContent += singleLine;
+                            content += singleLine;
                         }
-                        return JsonConvert.DeserializeObject<List<GitHubIssue>>(githubContent);
+                        return JsonConvert.DeserializeObject(content, cacheType);
                     }
                 }
             }
             return null;
         }
 
-        public static void WriteCachedIssues(string cacheFileName, List<GitHubIssue> issues)
+        private static void WriteCachedIssues(string cacheFileName, List<GitHubIssue> issues)
+        {
+            WriteCache(cacheFileName,issues);
+        }
+
+        private static void WriteCachedBoard(string cacheFileName, ZenHubBoard board)
+        {
+            WriteCache(cacheFileName, board);
+        }
+
+        private static void WriteCache(string cacheFileName, object data)
         {
             var cacheInfo = new FileInfo(cacheFileName);
-            var stringData = JsonConvert.SerializeObject(issues, Formatting.Indented);
+            var stringData = JsonConvert.SerializeObject(data, Formatting.Indented);
             using (var fs = cacheInfo.Create())
             {
                 var info = new UTF8Encoding(true).GetBytes(stringData);
@@ -67,13 +89,44 @@ namespace fad2.Backend
             }
         }
 
-        public static List<GitHubIssue> GetIssues(string cacheFileName, string user, string repo, bool useZenhub = false)
+
+        private static ZenHubBoard GetBoard(int repoId)
+        {
+            string zenhubUrl = $"http://files.oles-cloud.de/zenhub.php?repo={repoId}";
+            var zenhubContent = GetStringFromUrl(zenhubUrl);
+            return JsonConvert.DeserializeObject<ZenHubBoard>(zenhubContent);
+        }
+
+        public static ZenHubBoard GetBoard(string cacheFileName, string user, string repo)
+        {
+            var board = GetCachedBoard(cacheFileName);
+            if (board != null)
+            {
+                return board;
+            }
+            string repositoryUrl = $"https://api.github.com/repos/{user}/{repo}";
+            var repositoryjson = GetStringFromUrl(repositoryUrl);
+            var repository = (JsonConvert.DeserializeObject<GitHubIssue>(repositoryjson));
+            board = GetBoard(repository.Id);
+            WriteCachedBoard(cacheFileName,board);
+            return board;
+        }
+            
+
+        public static List<GitHubIssue> GetIssues(string cacheFileName, string user, string repo)
         {
             var allComments = GetCachedIssues(cacheFileName);
             if (allComments != null)
             {
                 return allComments;
             }
+           
+
+          
+            // we just need the id:
+            //            var id=repository.Id
+
+
             string url = $"https://api.github.com/repos/{user}/{repo}/issues";
 
             var json = GetStringFromUrl(url);
@@ -82,6 +135,9 @@ namespace fad2.Backend
             {
                 foreach (var issue in issues)
                 {
+
+                   
+
                     issue.User = GetUserFromUrl(issue.User.Url);
 
                     if (issue.CommentCount > 0)
