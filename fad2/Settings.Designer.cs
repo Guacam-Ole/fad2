@@ -265,7 +265,6 @@ namespace fad2.UI
             // 
             // metroPanel2
             // 
-            this.metroPanel2.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
             this.metroPanel2.Controls.Add(this.ServiceInterval);
             this.metroPanel2.Controls.Add(this.ServiceActions);
             this.metroPanel2.Controls.Add(this.CurrentServiceStatus);
@@ -350,7 +349,6 @@ namespace fad2.UI
             // 
             // metroPanel1
             // 
-            this.metroPanel1.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
             this.metroPanel1.Controls.Add(this.PathPreview);
             this.metroPanel1.Controls.Add(this.CustomDirHelp);
             this.metroPanel1.Controls.Add(this.CustomFolderCreation);

@@ -129,4 +129,44 @@
   <data name="LoadingSettings" xml:space="preserve">
     <value>Loading Settings</value>
   </data>
+  <data name="ReadyToCopy" xml:space="preserve">
+    <value>Done reading File Information from Flashair. Ready to copy new files.</value>
+  </data>
+  <data name="ReadingThumbnailsFromFlashair" xml:space="preserve">
+    <value>Reading Thumbnails for Images on Flashair</value>
+  </data>
+  <data name="ReadingThumnailNo" xml:space="preserve">
+    <value>Reading Thumbnails for Images on Flashair [{0} of {1}]</value>
+  </data>
+  <data name="ReadingFlashAirInfoAtPath" xml:space="preserve">
+    <value>Reading information from files from Flashair at path '{0}'</value>
+  </data>
+  <data name="ReadingInfoFromFilesAtPath" xml:space="preserve">
+    <value>Reading information from {0} files from Flashair at path '{1}'</value>
+  </data>
+  <data name="ErrorDownloadingFilelist" xml:space="preserve">
+    <value>Failed downloading Filelist. Ignore this folder and continue with next one? 
+[ignore=continue with next folder, abort=abort all downloads, retry=retry downloading this folder]</value>
+  </data>
+  <data name="ErrorFlashairGenericTitle" xml:space="preserve">
+    <value>FlashAir issues</value>
+  </data>
+  <data name="ErrorBlameToshiba" xml:space="preserve">
+    <value>Sorry about this. But it isn't my fault. Blame Toshiba :)</value>
+  </data>
+  <data name="ErrorBlameTitle" xml:space="preserve">
+    <value>That's a bit embarrassing </value>
+  </data>
+  <data name="CopyingFiles" xml:space="preserve">
+    <value>Copying files...</value>
+  </data>
+  <data name="CopyFileOfAtSpeed" xml:space="preserve">
+    <value>Copy file {0} of {1}: [{2}] Current Speed:{3:N} {4}</value>
+  </data>
+  <data name="DoneCopying" xml:space="preserve">
+    <value>Done copying.</value>
+  </data>
+  <data name="ReadLocalDir" xml:space="preserve">
+    <value>Loading local directory</value>
+  </data>
 </root>

@@ -33,11 +33,9 @@
             this.Progress = new MetroFramework.Controls.MetroProgressBar();
             this.CurrentAction = new MetroFramework.Controls.MetroLabel();
             this.ImageInfoPanel = new MetroFramework.Controls.MetroPanel();
-            this.ImageDownloadSwitch = new MetroFramework.Controls.MetroToggle();
             this.ImageSizeContent = new MetroFramework.Controls.MetroLabel();
             this.ImageFilenameContent = new MetroFramework.Controls.MetroLabel();
             this.ImageFolderContent = new MetroFramework.Controls.MetroLabel();
-            this.ImageDownloadLabel = new MetroFramework.Controls.MetroLabel();
             this.ImageSizeLabel = new MetroFramework.Controls.MetroLabel();
             this.ImageFilenameLabel = new MetroFramework.Controls.MetroLabel();
             this.ImageFolderLabel = new MetroFramework.Controls.MetroLabel();
@@ -80,6 +78,7 @@
             this.StartCopy.Size = new System.Drawing.Size(1142, 23);
             this.StartCopy.TabIndex = 4;
             this.StartCopy.Text = "Start copying files...";
+            this.StartCopy.UseSelectable = true;
             this.StartCopy.Visible = false;
             this.StartCopy.Click += new System.EventHandler(this.StartCopy_Click);
             // 
@@ -103,12 +102,9 @@
             // 
             // ImageInfoPanel
             // 
-            this.ImageInfoPanel.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
-            this.ImageInfoPanel.Controls.Add(this.ImageDownloadSwitch);
             this.ImageInfoPanel.Controls.Add(this.ImageSizeContent);
             this.ImageInfoPanel.Controls.Add(this.ImageFilenameContent);
             this.ImageInfoPanel.Controls.Add(this.ImageFolderContent);
-            this.ImageInfoPanel.Controls.Add(this.ImageDownloadLabel);
             this.ImageInfoPanel.Controls.Add(this.ImageSizeLabel);
             this.ImageInfoPanel.Controls.Add(this.ImageFilenameLabel);
             this.ImageInfoPanel.Controls.Add(this.ImageFolderLabel);
@@ -125,16 +121,6 @@
             this.ImageInfoPanel.VerticalScrollbarHighlightOnWheel = false;
             this.ImageInfoPanel.VerticalScrollbarSize = 10;
             this.ImageInfoPanel.Visible = false;
-            // 
-            // ImageDownloadSwitch
-            // 
-            this.ImageDownloadSwitch.AutoSize = true;
-            this.ImageDownloadSwitch.Location = new System.Drawing.Point(211, 81);
-            this.ImageDownloadSwitch.Name = "ImageDownloadSwitch";
-            this.ImageDownloadSwitch.Size = new System.Drawing.Size(80, 17);
-            this.ImageDownloadSwitch.TabIndex = 12;
-            this.ImageDownloadSwitch.Text = "Aus";
-            this.ImageDownloadSwitch.UseVisualStyleBackColor = true;
             // 
             // ImageSizeContent
             // 
@@ -165,16 +151,6 @@
             this.ImageFolderContent.Size = new System.Drawing.Size(925, 23);
             this.ImageFolderContent.TabIndex = 9;
             this.ImageFolderContent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // ImageDownloadLabel
-            // 
-            this.ImageDownloadLabel.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.ImageDownloadLabel.Location = new System.Drawing.Point(104, 76);
-            this.ImageDownloadLabel.Name = "ImageDownloadLabel";
-            this.ImageDownloadLabel.Size = new System.Drawing.Size(100, 23);
-            this.ImageDownloadLabel.TabIndex = 8;
-            this.ImageDownloadLabel.Text = "Downloaded:";
-            this.ImageDownloadLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ImageSizeLabel
             // 
@@ -208,10 +184,12 @@
             // 
             // SinglePreviewThumb
             // 
+            this.SinglePreviewThumb.ActiveControl = null;
             this.SinglePreviewThumb.Location = new System.Drawing.Point(4, 6);
             this.SinglePreviewThumb.Name = "SinglePreviewThumb";
             this.SinglePreviewThumb.Size = new System.Drawing.Size(93, 88);
             this.SinglePreviewThumb.TabIndex = 2;
+            this.SinglePreviewThumb.UseSelectable = true;
             // 
             // FileSplitter
             // 
@@ -270,6 +248,12 @@
             this.RightPanel.VerticalScrollbarSize = 10;
             this.RightPanel.Layout += new System.Windows.Forms.LayoutEventHandler(this.RightPanel_Layout);
             // 
+            // FileTooltip
+            // 
+            this.FileTooltip.Style = MetroFramework.MetroColorStyle.Blue;
+            this.FileTooltip.StyleManager = null;
+            this.FileTooltip.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // AutoMode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,7 +266,6 @@
             this.ProgressPanel.ResumeLayout(false);
             this.ProgressPanel.PerformLayout();
             this.ImageInfoPanel.ResumeLayout(false);
-            this.ImageInfoPanel.PerformLayout();
             this.FileSplitter.Panel1.ResumeLayout(false);
             this.FileSplitter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.FileSplitter)).EndInit();
@@ -297,11 +280,9 @@
         private MetroFramework.Controls.MetroProgressBar Progress;
         private MetroFramework.Controls.MetroLabel CurrentAction;
         private MetroFramework.Controls.MetroPanel ImageInfoPanel;
-        private MetroFramework.Controls.MetroToggle ImageDownloadSwitch;
         private MetroFramework.Controls.MetroLabel ImageSizeContent;
         private MetroFramework.Controls.MetroLabel ImageFilenameContent;
         private MetroFramework.Controls.MetroLabel ImageFolderContent;
-        private MetroFramework.Controls.MetroLabel ImageDownloadLabel;
         private MetroFramework.Controls.MetroLabel ImageSizeLabel;
         private MetroFramework.Controls.MetroLabel ImageFilenameLabel;
         private MetroFramework.Controls.MetroLabel ImageFolderLabel;

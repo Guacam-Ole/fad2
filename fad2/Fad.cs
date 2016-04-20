@@ -15,7 +15,7 @@ namespace fad2.UI
             ShowLoader();
         }
 
-        private void ShowLoader()
+        public void ShowLoader()
         {
             MainPanel.Controls.Clear();
             MainPanel.Controls.Add(new StartUp {Dock = DockStyle.Fill});
@@ -63,6 +63,11 @@ namespace fad2.UI
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowSettings();
+        }
+
+        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowLoader();
         }
     }
 }

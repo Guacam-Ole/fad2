@@ -11,6 +11,7 @@ using fad2.UI.UserControls;
 using log4net;
 using MetroFramework;
 using MetroFramework.Controls;
+using MetroFramework.Forms;
 
 namespace fad2.UI
 {
@@ -429,7 +430,8 @@ namespace fad2.UI
                 }
 
                 LoadTile.Visible = false;
-                return;
+                MetroMessageBox.Show(this, "Do you like this metro message box?", "Metro Title", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+
             }
 
             LoadTile.Style = MetroColorStyle.Orange;

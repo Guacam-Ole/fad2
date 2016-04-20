@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Mime;
+using System.Reflection;
+using log4net;
 
 namespace fad2.Backend
 {
@@ -12,10 +16,10 @@ namespace fad2.Backend
         {
             _settings= new FileLoader().LoadProgramSettings(settingsfile);
         }
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-      
 
-        
+
         private ProgramSettings _settings;
         public  ProgramSettings Settings { get { return _settings; } }
 
@@ -73,10 +77,22 @@ namespace fad2.Backend
         {
             try
             {
+                if (!filename.Contains("."))
+                {
+                    return null;
+                }
+                string[] validExtensions = "jpg,jpeg,gif,ping,png".Split(',');
+                string extension = filename.Substring(filename.LastIndexOf('.') + 1);
+                if (!validExtensions.Contains(extension.ToLower()))
+                {
+                    // No valid Image, no download
+                    return null;
+                }
+                
                 // http://flashair/thumbnail.cgi?/DCIM/100__TSB/DSC_100.JPG
                 
                 string command = string.Format($"{AddSlash(_settings.FlashAirUrl)}{ThumbnailPrefix}{AddSlash(directory)}{filename}");
-                Image thumb = Image.FromStream(new LongRunningWebClient(60).OpenRead(command));
+                Image thumb = Image.FromStream(new LongRunningWebClient(5,2).OpenRead(command));
                 return thumb;
             }
             catch (Exception ex)
@@ -87,9 +103,61 @@ namespace fad2.Backend
 
         }
 
+        public string GetAppName()
+        {
+            string command = $"{AddSlash(_settings.FlashAirUrl)}{CommandPrefix}{(int)CommandIds.Unique}";
+            string contents = new LongRunningWebClient().DownloadString(command);
+            return contents;
+        }
+       
+        public string GetCid()
+        {
+            string command = $"{AddSlash(_settings.FlashAirUrl)}{CommandPrefix}{(int) CommandIds.Cid}";
+            string contents = new LongRunningWebClient().DownloadString(command);
+            return contents;
+        }
+
+        public Stream DownloadFile( string directory, string filename)
+        {
+            try
+            {
+                if (directory.StartsWith("/"))
+                {
+                    directory = directory.Substring(1);
+                }
+                // http://flashair/DCIM/102_PANA/P1020062.JPG
+                string command = $"{AddSlash(_settings.FlashAirUrl)}{AddSlash(directory)}{filename}";
+                 var stream= new LongRunningWebClient(120,3).OpenRead(command);
+                _log.Debug($"Image {filename} downloaded");
+                return stream;
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                throw;
+            }
+        }
+
+        public bool DeleteFile( string path, string filename)
+        {
+            //   http: //flashair/upload.cgi?DEL=/DCIM/100__TSB/DSC_100.JPG
+            try
+            {
+                string command = $"{AddSlash(_settings.FlashAirUrl)}upload.cgi?DEL={AddSlash(path)}{filename}";
+                string returnValue = new WebClient().DownloadString(command);
+                _log.Debug($"Deletion successful for {filename}. Return:{returnValue}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                return false;
+            }
+        }
+
+
         public List<FlashAirFileInformation> GetFiles(string path)
         {
-            // TODO: Retries!
             string targetUrl = $"{AddSlash(_settings.FlashAirUrl)}{CommandPrefix}{(int)CommandIds.Files}&DIR={path}";
             string allFiles= new LongRunningWebClient().DownloadString(targetUrl);
             if (string.IsNullOrWhiteSpace(allFiles))

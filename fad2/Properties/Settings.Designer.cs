@@ -49,5 +49,50 @@ namespace fad2.UI.Properties {
                 return ((string)(this["ProgramSettingsFile"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3145728")]
+        public long MaxImageThumbSize {
+            get {
+                return ((long)(this["MaxImageThumbSize"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int MetroTileSize {
+            get {
+                return ((int)(this["MetroTileSize"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int MetroTileMargin {
+            get {
+                return ((int)(this["MetroTileMargin"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("png,ping,jpg,jpeg,tif,tiff,raw")]
+        public string ImageFileTypes {
+            get {
+                return ((string)(this["ImageFileTypes"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("mov,mpg,mpeg,mkv,avi")]
+        public string VideoFileTypes {
+            get {
+                return ((string)(this["VideoFileTypes"]));
+            }
+        }
     }
 }

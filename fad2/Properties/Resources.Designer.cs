@@ -61,6 +61,70 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy file {0} of {1}: [{2}] Current Speed:{3:N} {4}.
+        /// </summary>
+        internal static string CopyFileOfAtSpeed {
+            get {
+                return ResourceManager.GetString("CopyFileOfAtSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copying files....
+        /// </summary>
+        internal static string CopyingFiles {
+            get {
+                return ResourceManager.GetString("CopyingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done copying..
+        /// </summary>
+        internal static string DoneCopying {
+            get {
+                return ResourceManager.GetString("DoneCopying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to That&apos;s a bit embarrassing .
+        /// </summary>
+        internal static string ErrorBlameTitle {
+            get {
+                return ResourceManager.GetString("ErrorBlameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry about this. But it isn&apos;t my fault. Blame Toshiba :).
+        /// </summary>
+        internal static string ErrorBlameToshiba {
+            get {
+                return ResourceManager.GetString("ErrorBlameToshiba", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed downloading Filelist. Ignore this folder and continue with next one? 
+        ///[ignore=continue with next folder, abort=abort all downloads, retry=retry downloading this folder].
+        /// </summary>
+        internal static string ErrorDownloadingFilelist {
+            get {
+                return ResourceManager.GetString("ErrorDownloadingFilelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FlashAir issues.
+        /// </summary>
+        internal static string ErrorFlashairGenericTitle {
+            get {
+                return ResourceManager.GetString("ErrorFlashairGenericTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File not found.
         /// </summary>
         internal static string FileNotFound {
@@ -75,6 +139,60 @@ namespace fad2.UI.Properties {
         internal static string LoadingSettings {
             get {
                 return ResourceManager.GetString("LoadingSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading information from files from Flashair at path &apos;{0}&apos;.
+        /// </summary>
+        internal static string ReadingFlashAirInfoAtPath {
+            get {
+                return ResourceManager.GetString("ReadingFlashAirInfoAtPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading information from {0} files from Flashair at path &apos;{1}&apos;.
+        /// </summary>
+        internal static string ReadingInfoFromFilesAtPath {
+            get {
+                return ResourceManager.GetString("ReadingInfoFromFilesAtPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading Thumbnails for Images on Flashair.
+        /// </summary>
+        internal static string ReadingThumbnailsFromFlashair {
+            get {
+                return ResourceManager.GetString("ReadingThumbnailsFromFlashair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading Thumbnails for Images on Flashair [{0} of {1}].
+        /// </summary>
+        internal static string ReadingThumnailNo {
+            get {
+                return ResourceManager.GetString("ReadingThumnailNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading local directory.
+        /// </summary>
+        internal static string ReadLocalDir {
+            get {
+                return ResourceManager.GetString("ReadLocalDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done reading File Information from Flashair. Ready to copy new files..
+        /// </summary>
+        internal static string ReadyToCopy {
+            get {
+                return ResourceManager.GetString("ReadyToCopy", resourceCulture);
             }
         }
         

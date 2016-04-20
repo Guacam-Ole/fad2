@@ -15,6 +15,7 @@ namespace fad2.Backend
         public int CreateByDate { get; set; }
         public string FolderFomat { get; set; }
         public int FileCheckInterval { get; set; }
+        public int FileTypesToCopy { get; set; } = 1;
 
         public int LastTimeout { get; set; } = 300000;
 
@@ -70,6 +71,13 @@ namespace fad2.Backend
             Uninstall=1,
             Start=2,
             Stop=3
+        }
+
+        public enum FileTypes
+        {
+            Images=0,
+            Videos=1,
+            AllFiles=2
         }
     }
 }
