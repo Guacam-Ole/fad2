@@ -1,52 +1,75 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
+using System.Reflection;
 using System.Threading;
+using log4net;
 
 namespace fad2.Backend
 {
+    /// <summary>
+    /// Webclient with retries and custom Timeout
+    /// </summary>
     public class LongRunningWebClient : WebClient
     {
-        private int _timeOut = 120*1000; // 120 seconds
-        private int _maxRetries = 5;
-        public LongRunningWebClient() : base() { }
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly int _maxRetries = 5;
+        private readonly int _timeOut = 120*1000; // 120 seconds
 
-        public LongRunningWebClient(int timeoutInSeconds, int? maxRetries=null) : base()
+        /// <summary>
+        /// New Webclient
+        /// </summary>
+        public LongRunningWebClient()
         {
-            _timeOut = timeoutInSeconds * 1000;
+        }
+
+        /// <summary>
+        /// New Webclient
+        /// </summary>
+        /// <param name="timeoutInSeconds">Timeout in Seconds</param>
+        /// <param name="maxRetries">Maximum Retries before throwing the error</param>
+        public LongRunningWebClient(int timeoutInSeconds, int? maxRetries = null)
+        {
+            _timeOut = timeoutInSeconds*1000;
             _maxRetries = maxRetries ?? _maxRetries;
             Thread.Sleep(500);
         }
 
+        /// <summary>
+        /// Read Stream from Address
+        /// </summary>
+        /// <param name="address">Address</param>
+        /// <returns>Filestream</returns>
         public new Stream OpenRead(string address)
         {
-            int retryCount = 0;
+            var retryCount = 0;
             while (true)
             {
                 try
                 {
                     return base.OpenRead(address);
                 }
-                catch (WebException ex)
+                catch (Exception ex)
                 {
                     retryCount++;
                     if (retryCount > _maxRetries)
                     {
-                        throw (ex);
+                        _log.Error(ex);
+                        throw;
                     }
                     Thread.Sleep(2000);
                 }
             }
         }
 
-
-        public
-            new string DownloadString(string address)
+        /// <summary>
+        /// Return Url as string
+        /// </summary>
+        /// <param name="address">URL</param>
+        /// <returns>String-COntent</returns>
+        public new string DownloadString(string address)
         {
-            int retryCount = 0;
+            var retryCount = 0;
             while (true)
             {
                 try
@@ -55,29 +78,28 @@ namespace fad2.Backend
                 }
                 catch (WebException ex)
                 {
-                    // TODO: LOG
-                    // ex.Status=="NameResolutionFailure" -> http://Flashair gibbet nich
-                    // ex.Status=="Timeout" -> watt wohl
-                    // ex.Status=="ProtocolError" -> 408 "Anforderungstimeout" = Timeout vom "Server"   Message kann auch 500 sein, dann TOT....
-
+                    _log.Error(ex);
 
                     retryCount++;
                     if (retryCount > _maxRetries)
                     {
-                        throw (ex);
+                        throw;
                     }
                     Thread.Sleep(2000);
                 }
             }
         }
 
-
+        /// <summary>
+        /// GetRequest
+        /// </summary>
+        /// <param name="uri">Url</param>
+        /// <returns>Request</returns>
         protected override WebRequest GetWebRequest(Uri uri)
         {
-            WebRequest w = base.GetWebRequest(uri);
+            var w = base.GetWebRequest(uri);
             w.Timeout = _timeOut;
             return w;
         }
-
     }
 }

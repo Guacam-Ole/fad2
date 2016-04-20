@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using fad2.Backend;
+using fad2.Backend.Github;
 using log4net;
 using MetroFramework;
 using MetroFramework.Controls;

@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
-using fad2.Backend.Github;
 using Newtonsoft.Json;
 
-namespace fad2.Backend
+namespace fad2.Backend.Github
 {
+    /// <summary>
+    /// Github-Methods
+    /// </summary>
     public static class GitHub
     {
-        private const int _cacheDuration = 60;
+        private const int CacheDuration = 60;
 
         private static string GetStringFromUrl(string url)
         {
@@ -19,7 +20,7 @@ namespace fad2.Backend
             {
                 wc.Encoding = Encoding.UTF8;
                 wc.Headers.Add("ContentType", "application/json");
-                wc.Headers.Add("User-Agent",  "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36");
+                wc.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36");
                 return wc.DownloadString(url);
             }
         }
@@ -47,29 +48,24 @@ namespace fad2.Backend
 
         private static object GetCache(string cacheFileName, Type cacheType)
         {
-            if (File.Exists(cacheFileName))
+            if (!File.Exists(cacheFileName)) return null;
+            var cacheInfo = new FileInfo(cacheFileName);
+            if (!((DateTime.Now - cacheInfo.LastWriteTime).TotalMinutes < CacheDuration)) return null;
+            using (var sr = cacheInfo.OpenText())
             {
-                var cacheInfo = new FileInfo(cacheFileName);
-                if ((DateTime.Now - cacheInfo.LastWriteTime).TotalMinutes < _cacheDuration)
+                var content = string.Empty;
+                string singleLine;
+                while ((singleLine = sr.ReadLine()) != null)
                 {
-                    using (var sr = cacheInfo.OpenText())
-                    {
-                        var content = string.Empty;
-                        string singleLine;
-                        while ((singleLine = sr.ReadLine()) != null)
-                        {
-                            content += singleLine;
-                        }
-                        return JsonConvert.DeserializeObject(content, cacheType);
-                    }
+                    content += singleLine;
                 }
+                return JsonConvert.DeserializeObject(content, cacheType);
             }
-            return null;
         }
 
         private static void WriteCachedIssues(string cacheFileName, List<GitHubIssue> issues)
         {
-            WriteCache(cacheFileName,issues);
+            WriteCache(cacheFileName, issues);
         }
 
         private static void WriteCachedBoard(string cacheFileName, ZenHubBoard board)
@@ -106,13 +102,20 @@ namespace fad2.Backend
             }
             string repositoryUrl = $"https://api.github.com/repos/{user}/{repo}";
             var repositoryjson = GetStringFromUrl(repositoryUrl);
-            var repository = (JsonConvert.DeserializeObject<GitHubIssue>(repositoryjson));
+            var repository = JsonConvert.DeserializeObject<GitHubIssue>(repositoryjson);
             board = GetBoard(repository.Id);
-            WriteCachedBoard(cacheFileName,board);
+            WriteCachedBoard(cacheFileName, board);
             return board;
         }
-            
 
+
+        /// <summary>
+        /// Get Issues from Github
+        /// </summary>
+        /// <param name="cacheFileName">Cachefile</param>
+        /// <param name="user">User on Github (that's me :) )</param>
+        /// <param name="repo">Repo for fad2</param>
+        /// <returns></returns>
         public static List<GitHubIssue> GetIssues(string cacheFileName, string user, string repo)
         {
             var allComments = GetCachedIssues(cacheFileName);
@@ -120,68 +123,33 @@ namespace fad2.Backend
             {
                 return allComments;
             }
-           
-
-          
-            // we just need the id:
-            //            var id=repository.Id
-
-
             string url = $"https://api.github.com/repos/{user}/{repo}/issues";
 
             var json = GetStringFromUrl(url);
             var issues = JsonConvert.DeserializeObject<List<GitHubIssue>>(json);
-            if (issues != null)
+            if (issues == null) return null;
+            foreach (var issue in issues)
             {
-                foreach (var issue in issues)
+                issue.User = GetUserFromUrl(issue.User.Url);
+
+                if (issue.CommentCount > 0)
                 {
-
-                   
-
-                    issue.User = GetUserFromUrl(issue.User.Url);
-
-                    if (issue.CommentCount > 0)
+                    var jsonComments = GetStringFromUrl(issue.CommentsUrl);
+                    issue.Comments = JsonConvert.DeserializeObject<List<GitHubIssue>>(jsonComments);
+                    if (issue.Comments != null)
                     {
-                        var jsonComments = GetStringFromUrl(issue.CommentsUrl);
-                        issue.Comments = JsonConvert.DeserializeObject<List<GitHubIssue>>(jsonComments);
-                        if (issue.Comments != null)
+                        foreach (var comment in issue.Comments)
                         {
-                            foreach (var comment in issue.Comments)
-                            {
-                                comment.User = GetUserFromUrl(comment.User.Url);
-                            }
+                            comment.User = GetUserFromUrl(comment.User.Url);
                         }
                     }
-
-                    issue.IsBug = issue.Labels.Any(lb => lb.Name == "bug");
-                    issue.IsWish = issue.Labels.Any(lb => lb.Name == "enhancement");
-
-                    if (issue.Labels.Any(lb => lb.Name == "Closed"))
-                    {
-                        issue.Pipeline = "Closed";
-                    }
-                    else if (issue.Labels.Any(lb => lb.Name == "Done"))
-                    {
-                        issue.Pipeline = "Done";
-                    }
-                    else if (issue.Labels.Any(lb => lb.Name == "In Progress"))
-                    {
-                        issue.Pipeline = "In Progress";
-                    }
-                    else if (issue.Labels.Any(lb => lb.Name == "ToDo"))
-                    {
-                        issue.Pipeline = "ToDo";
-                    }
-                    else
-                    {
-                        issue.Pipeline = "New";
-                    }
                 }
-                WriteCachedIssues(cacheFileName, issues);
-                return issues;
-            }
 
-            return null;
+                issue.IsBug = issue.Labels.Any(lb => lb.Name == "bug");
+                issue.IsWish = issue.Labels.Any(lb => lb.Name == "enhancement");
+            }
+            WriteCachedIssues(cacheFileName, issues);
+            return issues;
         }
     }
 }

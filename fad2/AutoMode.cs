@@ -43,7 +43,8 @@ namespace fad2.UI
         /// </summary>
         /// <param name="flashairPath">Flashair-Path</param>
         /// <param name="localPath">Localpath</param>
-        public void LoadContents(string flashairPath, string localPath)
+        /// <param name="autostart">Autostart download</param>
+        public void LoadContents(string flashairPath, string localPath, bool autostart)
         {
             LeftPanel.Controls.Clear();
             LoadLocalContents(localPath);
@@ -51,6 +52,10 @@ namespace fad2.UI
             LoadFlashAirThumbs();
             CurrentAction.Text = Resources.ReadyToCopy;
             StartCopy.Visible = true;
+            if (autostart)
+            {
+                CopyFiles();
+            }
         }
 
 
@@ -288,7 +293,7 @@ namespace fad2.UI
             try
             {
                 _log.Debug($"Download thumbnail {fileInformation.Directory} {fileInformation.Filename}");
-                var thumBitmap = _connection.DownloadThumbnail(fileInformation.Directory, fileInformation.Filename);
+                var thumBitmap = _connection.DownloadThumbnail(fileInformation.Directory, fileInformation.Filename, Properties.Settings.Default.ImageFileTypes);
                 if (thumBitmap == null)
                 {
                     return;

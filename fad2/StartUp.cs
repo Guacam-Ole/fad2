@@ -4,23 +4,32 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using fad2.Backend;
+using fad2.UI.Properties;
 using MetroFramework;
 
 namespace fad2.UI
 {
+    /// <summary>
+    /// Startup-Page
+    /// </summary>
     public partial class StartUp : UserControl
     {
+        private readonly string _programSettingsFile = $"{Application.StartupPath}\\{Properties.Settings.Default.ProgramSettingsFile}";
+
         private bool _connected;
+
+        private readonly Connection _connection;
 
         private int _failCount;
 
         private Timer _imageSwitchTimer;
 
-        private readonly string _programSettingsFile =
-            $"{Application.StartupPath}\\{Properties.Settings.Default.ProgramSettingsFile}";
-
-    public StartUp()
+        /// <summary>
+        /// Startup-Page
+        /// </summary>
+        public StartUp()
         {
+            _connection = new Connection(_programSettingsFile);
             InitializeComponent();
             AutoDownload.Visible = false;
             FileExplorer.Visible = false;
@@ -31,10 +40,9 @@ namespace fad2.UI
 
         private void ImageSwitcher()
         {
-            // TODO: Allow local Images
-            UiSettings.ImageLoop = Directory.GetFiles($"{Application.StartupPath}\\examplepix").ToList();
-            _imageSwitchTimer = new Timer();
-            _imageSwitchTimer.Interval = 10000; // TODO: From Settings
+            _connection.Settings.ImageBackgroundFolder = _connection.Settings.ImageBackgroundFolder ?? $"{Application.StartupPath}\\examplepix";
+            UiSettings.ImageLoop = Directory.GetFiles(_connection.Settings.ImageBackgroundFolder).ToList();
+            _imageSwitchTimer = new Timer {Interval= _connection.Settings.ImageBackgroundTimer };
             _imageSwitchTimer.Tick += _imageSwitchTimer_Tick;
             _imageSwitchTimer.Start();
             ChangeImage();
@@ -63,13 +71,13 @@ namespace fad2.UI
             _connected = false;
             var worker = new BackgroundWorker();
             worker.DoWork += (sender, e) => TryToConnect();
-            worker.RunWorkerCompleted += (sender, e) => DisplayConnectionSuccess(sender, e);
+            worker.RunWorkerCompleted += (sender, e) => DisplayConnectionSuccess();
             worker.RunWorkerAsync();
         }
 
         private void ConnectionSuccessFull()
         {
-            ConnectionTile.Text = "Connection succeeded";
+            ConnectionTile.Text = Resources.ConnectionSuccess;
             ConnectionTile.Style = MetroColorStyle.Green;
             metroProgressSpinner1.Style = MetroColorStyle.Green;
             metroProgressSpinner1.Visible = false;
@@ -77,7 +85,7 @@ namespace fad2.UI
 
         private void ConnectionFailed()
         {
-            ConnectionTile.Text = $"Connecting (Attempt {_failCount})";
+            ConnectionTile.Text = string.Format(Resources.ConnectionTry, _failCount);
 
             if (_failCount > 4)
             {
@@ -91,11 +99,10 @@ namespace fad2.UI
             }
         }
 
-        private void DisplayConnectionSuccess(object sender, RunWorkerCompletedEventArgs e)
+        private void DisplayConnectionSuccess()
         {
             if (_connected)
             {
-
                 Action helpAction = () =>
                 {
                     ConnectionSuccessFull();
@@ -120,11 +127,10 @@ namespace fad2.UI
             }
         }
 
-
         private void TryToConnect()
         {
-            var connection = new Connection(_programSettingsFile);
-            _connected = connection.TestConnection();
+           
+            _connected = _connection.TestConnection();
         }
 
         private void StartUp_Resize(object sender, EventArgs e)
@@ -139,10 +145,10 @@ namespace fad2.UI
 
         private void AutoDownload_Click(object sender, EventArgs e)
         {
-            this.Controls.Clear();
-            AutoMode auto = new AutoMode {Dock = DockStyle.Fill};
-            this.Controls.Add(auto);
-            auto.LoadContents("/", @"C:\Users\Ole\Pictures");
+            Controls.Clear();
+            var auto = new AutoMode {Dock = DockStyle.Fill};
+            Controls.Add(auto);
+            auto.LoadContents("/", _connection.Settings.LocalPath, false);
         }
     }
 }

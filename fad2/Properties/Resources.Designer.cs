@@ -61,6 +61,24 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection succeeded.
+        /// </summary>
+        internal static string ConnectionSuccess {
+            get {
+                return ResourceManager.GetString("ConnectionSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting (Attempt {0}).
+        /// </summary>
+        internal static string ConnectionTry {
+            get {
+                return ResourceManager.GetString("ConnectionTry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy file {0} of {1}: [{2}] Current Speed:{3:N} {4}.
         /// </summary>
         internal static string CopyFileOfAtSpeed {

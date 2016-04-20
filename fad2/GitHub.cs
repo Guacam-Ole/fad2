@@ -35,9 +35,9 @@ namespace fad2.UI
             Controls.Add(gitHubTop);
             Application.DoEvents();
             
-            var allIssues = Backend.GitHub.GetIssues($"{Application.StartupPath}\\github.cache", Properties.Settings.Default.GIthubAuthor,Properties.Settings.Default.GithubRepo);
+            var allIssues = Backend.Github.GitHub.GetIssues($"{Application.StartupPath}\\github.cache", Properties.Settings.Default.GIthubAuthor,Properties.Settings.Default.GithubRepo);
             if (allIssues == null) return;
-            var board=Backend.GitHub.GetBoard($"{Application.StartupPath}\\zenhub.cache", Properties.Settings.Default.GIthubAuthor, Properties.Settings.Default.GithubRepo);
+            var board=Backend.Github.GitHub.GetBoard($"{Application.StartupPath}\\zenhub.cache", Properties.Settings.Default.GIthubAuthor, Properties.Settings.Default.GithubRepo);
             var counter = 0;
             Controls.Clear();
             

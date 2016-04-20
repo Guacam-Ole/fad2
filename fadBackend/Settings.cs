@@ -1,11 +1,10 @@
 ﻿namespace fad2.Backend
 {
+    /// <summary>
+    /// Card Settings
+    /// </summary>
     public class Settings
     {
-     
-
-      
-
         [Setting("ID", Parent = "WLANSD")]
         public string WlanSdCardId { get; set; }
 
@@ -115,6 +114,9 @@
         public int WebDavMode { get; set; }
 
 
+        /// <summary>
+        /// Version from current Card
+        /// </summary>
         public string Version
         {
             get

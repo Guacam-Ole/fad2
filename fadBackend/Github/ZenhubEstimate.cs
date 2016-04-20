@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace fad2.Backend
+namespace fad2.Backend.Github
 {
+    /// <summary>
+    /// Estimate for that issue
+    /// </summary>
     public class ZenhubEstimate
     {
+        /// <summary>
+        /// Value of Estimate
+        /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public  int Value { get; set; }
+        public int Value { get; set; }
     }
 }

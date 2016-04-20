@@ -169,4 +169,10 @@
   <data name="ReadLocalDir" xml:space="preserve">
     <value>Loading local directory</value>
   </data>
+  <data name="ConnectionSuccess" xml:space="preserve">
+    <value>Connection succeeded</value>
+  </data>
+  <data name="ConnectionTry" xml:space="preserve">
+    <value>Connecting (Attempt {0})</value>
+  </data>
 </root>

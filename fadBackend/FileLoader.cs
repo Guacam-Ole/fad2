@@ -5,15 +5,22 @@ using System.Linq;
 using System.Reflection;
 using log4net;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
 
 namespace fad2.Backend
 {
+    /// <summary>
+    /// Methods to load local files
+    /// </summary>
     public class FileLoader
     {
-        private List<SingleFileSetting> _allLines;
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private List<SingleFileSetting> _allLines;
 
+        /// <summary>
+        /// Load a file
+        /// </summary>
+        /// <param name="fileName">filename</param>
+        /// <returns>Settings</returns>
         public Settings LoadFromFile(string fileName)
         {
             var setting = new Settings();
@@ -39,30 +46,43 @@ namespace fad2.Backend
             return setting;
         }
 
+        /// <summary>
+        /// Save Program settings
+        /// </summary>
+        /// <param name="settings">Settings</param>
+        /// <param name="filename">File to save to</param>
         public void SaveProgramSettings(ProgramSettings settings, string filename)
         {
             File.WriteAllText(filename, JsonConvert.SerializeObject(settings));
         }
 
+        /// <summary>
+        /// Load program settings
+        /// </summary>
+        /// <param name="filename">Settingsfile</param>
+        /// <returns>Settings</returns>
         public ProgramSettings LoadProgramSettings(string filename)
         {
             if (File.Exists(filename))
             {
                 return JsonConvert.DeserializeObject<ProgramSettings>(File.ReadAllText(filename));
             }
-            else
+            return new ProgramSettings
             {
-                return new ProgramSettings
-                {
-                    FlashAirUrl = "http://flashair",
-                    LocalPath = "C:\\",
-                    CreateByDate = (int) ProgramSettings.DateModes.Month,
-                    FileCheckInterval = 60,
-                    FolderFomat = "{2:yyyy-MM-dd}"
-                };
-            }
+                FlashAirUrl = "http://flashair",
+                LocalPath = "C:\\",
+                CreateByDate = (int) ProgramSettings.DateModes.Month,
+                FileCheckInterval = 60,
+                FolderFomat = "{2:yyyy-MM-dd}"
+            };
         }
 
+        /// <summary>
+        /// Save Flashair-Settingsfile
+        /// </summary>
+        /// <param name="version">FAD-Version</param>
+        /// <param name="fileName">Filename</param>
+        /// <param name="settings">Settings</param>
         public void SaveToFile(string version, string fileName, Settings settings)
         {
             var configFileContent = new List<string>();
@@ -72,7 +92,7 @@ namespace fad2.Backend
             GetCategorizedValues(settings, out vendorValues, out sdWlanValues);
             configFileContent.Add("[FlashAirDownloader]");
             configFileContent.Add($"FAD_Version={version}");
-            configFileContent.Add($"FAD_Url=http://dotnet.work/fad2");
+            configFileContent.Add("FAD_Url=http://dotnet.work/fad2");
             configFileContent.Add(string.Empty);
             if (vendorValues.Count > 0)
             {
@@ -89,19 +109,17 @@ namespace fad2.Backend
             File.WriteAllLines(fileName, configFileContent);
         }
 
-        private void GetCategorizedValues(Settings settings, out Dictionary<string, string> vendorValues,
-            out Dictionary<string, string> sdWlanValues)
+        private void GetCategorizedValues(Settings settings, out Dictionary<string, string> vendorValues,out Dictionary<string, string> sdWlanValues)
         {
             vendorValues = new Dictionary<string, string>();
             sdWlanValues = new Dictionary<string, string>();
 
             foreach (var property in settings.GetType().GetProperties())
             {
-                var customAttribute =
-                    (SettingAttribute) property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
+                var customAttribute =  (SettingAttribute) property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
                 if (customAttribute == null) continue;
                 var value = property.GetValue(settings, null);
-                string strValue = null;
+                string strValue ;
                 if (value == null)
                 {
                     continue;

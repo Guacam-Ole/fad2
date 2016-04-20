@@ -2,30 +2,66 @@
 
 namespace fad2.Backend
 {
+    /// <summary>
+    /// Single Setting from Settings-File
+    /// </summary>
     public class SingleFileSetting
     {
-        public SingleFileSetting()
-        {
-        }
-
-
+        /// <summary>
+        /// New single Setting
+        /// </summary>
+        /// <param name="pos">Line pos in File</param>
+        /// <param name="line">Content from line</param>
         public SingleFileSetting(int pos, string line)
         {
             Line = pos;
             Original = line;
         }
 
+        /// <summary>
+        /// Line in File
+        /// </summary>
         public int Line { get; set; }
+        /// <summary>
+        /// Original string
+        /// </summary>
         public string Original { get; set; }
+        /// <summary>
+        /// Is this a category title?
+        /// </summary>
         public bool IsTitle { get; set; }
+        /// <summary>
+        /// Is this a setting?
+        /// </summary>
         public bool IsSetting { get; set; }
+        /// <summary>
+        /// Do I know this setting?
+        /// </summary>
         public bool IsKnown { get; set; }
+        /// <summary>
+        /// Key
+        /// </summary>
         public string Key { get; set; }
+        /// <summary>
+        /// Value
+        /// </summary>
         public string Value { get; set; }
+        /// <summary>
+        /// Is this just an empty line?
+        /// </summary>
         public bool IsEmpty { get; set; }
+        /// <summary>
+        /// Is this modified?
+        /// </summary>
         public bool IsModified { get; set; }
+        /// <summary>
+        /// Single Setting
+        /// </summary>
         public Settings Setting { get; set; }
 
+        /// <summary>
+        /// Check Line Contents
+        /// </summary>
         public void CheckLine()
         {
             if (string.IsNullOrWhiteSpace(Original))

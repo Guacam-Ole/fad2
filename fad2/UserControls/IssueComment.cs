@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using fad2.Backend;
+using fad2.Backend.Github;
 
 namespace fad2.UI.UserControls
 {
