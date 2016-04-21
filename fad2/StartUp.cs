@@ -23,11 +23,9 @@ namespace fad2.UI
         private int _failCount;
 
         private Timer _imageSwitchTimer;
+        private Control _parentControl;
 
-        /// <summary>
-        /// Startup-Page
-        /// </summary>
-        public StartUp()
+        public StartUp(Control parent=null)
         {
             _connection = new Connection(_programSettingsFile);
             InitializeComponent();
@@ -36,6 +34,7 @@ namespace fad2.UI
             ImageSwitcher();
             Application.DoEvents();
             StartConnection();
+            _parentControl = parent;
         }
 
         private void ImageSwitcher()
@@ -146,9 +145,9 @@ namespace fad2.UI
         private void AutoDownload_Click(object sender, EventArgs e)
         {
             Controls.Clear();
-            var auto = new AutoMode {Dock = DockStyle.Fill};
+            var auto = new FileCopy(_parentControl, true) {Dock = DockStyle.Fill};
             Controls.Add(auto);
-            auto.LoadContents("/", _connection.Settings.LocalPath, false);
+            auto.LoadContents("/DCIM", _connection.Settings.LocalPath);
         }
     }
 }

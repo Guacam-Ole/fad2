@@ -176,7 +176,7 @@ namespace fad2.Backend
             try
             {
                 string command = $"{AddSlash(Settings.FlashAirUrl)}upload.cgi?DEL={AddSlash(path)}{filename}";
-                var returnValue = new WebClient().DownloadString(command);
+                var returnValue = new LongRunningWebClient(10,5).DownloadString(command);
                 _log.Debug($"Deletion successful for {filename}. Return:{returnValue}");
                 return true;
             }

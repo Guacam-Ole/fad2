@@ -33,6 +33,16 @@ namespace fad2.Backend
             CalcDate();
         }
 
+
+        public string Extension
+        {
+            get
+            {
+                if (Filename == null) return string.Empty;
+                return !Filename.Contains(".") ? string.Empty : Filename.Substring(Filename.LastIndexOf('.') + 1);
+            }
+        }
+
         /// <summary>
         /// Absolute Directory
         /// </summary>

@@ -18,7 +18,7 @@ namespace fad2.UI
         public void ShowLoader()
         {
             MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(new StartUp {Dock = DockStyle.Fill});
+            MainPanel.Controls.Add(new StartUp(this) {Dock = DockStyle.Fill});
         }
 
         private void ShowSettings()

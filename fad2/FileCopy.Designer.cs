@@ -1,6 +1,6 @@
 ﻿namespace fad2.UI
 {
-    partial class AutoMode
+    partial class FileCopy
     {
         /// <summary> 
         /// Required designer variable.
@@ -54,7 +54,6 @@
             // 
             // ProgressPanel
             // 
-            this.ProgressPanel.Controls.Add(this.StartCopy);
             this.ProgressPanel.Controls.Add(this.Progress);
             this.ProgressPanel.Controls.Add(this.CurrentAction);
             this.ProgressPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -71,11 +70,10 @@
             // 
             // StartCopy
             // 
-            this.StartCopy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.StartCopy.Location = new System.Drawing.Point(0, 36);
+            this.StartCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.StartCopy.Location = new System.Drawing.Point(793, 79);
             this.StartCopy.Name = "StartCopy";
-            this.StartCopy.Size = new System.Drawing.Size(1142, 23);
+            this.StartCopy.Size = new System.Drawing.Size(357, 23);
             this.StartCopy.TabIndex = 4;
             this.StartCopy.Text = "Start copying files...";
             this.StartCopy.UseSelectable = true;
@@ -86,7 +84,7 @@
             // 
             this.Progress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Progress.Location = new System.Drawing.Point(4, 36);
+            this.Progress.Location = new System.Drawing.Point(11, 36);
             this.Progress.Name = "Progress";
             this.Progress.Size = new System.Drawing.Size(1142, 23);
             this.Progress.TabIndex = 3;
@@ -102,6 +100,7 @@
             // 
             // ImageInfoPanel
             // 
+            this.ImageInfoPanel.Controls.Add(this.StartCopy);
             this.ImageInfoPanel.Controls.Add(this.ImageSizeContent);
             this.ImageInfoPanel.Controls.Add(this.ImageFilenameContent);
             this.ImageInfoPanel.Controls.Add(this.ImageFolderContent);
@@ -254,14 +253,14 @@
             this.FileTooltip.StyleManager = null;
             this.FileTooltip.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
-            // AutoMode
+            // FileCopy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.FileSplitter);
             this.Controls.Add(this.ImageInfoPanel);
             this.Controls.Add(this.ProgressPanel);
-            this.Name = "AutoMode";
+            this.Name = "FileCopy";
             this.Size = new System.Drawing.Size(1153, 611);
             this.ProgressPanel.ResumeLayout(false);
             this.ProgressPanel.PerformLayout();

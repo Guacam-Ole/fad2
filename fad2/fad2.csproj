@@ -77,11 +77,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMode.cs">
+    <Compile Include="FileCopy.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AutoMode.Designer.cs">
-      <DependentUpon>AutoMode.cs</DependentUpon>
+    <Compile Include="FileCopy.Designer.cs">
+      <DependentUpon>FileCopy.cs</DependentUpon>
     </Compile>
     <Compile Include="Fad.cs">
       <SubType>Form</SubType>
@@ -181,8 +181,8 @@
       <DependentUpon>StartUp.cs</DependentUpon>
     </Compile>
     <Compile Include="UiSettings.cs" />
-    <EmbeddedResource Include="AutoMode.resx">
-      <DependentUpon>AutoMode.cs</DependentUpon>
+    <EmbeddedResource Include="FileCopy.resx">
+      <DependentUpon>FileCopy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Fad.resx">
       <DependentUpon>Fad.cs</DependentUpon>

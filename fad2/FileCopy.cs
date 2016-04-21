@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -15,7 +16,7 @@ using MetroFramework.Controls;
 
 namespace fad2.UI
 {
-    public partial class AutoMode : MetroUserControl
+    public partial class FileCopy : MetroUserControl
     {
         private readonly Connection _connection;
         private readonly string[] _imageFileTypes = Properties.Settings.Default.ImageFileTypes.Split(',');
@@ -31,12 +32,21 @@ namespace fad2.UI
         /// <summary>
         /// Automode-Download
         /// </summary>
-        public AutoMode()
+        public FileCopy(Control parent, bool automode)
         {
             InitializeComponent();
-            _parent = (Fad) Parent.Parent.Parent;
+            _parent = (Fad) parent;
             _connection = new Connection(_programSettingsFile);
+            _autoMode = automode;
+            if (automode)
+            {
+                FileSplitter.Panel2Collapsed = true;
+                FileSplitter.Panel2.Hide();
+            }
         }
+        public FileCopy() { }
+
+        private bool _autoMode;
 
         /// <summary>
         /// Load Contents from Flashair
@@ -44,20 +54,81 @@ namespace fad2.UI
         /// <param name="flashairPath">Flashair-Path</param>
         /// <param name="localPath">Localpath</param>
         /// <param name="autostart">Autostart download</param>
-        public void LoadContents(string flashairPath, string localPath, bool autostart)
+        public void LoadContents(string flashairPath, string localPath)
         {
             LeftPanel.Controls.Clear();
             LoadLocalContents(localPath);
             LoadFlashairInfo(flashairPath);
-            LoadFlashAirThumbs();
+          //  LoadFlashAirThumbs();
             CurrentAction.Text = Resources.ReadyToCopy;
             StartCopy.Visible = true;
-            if (autostart)
+            CopyFilesAsync();
+            //if (_autoMode)
+            //{
+            //    CopyFiles();
+            //}
+        }
+
+        BackgroundWorker _workerCopyFiles=new BackgroundWorker();
+
+        private void CopyFilesAsync()
+        {
+            StartCopy.Text = "Abort copying";
+            StartCopy.Visible = true;
+
+            _workerCopyFiles.RunWorkerAsync();
+            _workerCopyFiles.WorkerSupportsCancellation = true;
+            _workerCopyFiles.WorkerReportsProgress = true;
+            _workerCopyFiles.DoWork += WorkerCopyFilesDoWork;
+            _workerCopyFiles.ProgressChanged += WorkerCopyFilesProgressChanged;
+            _workerCopyFiles.RunWorkerCompleted += WorkerCopyFilesRunWorkerCopyFilesCompleted;
+            
+        }
+
+        private void WorkerCopyFilesRunWorkerCopyFilesCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error!=null)
             {
-                CopyFiles();
+                MetroMessageBox.Show(this, e.Error.Message);
+            }
+            if (e.Cancelled)
+            {
+                MetroMessageBox.Show(this, "Operation cancelled");
+            }
+            StartCopy.Visible = false;
+        }
+
+        private void WorkerCopyFilesProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Progress.Maximum = 100;
+            Progress.Value = e.ProgressPercentage;
+            Application.DoEvents();
+            if (e.UserState != null)
+            {
+                if (e.UserState is MetroTile)
+                {
+                    ShowPreviewFromTile((MetroTile) e.UserState);
+                }
+                else if (e.UserState is string)
+                {
+                    CurrentAction.Text = (string) e.UserState;
+                } else if (e.UserState is MetroMessageBoxProperties)
+                {
+                    var props = (MetroMessageBoxProperties) e.UserState;
+                    if (MetroMessageBox.Show(this, props.Message, props.Title, props.Buttons, props.Icon) == DialogResult.Abort)
+                    {
+                        _workerCopyFiles.CancelAsync();
+                    }
+                }
             }
         }
 
+        private void WorkerCopyFilesDoWork(object sender, DoWorkEventArgs e)
+        {
+            
+            BackgroundWorker worker = sender as BackgroundWorker;
+            e.Result = CopyFiles(worker,e);
+        }
 
         private void LoadFlashAirThumbs()
         {
@@ -112,7 +183,8 @@ namespace fad2.UI
                         _log.Error(ex);
                         errResponse = MetroMessageBox.Show(this,Resources.ErrorDownloadingFilelist,Resources.ErrorFlashairGenericTitle,MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
                         if (errResponse != DialogResult.Abort) continue;
-                        MetroMessageBox.Show(this, Resources.ErrorBlameToshiba,Resources.ErrorBlameTitle);var parent = (Fad) Parent;
+                        MetroMessageBox.Show(this, Resources.ErrorBlameToshiba,Resources.ErrorBlameTitle);
+                        var parent = (Fad) _parent;
                         parent.ShowLoader();
                     }
                 } while (allFiles == null && errResponse != DialogResult.Ignore);
@@ -136,10 +208,31 @@ namespace fad2.UI
                         {
                             path += '/';
                         }
-                        LoadFlashairInfo(path + singleFile.Filename);
+                        if (_autoMode)
+                        {
+                            LoadFlashairInfo(path + singleFile.Filename);
+                        }
                     }
                     foreach (var singleFile in nonHiddenfiles.Where(nhf => !nhf.IsVolume && !nhf.IsDirectory))
                     {
+                        if (_autoMode)
+                        {
+                            switch (_connection.Settings.FileTypesToCopy)
+                            {
+                                case (int) ProgramSettings.FileTypes.Images:
+                                    if (!_imageFileTypes.Contains(singleFile.Extension.ToLower()))
+                                    {
+                                        continue;
+                                    }
+                                    break;
+                                case (int) ProgramSettings.FileTypes.Videos:
+                                    if (!_imageFileTypes.Contains(singleFile.Extension.ToLower()) && !_movieFilesTypes.Contains(singleFile.Extension.ToLower()))
+                                    {
+                                        continue;
+                                    }
+                                    break;
+                            }
+                        }
                         var tile = new MetroTile
                         {
                             Text = singleFile.Filename,
@@ -160,12 +253,14 @@ namespace fad2.UI
             ResizeTiles(LeftPanel);
         }
 
-        private void CopyFiles()
+
+
+        private int CopyFiles(BackgroundWorker worker, DoWorkEventArgs e)
         {
+            var counter = 0;
             var duration = TimeSpan.FromSeconds(1);
             long lastSize = 0;
-
-            CurrentAction.Text = Resources.CopyingFiles;
+            worker.ReportProgress(0,Resources.CopyingFiles);
 
             var cardId = _connection.GetCid();
             var appId = _connection.GetAppName();
@@ -177,12 +272,19 @@ namespace fad2.UI
 
                 Progress.Maximum = allTiles.Count;
                 Progress.Value = 0;
-                StartCopy.Visible = false;
 
-                var counter = 0;
+                
+                int max = allTiles.Count;
                 foreach (var tile in allTiles)
                 {
-                    LeftTile_Click(tile, new EventArgs());
+                    int progress = (100*counter)/max;
+
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    worker.ReportProgress(progress, tile);
                     var fileInfo = (FlashAirFileInformation) tile.Tag;
                     var currentByteSpeed = lastSize/duration.TotalSeconds;
                     var unit = "Bytes/s";
@@ -197,9 +299,7 @@ namespace fad2.UI
                         unit = "MBytes/s";
                     }
 
-                    CurrentAction.Text = string.Format(Resources.CopyFileOfAtSpeed, counter + 1, Progress.Maximum, fileInfo.Filename, currentByteSpeed, unit);
-                    Application.DoEvents();
-
+                    worker.ReportProgress(progress,string.Format(Resources.CopyFileOfAtSpeed, counter + 1, Progress.Maximum, fileInfo.Filename, currentByteSpeed, unit));
 
                     var targetFolder = CreateTargetFolder(fileInfo, cardId, appId);
                     var targetFile = Path.Combine(targetFolder, fileInfo.Filename);
@@ -226,34 +326,31 @@ namespace fad2.UI
                         var startTick = DateTime.Now;
                         var errResponse = DialogResult.None;
                         Stream sourceFileStream = null;
-                        do
-                        {
+                        //do
+                        //{
                             try
                             {
-                                sourceFileStream = _connection.DownloadFile(fileInfo.Directory, fileInfo.Filename);
+                                sourceFileStream =  _connection.DownloadFile(fileInfo.Directory, fileInfo.Filename);
                             }
                             catch (Exception ex)
                             {
                                 _log.Error(ex);
                                 if (ex is WebException && ((WebException) ex).Status == WebExceptionStatus.NameResolutionFailure)
                                 {
-                                    errResponse = MetroMessageBox.Show(this, "Flashair cannot be found anymore. This usually means that the card has gone offline. Re-Power your camera and try again. \r\n\r\n[ignore=continue with next file, abort=abort all downloads, retry=retry downloading this file]", "Flashair cannot be found anymore", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+                                    worker.ReportProgress(progress, new MetroMessageBoxProperties(null) {Buttons = MessageBoxButtons.OK, Icon = MessageBoxIcon.Error, Title = "Flashair cannot be found anymore", Message = "Flashair cannot be found anymore. This usually means that the card has gone offline. Re-Power your camera and try again."});
                                 }
                                 else
                                 {
-                                    errResponse = MetroMessageBox.Show(this, $"Failed downloading File '{fileInfo.Filename}. Ignore this error and continue with next file?  \r\n[ignore=continue with next file, abort=abort all downloads, retry=retry downloading this file]", Resources.ErrorFlashairGenericTitle, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+                                    worker.ReportProgress(progress, new MetroMessageBoxProperties(null) { Buttons = MessageBoxButtons.OKCancel, Icon = MessageBoxIcon.Error, Title = Resources.ErrorFlashairGenericTitle, Message = $"Failed downloading File '{fileInfo.Filename}. This will be ignored for now. (Press Cancel to abort operation, OK continues with next file) " });
                                 }
-                                if (errResponse != DialogResult.Abort) continue;
-                                MetroMessageBox.Show(this, Resources.ErrorBlameToshiba, Resources.ErrorBlameTitle);
-                                _parent.ShowLoader();
                             }
-                        } while (sourceFileStream == null && errResponse != DialogResult.Ignore);
+                      //  } while (sourceFileStream == null && errResponse != DialogResult.Ignore);
                         if (sourceFileStream == null) continue;
                         using (var fileStream = File.Create(targetFile))
                         {
                             try
                             {
-                                sourceFileStream.CopyTo(fileStream);
+                                 sourceFileStream.CopyTo(fileStream);
                                 lastSize = fileStream.Length;
                             }
                             catch (Exception ex)
@@ -267,15 +364,20 @@ namespace fad2.UI
                             _connection.DeleteFile(fileInfo.Directory, fileInfo.Filename);
                         }
                     }
-                    Progress.Value = counter;
-                    Application.DoEvents();
+                    //Progress.Value = counter;
+                    //Application.DoEvents();
                     counter++;
+
+                    worker.ReportProgress((counter*100)/Progress.Maximum);
                 }
             }
-            Progress.Value = Progress.Maximum;
-            CurrentAction.Text = Resources.DoneCopying;
-            Thread.Sleep(10000);
-            _parent.ShowLoader();
+       
+            return counter;
+        }
+
+        private DialogResult MetroMessage(string title, string message, MessageBoxButtons buttons, MessageBoxIcon icon)
+        {
+            return MetroMessageBox.Show(this, message, title, buttons, icon);
         }
 
         private string CreateTargetFolder(FlashAirFileInformation fileInfo, string cardId, string appId)
@@ -310,7 +412,6 @@ namespace fad2.UI
             }
         }
 
-
         private void LoadLocalContents(string localPath)
         {
             CurrentAction.Text = Resources.ReadLocalDir;
@@ -340,25 +441,6 @@ namespace fad2.UI
                     {
                         continue;
                     }
-                    var extension = fileInfo.Name.Substring(fileInfo.Name.LastIndexOf('.') + 1).ToLower();
-
-                    var doCopy = true;
-                    switch (_connection.Settings.FileTypesToCopy)
-                    {
-                        case (int) ProgramSettings.FileTypes.Images:
-                            doCopy = _imageFileTypes.Contains(extension);
-                            break;
-                        case (int) ProgramSettings.FileTypes.Videos:
-                            doCopy = _imageFileTypes.Contains(extension) || _movieFilesTypes.Contains(extension);
-                            break;
-                    }
-
-                    if (!doCopy)
-                    {
-                        _log.Debug($"Ignoring {fileInfo.Directory} {fileInfo.Name}, because it has the wrong extension");
-                        continue;
-                    }
-
 
                     var tile = new MetroTile {Text = fileInfo.Name, Width = _metroTileSize, Height = _metroTileSize};
                     FileTooltip.SetToolTip(tile, fileInfo.Name);
@@ -382,7 +464,7 @@ namespace fad2.UI
             try
             {
                 if (fileInfo.Length > _maxThumbnailSize) return;
-                string[] validExtensions = {"jpg", "jpeg", "png", "ping", "gif", "tif", "tiff"};
+                var validExtensions = Properties.Settings.Default.ImageFileTypes.Split(',');
                 var extension = fileInfo.Name.Substring(fileInfo.Name.LastIndexOf('.') + 1).ToLower();
                 if (!validExtensions.Contains(extension)) return;
                 Image.GetThumbnailImageAbort myCallback = ThumbnailCallback;
@@ -397,7 +479,6 @@ namespace fad2.UI
                 _log.Error(ex);
             }
         }
-
 
         private void ResizeTiles(Control parentControl)
         {
@@ -431,7 +512,6 @@ namespace fad2.UI
                 _log.Error(ex);
             }
         }
-     
 
         private void RightPanel_Layout(object sender, LayoutEventArgs e)
         {
@@ -447,22 +527,25 @@ namespace fad2.UI
 
         private void StartCopy_Click(object sender, EventArgs e)
         {
+            if (_autoMode)
+            {
+                _workerCopyFiles.CancelAsync();
+            }
             StartCopy.Visible = false;
-            CopyFiles();
+            //CopyFilesAsync();
         }
 
-        private void LeftTile_Click(object sender, EventArgs e)
+        private void ShowPreviewFromTile(MetroTile tile)
         {
-            var tile = (MetroTile) sender;
-            var fileData = (FlashAirFileInformation) tile.Tag;
+            var fileData = (FlashAirFileInformation)tile.Tag;
             SinglePreviewThumb.TileImage = tile.TileImage;
             SinglePreviewThumb.UseTileImage = tile.UseTileImage;
             ImageFolderContent.Text = fileData.Directory;
             ImageFilenameContent.Text = fileData.Filename;
 
-            var kbSize = (double) fileData.Size/1024;
-            var mbSize = kbSize/1024;
-            var gbSize = mbSize/1024;
+            var kbSize = (double)fileData.Size / 1024;
+            var mbSize = kbSize / 1024;
+            var gbSize = mbSize / 1024;
 
             if (gbSize > 1)
             {
@@ -483,6 +566,12 @@ namespace fad2.UI
             ImageInfoPanel.Visible = true;
             SinglePreviewThumb.Refresh();
             Application.DoEvents();
+        }
+
+        private void LeftTile_Click(object sender, EventArgs e)
+        {
+            var tile = (MetroTile) sender;
+            ShowPreviewFromTile(tile);
         }
     }
 }
