@@ -40,7 +40,6 @@ namespace fad2.UI
         private void ImageSwitcher()
         {
             if (!_connection.Settings.ShowBackgroundImage) return;
-            _connection.Settings.ImageBackgroundFolder = _connection.Settings.ImageBackgroundFolder ?? $"{Application.StartupPath}\\examplepix";
             try
             {
                 UiSettings.ImageLoop = Directory.GetFiles(_connection.Settings.ImageBackgroundFolder).ToList();

@@ -68,7 +68,6 @@ namespace fad2.UI
             LoadThumbs.Value = _programSettings.LoadThumbs;
             FiletypesToCopy.Value = _programSettings.FileTypesToCopy;
             StartupPath.Value = _programSettings.CardStartupPath;
-
             BackgroundInterval.Value = _programSettings.BackgroundInterval;
             Backgroundlocation.Value = _programSettings.ImageBackgroundFolder;
             ShowBackimages.Value = _programSettings.ShowBackgroundImage;
@@ -194,6 +193,8 @@ namespace fad2.UI
 
         private void SettingsPanel_Resize(object sender, EventArgs e)
         {
+            if (!_programSettings.ShowTiles) { return;
+            }
             AddTiles();
             ChangeImages();
         }
@@ -618,6 +619,7 @@ namespace fad2.UI
         private void SaveProgSettings_Click(object sender, EventArgs e)
         {
             SaveProgramSettings();
+            LoadProgramSettings();
         }
     }
 }

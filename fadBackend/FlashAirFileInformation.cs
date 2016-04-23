@@ -33,6 +33,7 @@ namespace fad2.Backend
             CalcDate();
         }
 
+        public FlashAirFileInformation() { }
 
         public string Extension
         {

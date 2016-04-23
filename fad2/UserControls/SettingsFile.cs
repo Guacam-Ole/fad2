@@ -111,6 +111,10 @@ namespace fad2.UI.UserControls
             if (DirectoryOnly)
             {
                 var dlg = new FolderBrowserDialog();
+                if (!string.IsNullOrWhiteSpace(Value))
+                {
+                    dlg.SelectedPath = Value;
+                }
                 dlg.ShowDialog();
                 SettingValue.Text = dlg.SelectedPath;
                 if (!string.IsNullOrWhiteSpace(SettingValue.Text) && !SettingValue.Text.EndsWith("\\"))
@@ -121,6 +125,10 @@ namespace fad2.UI.UserControls
             else
             {
                 var fld = new OpenFileDialog {Filter = Filter};
+                if (!string.IsNullOrWhiteSpace(Value))
+                {
+                    fld.FileName = Value;
+                }
                 fld.ShowDialog();
                 SettingValue.Text = fld.FileName;
             }

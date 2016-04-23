@@ -1,4 +1,7 @@
-﻿namespace fad2.Backend
+﻿using System;
+using System.Reflection;
+
+namespace fad2.Backend
 {
     /// <summary>
     /// Program setings
@@ -132,7 +135,7 @@
         /// <summary>
         /// What Images to use for background
         /// </summary>
-        public string ImageBackgroundFolder { get; set; }
+        public string ImageBackgroundFolder { get; set; } = AppDomain.CurrentDomain.BaseDirectory + "examplepix";
 
         /// <summary>
         /// Where to start looking for files?
