@@ -101,6 +101,9 @@ namespace fad2.UI
             this.WlansdIpAddress = new fad2.UI.UserControls.SettingsIp();
             this.WlansdDhcp = new fad2.UI.UserControls.SettingsBoolean();
             this.WlansdId = new fad2.UI.UserControls.SettingsString();
+            this.FiletypesToCopy = new fad2.UI.UserControls.SettingsCombo();
+            this.StartupPath = new fad2.UI.UserControls.SettingsString();
+            this.LoadThumbs = new fad2.UI.UserControls.SettingsBoolean();
             this.SettingsPanel.SuspendLayout();
             this.LoadTile.SuspendLayout();
             this.CardSettingsTab.SuspendLayout();
@@ -144,6 +147,7 @@ namespace fad2.UI
             this.SaveProgSettings.Size = new System.Drawing.Size(119, 23);
             this.SaveProgSettings.TabIndex = 17;
             this.SaveProgSettings.Text = "Save";
+            this.SaveProgSettings.UseSelectable = true;
             this.SaveProgSettings.Click += new System.EventHandler(this.SaveProgSettings_Click);
             // 
             // ProgSettingsLabel
@@ -157,12 +161,14 @@ namespace fad2.UI
             // 
             // LoadTile
             // 
+            this.LoadTile.ActiveControl = null;
             this.LoadTile.Controls.Add(this.LoadSpinner);
             this.LoadTile.Location = new System.Drawing.Point(17, 155);
             this.LoadTile.Name = "LoadTile";
             this.LoadTile.Size = new System.Drawing.Size(119, 110);
             this.LoadTile.TabIndex = 15;
             this.LoadTile.Text = "Loading....";
+            this.LoadTile.UseSelectable = true;
             this.LoadTile.Visible = false;
             // 
             // LoadSpinner
@@ -172,6 +178,7 @@ namespace fad2.UI
             this.LoadSpinner.Name = "LoadSpinner";
             this.LoadSpinner.Size = new System.Drawing.Size(116, 88);
             this.LoadSpinner.TabIndex = 0;
+            this.LoadSpinner.UseSelectable = true;
             // 
             // RightPanel
             // 
@@ -197,6 +204,7 @@ namespace fad2.UI
             this.SaveSettings.Size = new System.Drawing.Size(119, 23);
             this.SaveSettings.TabIndex = 13;
             this.SaveSettings.Text = "Save";
+            this.SaveSettings.UseSelectable = true;
             this.SaveSettings.Click += new System.EventHandler(this.SaveSettings_Click);
             // 
             // metroLabel1
@@ -215,6 +223,7 @@ namespace fad2.UI
             this.LoadFromFile.Size = new System.Drawing.Size(119, 23);
             this.LoadFromFile.TabIndex = 3;
             this.LoadFromFile.Text = "Load";
+            this.LoadFromFile.UseSelectable = true;
             this.LoadFromFile.Click += new System.EventHandler(this.LoadFromFile_Click);
             // 
             // CardSettingsTab
@@ -230,10 +239,14 @@ namespace fad2.UI
             this.CardSettingsTab.SelectedIndex = 0;
             this.CardSettingsTab.Size = new System.Drawing.Size(834, 598);
             this.CardSettingsTab.TabIndex = 2;
+            this.CardSettingsTab.UseSelectable = true;
             // 
             // ApplicationSettings
             // 
             this.ApplicationSettings.AutoScroll = true;
+            this.ApplicationSettings.Controls.Add(this.LoadThumbs);
+            this.ApplicationSettings.Controls.Add(this.StartupPath);
+            this.ApplicationSettings.Controls.Add(this.FiletypesToCopy);
             this.ApplicationSettings.Controls.Add(this.DeleteFiles);
             this.ApplicationSettings.Controls.Add(this.metroPanel2);
             this.ApplicationSettings.Controls.Add(this.FilesExist);
@@ -242,13 +255,17 @@ namespace fad2.UI
             this.ApplicationSettings.Controls.Add(this.ApplicationUrl);
             this.ApplicationSettings.HorizontalScrollbar = true;
             this.ApplicationSettings.HorizontalScrollbarBarColor = true;
-            this.ApplicationSettings.Location = new System.Drawing.Point(4, 35);
+            this.ApplicationSettings.HorizontalScrollbarHighlightOnWheel = false;
+            this.ApplicationSettings.HorizontalScrollbarSize = 10;
+            this.ApplicationSettings.Location = new System.Drawing.Point(4, 38);
             this.ApplicationSettings.Name = "ApplicationSettings";
-            this.ApplicationSettings.Size = new System.Drawing.Size(826, 559);
+            this.ApplicationSettings.Size = new System.Drawing.Size(826, 556);
             this.ApplicationSettings.TabIndex = 2;
             this.ApplicationSettings.Text = "Application Settings";
             this.ApplicationSettings.VerticalScrollbar = true;
             this.ApplicationSettings.VerticalScrollbarBarColor = true;
+            this.ApplicationSettings.VerticalScrollbarHighlightOnWheel = false;
+            this.ApplicationSettings.VerticalScrollbarSize = 10;
             // 
             // DeleteFiles
             // 
@@ -260,6 +277,7 @@ namespace fad2.UI
             this.DeleteFiles.Size = new System.Drawing.Size(765, 37);
             this.DeleteFiles.TabIndex = 22;
             this.DeleteFiles.ToolTip = null;
+            this.DeleteFiles.UseSelectable = true;
             this.DeleteFiles.Value = false;
             this.DeleteFiles.Warning = null;
             // 
@@ -272,7 +290,7 @@ namespace fad2.UI
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(0, 425);
+            this.metroPanel2.Location = new System.Drawing.Point(3, 533);
             this.metroPanel2.Name = "metroPanel2";
             this.metroPanel2.Size = new System.Drawing.Size(793, 192);
             this.metroPanel2.TabIndex = 21;
@@ -292,6 +310,7 @@ namespace fad2.UI
             this.ServiceInterval.Size = new System.Drawing.Size(765, 37);
             this.ServiceInterval.TabIndex = 17;
             this.ServiceInterval.ToolTip = null;
+            this.ServiceInterval.UseSelectable = true;
             this.ServiceInterval.Value = 50;
             this.ServiceInterval.ValueType = fad2.UI.UserControls.SettingsTimeSlider.ValueTypes.Second;
             this.ServiceInterval.Warning = null;
@@ -307,6 +326,7 @@ namespace fad2.UI
             this.ServiceActions.Size = new System.Drawing.Size(765, 37);
             this.ServiceActions.TabIndex = 16;
             this.ServiceActions.ToolTip = null;
+            this.ServiceActions.UseSelectable = true;
             this.ServiceActions.Value = null;
             this.ServiceActions.Warning = null;
             // 
@@ -321,6 +341,7 @@ namespace fad2.UI
             this.CurrentServiceStatus.Size = new System.Drawing.Size(765, 37);
             this.CurrentServiceStatus.TabIndex = 15;
             this.CurrentServiceStatus.ToolTip = null;
+            this.CurrentServiceStatus.UseSelectable = true;
             this.CurrentServiceStatus.Value = "Not Installed";
             this.CurrentServiceStatus.Warning = null;
             // 
@@ -329,9 +350,9 @@ namespace fad2.UI
             this.metroLabel5.AutoSize = true;
             this.metroLabel5.Location = new System.Drawing.Point(8, 0);
             this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(89, 19);
+            this.metroLabel5.Size = new System.Drawing.Size(86, 19);
             this.metroLabel5.TabIndex = 14;
-            this.metroLabel5.Text = "FAD2 Service:";
+            this.metroLabel5.Text = "Fad2 Service:";
             // 
             // FilesExist
             // 
@@ -344,6 +365,7 @@ namespace fad2.UI
             this.FilesExist.Size = new System.Drawing.Size(765, 37);
             this.FilesExist.TabIndex = 20;
             this.FilesExist.ToolTip = null;
+            this.FilesExist.UseSelectable = true;
             this.FilesExist.Value = null;
             this.FilesExist.Warning = null;
             // 
@@ -358,7 +380,7 @@ namespace fad2.UI
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 206);
+            this.metroPanel1.Location = new System.Drawing.Point(3, 314);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(793, 213);
             this.metroPanel1.TabIndex = 12;
@@ -377,6 +399,7 @@ namespace fad2.UI
             this.PathPreview.Size = new System.Drawing.Size(765, 37);
             this.PathPreview.TabIndex = 20;
             this.PathPreview.ToolTip = null;
+            this.PathPreview.UseSelectable = true;
             this.PathPreview.Value = "D:\\Images\\APPID\\2016-12-31\\Image.png";
             this.PathPreview.Warning = null;
             // 
@@ -387,6 +410,7 @@ namespace fad2.UI
             this.CustomDirHelp.Size = new System.Drawing.Size(75, 23);
             this.CustomDirHelp.TabIndex = 19;
             this.CustomDirHelp.Text = "Help";
+            this.CustomDirHelp.UseSelectable = true;
             // 
             // CustomFolderCreation
             // 
@@ -402,6 +426,7 @@ namespace fad2.UI
             this.CustomFolderCreation.Size = new System.Drawing.Size(765, 37);
             this.CustomFolderCreation.TabIndex = 16;
             this.CustomFolderCreation.ToolTip = "";
+            this.CustomFolderCreation.UseSelectable = true;
             this.CustomFolderCreation.Value = "";
             this.CustomFolderCreation.Warning = null;
             // 
@@ -416,6 +441,7 @@ namespace fad2.UI
             this.DateCreation.Size = new System.Drawing.Size(765, 37);
             this.DateCreation.TabIndex = 15;
             this.DateCreation.ToolTip = null;
+            this.DateCreation.UseSelectable = true;
             this.DateCreation.Value = null;
             this.DateCreation.Warning = null;
             this.DateCreation.ComboChanged += new System.EventHandler(this.DateCreation_ComboChanged);
@@ -440,6 +466,7 @@ namespace fad2.UI
             this.MultiCards.Size = new System.Drawing.Size(765, 37);
             this.MultiCards.TabIndex = 12;
             this.MultiCards.ToolTip = null;
+            this.MultiCards.UseSelectable = true;
             this.MultiCards.Value = null;
             this.MultiCards.Warning = null;
             this.MultiCards.ComboChanged += new System.EventHandler(this.MultiCards_ComboChanged);
@@ -458,6 +485,7 @@ namespace fad2.UI
             this.LocalPath.Size = new System.Drawing.Size(765, 37);
             this.LocalPath.TabIndex = 10;
             this.LocalPath.ToolTip = null;
+            this.LocalPath.UseSelectable = true;
             this.LocalPath.Value = "";
             // 
             // ApplicationUrl
@@ -473,6 +501,7 @@ namespace fad2.UI
             this.ApplicationUrl.Size = new System.Drawing.Size(765, 37);
             this.ApplicationUrl.TabIndex = 9;
             this.ApplicationUrl.ToolTip = "";
+            this.ApplicationUrl.UseSelectable = true;
             this.ApplicationUrl.Value = "http://flashair";
             this.ApplicationUrl.Warning = null;
             // 
@@ -484,12 +513,16 @@ namespace fad2.UI
             this.CardSettingsDisable.Controls.Add(this.DisableCommand);
             this.CardSettingsDisable.Controls.Add(this.DisableDownload);
             this.CardSettingsDisable.HorizontalScrollbarBarColor = true;
-            this.CardSettingsDisable.Location = new System.Drawing.Point(4, 35);
+            this.CardSettingsDisable.HorizontalScrollbarHighlightOnWheel = false;
+            this.CardSettingsDisable.HorizontalScrollbarSize = 10;
+            this.CardSettingsDisable.Location = new System.Drawing.Point(4, 38);
             this.CardSettingsDisable.Name = "CardSettingsDisable";
-            this.CardSettingsDisable.Size = new System.Drawing.Size(826, 559);
+            this.CardSettingsDisable.Size = new System.Drawing.Size(826, 556);
             this.CardSettingsDisable.TabIndex = 3;
             this.CardSettingsDisable.Text = "Disable Functions";
             this.CardSettingsDisable.VerticalScrollbarBarColor = true;
+            this.CardSettingsDisable.VerticalScrollbarHighlightOnWheel = false;
+            this.CardSettingsDisable.VerticalScrollbarSize = 10;
             // 
             // metroLabel6
             // 
@@ -511,6 +544,7 @@ namespace fad2.UI
             this.DisableUploads.Size = new System.Drawing.Size(765, 37);
             this.DisableUploads.TabIndex = 37;
             this.DisableUploads.ToolTip = null;
+            this.DisableUploads.UseSelectable = true;
             this.DisableUploads.Value = false;
             this.DisableUploads.Warning = "Also disables Delete-Functioniality";
             // 
@@ -524,6 +558,7 @@ namespace fad2.UI
             this.DisableThumbnails.Size = new System.Drawing.Size(765, 37);
             this.DisableThumbnails.TabIndex = 36;
             this.DisableThumbnails.ToolTip = null;
+            this.DisableThumbnails.UseSelectable = true;
             this.DisableThumbnails.Value = false;
             this.DisableThumbnails.Warning = "Makes this application a bit ugly...";
             // 
@@ -538,6 +573,7 @@ namespace fad2.UI
             this.DisableCommand.TabIndex = 35;
             this.DisableCommand.Tag = "";
             this.DisableCommand.ToolTip = "These allow configurations without physical access to the card";
+            this.DisableCommand.UseSelectable = true;
             this.DisableCommand.Value = false;
             this.DisableCommand.Warning = "";
             // 
@@ -551,6 +587,7 @@ namespace fad2.UI
             this.DisableDownload.Size = new System.Drawing.Size(765, 37);
             this.DisableDownload.TabIndex = 34;
             this.DisableDownload.ToolTip = null;
+            this.DisableDownload.UseSelectable = true;
             this.DisableDownload.Value = false;
             this.DisableDownload.Warning = "Makes this program pretty useless (obviously)";
             // 
@@ -584,13 +621,17 @@ namespace fad2.UI
             this.CardSettingsVendor.Controls.Add(this.VendorAppInfo);
             this.CardSettingsVendor.HorizontalScrollbar = true;
             this.CardSettingsVendor.HorizontalScrollbarBarColor = true;
-            this.CardSettingsVendor.Location = new System.Drawing.Point(4, 35);
+            this.CardSettingsVendor.HorizontalScrollbarHighlightOnWheel = false;
+            this.CardSettingsVendor.HorizontalScrollbarSize = 10;
+            this.CardSettingsVendor.Location = new System.Drawing.Point(4, 38);
             this.CardSettingsVendor.Name = "CardSettingsVendor";
-            this.CardSettingsVendor.Size = new System.Drawing.Size(826, 559);
+            this.CardSettingsVendor.Size = new System.Drawing.Size(826, 556);
             this.CardSettingsVendor.TabIndex = 0;
             this.CardSettingsVendor.Text = "Vendor";
             this.CardSettingsVendor.VerticalScrollbar = true;
             this.CardSettingsVendor.VerticalScrollbarBarColor = true;
+            this.CardSettingsVendor.VerticalScrollbarHighlightOnWheel = false;
+            this.CardSettingsVendor.VerticalScrollbarSize = 10;
             // 
             // metroLabel2
             // 
@@ -622,6 +663,7 @@ namespace fad2.UI
             this.VendorWebDav.Size = new System.Drawing.Size(765, 37);
             this.VendorWebDav.TabIndex = 30;
             this.VendorWebDav.ToolTip = null;
+            this.VendorWebDav.UseSelectable = true;
             this.VendorWebDav.Value = null;
             this.VendorWebDav.Warning = "Upload must be enabled, too to allow writing";
             // 
@@ -638,6 +680,7 @@ namespace fad2.UI
             this.VendorFirmware.Size = new System.Drawing.Size(765, 37);
             this.VendorFirmware.TabIndex = 29;
             this.VendorFirmware.ToolTip = "";
+            this.VendorFirmware.UseSelectable = true;
             this.VendorFirmware.Value = "";
             this.VendorFirmware.Warning = "";
             // 
@@ -654,6 +697,7 @@ namespace fad2.UI
             this.VendorCode.Size = new System.Drawing.Size(765, 37);
             this.VendorCode.TabIndex = 28;
             this.VendorCode.ToolTip = "";
+            this.VendorCode.UseSelectable = true;
             this.VendorCode.Value = "";
             this.VendorCode.Warning = "";
             // 
@@ -667,6 +711,7 @@ namespace fad2.UI
             this.VendorUploadEnabled.Size = new System.Drawing.Size(765, 37);
             this.VendorUploadEnabled.TabIndex = 27;
             this.VendorUploadEnabled.ToolTip = "";
+            this.VendorUploadEnabled.UseSelectable = true;
             this.VendorUploadEnabled.Value = false;
             this.VendorUploadEnabled.Warning = "MUST be enabled to allow writing of data or configuration";
             // 
@@ -683,6 +728,7 @@ namespace fad2.UI
             this.VendorUploadDir.Size = new System.Drawing.Size(765, 37);
             this.VendorUploadDir.TabIndex = 26;
             this.VendorUploadDir.ToolTip = "";
+            this.VendorUploadDir.UseSelectable = true;
             this.VendorUploadDir.Value = "";
             this.VendorUploadDir.Warning = "";
             // 
@@ -698,6 +744,7 @@ namespace fad2.UI
             this.VendorTimezone.Size = new System.Drawing.Size(765, 37);
             this.VendorTimezone.TabIndex = 25;
             this.VendorTimezone.ToolTip = "UTC = 0";
+            this.VendorTimezone.UseSelectable = true;
             this.VendorTimezone.Value = 10;
             this.VendorTimezone.Warning = null;
             // 
@@ -713,6 +760,7 @@ namespace fad2.UI
             this.VendorStaRetry.Size = new System.Drawing.Size(765, 37);
             this.VendorStaRetry.TabIndex = 24;
             this.VendorStaRetry.ToolTip = null;
+            this.VendorStaRetry.UseSelectable = true;
             this.VendorStaRetry.Value = 10;
             this.VendorStaRetry.Warning = null;
             // 
@@ -729,6 +777,7 @@ namespace fad2.UI
             this.VendorProductCode.Size = new System.Drawing.Size(765, 37);
             this.VendorProductCode.TabIndex = 23;
             this.VendorProductCode.ToolTip = "Product name of the FlashAir";
+            this.VendorProductCode.UseSelectable = true;
             this.VendorProductCode.Value = "";
             this.VendorProductCode.Warning = "";
             // 
@@ -742,6 +791,7 @@ namespace fad2.UI
             this.VendorNoiseCancel.Size = new System.Drawing.Size(765, 37);
             this.VendorNoiseCancel.TabIndex = 22;
             this.VendorNoiseCancel.ToolTip = "Improve connection at the cost of range and signal";
+            this.VendorNoiseCancel.UseSelectable = true;
             this.VendorNoiseCancel.Value = false;
             this.VendorNoiseCancel.Warning = "";
             // 
@@ -758,6 +808,7 @@ namespace fad2.UI
             this.VendorMasterCode.Size = new System.Drawing.Size(765, 37);
             this.VendorMasterCode.TabIndex = 21;
             this.VendorMasterCode.ToolTip = "Used as a password to set the SSID and Network key";
+            this.VendorMasterCode.UseSelectable = true;
             this.VendorMasterCode.Value = "";
             this.VendorMasterCode.Warning = "Must be a HEX value with 12 characters";
             // 
@@ -775,6 +826,7 @@ namespace fad2.UI
             this.VendorLuaWrite.Size = new System.Drawing.Size(765, 37);
             this.VendorLuaWrite.TabIndex = 20;
             this.VendorLuaWrite.ToolTip = "";
+            this.VendorLuaWrite.UseSelectable = true;
             this.VendorLuaWrite.Value = "";
             this.VendorLuaWrite.Warning = "";
             // 
@@ -791,6 +843,7 @@ namespace fad2.UI
             this.VendorLuaPathBoot.Size = new System.Drawing.Size(765, 37);
             this.VendorLuaPathBoot.TabIndex = 19;
             this.VendorLuaPathBoot.ToolTip = "";
+            this.VendorLuaPathBoot.UseSelectable = true;
             this.VendorLuaPathBoot.Value = "";
             this.VendorLuaPathBoot.Warning = "";
             // 
@@ -804,6 +857,7 @@ namespace fad2.UI
             this.VendorLock.Size = new System.Drawing.Size(765, 37);
             this.VendorLock.TabIndex = 18;
             this.VendorLock.ToolTip = "If set to true, Network settings will be reconfigured on browser";
+            this.VendorLock.UseSelectable = true;
             this.VendorLock.Value = false;
             this.VendorLock.Warning = "";
             // 
@@ -817,6 +871,7 @@ namespace fad2.UI
             this.VendorIfMode.Size = new System.Drawing.Size(765, 37);
             this.VendorIfMode.TabIndex = 17;
             this.VendorIfMode.ToolTip = "Enable the usage of the SD Interface User I/O";
+            this.VendorIfMode.UseSelectable = true;
             this.VendorIfMode.Value = false;
             this.VendorIfMode.Warning = "Check the API for more information";
             // 
@@ -831,6 +886,7 @@ namespace fad2.UI
             this.VendorDns.Size = new System.Drawing.Size(765, 37);
             this.VendorDns.TabIndex = 16;
             this.VendorDns.ToolTip = null;
+            this.VendorDns.UseSelectable = true;
             this.VendorDns.Value = null;
             this.VendorDns.Warning = "";
             // 
@@ -847,6 +903,7 @@ namespace fad2.UI
             this.VendorBootScreenPath.Size = new System.Drawing.Size(765, 37);
             this.VendorBootScreenPath.TabIndex = 15;
             this.VendorBootScreenPath.ToolTip = "";
+            this.VendorBootScreenPath.UseSelectable = true;
             this.VendorBootScreenPath.Value = "";
             this.VendorBootScreenPath.Warning = "";
             // 
@@ -861,6 +918,7 @@ namespace fad2.UI
             this.VendorAppMode.Size = new System.Drawing.Size(765, 37);
             this.VendorAppMode.TabIndex = 14;
             this.VendorAppMode.ToolTip = null;
+            this.VendorAppMode.UseSelectable = true;
             this.VendorAppMode.Value = null;
             this.VendorAppMode.Warning = "Pass-Thru-Mode requires V2.00.02 or higher";
             // 
@@ -876,6 +934,7 @@ namespace fad2.UI
             this.VendorAppAutoTime.Size = new System.Drawing.Size(765, 37);
             this.VendorAppAutoTime.TabIndex = 13;
             this.VendorAppAutoTime.ToolTip = null;
+            this.VendorAppAutoTime.UseSelectable = true;
             this.VendorAppAutoTime.Value = 60000;
             this.VendorAppAutoTime.ValueType = fad2.UI.UserControls.SettingsTimeSlider.ValueTypes.Millisecond;
             this.VendorAppAutoTime.Warning = "Use at least 1 Minute or \"0\" to disable Timeout";
@@ -893,6 +952,7 @@ namespace fad2.UI
             this.VendorCid.Size = new System.Drawing.Size(765, 37);
             this.VendorCid.TabIndex = 12;
             this.VendorCid.ToolTip = "Card Identifier specified by the SD standard";
+            this.VendorCid.UseSelectable = true;
             this.VendorCid.Value = "";
             this.VendorCid.Warning = "Must be a HEX value with exactly 32 characters";
             // 
@@ -909,6 +969,7 @@ namespace fad2.UI
             this.VendorSSID.Size = new System.Drawing.Size(765, 37);
             this.VendorSSID.TabIndex = 11;
             this.VendorSSID.ToolTip = "";
+            this.VendorSSID.UseSelectable = true;
             this.VendorSSID.Value = "";
             this.VendorSSID.Warning = "";
             // 
@@ -925,6 +986,7 @@ namespace fad2.UI
             this.VendorNetworkKey.Size = new System.Drawing.Size(765, 37);
             this.VendorNetworkKey.TabIndex = 10;
             this.VendorNetworkKey.ToolTip = "";
+            this.VendorNetworkKey.UseSelectable = true;
             this.VendorNetworkKey.Value = "";
             this.VendorNetworkKey.Warning = "Enter at least 8 Characters";
             // 
@@ -941,6 +1003,7 @@ namespace fad2.UI
             this.VendorAppname.Size = new System.Drawing.Size(765, 37);
             this.VendorAppname.TabIndex = 9;
             this.VendorAppname.ToolTip = "";
+            this.VendorAppname.UseSelectable = true;
             this.VendorAppname.Value = "";
             this.VendorAppname.Warning = "";
             // 
@@ -957,6 +1020,7 @@ namespace fad2.UI
             this.VendorAppInfo.Size = new System.Drawing.Size(765, 37);
             this.VendorAppInfo.TabIndex = 6;
             this.VendorAppInfo.ToolTip = "Application\'s unique information";
+            this.VendorAppInfo.UseSelectable = true;
             this.VendorAppInfo.Value = "";
             this.VendorAppInfo.Warning = "Must be 1-16 characters ";
             // 
@@ -973,12 +1037,16 @@ namespace fad2.UI
             this.CardSettingsNetwork.Controls.Add(this.WlansdDhcp);
             this.CardSettingsNetwork.Controls.Add(this.WlansdId);
             this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
-            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 35);
+            this.CardSettingsNetwork.HorizontalScrollbarHighlightOnWheel = false;
+            this.CardSettingsNetwork.HorizontalScrollbarSize = 10;
+            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 38);
             this.CardSettingsNetwork.Name = "CardSettingsNetwork";
-            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 559);
+            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 556);
             this.CardSettingsNetwork.TabIndex = 1;
             this.CardSettingsNetwork.Text = "WLANSD";
             this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
+            this.CardSettingsNetwork.VerticalScrollbarHighlightOnWheel = false;
+            this.CardSettingsNetwork.VerticalScrollbarSize = 10;
             // 
             // WlansdProxyPort
             // 
@@ -993,6 +1061,7 @@ namespace fad2.UI
             this.WlansdProxyPort.Size = new System.Drawing.Size(765, 37);
             this.WlansdProxyPort.TabIndex = 27;
             this.WlansdProxyPort.ToolTip = "";
+            this.WlansdProxyPort.UseSelectable = true;
             this.WlansdProxyPort.Value = "";
             this.WlansdProxyPort.Warning = null;
             // 
@@ -1010,6 +1079,7 @@ namespace fad2.UI
             this.Wlansd_ProxyServer.Size = new System.Drawing.Size(765, 37);
             this.Wlansd_ProxyServer.TabIndex = 26;
             this.Wlansd_ProxyServer.ToolTip = "Ip or Hostname";
+            this.Wlansd_ProxyServer.UseSelectable = true;
             this.Wlansd_ProxyServer.Value = "";
             this.Wlansd_ProxyServer.Warning = null;
             // 
@@ -1023,6 +1093,7 @@ namespace fad2.UI
             this.WlansdUseProxy.Size = new System.Drawing.Size(765, 37);
             this.WlansdUseProxy.TabIndex = 24;
             this.WlansdUseProxy.ToolTip = "";
+            this.WlansdUseProxy.UseSelectable = true;
             this.WlansdUseProxy.Value = false;
             this.WlansdUseProxy.Warning = "";
             // 
@@ -1039,6 +1110,7 @@ namespace fad2.UI
             this.WlansdDnsAlternate.Size = new System.Drawing.Size(765, 37);
             this.WlansdDnsAlternate.TabIndex = 23;
             this.WlansdDnsAlternate.ToolTip = null;
+            this.WlansdDnsAlternate.UseSelectable = true;
             this.WlansdDnsAlternate.Value = "";
             this.WlansdDnsAlternate.Warning = null;
             // 
@@ -1055,6 +1127,7 @@ namespace fad2.UI
             this.WlansdDns.Size = new System.Drawing.Size(765, 37);
             this.WlansdDns.TabIndex = 22;
             this.WlansdDns.ToolTip = null;
+            this.WlansdDns.UseSelectable = true;
             this.WlansdDns.Value = "";
             this.WlansdDns.Warning = null;
             // 
@@ -1071,6 +1144,7 @@ namespace fad2.UI
             this.WlansdGateway.Size = new System.Drawing.Size(765, 37);
             this.WlansdGateway.TabIndex = 21;
             this.WlansdGateway.ToolTip = null;
+            this.WlansdGateway.UseSelectable = true;
             this.WlansdGateway.Value = "";
             this.WlansdGateway.Warning = null;
             // 
@@ -1087,6 +1161,7 @@ namespace fad2.UI
             this.WlansdSubnet.Size = new System.Drawing.Size(765, 37);
             this.WlansdSubnet.TabIndex = 20;
             this.WlansdSubnet.ToolTip = null;
+            this.WlansdSubnet.UseSelectable = true;
             this.WlansdSubnet.Value = "";
             this.WlansdSubnet.Warning = null;
             // 
@@ -1103,6 +1178,7 @@ namespace fad2.UI
             this.WlansdIpAddress.Size = new System.Drawing.Size(765, 37);
             this.WlansdIpAddress.TabIndex = 19;
             this.WlansdIpAddress.ToolTip = null;
+            this.WlansdIpAddress.UseSelectable = true;
             this.WlansdIpAddress.Value = "";
             this.WlansdIpAddress.Warning = null;
             // 
@@ -1116,6 +1192,7 @@ namespace fad2.UI
             this.WlansdDhcp.Size = new System.Drawing.Size(765, 37);
             this.WlansdDhcp.TabIndex = 18;
             this.WlansdDhcp.ToolTip = "";
+            this.WlansdDhcp.UseSelectable = true;
             this.WlansdDhcp.Value = false;
             this.WlansdDhcp.Warning = "";
             // 
@@ -1132,8 +1209,55 @@ namespace fad2.UI
             this.WlansdId.Size = new System.Drawing.Size(765, 37);
             this.WlansdId.TabIndex = 8;
             this.WlansdId.ToolTip = "Card ID using up to 16 characters";
+            this.WlansdId.UseSelectable = true;
             this.WlansdId.Value = "";
             this.WlansdId.Warning = null;
+            // 
+            // FiletypesToCopy
+            // 
+            this.FiletypesToCopy.DataSource = null;
+            this.FiletypesToCopy.InternalName = null;
+            this.FiletypesToCopy.Key = "Filetypes to copy:";
+            this.FiletypesToCopy.Location = new System.Drawing.Point(3, 228);
+            this.FiletypesToCopy.Name = "FiletypesToCopy";
+            this.FiletypesToCopy.RequiredVersion = "";
+            this.FiletypesToCopy.Size = new System.Drawing.Size(765, 37);
+            this.FiletypesToCopy.TabIndex = 23;
+            this.FiletypesToCopy.ToolTip = null;
+            this.FiletypesToCopy.UseSelectable = true;
+            this.FiletypesToCopy.Value = null;
+            this.FiletypesToCopy.Warning = null;
+            // 
+            // StartupPath
+            // 
+            this.StartupPath.InternalName = null;
+            this.StartupPath.Key = "Flashair Imagepath";
+            this.StartupPath.Location = new System.Drawing.Point(3, 185);
+            this.StartupPath.MaxCharacters = 32767;
+            this.StartupPath.Name = "StartupPath";
+            this.StartupPath.PasswordChar = '\0';
+            this.StartupPath.Regex = null;
+            this.StartupPath.RequiredVersion = "";
+            this.StartupPath.Size = new System.Drawing.Size(765, 37);
+            this.StartupPath.TabIndex = 24;
+            this.StartupPath.ToolTip = null;
+            this.StartupPath.UseSelectable = true;
+            this.StartupPath.Value = "";
+            this.StartupPath.Warning = null;
+            // 
+            // LoadThumbs
+            // 
+            this.LoadThumbs.InternalName = null;
+            this.LoadThumbs.Key = "Load Thumbnails";
+            this.LoadThumbs.Location = new System.Drawing.Point(3, 271);
+            this.LoadThumbs.Name = "LoadThumbs";
+            this.LoadThumbs.RequiredVersion = "";
+            this.LoadThumbs.Size = new System.Drawing.Size(765, 37);
+            this.LoadThumbs.TabIndex = 25;
+            this.LoadThumbs.ToolTip = null;
+            this.LoadThumbs.UseSelectable = true;
+            this.LoadThumbs.Value = false;
+            this.LoadThumbs.Warning = null;
             // 
             // Settings
             // 
@@ -1232,5 +1356,8 @@ namespace fad2.UI
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroButton SaveProgSettings;
         private MetroFramework.Controls.MetroLabel ProgSettingsLabel;
+        private SettingsString StartupPath;
+        private SettingsCombo FiletypesToCopy;
+        private SettingsBoolean LoadThumbs;
     }
 }

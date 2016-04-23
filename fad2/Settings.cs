@@ -11,7 +11,6 @@ using fad2.UI.UserControls;
 using log4net;
 using MetroFramework;
 using MetroFramework.Controls;
-using MetroFramework.Forms;
 
 namespace fad2.UI
 {
@@ -59,6 +58,9 @@ namespace fad2.UI
             DateCreation.Value = _programSettings.CreateByDate;
             CustomFolderCreation.Value = _programSettings.FolderFomat;
             ServiceInterval.Value = _programSettings.FileCheckInterval;
+            LoadThumbs.Value = _programSettings.LoadThumbs;
+            FiletypesToCopy.Value = _programSettings.FileTypesToCopy;
+            StartupPath.Value = _programSettings.CardStartupPath;
         }
 
 
@@ -129,6 +131,14 @@ namespace fad2.UI
                 new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Stop, "Stop Service")
             };
             ServiceActions.DataSource = serviceOptions;
+
+            var fileTypes = new List<KeyValuePair<int, string>>
+            {
+                new KeyValuePair<int, string>((int)ProgramSettings.FileTypes.Images, "Images"),
+                new KeyValuePair<int, string>((int)ProgramSettings.FileTypes.Videos, "Images and Videos"),
+                new KeyValuePair<int, string>((int)ProgramSettings.FileTypes.AllFiles, "All Files")
+            };
+            FiletypesToCopy.DataSource = fileTypes;
         }
 
         private void AddTiles()
@@ -215,15 +225,15 @@ namespace fad2.UI
             CardSettingsTab.TabPages.Add(CardSettingsDisable);
         }
 
-        private void LoadSettingsFromFile(string filename)
+        private void LoadFlashairSettingsFromFile(string filename)
         {
             var fl = new FileLoader();
             _settings = fl.LoadFromFile(filename);
-            DisplaySettings();
+            DisplayFlashairSettings();
         }
 
 
-        private void ReadSettings()
+        private void ReadFlashairSettings()
         {
             if (_settings == null)
             {
@@ -290,7 +300,7 @@ namespace fad2.UI
             }
         }
 
-        private void DisplaySettings()
+        private void DisplayFlashairSettings()
         {
             if (_settings == null)
             {
@@ -357,7 +367,7 @@ namespace fad2.UI
         }
 
 
-        private string GetSettingsFile()
+        private string GetFlashairSettingsFile()
         {
             LoadTile.Visible = true;
             LoadSpinner.Visible = true;
@@ -392,21 +402,21 @@ namespace fad2.UI
             return null;
         }
 
-        private void SaveSettingsToFile(string fileName)
+        private void SaveFlashairSettingsToFile(string fileName)
         {
-            ReadSettings();
+            ReadFlashairSettings();
             var fl = new FileLoader();
             fl.SaveToFile(Application.ProductVersion, fileName, _settings);
         }
 
-        private void SaveSettingsToFile()
+        private void SaveFlashairSettingsToFile()
         {
-            var settingsFile = GetSettingsFile();
+            var settingsFile = GetFlashairSettingsFile();
             if (settingsFile != null)
             {
                 LoadTile.Text = Resources.SavingSettings;
                 Application.DoEvents();
-                SaveSettingsToFile(settingsFile);
+                SaveFlashairSettingsToFile(settingsFile);
                 LoadTile.Visible = false;
                 return;
             }
@@ -415,14 +425,14 @@ namespace fad2.UI
             LoadTile.Text = Resources.FileNotFound;
         }
 
-        private void LoadSettingsFromFile()
+        private void LoadFlashairSettingsFromFile()
         {
-            var settingsFile = GetSettingsFile();
+            var settingsFile = GetFlashairSettingsFile();
             if (settingsFile != null)
             {
                 LoadTile.Text = Resources.LoadingSettings;
                 Application.DoEvents();
-                LoadSettingsFromFile(settingsFile);
+                LoadFlashairSettingsFromFile(settingsFile);
                 var settingsFileInfo = new FileInfo(settingsFile);
                 if (!settingsFileInfo.IsReadOnly)
                 {
@@ -430,8 +440,6 @@ namespace fad2.UI
                 }
 
                 LoadTile.Visible = false;
-                MetroMessageBox.Show(this, "Do you like this metro message box?", "Metro Title", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
-
             }
 
             LoadTile.Style = MetroColorStyle.Orange;
@@ -441,12 +449,12 @@ namespace fad2.UI
 
         private void LoadFromFile_Click(object sender, EventArgs e)
         {
-            LoadSettingsFromFile();
+            LoadFlashairSettingsFromFile();
         }
 
         private void SaveSettings_Click(object sender, EventArgs e)
         {
-            SaveSettingsToFile();
+            SaveFlashairSettingsToFile();
         }
 
         private object GetControlValue(string internalName)
@@ -579,6 +587,9 @@ namespace fad2.UI
             _programSettings.FlashAirUrl = ApplicationUrl.Value;
             _programSettings.FolderFomat = CustomFolderCreation.Value;
             _programSettings.MultiCardsFolder = MultiCards.Value ?? 0;
+            _programSettings.FileTypesToCopy = FiletypesToCopy.Value ?? 1;
+            _programSettings.LoadThumbs = LoadThumbs.Value;
+            _programSettings.CardStartupPath = StartupPath.Value;
 
             new FileLoader().SaveProgramSettings(_programSettings, _programSettingsFile);
         }

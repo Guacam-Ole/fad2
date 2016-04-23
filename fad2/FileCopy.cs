@@ -149,8 +149,6 @@ namespace fad2.UI
 
         private void LoadFlashairThumbsAsync()
         {
-
-
             _workerDownloadThumbs.WorkerSupportsCancellation = true;
             _workerDownloadThumbs.WorkerReportsProgress = true;
             _workerDownloadThumbs.DoWork += WorkerDownloadThumbsDoWork;
@@ -186,7 +184,14 @@ namespace fad2.UI
         private void WorkerListFilesCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ResizeTiles(LeftPanel);
-            LoadFlashairThumbsAsync();
+            if (_connection.Settings.LoadThumbs)
+            {
+                LoadFlashairThumbsAsync();
+            }
+            else
+            {
+                CopyFilesAsync();
+            }
         }
 
         private void WorkerListFilesProgressChanged(object sender, ProgressChangedEventArgs e)
