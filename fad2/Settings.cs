@@ -10,6 +10,7 @@ using fad2.UI.Properties;
 using fad2.UI.UserControls;
 using log4net;
 using MetroFramework;
+using MetroFramework.Components;
 using MetroFramework.Controls;
 
 namespace fad2.UI
@@ -39,13 +40,19 @@ namespace fad2.UI
         {
             InitializeComponent();
             SetCombos();
-            var backImageTimer = new Timer {Interval = 5000};
-            backImageTimer.Tick += _backImageTimer_Tick;
-            backImageTimer.Start();
+            
             LoadProgramSettings();
+            var backImageTimer = new Timer { Interval = _programSettings.BackgroundInterval*1000 };
+            backImageTimer.Tick += _backImageTimer_Tick;
+            if (_programSettings.ShowTiles)
+            {
+                backImageTimer.Start();
+            }
 
             DisableControls();
         }
+
+
 
         private void LoadProgramSettings()
         {
@@ -61,6 +68,11 @@ namespace fad2.UI
             LoadThumbs.Value = _programSettings.LoadThumbs;
             FiletypesToCopy.Value = _programSettings.FileTypesToCopy;
             StartupPath.Value = _programSettings.CardStartupPath;
+
+            BackgroundInterval.Value = _programSettings.BackgroundInterval;
+            Backgroundlocation.Value = _programSettings.ImageBackgroundFolder;
+            ShowBackimages.Value = _programSettings.ShowBackgroundImage;
+            ShowTiles.Value = _programSettings.ShowTiles;
         }
 
 
@@ -71,75 +83,81 @@ namespace fad2.UI
 
         private void SetCombos()
         {
-            var appModes = new List<KeyValuePair<int, string>>
+            var appModes = new Dictionary<int, string>
             {
-                new KeyValuePair<int, string>((int) ProgramSettings.AppModes.AccessPoint, "AP (Access Point) mode "),
-                new KeyValuePair<int, string>((int) ProgramSettings.AppModes.Station, "STA (Station) mode "),
-                new KeyValuePair<int, string>((int) ProgramSettings.AppModes.PassThru, "Pass-Thru mode")
+                {(int) ProgramSettings.AppModes.AccessPoint, "AP (Access Point) mode "},
+                {(int) ProgramSettings.AppModes.Station, "STA (Station) mode "},
+                {(int) ProgramSettings.AppModes.PassThru, "Pass-Thru mode"}
             };
-            VendorAppMode.DataSource = appModes;
+            VendorAppMode.DataSource = appModes.ToList();
 
-            var dnsModes = new List<KeyValuePair<int, string>>
+            var dnsModes = new Dictionary<int, string>
             {
-                new KeyValuePair<int, string>((int) ProgramSettings.DnsModes.OnlyAppName,
-                    "Return IP Only if request is done with APPNAME"),
-                new KeyValuePair<int, string>((int) ProgramSettings.DnsModes.Always,
-                    "Always return IP to DNS requests (default)")
+                {(int) ProgramSettings.DnsModes.OnlyAppName, "Return IP Only if request is done with APPNAME"},
+                {(int) ProgramSettings.DnsModes.Always, "Always return IP to DNS requests (default)"}
             };
-            VendorDns.DataSource = dnsModes;
+            VendorDns.DataSource = dnsModes.ToList();
 
-            var webdavModes = new List<KeyValuePair<int, string>>
+            var webdavModes = new Dictionary<int, string>
             {
-                new KeyValuePair<int, string>((int) ProgramSettings.WebDavModes.Disable, "Disable FlashAir Drive"),
-                new KeyValuePair<int, string>((int) ProgramSettings.WebDavModes.ReadOnly, "Read only - mode"),
-                new KeyValuePair<int, string>((int) ProgramSettings.WebDavModes.ReadWrite, "Read/write - mode")
+                {(int) ProgramSettings.WebDavModes.Disable, "Disable FlashAir Drive"},
+                {(int) ProgramSettings.WebDavModes.ReadOnly, "Read only - mode"},
+                {(int) ProgramSettings.WebDavModes.ReadWrite, "Read/write - mode"}
             };
-            VendorWebDav.DataSource = webdavModes;
+            VendorWebDav.DataSource = webdavModes.ToList();
 
-            var perCardDirectory = new List<KeyValuePair<int, string>>
+            var perCardDirectory = new Dictionary<int, string>
             {
-                new KeyValuePair<int, string>((int) ProgramSettings.CardDirModes.NoDirectory, "No Subdirectory per Card"),
-                new KeyValuePair<int, string>((int) ProgramSettings.CardDirModes.CardId, "Use Card Id"),
-                new KeyValuePair<int, string>((int) ProgramSettings.CardDirModes.ApplicationName, "Use Application Name")
+                {(int) ProgramSettings.CardDirModes.NoDirectory, "No Subdirectory per Card"},
+                {(int) ProgramSettings.CardDirModes.CardId, "Use Card Id"},
+                {(int) ProgramSettings.CardDirModes.ApplicationName, "Use Application Name"}
             };
-            MultiCards.DataSource = perCardDirectory;
+            MultiCards.DataSource = perCardDirectory.ToList();
 
-            var dateCreation = new List<KeyValuePair<int, string>>
+            var dateCreation = new Dictionary<int, string>
             {
-                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.NoDirectory, "Don't create Subfolder"),
-                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.Year, "Year"),
-                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.Month, "Year-Month"),
-                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.Day, "Year-Month-Day"),
-                new KeyValuePair<int, string>((int) ProgramSettings.DateModes.Custom, "Custom")
+                {(int) ProgramSettings.DateModes.NoDirectory, "Don't create Subfolder"},
+                {(int) ProgramSettings.DateModes.Year, "Year"},
+                {(int) ProgramSettings.DateModes.Month, "Year-Month"},
+                {(int) ProgramSettings.DateModes.Day, "Year-Month-Day"},
+                {(int) ProgramSettings.DateModes.Custom, "Custom"}
             };
-            DateCreation.DataSource = dateCreation;
+            DateCreation.DataSource = dateCreation.ToList();
 
-            var existingFiles = new List<KeyValuePair<int, string>>
+            var existingFiles = new Dictionary<int, string>
             {
-                new KeyValuePair<int, string>((int) ProgramSettings.OverwriteModes.Never, "Never Overwrite"),
-                new KeyValuePair<int, string>((int) ProgramSettings.OverwriteModes.Newer, "Overwrite if newer"),
-                new KeyValuePair<int, string>((int) ProgramSettings.OverwriteModes.Always, "Always overwrite"),
-                new KeyValuePair<int, string>((int) ProgramSettings.OverwriteModes.Copy, "Create copy")
+                {(int) ProgramSettings.OverwriteModes.Never, "Never Overwrite"},
+                {(int) ProgramSettings.OverwriteModes.Newer, "Overwrite if newer"},
+                {(int) ProgramSettings.OverwriteModes.Always, "Always overwrite"},
+                {(int) ProgramSettings.OverwriteModes.Copy, "Create copy"}
             };
-            FilesExist.DataSource = existingFiles;
+            FilesExist.DataSource = existingFiles.ToList();
 
-            var serviceOptions = new List<KeyValuePair<int, string>>
+            var serviceOptions = new Dictionary<int, string>
             {
-                new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Install, "Install Service"),
-                new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Uninstall, "Uninstall Service"),
-                new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Start, "Start Service"),
-                new KeyValuePair<int, string>((int) ProgramSettings.ServiceOption.Stop, "Stop Service")
+                {(int) ProgramSettings.ServiceOption.Install, "Install Service"},
+                {(int) ProgramSettings.ServiceOption.Uninstall, "Uninstall Service"},
+                {(int) ProgramSettings.ServiceOption.Start, "Start Service"},
+                {(int) ProgramSettings.ServiceOption.Stop, "Stop Service"}
             };
-            ServiceActions.DataSource = serviceOptions;
+            ServiceActions.DataSource = serviceOptions.ToList();
 
-            var fileTypes = new List<KeyValuePair<int, string>>
+
+            var fileTypes = new Dictionary<int, string>
             {
-                new KeyValuePair<int, string>((int)ProgramSettings.FileTypes.Images, "Images"),
-                new KeyValuePair<int, string>((int)ProgramSettings.FileTypes.Videos, "Images and Videos"),
-                new KeyValuePair<int, string>((int)ProgramSettings.FileTypes.AllFiles, "All Files")
+                {(int) ProgramSettings.FileTypes.Images, "Images"},
+                {(int) ProgramSettings.FileTypes.Videos, "Images and Videos"},
+                {(int) ProgramSettings.FileTypes.AllFiles, "All Files"}
             };
-            FiletypesToCopy.DataSource = fileTypes;
+            FiletypesToCopy.DataSource = fileTypes.ToList();
+
+            var themes = new Dictionary<int, string>
+            {
+                {(int) ProgramSettings.Themes.Light, "Light"},
+                {(int) ProgramSettings.Themes.Dark, "Dark"}
+            };
         }
+
 
         private void AddTiles()
         {
@@ -200,7 +218,6 @@ namespace fad2.UI
             var imageControl = RightPanel.Controls[currentImage];
             if (imageControl is MetroTile)
             {
-
                 var tile = (MetroTile) RightPanel.Controls[currentImage];
                 tile.TileImage = UiSettings.ResizedImage(TileSize, TileSize);
                 tile.Refresh();
@@ -590,6 +607,10 @@ namespace fad2.UI
             _programSettings.FileTypesToCopy = FiletypesToCopy.Value ?? 1;
             _programSettings.LoadThumbs = LoadThumbs.Value;
             _programSettings.CardStartupPath = StartupPath.Value;
+            _programSettings.BackgroundInterval = BackgroundInterval.Value;
+            _programSettings.ImageBackgroundFolder = Backgroundlocation.Value;
+            _programSettings.ShowBackgroundImage = ShowBackimages.Value;
+            _programSettings.ShowTiles = ShowTiles.Value;
 
             new FileLoader().SaveProgramSettings(_programSettings, _programSettingsFile);
         }

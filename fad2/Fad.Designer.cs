@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.FadMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,8 +43,6 @@
             this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CreateIssue = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MainPanel = new System.Windows.Forms.Panel();
             this.FadMenu.SuspendLayout();
             this.SuspendLayout();
@@ -54,14 +51,12 @@
             // 
             this.FadMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.CreateIssue});
+            this.toolStripMenuItem2});
             this.FadMenu.Location = new System.Drawing.Point(20, 60);
             this.FadMenu.Name = "FadMenu";
             this.FadMenu.Size = new System.Drawing.Size(1072, 24);
             this.FadMenu.TabIndex = 0;
             this.FadMenu.Text = "menuStrip1";
-            this.FadMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.FadMenu_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -80,33 +75,33 @@
             // 
             this.connectToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.connectToolStripMenuItem.Text = "Start";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(113, 6);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(113, 6);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -165,19 +160,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // CreateIssue
-            // 
-            this.CreateIssue.Name = "CreateIssue";
-            this.CreateIssue.Size = new System.Drawing.Size(107, 20);
-            this.CreateIssue.Text = "Create new Issue";
-            this.CreateIssue.Visible = false;
-            this.CreateIssue.Click += new System.EventHandler(this.CreateIssue_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // MainPanel
             // 
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -198,7 +180,9 @@
             this.MainMenuStrip = this.FadMenu;
             this.MinimumSize = new System.Drawing.Size(1050, 500);
             this.Name = "Fad";
+            this.Style = MetroFramework.MetroColorStyle.Default;
             this.Text = "FlashAir Downloader";
+            this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Resize += new System.EventHandler(this.Fad_Resize);
             this.FadMenu.ResumeLayout(false);
             this.FadMenu.PerformLayout();
@@ -220,13 +204,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.Panel MainPanel;
-        private System.Windows.Forms.ToolStripMenuItem CreateIssue;
     }
 }
 

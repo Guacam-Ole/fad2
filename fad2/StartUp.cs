@@ -2,30 +2,31 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using fad2.Backend;
 using fad2.UI.Properties;
+using log4net;
 using MetroFramework;
 
 namespace fad2.UI
 {
     /// <summary>
-    /// Startup-Page
+    ///     Startup-Page
     /// </summary>
     public partial class StartUp : UserControl
     {
+        private readonly Connection _connection;
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string _programSettingsFile = $"{Application.StartupPath}\\{Properties.Settings.Default.ProgramSettingsFile}";
 
         private bool _connected;
 
-        private readonly Connection _connection;
-
         private int _failCount;
 
         private Timer _imageSwitchTimer;
-        private Control _parentControl;
 
-        public StartUp(Control parent=null)
+        public StartUp()
         {
             _connection = new Connection(_programSettingsFile);
             InitializeComponent();
@@ -34,17 +35,26 @@ namespace fad2.UI
             ImageSwitcher();
             Application.DoEvents();
             StartConnection();
-            _parentControl = parent;
         }
 
         private void ImageSwitcher()
         {
+            if (!_connection.Settings.ShowBackgroundImage) return;
             _connection.Settings.ImageBackgroundFolder = _connection.Settings.ImageBackgroundFolder ?? $"{Application.StartupPath}\\examplepix";
-            UiSettings.ImageLoop = Directory.GetFiles(_connection.Settings.ImageBackgroundFolder).ToList();
-            _imageSwitchTimer = new Timer {Interval= _connection.Settings.ImageBackgroundTimer };
-            _imageSwitchTimer.Tick += _imageSwitchTimer_Tick;
-            _imageSwitchTimer.Start();
-            ChangeImage();
+            try
+            {
+                UiSettings.ImageLoop = Directory.GetFiles(_connection.Settings.ImageBackgroundFolder).ToList();
+                _imageSwitchTimer = new Timer {Interval = _connection.Settings.BackgroundInterval*1000};
+
+                _imageSwitchTimer.Tick += _imageSwitchTimer_Tick;
+                _imageSwitchTimer.Start();
+                ChangeImage();
+            }
+            catch (Exception ex)
+            {
+                // Wrong path for BackgroundImage. Nothing to worry about
+                _log.Error(ex);
+            }
         }
 
         private void _imageSwitchTimer_Tick(object sender, EventArgs e)
@@ -128,7 +138,6 @@ namespace fad2.UI
 
         private void TryToConnect()
         {
-           
             _connected = _connection.TestConnection();
         }
 

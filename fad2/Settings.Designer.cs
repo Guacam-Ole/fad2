@@ -42,6 +42,15 @@ namespace fad2.UI
             this.LoadFromFile = new MetroFramework.Controls.MetroButton();
             this.CardSettingsTab = new MetroFramework.Controls.MetroTabControl();
             this.ApplicationSettings = new MetroFramework.Controls.MetroTabPage();
+            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+            this.Backgroundlocation = new fad2.UI.UserControls.SettingsFile();
+            this.ShowTiles = new fad2.UI.UserControls.SettingsBoolean();
+            this.ShowBackimages = new fad2.UI.UserControls.SettingsBoolean();
+            this.BackgroundInterval = new fad2.UI.UserControls.SettingsTimeSlider();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.LoadThumbs = new fad2.UI.UserControls.SettingsBoolean();
+            this.StartupPath = new fad2.UI.UserControls.SettingsString();
+            this.FiletypesToCopy = new fad2.UI.UserControls.SettingsCombo();
             this.DeleteFiles = new fad2.UI.UserControls.SettingsBoolean();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.ServiceInterval = new fad2.UI.UserControls.SettingsTimeSlider();
@@ -101,13 +110,11 @@ namespace fad2.UI
             this.WlansdIpAddress = new fad2.UI.UserControls.SettingsIp();
             this.WlansdDhcp = new fad2.UI.UserControls.SettingsBoolean();
             this.WlansdId = new fad2.UI.UserControls.SettingsString();
-            this.FiletypesToCopy = new fad2.UI.UserControls.SettingsCombo();
-            this.StartupPath = new fad2.UI.UserControls.SettingsString();
-            this.LoadThumbs = new fad2.UI.UserControls.SettingsBoolean();
             this.SettingsPanel.SuspendLayout();
             this.LoadTile.SuspendLayout();
             this.CardSettingsTab.SuspendLayout();
             this.ApplicationSettings.SuspendLayout();
+            this.metroPanel3.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.CardSettingsDisable.SuspendLayout();
@@ -244,6 +251,7 @@ namespace fad2.UI
             // ApplicationSettings
             // 
             this.ApplicationSettings.AutoScroll = true;
+            this.ApplicationSettings.Controls.Add(this.metroPanel3);
             this.ApplicationSettings.Controls.Add(this.LoadThumbs);
             this.ApplicationSettings.Controls.Add(this.StartupPath);
             this.ApplicationSettings.Controls.Add(this.FiletypesToCopy);
@@ -267,11 +275,146 @@ namespace fad2.UI
             this.ApplicationSettings.VerticalScrollbarHighlightOnWheel = false;
             this.ApplicationSettings.VerticalScrollbarSize = 10;
             // 
+            // metroPanel3
+            // 
+            this.metroPanel3.Controls.Add(this.Backgroundlocation);
+            this.metroPanel3.Controls.Add(this.ShowTiles);
+            this.metroPanel3.Controls.Add(this.ShowBackimages);
+            this.metroPanel3.Controls.Add(this.BackgroundInterval);
+            this.metroPanel3.Controls.Add(this.metroLabel4);
+            this.metroPanel3.HorizontalScrollbarBarColor = true;
+            this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel3.HorizontalScrollbarSize = 10;
+            this.metroPanel3.Location = new System.Drawing.Point(4, 542);
+            this.metroPanel3.Name = "metroPanel3";
+            this.metroPanel3.Size = new System.Drawing.Size(792, 203);
+            this.metroPanel3.TabIndex = 26;
+            this.metroPanel3.VerticalScrollbarBarColor = true;
+            this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel3.VerticalScrollbarSize = 10;
+            // 
+            // Backgroundlocation
+            // 
+            this.Backgroundlocation.DirectoryOnly = true;
+            this.Backgroundlocation.Filter = null;
+            this.Backgroundlocation.InternalName = null;
+            this.Backgroundlocation.Key = "Background images location";
+            this.Backgroundlocation.Location = new System.Drawing.Point(7, 153);
+            this.Backgroundlocation.MaxCharacters = 32767;
+            this.Backgroundlocation.Name = "Backgroundlocation";
+            this.Backgroundlocation.PasswordChar = '\0';
+            this.Backgroundlocation.Regex = null;
+            this.Backgroundlocation.Size = new System.Drawing.Size(765, 37);
+            this.Backgroundlocation.TabIndex = 19;
+            this.Backgroundlocation.ToolTip = null;
+            this.Backgroundlocation.UseSelectable = true;
+            this.Backgroundlocation.Value = "";
+            // 
+            // ShowTiles
+            // 
+            this.ShowTiles.InternalName = null;
+            this.ShowTiles.Key = "Show Imagetiles (Settings)";
+            this.ShowTiles.Location = new System.Drawing.Point(7, 67);
+            this.ShowTiles.Name = "ShowTiles";
+            this.ShowTiles.RequiredVersion = "";
+            this.ShowTiles.Size = new System.Drawing.Size(765, 37);
+            this.ShowTiles.TabIndex = 18;
+            this.ShowTiles.ToolTip = null;
+            this.ShowTiles.UseSelectable = true;
+            this.ShowTiles.Value = false;
+            this.ShowTiles.Warning = null;
+            // 
+            // ShowBackimages
+            // 
+            this.ShowBackimages.InternalName = null;
+            this.ShowBackimages.Key = "Show background Images";
+            this.ShowBackimages.Location = new System.Drawing.Point(7, 24);
+            this.ShowBackimages.Name = "ShowBackimages";
+            this.ShowBackimages.RequiredVersion = "";
+            this.ShowBackimages.Size = new System.Drawing.Size(765, 37);
+            this.ShowBackimages.TabIndex = 17;
+            this.ShowBackimages.ToolTip = null;
+            this.ShowBackimages.UseSelectable = true;
+            this.ShowBackimages.Value = false;
+            this.ShowBackimages.Warning = null;
+            // 
+            // BackgroundInterval
+            // 
+            this.BackgroundInterval.InternalName = null;
+            this.BackgroundInterval.Key = "Image change interval";
+            this.BackgroundInterval.Location = new System.Drawing.Point(7, 110);
+            this.BackgroundInterval.Maximum = 60;
+            this.BackgroundInterval.Minimum = 2;
+            this.BackgroundInterval.Name = "BackgroundInterval";
+            this.BackgroundInterval.RequiredVersion = "";
+            this.BackgroundInterval.Size = new System.Drawing.Size(765, 37);
+            this.BackgroundInterval.TabIndex = 16;
+            this.BackgroundInterval.ToolTip = null;
+            this.BackgroundInterval.UseSelectable = true;
+            this.BackgroundInterval.Value = 50;
+            this.BackgroundInterval.ValueType = fad2.UI.UserControls.SettingsTimeSlider.ValueTypes.Second;
+            this.BackgroundInterval.Warning = null;
+            // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(7, -5);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(47, 19);
+            this.metroLabel4.TabIndex = 14;
+            this.metroLabel4.Text = "Styling";
+            // 
+            // LoadThumbs
+            // 
+            this.LoadThumbs.InternalName = null;
+            this.LoadThumbs.Key = "Load Thumbnails";
+            this.LoadThumbs.Location = new System.Drawing.Point(3, 268);
+            this.LoadThumbs.Name = "LoadThumbs";
+            this.LoadThumbs.RequiredVersion = "";
+            this.LoadThumbs.Size = new System.Drawing.Size(765, 37);
+            this.LoadThumbs.TabIndex = 25;
+            this.LoadThumbs.ToolTip = null;
+            this.LoadThumbs.UseSelectable = true;
+            this.LoadThumbs.Value = false;
+            this.LoadThumbs.Warning = null;
+            // 
+            // StartupPath
+            // 
+            this.StartupPath.InternalName = null;
+            this.StartupPath.Key = "Flashair Imagepath";
+            this.StartupPath.Location = new System.Drawing.Point(3, 182);
+            this.StartupPath.MaxCharacters = 32767;
+            this.StartupPath.Name = "StartupPath";
+            this.StartupPath.PasswordChar = '\0';
+            this.StartupPath.Regex = null;
+            this.StartupPath.RequiredVersion = "";
+            this.StartupPath.Size = new System.Drawing.Size(765, 37);
+            this.StartupPath.TabIndex = 24;
+            this.StartupPath.ToolTip = null;
+            this.StartupPath.UseSelectable = true;
+            this.StartupPath.Value = "";
+            this.StartupPath.Warning = null;
+            // 
+            // FiletypesToCopy
+            // 
+            this.FiletypesToCopy.DataSource = null;
+            this.FiletypesToCopy.InternalName = null;
+            this.FiletypesToCopy.Key = "Filetypes to copy:";
+            this.FiletypesToCopy.Location = new System.Drawing.Point(3, 225);
+            this.FiletypesToCopy.Name = "FiletypesToCopy";
+            this.FiletypesToCopy.RequiredVersion = "";
+            this.FiletypesToCopy.Size = new System.Drawing.Size(765, 37);
+            this.FiletypesToCopy.TabIndex = 23;
+            this.FiletypesToCopy.ToolTip = null;
+            this.FiletypesToCopy.UseSelectable = true;
+            this.FiletypesToCopy.Value = null;
+            this.FiletypesToCopy.Warning = null;
+            // 
             // DeleteFiles
             // 
             this.DeleteFiles.InternalName = null;
             this.DeleteFiles.Key = "Delete files after downloading:";
-            this.DeleteFiles.Location = new System.Drawing.Point(3, 142);
+            this.DeleteFiles.Location = new System.Drawing.Point(3, 139);
             this.DeleteFiles.Name = "DeleteFiles";
             this.DeleteFiles.RequiredVersion = "";
             this.DeleteFiles.Size = new System.Drawing.Size(765, 37);
@@ -290,7 +433,7 @@ namespace fad2.UI
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(3, 533);
+            this.metroPanel2.Location = new System.Drawing.Point(3, 765);
             this.metroPanel2.Name = "metroPanel2";
             this.metroPanel2.Size = new System.Drawing.Size(793, 192);
             this.metroPanel2.TabIndex = 21;
@@ -359,7 +502,7 @@ namespace fad2.UI
             this.FilesExist.DataSource = null;
             this.FilesExist.InternalName = null;
             this.FilesExist.Key = "Existing Files:";
-            this.FilesExist.Location = new System.Drawing.Point(3, 102);
+            this.FilesExist.Location = new System.Drawing.Point(3, 99);
             this.FilesExist.Name = "FilesExist";
             this.FilesExist.RequiredVersion = "";
             this.FilesExist.Size = new System.Drawing.Size(765, 37);
@@ -380,7 +523,7 @@ namespace fad2.UI
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(3, 314);
+            this.metroPanel1.Location = new System.Drawing.Point(3, 311);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(793, 213);
             this.metroPanel1.TabIndex = 12;
@@ -477,7 +620,7 @@ namespace fad2.UI
             this.LocalPath.Filter = null;
             this.LocalPath.InternalName = null;
             this.LocalPath.Key = "Local path";
-            this.LocalPath.Location = new System.Drawing.Point(3, 59);
+            this.LocalPath.Location = new System.Drawing.Point(3, 56);
             this.LocalPath.MaxCharacters = 32767;
             this.LocalPath.Name = "LocalPath";
             this.LocalPath.PasswordChar = '\0';
@@ -492,7 +635,7 @@ namespace fad2.UI
             // 
             this.ApplicationUrl.InternalName = "ID";
             this.ApplicationUrl.Key = "FlashAir Url";
-            this.ApplicationUrl.Location = new System.Drawing.Point(3, 16);
+            this.ApplicationUrl.Location = new System.Drawing.Point(3, 13);
             this.ApplicationUrl.MaxCharacters = 16;
             this.ApplicationUrl.Name = "ApplicationUrl";
             this.ApplicationUrl.PasswordChar = '\0';
@@ -1213,52 +1356,6 @@ namespace fad2.UI
             this.WlansdId.Value = "";
             this.WlansdId.Warning = null;
             // 
-            // FiletypesToCopy
-            // 
-            this.FiletypesToCopy.DataSource = null;
-            this.FiletypesToCopy.InternalName = null;
-            this.FiletypesToCopy.Key = "Filetypes to copy:";
-            this.FiletypesToCopy.Location = new System.Drawing.Point(3, 228);
-            this.FiletypesToCopy.Name = "FiletypesToCopy";
-            this.FiletypesToCopy.RequiredVersion = "";
-            this.FiletypesToCopy.Size = new System.Drawing.Size(765, 37);
-            this.FiletypesToCopy.TabIndex = 23;
-            this.FiletypesToCopy.ToolTip = null;
-            this.FiletypesToCopy.UseSelectable = true;
-            this.FiletypesToCopy.Value = null;
-            this.FiletypesToCopy.Warning = null;
-            // 
-            // StartupPath
-            // 
-            this.StartupPath.InternalName = null;
-            this.StartupPath.Key = "Flashair Imagepath";
-            this.StartupPath.Location = new System.Drawing.Point(3, 185);
-            this.StartupPath.MaxCharacters = 32767;
-            this.StartupPath.Name = "StartupPath";
-            this.StartupPath.PasswordChar = '\0';
-            this.StartupPath.Regex = null;
-            this.StartupPath.RequiredVersion = "";
-            this.StartupPath.Size = new System.Drawing.Size(765, 37);
-            this.StartupPath.TabIndex = 24;
-            this.StartupPath.ToolTip = null;
-            this.StartupPath.UseSelectable = true;
-            this.StartupPath.Value = "";
-            this.StartupPath.Warning = null;
-            // 
-            // LoadThumbs
-            // 
-            this.LoadThumbs.InternalName = null;
-            this.LoadThumbs.Key = "Load Thumbnails";
-            this.LoadThumbs.Location = new System.Drawing.Point(3, 271);
-            this.LoadThumbs.Name = "LoadThumbs";
-            this.LoadThumbs.RequiredVersion = "";
-            this.LoadThumbs.Size = new System.Drawing.Size(765, 37);
-            this.LoadThumbs.TabIndex = 25;
-            this.LoadThumbs.ToolTip = null;
-            this.LoadThumbs.UseSelectable = true;
-            this.LoadThumbs.Value = false;
-            this.LoadThumbs.Warning = null;
-            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1271,6 +1368,8 @@ namespace fad2.UI
             this.LoadTile.ResumeLayout(false);
             this.CardSettingsTab.ResumeLayout(false);
             this.ApplicationSettings.ResumeLayout(false);
+            this.metroPanel3.ResumeLayout(false);
+            this.metroPanel3.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
             this.metroPanel1.ResumeLayout(false);
@@ -1359,5 +1458,11 @@ namespace fad2.UI
         private SettingsString StartupPath;
         private SettingsCombo FiletypesToCopy;
         private SettingsBoolean LoadThumbs;
+        private MetroFramework.Controls.MetroPanel metroPanel3;
+        private SettingsFile Backgroundlocation;
+        private SettingsBoolean ShowTiles;
+        private SettingsBoolean ShowBackimages;
+        private SettingsTimeSlider BackgroundInterval;
+        private MetroFramework.Controls.MetroLabel metroLabel4;
     }
 }

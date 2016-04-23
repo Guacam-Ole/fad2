@@ -86,6 +86,12 @@
             ReadWrite = 2
         }
 
+        public enum Themes
+        {
+            Light=0,
+            Dark=1
+        }
+
         /// <summary>
         /// Flashair-Address
         /// </summary>
@@ -124,10 +130,6 @@
         public int FileTypesToCopy { get; set; } = 1;
 
         /// <summary>
-        /// Background Images change interval
-        /// </summary>
-        public int ImageBackgroundTimer { get; set; } = 10000;
-        /// <summary>
         /// What Images to use for background
         /// </summary>
         public string ImageBackgroundFolder { get; set; }
@@ -141,5 +143,12 @@
         /// Load Thumbnails?
         /// </summary>
         public bool LoadThumbs { get; set; } = true;
+
+        public string Theme { get; set; } = "Light";
+
+        public int BackgroundInterval { get; set; } = 10;
+
+        public bool ShowBackgroundImage { get; set; } = true;
+        public bool ShowTiles { get; set; } = true;
     }
 }
