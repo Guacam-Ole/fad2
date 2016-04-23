@@ -145,7 +145,7 @@ namespace fad2.UI
         private void AutoDownload_Click(object sender, EventArgs e)
         {
             Controls.Clear();
-            var auto = new FileCopy(_parentControl, true) {Dock = DockStyle.Fill};
+            var auto = new FileCopy(true) {Dock = DockStyle.Fill};
             Controls.Add(auto);
             auto.LoadContents("/DCIM", _connection.Settings.LocalPath);
         }

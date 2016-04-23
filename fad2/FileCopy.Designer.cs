@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.ProgressPanel = new MetroFramework.Controls.MetroPanel();
-            this.StartCopy = new MetroFramework.Controls.MetroButton();
+            this.CancelCopy = new MetroFramework.Controls.MetroButton();
             this.Progress = new MetroFramework.Controls.MetroProgressBar();
             this.CurrentAction = new MetroFramework.Controls.MetroLabel();
             this.ImageInfoPanel = new MetroFramework.Controls.MetroPanel();
@@ -68,17 +68,17 @@
             this.ProgressPanel.VerticalScrollbarHighlightOnWheel = false;
             this.ProgressPanel.VerticalScrollbarSize = 10;
             // 
-            // StartCopy
+            // CancelCopy
             // 
-            this.StartCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.StartCopy.Location = new System.Drawing.Point(793, 79);
-            this.StartCopy.Name = "StartCopy";
-            this.StartCopy.Size = new System.Drawing.Size(357, 23);
-            this.StartCopy.TabIndex = 4;
-            this.StartCopy.Text = "Start copying files...";
-            this.StartCopy.UseSelectable = true;
-            this.StartCopy.Visible = false;
-            this.StartCopy.Click += new System.EventHandler(this.StartCopy_Click);
+            this.CancelCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CancelCopy.Location = new System.Drawing.Point(793, 79);
+            this.CancelCopy.Name = "CancelCopy";
+            this.CancelCopy.Size = new System.Drawing.Size(357, 23);
+            this.CancelCopy.TabIndex = 4;
+            this.CancelCopy.Text = "Start copying files...";
+            this.CancelCopy.UseSelectable = true;
+            this.CancelCopy.Visible = false;
+            this.CancelCopy.Click += new System.EventHandler(this.StartCopy_Click);
             // 
             // Progress
             // 
@@ -100,7 +100,7 @@
             // 
             // ImageInfoPanel
             // 
-            this.ImageInfoPanel.Controls.Add(this.StartCopy);
+            this.ImageInfoPanel.Controls.Add(this.CancelCopy);
             this.ImageInfoPanel.Controls.Add(this.ImageSizeContent);
             this.ImageInfoPanel.Controls.Add(this.ImageFilenameContent);
             this.ImageInfoPanel.Controls.Add(this.ImageFolderContent);
@@ -290,6 +290,6 @@
         private MetroFramework.Controls.MetroPanel LeftPanel;
         private MetroFramework.Controls.MetroPanel RightPanel;
         private MetroFramework.Components.MetroToolTip FileTooltip;
-        private MetroFramework.Controls.MetroButton StartCopy;
+        private MetroFramework.Controls.MetroButton CancelCopy;
     }
 }

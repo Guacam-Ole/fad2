@@ -61,6 +61,33 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abort copying.
+        /// </summary>
+        internal static string AbortCopy {
+            get {
+                return ResourceManager.GetString("AbortCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flashair cannot be found anymore. This usually means that the card has gone offline. Re-Power your camera and try again..
+        /// </summary>
+        internal static string CannotFindFlashairMessage {
+            get {
+                return ResourceManager.GetString("CannotFindFlashairMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flashair cannot be found anymore.
+        /// </summary>
+        internal static string CannotFindFlashairTitle {
+            get {
+                return ResourceManager.GetString("CannotFindFlashairTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection succeeded.
         /// </summary>
         internal static string ConnectionSuccess {
@@ -84,6 +111,15 @@ namespace fad2.UI.Properties {
         internal static string CopyFileOfAtSpeed {
             get {
                 return ResourceManager.GetString("CopyFileOfAtSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy finished.
+        /// </summary>
+        internal static string CopyFinished {
+            get {
+                return ResourceManager.GetString("CopyFinished", resourceCulture);
             }
         }
         
@@ -143,6 +179,15 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed downloading File &apos;{0}. This will be ignored for now. (Press Cancel to abort operation, OK continues with next file) .
+        /// </summary>
+        internal static string FailedDownloadingFile {
+            get {
+                return ResourceManager.GetString("FailedDownloadingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File not found.
         /// </summary>
         internal static string FileNotFound {
@@ -157,6 +202,15 @@ namespace fad2.UI.Properties {
         internal static string LoadingSettings {
             get {
                 return ResourceManager.GetString("LoadingSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation cancelled.
+        /// </summary>
+        internal static string OperationCancelled {
+            get {
+                return ResourceManager.GetString("OperationCancelled", resourceCulture);
             }
         }
         

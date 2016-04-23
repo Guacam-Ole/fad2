@@ -131,5 +131,15 @@
         /// What Images to use for background
         /// </summary>
         public string ImageBackgroundFolder { get; set; }
+
+        /// <summary>
+        /// Where to start looking for files?
+        /// </summary>
+        public string CardStartupPath { get; set; } = "/";
+
+        /// <summary>
+        /// Load Thumbnails?
+        /// </summary>
+        public bool LoadThumbs { get; set; } = true;
     }
 }
