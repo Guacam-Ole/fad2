@@ -24,6 +24,10 @@ namespace fad2.UI
 
         public static string RandomImageUrl()
         {
+            if (ImageLoop == null || ImageLoop.Count == 0)
+            {
+                return null;
+            }
             var randomImageId = _random.Next(ImageLoop.Count);
             return ImageLoop[randomImageId];
         }
@@ -86,6 +90,7 @@ namespace fad2.UI
 
         public static Bitmap ResizedImage(string path, int alpha, int maxWidth, int maxHeight)
         {
+            if (string.IsNullOrWhiteSpace(path)) return null;
             var bitmap = new Bitmap(path);
             return ResizedImage(new Bitmap(path), alpha, maxWidth, maxHeight);
         }

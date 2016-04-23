@@ -159,8 +159,8 @@ namespace fad2.UI
 
         private void WorkerDownloadThumbsCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (!_autoMode) return;
             CurrentAction.Text = Resources.ReadyToCopy;
+            if (!_autoMode) return;
             CopyFilesAsync();
         }
 
@@ -190,7 +190,10 @@ namespace fad2.UI
             }
             else
             {
-                CopyFilesAsync();
+                if (_autoMode)
+                {
+                    CopyFilesAsync();
+                }
             }
         }
 

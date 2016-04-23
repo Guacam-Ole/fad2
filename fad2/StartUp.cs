@@ -156,7 +156,15 @@ namespace fad2.UI
             Controls.Clear();
             var auto = new FileCopy(true) {Dock = DockStyle.Fill};
             Controls.Add(auto);
-            auto.LoadContents("/DCIM", _connection.Settings.LocalPath);
+            auto.LoadContents(_connection.Settings.CardStartupPath, _connection.Settings.LocalPath);
+        }
+
+        private void FileExplorer_Click(object sender, EventArgs e)
+        {
+            Controls.Clear();
+            var manual = new FileCopy(false) {Dock = DockStyle.Fill};
+            Controls.Add(manual);
+            manual.LoadContents(_connection.Settings.CardStartupPath, _connection.Settings.LocalPath);
         }
     }
 }

@@ -60,6 +60,7 @@
             // 
             // FileExplorer
             // 
+            this.FileExplorer.ActiveControl = null;
             this.FileExplorer.Location = new System.Drawing.Point(184, 127);
             this.FileExplorer.Name = "FileExplorer";
             this.FileExplorer.Size = new System.Drawing.Size(143, 144);
@@ -67,10 +68,13 @@
             this.FileExplorer.Text = "File Explorer";
             this.FileExplorer.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             this.FileExplorer.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.FileExplorer.UseSelectable = true;
             this.FileExplorer.Visible = false;
+            this.FileExplorer.Click += new System.EventHandler(this.FileExplorer_Click);
             // 
             // AutoDownload
             // 
+            this.AutoDownload.ActiveControl = null;
             this.AutoDownload.Location = new System.Drawing.Point(3, 127);
             this.AutoDownload.Name = "AutoDownload";
             this.AutoDownload.Size = new System.Drawing.Size(143, 144);
@@ -78,6 +82,7 @@
             this.AutoDownload.Text = "Auto Mode";
             this.AutoDownload.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             this.AutoDownload.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.AutoDownload.UseSelectable = true;
             this.AutoDownload.Visible = false;
             this.AutoDownload.Click += new System.EventHandler(this.AutoDownload_Click);
             // 
@@ -93,6 +98,7 @@
             // 
             // ConnectionTile
             // 
+            this.ConnectionTile.ActiveControl = null;
             this.ConnectionTile.Controls.Add(this.metroProgressSpinner1);
             this.ConnectionTile.Location = new System.Drawing.Point(3, 3);
             this.ConnectionTile.Name = "ConnectionTile";
@@ -100,6 +106,7 @@
             this.ConnectionTile.TabIndex = 4;
             this.ConnectionTile.Text = "Connecting...";
             this.ConnectionTile.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
+            this.ConnectionTile.UseSelectable = true;
             // 
             // metroProgressSpinner1
             // 
@@ -108,6 +115,7 @@
             this.metroProgressSpinner1.Name = "metroProgressSpinner1";
             this.metroProgressSpinner1.Size = new System.Drawing.Size(56, 30);
             this.metroProgressSpinner1.TabIndex = 6;
+            this.metroProgressSpinner1.UseSelectable = true;
             // 
             // BackPicture
             // 
