@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.ProgressPanel = new MetroFramework.Controls.MetroPanel();
-            this.CancelCopy = new MetroFramework.Controls.MetroButton();
             this.Progress = new MetroFramework.Controls.MetroProgressBar();
             this.CurrentAction = new MetroFramework.Controls.MetroLabel();
+            this.CancelCopy = new MetroFramework.Controls.MetroButton();
             this.ImageInfoPanel = new MetroFramework.Controls.MetroPanel();
             this.ImageSizeContent = new MetroFramework.Controls.MetroLabel();
             this.ImageFilenameContent = new MetroFramework.Controls.MetroLabel();
@@ -44,12 +44,15 @@
             this.LeftPanel = new MetroFramework.Controls.MetroPanel();
             this.RightPanel = new MetroFramework.Controls.MetroPanel();
             this.FileTooltip = new MetroFramework.Components.MetroToolTip();
+            this.LocalPath = new MetroFramework.Controls.MetroTextBox();
+            this.RightTiles = new MetroFramework.Controls.MetroPanel();
             this.ProgressPanel.SuspendLayout();
             this.ImageInfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FileSplitter)).BeginInit();
             this.FileSplitter.Panel1.SuspendLayout();
             this.FileSplitter.Panel2.SuspendLayout();
             this.FileSplitter.SuspendLayout();
+            this.RightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ProgressPanel
@@ -68,18 +71,6 @@
             this.ProgressPanel.VerticalScrollbarHighlightOnWheel = false;
             this.ProgressPanel.VerticalScrollbarSize = 10;
             // 
-            // CancelCopy
-            // 
-            this.CancelCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelCopy.Location = new System.Drawing.Point(793, 79);
-            this.CancelCopy.Name = "CancelCopy";
-            this.CancelCopy.Size = new System.Drawing.Size(357, 23);
-            this.CancelCopy.TabIndex = 4;
-            this.CancelCopy.Text = "Start copying files...";
-            this.CancelCopy.UseSelectable = true;
-            this.CancelCopy.Visible = false;
-            this.CancelCopy.Click += new System.EventHandler(this.StartCopy_Click);
-            // 
             // Progress
             // 
             this.Progress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -97,6 +88,18 @@
             this.CurrentAction.Size = new System.Drawing.Size(66, 19);
             this.CurrentAction.TabIndex = 2;
             this.CurrentAction.Text = "Initializing";
+            // 
+            // CancelCopy
+            // 
+            this.CancelCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CancelCopy.Location = new System.Drawing.Point(793, 79);
+            this.CancelCopy.Name = "CancelCopy";
+            this.CancelCopy.Size = new System.Drawing.Size(357, 23);
+            this.CancelCopy.TabIndex = 4;
+            this.CancelCopy.Text = "Start copying files...";
+            this.CancelCopy.UseSelectable = true;
+            this.CancelCopy.Visible = false;
+            this.CancelCopy.Click += new System.EventHandler(this.StartCopy_Click);
             // 
             // ImageInfoPanel
             // 
@@ -232,6 +235,8 @@
             // RightPanel
             // 
             this.RightPanel.AutoScroll = true;
+            this.RightPanel.Controls.Add(this.RightTiles);
+            this.RightPanel.Controls.Add(this.LocalPath);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RightPanel.HorizontalScrollbar = true;
             this.RightPanel.HorizontalScrollbarBarColor = true;
@@ -253,6 +258,51 @@
             this.FileTooltip.StyleManager = null;
             this.FileTooltip.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
+            // LocalPath
+            // 
+            // 
+            // 
+            // 
+            this.LocalPath.CustomButton.Image = null;
+            this.LocalPath.CustomButton.Location = new System.Drawing.Point(740, 1);
+            this.LocalPath.CustomButton.Name = "";
+            this.LocalPath.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.LocalPath.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.LocalPath.CustomButton.TabIndex = 1;
+            this.LocalPath.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.LocalPath.CustomButton.UseSelectable = true;
+            this.LocalPath.CustomButton.Visible = false;
+            this.LocalPath.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LocalPath.Lines = new string[0];
+            this.LocalPath.Location = new System.Drawing.Point(0, 0);
+            this.LocalPath.MaxLength = 32767;
+            this.LocalPath.Name = "LocalPath";
+            this.LocalPath.PasswordChar = '\0';
+            this.LocalPath.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.LocalPath.SelectedText = "";
+            this.LocalPath.SelectionLength = 0;
+            this.LocalPath.SelectionStart = 0;
+            this.LocalPath.Size = new System.Drawing.Size(762, 23);
+            this.LocalPath.TabIndex = 2;
+            this.LocalPath.UseSelectable = true;
+            this.LocalPath.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.LocalPath.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.LocalPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LocalPath_KeyDown);
+            // 
+            // RightTiles
+            // 
+            this.RightTiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightTiles.HorizontalScrollbarBarColor = true;
+            this.RightTiles.HorizontalScrollbarHighlightOnWheel = false;
+            this.RightTiles.HorizontalScrollbarSize = 10;
+            this.RightTiles.Location = new System.Drawing.Point(0, 23);
+            this.RightTiles.Name = "RightTiles";
+            this.RightTiles.Size = new System.Drawing.Size(762, 408);
+            this.RightTiles.TabIndex = 3;
+            this.RightTiles.VerticalScrollbarBarColor = true;
+            this.RightTiles.VerticalScrollbarHighlightOnWheel = false;
+            this.RightTiles.VerticalScrollbarSize = 10;
+            // 
             // FileCopy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,6 +319,7 @@
             this.FileSplitter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.FileSplitter)).EndInit();
             this.FileSplitter.ResumeLayout(false);
+            this.RightPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -291,5 +342,7 @@
         private MetroFramework.Controls.MetroPanel RightPanel;
         private MetroFramework.Components.MetroToolTip FileTooltip;
         private MetroFramework.Controls.MetroButton CancelCopy;
+        private MetroFramework.Controls.MetroPanel RightTiles;
+        private MetroFramework.Controls.MetroTextBox LocalPath;
     }
 }

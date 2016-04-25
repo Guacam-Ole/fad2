@@ -64,7 +64,7 @@ namespace fad2.UI
 
         private void CopyFilesAsync()
         {
-            var worker=new BackgroundWorker();
+            var worker = new BackgroundWorker();
 
             CancelCopy.Text = Resources.AbortCopy;
             CancelCopy.Visible = true;
@@ -141,7 +141,7 @@ namespace fad2.UI
 
         private void LoadFlashairInfoAsync(string path)
         {
-            var worker=new BackgroundWorker();
+            var worker = new BackgroundWorker();
             LeftPanel.Controls.Clear();
             path = path.Replace("\\", "/");
             worker.WorkerSupportsCancellation = true;
@@ -154,7 +154,7 @@ namespace fad2.UI
 
         private void LoadFlashairThumbsAsync()
         {
-            var worker=new BackgroundWorker();
+            var worker = new BackgroundWorker();
             while (worker.IsBusy)
             {
                 return;
@@ -183,13 +183,13 @@ namespace fad2.UI
         {
             Progress.Maximum = 100;
             Progress.Value = e.ProgressPercentage;
-            
+
             if (e.UserState is string)
             {
                 CurrentAction.Text = (string) e.UserState;
             }
             LeftPanel.Refresh();
-            foreach (var control in LeftPanel.Controls.OfType<MetroTile>()) {control.Refresh();  }
+            foreach (var control in LeftPanel.Controls.OfType<MetroTile>()) { control.Refresh(); }
             Application.DoEvents();
         }
 
@@ -279,14 +279,10 @@ namespace fad2.UI
                 // could not read Number of files. Just ignore this for now. Just download Thumbs and don't show the progress
                 imageCount = int.MaxValue;
             }
-            //if (path.EndsWith("/"))
-            //{
-            //    path = path.Substring(0, path.Length - 1);
-            //}
-            if (path.Length>1)
+            if (path.Length > 1)
             {
                 // parent Tile
-                var parentDirectory = path.LastIndexOf("/") == 0 ? "/" : path.Substring(0, path.LastIndexOf("/") );
+                var parentDirectory = path.LastIndexOf("/") == 0 ? "/" : path.Substring(0, path.LastIndexOf("/"));
                 var tile = new MetroTile
                 {
                     Text = "..",
@@ -367,8 +363,6 @@ namespace fad2.UI
                             Tag = singleFile,
                             Style = MetroColorStyle.Yellow
                         };
-                        //    tile.Click += LeftTile_Click;
-                        //   tile.DoubleClick += LeftTile_DoubleClick;
                         worker.ReportProgress(progress, tile);
                     }
                 }
@@ -566,50 +560,88 @@ namespace fad2.UI
             {
                 // Could not download Thumb after 5 retries. Well. Just a thumb. Let's ignore this
                 _log.Error(ex);
+               
             }
         }
 
         private void LoadLocalContents(string localPath)
         {
-            CurrentAction.Text = Resources.ReadLocalDir;
-            if (Directory.Exists(localPath))
+            try
             {
+                CurrentAction.Text = Resources.ReadLocalDir;
+
                 var currentDirectory = new DirectoryInfo(localPath);
                 var files = currentDirectory.GetFiles();
                 var folders = currentDirectory.GetDirectories();
 
-                RightPanel.Controls.Clear();
-                Progress.Maximum = folders.Length;
-                var counter = 0;
-                foreach (var folder in folders.OrderBy(fld => fld.Name))
+                RightTiles.Controls.Clear();
+
+
+                if (Directory.Exists(localPath))
                 {
-                    var tile = new MetroTile {Text = folder.Name, Width = _metroTileSize, Height = _metroTileSize, Style = MetroColorStyle.Yellow};
-                    FileTooltip.SetToolTip(tile, folder.Name);
-                    RightPanel.Controls.Add(tile);
-                    Progress.Value = counter;
-                    counter++;
-                    Application.DoEvents();
-                }
-                Progress.Maximum = folders.Length;
-                counter = 0;
-                foreach (var fileInfo in files.OrderBy(fld => fld.Name))
-                {
-                    if (!fileInfo.Name.Contains('.') && _connection.Settings.FileTypesToCopy != (int) ProgramSettings.FileTypes.AllFiles)
+                    LocalPath.Text = localPath;
+                    if (localPath.Length > 2)
                     {
-                        continue;
+                        // parent Tile
+                        var parentDirectory = localPath.LastIndexOf("\\") == 0 ? "\\" : localPath.Substring(0, localPath.LastIndexOf("\\"));
+                        var tile = new MetroTile
+                        {
+                            Text = "..",
+                            Width = _metroTileSize,
+                            Height = _metroTileSize,
+                            Tag = parentDirectory,
+                            Style = MetroColorStyle.Green
+                        };
+                        tile.Click += RightTile_Click;
+                        RightTiles.Controls.Add(tile);
                     }
 
-                    var tile = new MetroTile {Text = fileInfo.Name, Width = _metroTileSize, Height = _metroTileSize};
-                    FileTooltip.SetToolTip(tile, fileInfo.Name);
-                    TryGetThumb(tile, fileInfo);
-                    RightPanel.Controls.Add(tile);
-                    Progress.Value = counter;
-                    counter++;
-                    Application.DoEvents();
+
+                    Progress.Maximum = folders.Length;
+                    var counter = 0;
+                    foreach (var folder in folders.OrderBy(fld => fld.Name))
+                    {
+                        var tile = new MetroTile
+                        {
+                            Text = folder.Name, Width = _metroTileSize, Height = _metroTileSize, Style = MetroColorStyle.Yellow,
+                            Tag = folder.FullName
+                        };
+                        tile.Click += RightTile_Click;
+                        FileTooltip.SetToolTip(tile, folder.Name);
+                        RightTiles.Controls.Add(tile);
+                        Progress.Value = counter;
+                        counter++;
+                        Application.DoEvents();
+                    }
+                    Progress.Maximum = folders.Length;
+                    counter = 0;
+                    foreach (var fileInfo in files.OrderBy(fld => fld.Name))
+                    {
+                        if (!fileInfo.Name.Contains('.') && _connection.Settings.FileTypesToCopy != (int) ProgramSettings.FileTypes.AllFiles)
+                        {
+                            continue;
+                        }
+
+                        var tile = new MetroTile {Text = fileInfo.Name, Width = _metroTileSize, Height = _metroTileSize};
+                        tile.Click += RightTile_Click;
+                        FileTooltip.SetToolTip(tile, fileInfo.Name);
+                        TryGetThumb(tile, fileInfo);
+                        RightTiles.Controls.Add(tile);
+                        Progress.Value = counter;
+                        counter++;
+                        Application.DoEvents();
+                    }
                 }
+                ResizeTiles(RightTiles);
             }
-            ResizeTiles(RightPanel);
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                MetroMessageBox.Show(this, "That path seems to be terribly wrong.");
+            }
         }
+
+     
 
         private bool ThumbnailCallback()
         {
@@ -673,7 +705,7 @@ namespace fad2.UI
 
         private void RightPanel_Layout(object sender, LayoutEventArgs e)
         {
-            ResizeTiles(RightPanel);
+            ResizeTiles(RightTiles);
             Refresh();
         }
 
@@ -686,7 +718,7 @@ namespace fad2.UI
         private void StartCopy_Click(object sender, EventArgs e)
         {
             var worker = (BackgroundWorker) sender;
-            
+
             CancelCopy.Visible = false;
             //CopyFilesAsync();
         }
@@ -737,6 +769,25 @@ namespace fad2.UI
             else
             {
                 ShowPreviewFromTile(tile);
+            }
+        }
+
+        private void RightTile_Click(object sender, EventArgs e)
+        {
+            var tile = (MetroTile) sender;
+            if (tile.Tag == null) return;
+            string path = (string) tile.Tag;
+
+            RightTiles.Controls.Clear();
+            LoadLocalContents(path);
+        }
+
+        private void LocalPath_KeyDown(object sender, KeyEventArgs e)
+        {
+            var path = (MetroTextBox) sender;
+            if (e.KeyValue ==(int) Keys.Enter)
+            {
+                LoadLocalContents(path.Text);
             }
         }
     }
