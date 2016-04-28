@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace fad2.Backend.Github
 {
     /// <summary>
-    /// Github-Methods
+    ///     Github-Methods
     /// </summary>
     public static class GitHub
     {
@@ -110,7 +110,7 @@ namespace fad2.Backend.Github
 
 
         /// <summary>
-        /// Get Issues from Github
+        ///     Get Issues from Github
         /// </summary>
         /// <param name="cacheFileName">Cachefile</param>
         /// <param name="user">User on Github (that's me :) )</param>

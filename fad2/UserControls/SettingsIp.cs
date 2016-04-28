@@ -31,13 +31,13 @@ namespace fad2.UI.UserControls
             if (string.IsNullOrWhiteSpace(SettingValue.Text) || IPAddress.TryParse(SettingValue.Text, out ipAddress))
             {
                 Warning = null;
-             //   SettingValue.CustomBackground = false;
+                //   SettingValue.CustomBackground = false;
                 _isValid = true;
             }
             else
             {
                 Warning = "Please enter a valid IP-Address";
-               // SettingValue.CustomBackground = true;
+                // SettingValue.CustomBackground = true;
                 _isValid = false;
             }
         }

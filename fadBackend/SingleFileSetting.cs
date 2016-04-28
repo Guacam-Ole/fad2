@@ -3,12 +3,12 @@
 namespace fad2.Backend
 {
     /// <summary>
-    /// Single Setting from Settings-File
+    ///     Single Setting from Settings-File
     /// </summary>
     public class SingleFileSetting
     {
         /// <summary>
-        /// New single Setting
+        ///     New single Setting
         /// </summary>
         /// <param name="pos">Line pos in File</param>
         /// <param name="line">Content from line</param>
@@ -19,48 +19,57 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Line in File
+        ///     Line in File
         /// </summary>
         public int Line { get; set; }
+
         /// <summary>
-        /// Original string
+        ///     Original string
         /// </summary>
         public string Original { get; set; }
+
         /// <summary>
-        /// Is this a category title?
+        ///     Is this a category title?
         /// </summary>
         public bool IsTitle { get; set; }
+
         /// <summary>
-        /// Is this a setting?
+        ///     Is this a setting?
         /// </summary>
         public bool IsSetting { get; set; }
+
         /// <summary>
-        /// Do I know this setting?
+        ///     Do I know this setting?
         /// </summary>
         public bool IsKnown { get; set; }
+
         /// <summary>
-        /// Key
+        ///     Key
         /// </summary>
         public string Key { get; set; }
+
         /// <summary>
-        /// Value
+        ///     Value
         /// </summary>
         public string Value { get; set; }
+
         /// <summary>
-        /// Is this just an empty line?
+        ///     Is this just an empty line?
         /// </summary>
         public bool IsEmpty { get; set; }
+
         /// <summary>
-        /// Is this modified?
+        ///     Is this modified?
         /// </summary>
         public bool IsModified { get; set; }
+
         /// <summary>
-        /// Single Setting
+        ///     Single Setting
         /// </summary>
         public Settings Setting { get; set; }
 
         /// <summary>
-        /// Check Line Contents
+        ///     Check Line Contents
         /// </summary>
         public void CheckLine()
         {

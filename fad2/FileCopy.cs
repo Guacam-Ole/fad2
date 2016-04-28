@@ -27,6 +27,8 @@ namespace fad2.UI
         private readonly string[] _movieFilesTypes = Properties.Settings.Default.VideoFileTypes.Split(',');
 
         private readonly string _programSettingsFile = $"{Application.StartupPath}\\{Properties.Settings.Default.ProgramSettingsFile}";
+
+        private string _currentFlashairPath;
         private List<string> _selectedFilesLeft = new List<string>();
 
 
@@ -123,7 +125,6 @@ namespace fad2.UI
 
         private void WorkerCopyFilesDoWork(object sender, DoWorkEventArgs e)
         {
-           
             var worker = sender as BackgroundWorker;
             e.Result = CopyFiles(worker, e);
         }
@@ -158,8 +159,6 @@ namespace fad2.UI
             worker.RunWorkerAsync(path);
         }
 
-        private string _currentFlashairPath;
-
         private void LoadFlashairThumbsAsync()
         {
             var worker = new BackgroundWorker();
@@ -186,7 +185,6 @@ namespace fad2.UI
             Application.DoEvents();
             if (!_autoMode) return;
             CopyFilesAsync();
-
         }
 
         private void WorkerDownloadThumbsProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -205,7 +203,6 @@ namespace fad2.UI
 
         private void WorkerDownloadThumbsDoWork(object sender, DoWorkEventArgs e)
         {
-           
             var worker = sender as BackgroundWorker;
             LoadFlashAirThumbs(worker);
         }
@@ -421,21 +418,21 @@ namespace fad2.UI
 
         private string GetSpeed(long size, TimeSpan duration)
         {
-            double seconds = duration.TotalSeconds;
+            var seconds = duration.TotalSeconds;
             if (seconds.CompareTo(0) == 0)
             {
                 return "lotta TBytes/s";
             }
-            var currentByteSpeed = size / seconds;
+            var currentByteSpeed = size/seconds;
             var unit = "Bytes/s";
             if (currentByteSpeed > 1024)
             {
-                currentByteSpeed = currentByteSpeed / 1024;
+                currentByteSpeed = currentByteSpeed/1024;
                 unit = "KBytes/s";
             }
             if (currentByteSpeed > 1024)
             {
-                currentByteSpeed = currentByteSpeed / 1024;
+                currentByteSpeed = currentByteSpeed/1024;
                 unit = "MBytes/s";
             }
             return $"{currentByteSpeed:N} {unit}";
@@ -475,7 +472,7 @@ namespace fad2.UI
                     worker.ReportProgress(progress, tile);
                     var fileInfo = (FlashAirFileInformation) tile.Tag;
                     var currentByteSpeed = GetSpeed(lastSize, duration);
-             
+
 
                     worker.ReportProgress(progress, string.Format(Resources.CopyFileOfAtSpeed, counter + 1, Progress.Maximum, fileInfo.Filename, currentByteSpeed));
 
@@ -882,13 +879,12 @@ namespace fad2.UI
             catch (Exception ex)
             {
                 _log.Error(ex);
-               
             }
         }
 
         private void WorkerCopyFilesToFlashAirCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            int result = (int)e.Result;
+            var result = (int) e.Result;
             if (result == 0)
             {
                 MetroMessageBox.Show(this, $"Successfully copied {_selectedFilesRight.Count} files.");
@@ -899,7 +895,7 @@ namespace fad2.UI
                 MetroMessageBox.Show(this, $"{result} from {_selectedFilesRight.Count} files weren't copied.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-           
+
             ProgressPanel.Visible = false;
             ImageInfoPanel.Visible = false;
             LoadFlashairInfoAsync(_currentFlashairPath);
@@ -921,10 +917,10 @@ namespace fad2.UI
 
         private void WorkerCopyFilesToFlashAirProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (e.ProgressPercentage==-1)
+            if (e.ProgressPercentage == -1)
             {
                 ImageInfoPanel.Visible = true;
-                var imageTile= RightTiles.Controls.OfType<MetroTile>().First(tile => tile.Tag is FileInfo && ((FileInfo) tile.Tag).FullName == (string) e.UserState);
+                var imageTile = RightTiles.Controls.OfType<MetroTile>().First(tile => tile.Tag is FileInfo && ((FileInfo) tile.Tag).FullName == (string) e.UserState);
                 SinglePreviewThumb.TileImage = imageTile.TileImage;
                 var fileInfo = (FileInfo) imageTile.Tag;
                 ImageFolderContent.Text = fileInfo.DirectoryName;
@@ -933,7 +929,8 @@ namespace fad2.UI
                 SinglePreviewThumb.UseTileImage = true;
                 SinglePreviewThumb.Refresh();
                 Application.DoEvents();
-            }   else
+            }
+            else
             {
                 Progress.Value = e.ProgressPercentage;
                 CurrentAction.Text = (string) e.UserState;
@@ -942,15 +939,14 @@ namespace fad2.UI
 
         private void WorkerCopyFilesToFlashAirDoWork(object sender, DoWorkEventArgs e)
         {
-           
             var worker = (BackgroundWorker) sender;
             var filesToCopy = (List<string>) e.Argument;
-            int maximum = filesToCopy.Count;
-            int counter = 0;
-            int errorCount = 0;
+            var maximum = filesToCopy.Count;
+            var counter = 0;
+            var errorCount = 0;
             foreach (var filename in filesToCopy)
             {
-                DateTime now=DateTime.Now;
+                var now = DateTime.Now;
                 long filesize;
                 if (!_connection.UploadFile(filename, out filesize))
                 {
@@ -960,14 +956,13 @@ namespace fad2.UI
                 if (worker.CancellationPending)
                 {
                     e.Result = -1;
-                    return ;
+                    return;
                 }
                 counter++;
-                
-                var currentByteSpeed = GetSpeed(filesize, duration);
-                worker.ReportProgress(counter * 100 / maximum, $"Uploaded {filename} with {currentByteSpeed}" );
-                worker.ReportProgress(-1, filename );
 
+                var currentByteSpeed = GetSpeed(filesize, duration);
+                worker.ReportProgress(counter*100/maximum, $"Uploaded {filename} with {currentByteSpeed}");
+                worker.ReportProgress(-1, filename);
             }
             e.Result = errorCount;
         }

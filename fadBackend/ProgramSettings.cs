@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Reflection;
 
 namespace fad2.Backend
 {
     /// <summary>
-    /// Program setings
+    ///     Program setings
     /// </summary>
     public class ProgramSettings
     {
         /// <summary>
-        /// Available AppModes
+        ///     Available AppModes
         /// </summary>
         public enum AppModes
         {
@@ -19,7 +18,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Card Directory Modes
+        ///     Card Directory Modes
         /// </summary>
         public enum CardDirModes
         {
@@ -30,7 +29,7 @@ namespace fad2.Backend
 
 
         /// <summary>
-        /// Date Modes
+        ///     Date Modes
         /// </summary>
         public enum DateModes
         {
@@ -42,7 +41,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Dns Modes
+        ///     Dns Modes
         /// </summary>
         public enum DnsModes
         {
@@ -51,7 +50,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// File Types
+        ///     File Types
         /// </summary>
         public enum FileTypes
         {
@@ -61,7 +60,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Overwrite Modes
+        ///     Overwrite Modes
         /// </summary>
         public enum OverwriteModes
         {
@@ -79,8 +78,14 @@ namespace fad2.Backend
             Stop = 3
         }
 
+        public enum Themes
+        {
+            Light = 0,
+            Dark = 1
+        }
+
         /// <summary>
-        /// Webdav Modes
+        ///     Webdav Modes
         /// </summary>
         public enum WebDavModes
         {
@@ -89,61 +94,63 @@ namespace fad2.Backend
             ReadWrite = 2
         }
 
-        public enum Themes
-        {
-            Light=0,
-            Dark=1
-        }
-
         /// <summary>
-        /// Flashair-Address
+        ///     Flashair-Address
         /// </summary>
         public string FlashAirUrl { get; set; }
+
         /// <summary>
-        /// Local Path
+        ///     Local Path
         /// </summary>
         public string LocalPath { get; set; }
+
         /// <summary>
-        /// How to deal with existing files?
+        ///     How to deal with existing files?
         /// </summary>
         public int ExistingFiles { get; set; }
+
         /// <summary>
-        /// Delete files after copying?
+        ///     Delete files after copying?
         /// </summary>
         public bool DeleteFiles { get; set; }
+
         /// <summary>
-        /// Folder creation when using multiple Cards
+        ///     Folder creation when using multiple Cards
         /// </summary>
         public int MultiCardsFolder { get; set; }
+
         /// <summary>
-        /// Create a folder by date?
+        ///     Create a folder by date?
         /// </summary>
         public int CreateByDate { get; set; }
+
         /// <summary>
-        /// Folder format
+        ///     Folder format
         /// </summary>
         public string FolderFomat { get; set; }
+
         /// <summary>
-        /// Interval to check for files when using service
+        ///     Interval to check for files when using service
         /// </summary>
         public int FileCheckInterval { get; set; }
+
         /// <summary>
-        /// What files to copy?
+        ///     What files to copy?
         /// </summary>
         public int FileTypesToCopy { get; set; } = 1;
 
         /// <summary>
-        /// What Images to use for background
+        ///     What Images to use for background
         /// </summary>
         public string ImageBackgroundFolder { get; set; } = AppDomain.CurrentDomain.BaseDirectory + "examplepix";
 
         /// <summary>
-        /// Where to start looking for files?
+        ///     Where to start looking for files?
         /// </summary>
         public string CardStartupPath { get; set; } = "/";
 
         /// <summary>
-        /// Load Thumbnails?
+        ///     Load Thumbnails?
         /// </summary>
         public bool LoadThumbs { get; set; } = true;
 

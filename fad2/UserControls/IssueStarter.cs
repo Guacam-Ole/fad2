@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using fad2.Backend;
 using fad2.Backend.Github;
 using log4net;
 using MetroFramework;
@@ -14,8 +13,8 @@ namespace fad2.UI.UserControls
 {
     public partial class IssueStarter : UserControl
     {
-        private List<GitHubComment> _comments;
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private List<GitHubComment> _comments;
         private DateTime _date;
 
 

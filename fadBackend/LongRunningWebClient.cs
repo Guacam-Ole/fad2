@@ -8,7 +8,7 @@ using log4net;
 namespace fad2.Backend
 {
     /// <summary>
-    /// Webclient with retries and custom Timeout
+    ///     Webclient with retries and custom Timeout
     /// </summary>
     public class LongRunningWebClient : WebClient
     {
@@ -17,14 +17,14 @@ namespace fad2.Backend
         private readonly int _timeOut = 120*1000; // 120 seconds
 
         /// <summary>
-        /// New Webclient
+        ///     New Webclient
         /// </summary>
         public LongRunningWebClient()
         {
         }
 
         /// <summary>
-        /// New Webclient
+        ///     New Webclient
         /// </summary>
         /// <param name="timeoutInSeconds">Timeout in Seconds</param>
         /// <param name="maxRetries">Maximum Retries before throwing the error</param>
@@ -36,7 +36,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Read Stream from Address
+        ///     Read Stream from Address
         /// </summary>
         /// <param name="address">Address</param>
         /// <returns>Filestream</returns>
@@ -63,7 +63,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Return Url as string
+        ///     Return Url as string
         /// </summary>
         /// <param name="address">URL</param>
         /// <returns>String-COntent</returns>
@@ -91,7 +91,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// GetRequest
+        ///     GetRequest
         /// </summary>
         /// <param name="uri">Url</param>
         /// <returns>Request</returns>

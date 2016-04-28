@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Reflection;
+using System.Text;
 using log4net;
+using Microsoft.Win32;
 
 namespace fad2.Backend
 {
@@ -97,9 +97,9 @@ namespace fad2.Backend
 
         private string GetMimeType(string fileName)
         {
-            string mimeType = "application/unknown";
-            string ext = Path.GetExtension(fileName).ToLower();
-            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            var mimeType = "application/unknown";
+            var ext = Path.GetExtension(fileName).ToLower();
+            var regKey = Registry.ClassesRoot.OpenSubKey(ext);
             if (regKey?.GetValue("Content Type") != null)
             {
                 mimeType = regKey.GetValue("Content Type").ToString();
@@ -107,31 +107,31 @@ namespace fad2.Backend
             return mimeType;
         }
 
-        public bool UploadFile(string filename, out long filesize )
+        public bool UploadFile(string filename, out long filesize)
         {
-            string url= $"{AddSlash(Settings.FlashAirUrl)}{UploadPrefix}";
+            string url = $"{AddSlash(Settings.FlashAirUrl)}{UploadPrefix}";
             _log.Debug($"Uploading {filename} to {url}");
-            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
-            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+            var boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+            var boundarybytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
 
-            HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(url);
+            var wr = (HttpWebRequest) WebRequest.Create(url);
             wr.ServicePoint.Expect100Continue = false;
             wr.ContentType = "multipart/form-data; boundary=" + boundary;
             wr.Method = "POST";
             wr.KeepAlive = true;
-            wr.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            wr.Credentials = CredentialCache.DefaultCredentials;
 
-            Stream rs = wr.GetRequestStream();
+            var rs = wr.GetRequestStream();
             rs.Write(boundarybytes, 0, boundarybytes.Length);
-            string localFileName = Path.GetFileName(filename);
-            string contentType = GetMimeType(filename);
+            var localFileName = Path.GetFileName(filename);
+            var contentType = GetMimeType(filename);
             string header = $"Content-Disposition: form-data; name=\"file\"; filename=\"{localFileName}\"\r\nContent-Type: {contentType}\r\n\r\n";
-            byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+            var headerbytes = Encoding.UTF8.GetBytes(header);
             rs.Write(headerbytes, 0, headerbytes.Length);
 
-            FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            
-            byte[] buffer = new byte[4096];
+            var fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+
+            var buffer = new byte[4096];
             int bytesRead;
             while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
             {
@@ -140,19 +140,19 @@ namespace fad2.Backend
             fileStream.Close();
             filesize = bytesRead;
 
-            byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+            var trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
             rs.Write(trailer, 0, trailer.Length);
             rs.Close();
 
             WebResponse wresp = null;
-            
+
             try
             {
                 wresp = wr.GetResponse();
-                Stream stream2 = wresp.GetResponseStream();
-                StreamReader reader2 = new StreamReader(stream2);
+                var stream2 = wresp.GetResponseStream();
+                var reader2 = new StreamReader(stream2);
                 var response = reader2.ReadToEnd();
-               _log.Debug($"File uploaded, server response is: {response}");
+                _log.Debug($"File uploaded, server response is: {response}");
                 return response.ToLower().Contains("success");
             }
             catch (Exception ex)

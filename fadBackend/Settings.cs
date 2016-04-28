@@ -1,7 +1,7 @@
 ﻿namespace fad2.Backend
 {
     /// <summary>
-    /// Card Settings
+    ///     Card Settings
     /// </summary>
     public class Settings
     {
@@ -115,7 +115,7 @@
 
 
         /// <summary>
-        /// Version from current Card
+        ///     Version from current Card
         /// </summary>
         public string Version
         {

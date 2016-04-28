@@ -10,7 +10,6 @@ using fad2.UI.Properties;
 using fad2.UI.UserControls;
 using log4net;
 using MetroFramework;
-using MetroFramework.Components;
 using MetroFramework.Controls;
 
 namespace fad2.UI
@@ -40,9 +39,9 @@ namespace fad2.UI
         {
             InitializeComponent();
             SetCombos();
-            
+
             LoadProgramSettings();
-            var backImageTimer = new Timer { Interval = _programSettings.BackgroundInterval*1000 };
+            var backImageTimer = new Timer {Interval = _programSettings.BackgroundInterval*1000};
             backImageTimer.Tick += _backImageTimer_Tick;
             if (_programSettings.ShowTiles)
             {
@@ -51,7 +50,6 @@ namespace fad2.UI
 
             DisableControls();
         }
-
 
 
         private void LoadProgramSettings()
@@ -193,7 +191,9 @@ namespace fad2.UI
 
         private void SettingsPanel_Resize(object sender, EventArgs e)
         {
-            if (!_programSettings.ShowTiles) { return;
+            if (!_programSettings.ShowTiles)
+            {
+                return;
             }
             AddTiles();
             ChangeImages();

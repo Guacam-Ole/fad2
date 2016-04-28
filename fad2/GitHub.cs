@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using fad2.Backend.Github;
@@ -11,6 +10,7 @@ namespace fad2.UI
     public partial class GitHub : UserControl
     {
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public GitHub()
         {
             InitializeComponent();
@@ -27,20 +27,19 @@ namespace fad2.UI
             return (from pipeline in board.Pipelines where pipeline.Issues.Any(issue => issue.Number == issueNumber) select pipeline.Name).FirstOrDefault();
         }
 
- 
 
         private void LoadGitHubValues()
         {
-            var gitHubTop = new GithubTop { Dock = DockStyle.Top };
+            var gitHubTop = new GithubTop {Dock = DockStyle.Top};
             Controls.Add(gitHubTop);
             Application.DoEvents();
-            
-            var allIssues = Backend.Github.GitHub.GetIssues($"{Application.StartupPath}\\github.cache", Properties.Settings.Default.GIthubAuthor,Properties.Settings.Default.GithubRepo);
+
+            var allIssues = Backend.Github.GitHub.GetIssues($"{Application.StartupPath}\\github.cache", Properties.Settings.Default.GIthubAuthor, Properties.Settings.Default.GithubRepo);
             if (allIssues == null) return;
-            var board=Backend.Github.GitHub.GetBoard($"{Application.StartupPath}\\zenhub.cache", Properties.Settings.Default.GIthubAuthor, Properties.Settings.Default.GithubRepo);
+            var board = Backend.Github.GitHub.GetBoard($"{Application.StartupPath}\\zenhub.cache", Properties.Settings.Default.GIthubAuthor, Properties.Settings.Default.GithubRepo);
             var counter = 0;
             Controls.Clear();
-            
+
             foreach (var issue in allIssues)
             {
                 counter++;
@@ -49,8 +48,7 @@ namespace fad2.UI
                     Tag = counter,
                     IsBug = issue.IsBug,
                     IsFeatureRequest = issue.IsWish,
-                    IssueComment = issue.Comment, 
-
+                    IssueComment = issue.Comment,
                     Pipeline = GetPipeLineForIssue(board, issue.Number),
                     Comments = issue.Comments?.Select(cm => cm.Comment).ToList(),
                     Dock = DockStyle.Top

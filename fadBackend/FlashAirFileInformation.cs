@@ -3,16 +3,16 @@ using System.Reflection;
 using log4net;
 
 namespace fad2.Backend
-{              
+{
     /// <summary>
-    /// Informations for a single File on Flashair-card
+    ///     Informations for a single File on Flashair-card
     /// </summary>
     public class FlashAirFileInformation
     {
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Create new Information-Object from returnstring
+        ///     Create new Information-Object from returnstring
         /// </summary>
         /// <param name="originalData">String returned by api</param>
         public FlashAirFileInformation(string originalData)
@@ -33,7 +33,9 @@ namespace fad2.Backend
             CalcDate();
         }
 
-        public FlashAirFileInformation() { }
+        public FlashAirFileInformation()
+        {
+        }
 
         public string Extension
         {
@@ -45,55 +47,67 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Absolute Directory
+        ///     Absolute Directory
         /// </summary>
         public string Directory { get; set; }
+
         /// <summary>
-        /// Filename
+        ///     Filename
         /// </summary>
         public string Filename { get; set; }
+
         /// <summary>
-        /// Filesize
+        ///     Filesize
         /// </summary>
         public int Size { get; set; }
+
         /// <summary>
-        /// File Attributes
+        ///     File Attributes
         /// </summary>
         public int Attributes { get; set; }
+
         /// <summary>
-        /// Date Attributes
+        ///     Date Attributes
         /// </summary>
         public int DateAttributes { get; set; }
+
         /// <summary>
-        /// Time Attributes
+        ///     Time Attributes
         /// </summary>
         public int TimeAttributes { get; set; }
+
         /// <summary>
-        /// File is Archived?
+        ///     File is Archived?
         /// </summary>
         public bool Archive { get; set; }
+
         /// <summary>
-        /// File is Volume?
+        ///     File is Volume?
         /// </summary>
         public bool IsVolume { get; set; }
+
         /// <summary>
-        /// File is Directory?
+        ///     File is Directory?
         /// </summary>
         public bool IsDirectory { get; set; }
+
         /// <summary>
-        /// FIle is Systemfile?
+        ///     FIle is Systemfile?
         /// </summary>
         public bool SystemFile { get; set; }
+
         /// <summary>
-        /// File is Hidden?
+        ///     File is Hidden?
         /// </summary>
         public bool Hidden { get; set; }
+
         /// <summary>
-        /// File is Readonly?
+        ///     File is Readonly?
         /// </summary>
         public bool ReadOnly { get; set; }
+
         /// <summary>
-        /// Date the Picture is taken
+        ///     Date the Picture is taken
         /// </summary>
         public DateTime PictureTaken { get; set; }
 

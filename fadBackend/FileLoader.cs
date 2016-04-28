@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace fad2.Backend
 {
     /// <summary>
-    /// Methods to load local files
+    ///     Methods to load local files
     /// </summary>
     public class FileLoader
     {
@@ -17,7 +17,7 @@ namespace fad2.Backend
         private List<SingleFileSetting> _allLines;
 
         /// <summary>
-        /// Load a file
+        ///     Load a file
         /// </summary>
         /// <param name="fileName">filename</param>
         /// <returns>Settings</returns>
@@ -47,7 +47,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Save Program settings
+        ///     Save Program settings
         /// </summary>
         /// <param name="settings">Settings</param>
         /// <param name="filename">File to save to</param>
@@ -57,7 +57,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Load program settings
+        ///     Load program settings
         /// </summary>
         /// <param name="filename">Settingsfile</param>
         /// <returns>Settings</returns>
@@ -78,7 +78,7 @@ namespace fad2.Backend
         }
 
         /// <summary>
-        /// Save Flashair-Settingsfile
+        ///     Save Flashair-Settingsfile
         /// </summary>
         /// <param name="version">FAD-Version</param>
         /// <param name="fileName">Filename</param>
@@ -109,17 +109,17 @@ namespace fad2.Backend
             File.WriteAllLines(fileName, configFileContent);
         }
 
-        private void GetCategorizedValues(Settings settings, out Dictionary<string, string> vendorValues,out Dictionary<string, string> sdWlanValues)
+        private void GetCategorizedValues(Settings settings, out Dictionary<string, string> vendorValues, out Dictionary<string, string> sdWlanValues)
         {
             vendorValues = new Dictionary<string, string>();
             sdWlanValues = new Dictionary<string, string>();
 
             foreach (var property in settings.GetType().GetProperties())
             {
-                var customAttribute =  (SettingAttribute) property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
+                var customAttribute = (SettingAttribute) property.GetCustomAttributes(typeof(SettingAttribute), true).FirstOrDefault();
                 if (customAttribute == null) continue;
                 var value = property.GetValue(settings, null);
-                string strValue ;
+                string strValue;
                 if (value == null)
                 {
                     continue;

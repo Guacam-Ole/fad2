@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
-using fad2.Backend;
 using fad2.Backend.Github;
 
 namespace fad2.UI.UserControls
 {
     public partial class IssueComment : UserControl
     {
-        private DateTime _date;
-
         private readonly int _minHeight = 40;
+        private DateTime _date;
 
         public IssueComment()
         {
