@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using log4net;
 
@@ -36,6 +38,7 @@ namespace fad2.Backend
 
         private const string CommandPrefix = "command.cgi?op=";
         private const string ThumbnailPrefix = "thumbnail.cgi?";
+        private const string UploadPrefix = "upload.cgi";
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
@@ -84,6 +87,83 @@ namespace fad2.Backend
             return value;
         }
 
+        public bool SetUploadDirectory(string directory)
+        {
+            string command = $"{AddSlash(Settings.FlashAirUrl)}{UploadPrefix}?WRITEPROTECT=ON&UPDIR={directory}";
+            var contents = new LongRunningWebClient().DownloadString(command);
+            return contents == "SUCCESS";
+            //  http://flashair/upload.cgi?UPDIR=/DCIM/101__TSB
+        }
+
+        private string GetMimeType(string fileName)
+        {
+            string mimeType = "application/unknown";
+            string ext = Path.GetExtension(fileName).ToLower();
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            if (regKey?.GetValue("Content Type") != null)
+            {
+                mimeType = regKey.GetValue("Content Type").ToString();
+            }
+            return mimeType;
+        }
+
+        public bool UploadFile(string filename )
+        {
+            string url= $"{AddSlash(Settings.FlashAirUrl)}{UploadPrefix}";
+            _log.Debug($"Uploading {filename} to {url}");
+            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+
+            HttpWebRequest wr = (HttpWebRequest)WebRequest.Create(url);
+            wr.ServicePoint.Expect100Continue = false;
+            wr.ContentType = "multipart/form-data; boundary=" + boundary;
+            wr.Method = "POST";
+            wr.KeepAlive = true;
+            wr.Credentials = System.Net.CredentialCache.DefaultCredentials;
+
+            Stream rs = wr.GetRequestStream();
+            rs.Write(boundarybytes, 0, boundarybytes.Length);
+            string localFileName = Path.GetFileName(filename);
+            string contentType = GetMimeType(filename);
+            string header = $"Content-Disposition: form-data; name=\"file\"; filename=\"{localFileName}\"\r\nContent-Type: {contentType}\r\n\r\n";
+            byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+            rs.Write(headerbytes, 0, headerbytes.Length);
+
+            FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+            {
+                rs.Write(buffer, 0, bytesRead);
+            }
+            fileStream.Close();
+
+            byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+            rs.Write(trailer, 0, trailer.Length);
+            rs.Close();
+
+            WebResponse wresp = null;
+            
+            try
+            {
+                wresp = wr.GetResponse();
+                Stream stream2 = wresp.GetResponseStream();
+                StreamReader reader2 = new StreamReader(stream2);
+               _log.Debug($"File uploaded, server response is: {reader2.ReadToEnd()}");
+                return reader2.ReadToEnd().ToLower().Contains("success");
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error uploading file", ex);
+                wresp?.Close();
+            }
+            finally
+            {
+                wr = null;
+            }
+            return false;
+        }
+
         /// <summary>
         ///     Download thumb for an image
         /// </summary>
@@ -99,7 +179,7 @@ namespace fad2.Backend
                 {
                     return null;
                 }
-                var extension = filename.Substring(filename.LastIndexOf('.') + 1);
+                var extension = Path.GetExtension(filename);
                 if (!validExtensions.Contains(extension.ToLower()))
                 {
                     // No valid Image, no download
@@ -176,7 +256,7 @@ namespace fad2.Backend
             try
             {
                 string command = $"{AddSlash(Settings.FlashAirUrl)}upload.cgi?DEL={AddSlash(path)}{filename}";
-                var returnValue = new LongRunningWebClient(10,5).DownloadString(command);
+                var returnValue = new LongRunningWebClient(10, 5).DownloadString(command);
                 _log.Debug($"Deletion successful for {filename}. Return:{returnValue}");
                 return true;
             }

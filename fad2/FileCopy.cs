@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
 using fad2.Backend;
 using fad2.UI.Properties;
@@ -28,7 +27,10 @@ namespace fad2.UI
         private readonly string[] _movieFilesTypes = Properties.Settings.Default.VideoFileTypes.Split(',');
 
         private readonly string _programSettingsFile = $"{Application.StartupPath}\\{Properties.Settings.Default.ProgramSettingsFile}";
+        private List<string> _selectedFilesLeft = new List<string>();
 
+
+        private List<string> _selectedFilesRight = new List<string>();
 
 
         /// <summary>
@@ -141,6 +143,7 @@ namespace fad2.UI
 
         private void LoadFlashairInfoAsync(string path)
         {
+            _currentFlashairPath = path;
             var worker = new BackgroundWorker();
             LeftPanel.Controls.Clear();
             path = path.Replace("\\", "/");
@@ -151,6 +154,8 @@ namespace fad2.UI
             worker.RunWorkerCompleted += WorkerListFilesCompleted;
             worker.RunWorkerAsync(path);
         }
+
+        private string _currentFlashairPath;
 
         private void LoadFlashairThumbsAsync()
         {
@@ -560,7 +565,6 @@ namespace fad2.UI
             {
                 // Could not download Thumb after 5 retries. Well. Just a thumb. Let's ignore this
                 _log.Error(ex);
-               
             }
         }
 
@@ -604,7 +608,7 @@ namespace fad2.UI
                         var tile = new MetroTile
                         {
                             Text = folder.Name, Width = _metroTileSize, Height = _metroTileSize, Style = MetroColorStyle.Yellow,
-                            Tag = folder.FullName
+                            Tag = folder
                         };
                         tile.Click += RightTile_Click;
                         FileTooltip.SetToolTip(tile, folder.Name);
@@ -622,7 +626,11 @@ namespace fad2.UI
                             continue;
                         }
 
-                        var tile = new MetroTile {Text = fileInfo.Name, Width = _metroTileSize, Height = _metroTileSize};
+                        var tile = new MetroTile
+                        {
+                            Text = fileInfo.Name, Width = _metroTileSize, Height = _metroTileSize,
+                            Tag = fileInfo
+                        };
                         tile.Click += RightTile_Click;
                         FileTooltip.SetToolTip(tile, fileInfo.Name);
                         TryGetThumb(tile, fileInfo);
@@ -641,7 +649,6 @@ namespace fad2.UI
             }
         }
 
-     
 
         private bool ThumbnailCallback()
         {
@@ -756,6 +763,56 @@ namespace fad2.UI
             Application.DoEvents();
         }
 
+        private void MarkElement(List<string> list, string filename, MetroTile tile)
+        {
+            if (list.Contains(filename))
+            {
+                tile.Style = MetroColorStyle.Blue;
+                list.Remove(filename);
+                tile.UseTileImage = true;
+            }
+            else
+            {
+                tile.Style = MetroColorStyle.Magenta;
+                list.Add(filename);
+                tile.UseTileImage = false;
+            }
+            ShowCopyPanel();
+        }
+
+        private void ShowCopyPanel()
+        {
+            CopyToFlashAir.Visible = _selectedFilesRight.Count > 0;
+            CopyFromFlashAir.Visible = _selectedFilesLeft.Count > 0;
+            CopyPanel.Visible = _selectedFilesRight.Count > 0 || _selectedFilesLeft.Count > 0;
+        }
+
+        private void RightTile_Click(object sender, EventArgs e)
+        {
+            var tile = (MetroTile) sender;
+
+            if (tile.Tag == null) return;
+            if (tile.Tag is string)
+            {
+                // ".."
+                RightTiles.Controls.Clear();
+                LoadLocalContents((string) tile.Tag);
+                _selectedFilesRight = new List<string>();
+            }
+            else if (tile.Tag is DirectoryInfo)
+            {
+                var dir = (DirectoryInfo) tile.Tag;
+                RightTiles.Controls.Clear();
+                LoadLocalContents(dir.FullName);
+                _selectedFilesRight = new List<string>();
+            }
+            else if (tile.Tag is FileInfo)
+            {
+                var file = (FileInfo) tile.Tag;
+                MarkElement(_selectedFilesRight, file.FullName, tile);
+            }
+        }
+
         private void LeftTile_Click(object sender, EventArgs e)
         {
             var tile = (MetroTile) sender;
@@ -765,29 +822,34 @@ namespace fad2.UI
                 if (_autoMode) return;
                 LeftPanel.Controls.Clear();
                 LoadFlashairInfoAsync(Path.Combine(fileInfo.Directory, fileInfo.Filename));
+                _selectedFilesLeft = new List<string>();
             }
             else
             {
+                MarkElement(_selectedFilesLeft, fileInfo.Filename, tile);
+                Application.DoEvents();
                 ShowPreviewFromTile(tile);
             }
-        }
-
-        private void RightTile_Click(object sender, EventArgs e)
-        {
-            var tile = (MetroTile) sender;
-            if (tile.Tag == null) return;
-            string path = (string) tile.Tag;
-
-            RightTiles.Controls.Clear();
-            LoadLocalContents(path);
         }
 
         private void LocalPath_KeyDown(object sender, KeyEventArgs e)
         {
             var path = (MetroTextBox) sender;
-            if (e.KeyValue ==(int) Keys.Enter)
+            if (e.KeyValue == (int) Keys.Enter)
             {
                 LoadLocalContents(path.Text);
+            }
+        }
+
+        private void CopyToFlashAir_Click(object sender, EventArgs e)
+        {
+            _connection.SetUploadDirectory(_currentFlashairPath);
+
+            foreach (var filename in _selectedFilesRight)
+            {
+                byte[] bytes = File.ReadAllBytes(filename);
+                string tragetFIlename = filename.Substring(filename.LastIndexOf("\\") + 1);
+                _connection.UploadFile(filename);
             }
         }
     }
