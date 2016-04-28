@@ -161,7 +161,7 @@
     <value>Copying files...</value>
   </data>
   <data name="CopyFileOfAtSpeed" xml:space="preserve">
-    <value>Copy file {0} of {1}: [{2}] Current Speed:{3:N} {4}</value>
+    <value>Copy file {0} of {1}: [{2}] Current Speed:{3} </value>
   </data>
   <data name="DoneCopying" xml:space="preserve">
     <value>Done copying.</value>

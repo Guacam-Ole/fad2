@@ -106,7 +106,7 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copy file {0} of {1}: [{2}] Current Speed:{3:N} {4}.
+        ///   Looks up a localized string similar to Copy file {0} of {1}: [{2}] Current Speed:{3} .
         /// </summary>
         internal static string CopyFileOfAtSpeed {
             get {

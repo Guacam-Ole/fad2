@@ -107,7 +107,7 @@ namespace fad2.Backend
             return mimeType;
         }
 
-        public bool UploadFile(string filename )
+        public bool UploadFile(string filename, out long filesize )
         {
             string url= $"{AddSlash(Settings.FlashAirUrl)}{UploadPrefix}";
             _log.Debug($"Uploading {filename} to {url}");
@@ -130,6 +130,7 @@ namespace fad2.Backend
             rs.Write(headerbytes, 0, headerbytes.Length);
 
             FileStream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            
             byte[] buffer = new byte[4096];
             int bytesRead;
             while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
@@ -137,6 +138,7 @@ namespace fad2.Backend
                 rs.Write(buffer, 0, bytesRead);
             }
             fileStream.Close();
+            filesize = bytesRead;
 
             byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
             rs.Write(trailer, 0, trailer.Length);
@@ -149,8 +151,9 @@ namespace fad2.Backend
                 wresp = wr.GetResponse();
                 Stream stream2 = wresp.GetResponseStream();
                 StreamReader reader2 = new StreamReader(stream2);
-               _log.Debug($"File uploaded, server response is: {reader2.ReadToEnd()}");
-                return reader2.ReadToEnd().ToLower().Contains("success");
+                var response = reader2.ReadToEnd();
+               _log.Debug($"File uploaded, server response is: {response}");
+                return response.ToLower().Contains("success");
             }
             catch (Exception ex)
             {
