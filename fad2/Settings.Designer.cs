@@ -43,40 +43,39 @@ namespace fad2.UI
             this.CardSettingsTab = new MetroFramework.Controls.MetroTabControl();
             this.ApplicationSettings = new MetroFramework.Controls.MetroTabPage();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.CustomDirHelp = new MetroFramework.Controls.MetroLink();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.CardSettingsDisable = new MetroFramework.Controls.MetroTabPage();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
-            this.CardSettingsVendor = new MetroFramework.Controls.MetroTabPage();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.DontDoAnythingStupid = new MetroFramework.Controls.MetroLabel();
-            this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
             this.Backgroundlocation = new fad2.UI.UserControls.SettingsFile();
             this.ShowTiles = new fad2.UI.UserControls.SettingsBoolean();
             this.ShowBackimages = new fad2.UI.UserControls.SettingsBoolean();
             this.BackgroundInterval = new fad2.UI.UserControls.SettingsTimeSlider();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.LoadThumbs = new fad2.UI.UserControls.SettingsBoolean();
             this.StartupPath = new fad2.UI.UserControls.SettingsString();
             this.FiletypesToCopy = new fad2.UI.UserControls.SettingsCombo();
             this.DeleteFiles = new fad2.UI.UserControls.SettingsBoolean();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.ServiceInterval = new fad2.UI.UserControls.SettingsTimeSlider();
             this.ServiceActions = new fad2.UI.UserControls.SettingsComboButton();
             this.CurrentServiceStatus = new fad2.UI.UserControls.SettingsLabel();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.FilesExist = new fad2.UI.UserControls.SettingsCombo();
+            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.PathPreview = new fad2.UI.UserControls.SettingsLabel();
+            this.CustomDirHelp = new MetroFramework.Controls.MetroLink();
             this.CustomFolderCreation = new fad2.UI.UserControls.SettingsString();
             this.DateCreation = new fad2.UI.UserControls.SettingsCombo();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.MultiCards = new fad2.UI.UserControls.SettingsCombo();
             this.LocalPath = new fad2.UI.UserControls.SettingsFile();
             this.ApplicationUrl = new fad2.UI.UserControls.SettingsString();
+            this.CardSettingsDisable = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.DisableUploads = new fad2.UI.UserControls.SettingsBoolean();
             this.DisableThumbnails = new fad2.UI.UserControls.SettingsBoolean();
             this.DisableCommand = new fad2.UI.UserControls.SettingsBoolean();
             this.DisableDownload = new fad2.UI.UserControls.SettingsBoolean();
+            this.CardSettingsVendor = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.DontDoAnythingStupid = new MetroFramework.Controls.MetroLabel();
             this.VendorWebDav = new fad2.UI.UserControls.SettingsCombo();
             this.VendorFirmware = new fad2.UI.UserControls.SettingsString();
             this.VendorCode = new fad2.UI.UserControls.SettingsString();
@@ -100,6 +99,7 @@ namespace fad2.UI
             this.VendorNetworkKey = new fad2.UI.UserControls.SettingsString();
             this.VendorAppname = new fad2.UI.UserControls.SettingsString();
             this.VendorAppInfo = new fad2.UI.UserControls.SettingsString();
+            this.CardSettingsNetwork = new MetroFramework.Controls.MetroTabPage();
             this.WlansdProxyPort = new fad2.UI.UserControls.SettingsString();
             this.Wlansd_ProxyServer = new fad2.UI.UserControls.SettingsString();
             this.WlansdUseProxy = new fad2.UI.UserControls.SettingsBoolean();
@@ -294,194 +294,6 @@ namespace fad2.UI
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
             // 
-            // metroLabel4
-            // 
-            this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(7, -5);
-            this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(47, 19);
-            this.metroLabel4.TabIndex = 14;
-            this.metroLabel4.Text = "Styling";
-            // 
-            // metroPanel2
-            // 
-            this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel2.Controls.Add(this.ServiceInterval);
-            this.metroPanel2.Controls.Add(this.ServiceActions);
-            this.metroPanel2.Controls.Add(this.CurrentServiceStatus);
-            this.metroPanel2.Controls.Add(this.metroLabel5);
-            this.metroPanel2.HorizontalScrollbarBarColor = true;
-            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(3, 765);
-            this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(793, 192);
-            this.metroPanel2.TabIndex = 21;
-            this.metroPanel2.VerticalScrollbarBarColor = true;
-            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(8, 0);
-            this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(86, 19);
-            this.metroLabel5.TabIndex = 14;
-            this.metroLabel5.Text = "Fad2 Service:";
-            // 
-            // metroPanel1
-            // 
-            this.metroPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel1.Controls.Add(this.PathPreview);
-            this.metroPanel1.Controls.Add(this.CustomDirHelp);
-            this.metroPanel1.Controls.Add(this.CustomFolderCreation);
-            this.metroPanel1.Controls.Add(this.DateCreation);
-            this.metroPanel1.Controls.Add(this.metroLabel3);
-            this.metroPanel1.Controls.Add(this.MultiCards);
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(3, 311);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(793, 213);
-            this.metroPanel1.TabIndex = 12;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // CustomDirHelp
-            // 
-            this.CustomDirHelp.Location = new System.Drawing.Point(632, 137);
-            this.CustomDirHelp.Name = "CustomDirHelp";
-            this.CustomDirHelp.Size = new System.Drawing.Size(75, 23);
-            this.CustomDirHelp.TabIndex = 19;
-            this.CustomDirHelp.Text = "Help";
-            this.CustomDirHelp.UseSelectable = true;
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(8, -3);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(162, 19);
-            this.metroLabel3.TabIndex = 13;
-            this.metroLabel3.Text = "Automatic folder creation:";
-            // 
-            // CardSettingsDisable
-            // 
-            this.CardSettingsDisable.Controls.Add(this.metroLabel6);
-            this.CardSettingsDisable.Controls.Add(this.DisableUploads);
-            this.CardSettingsDisable.Controls.Add(this.DisableThumbnails);
-            this.CardSettingsDisable.Controls.Add(this.DisableCommand);
-            this.CardSettingsDisable.Controls.Add(this.DisableDownload);
-            this.CardSettingsDisable.HorizontalScrollbarBarColor = true;
-            this.CardSettingsDisable.HorizontalScrollbarHighlightOnWheel = false;
-            this.CardSettingsDisable.HorizontalScrollbarSize = 10;
-            this.CardSettingsDisable.Location = new System.Drawing.Point(4, 38);
-            this.CardSettingsDisable.Name = "CardSettingsDisable";
-            this.CardSettingsDisable.Size = new System.Drawing.Size(826, 556);
-            this.CardSettingsDisable.TabIndex = 3;
-            this.CardSettingsDisable.Text = "Disable Functions";
-            this.CardSettingsDisable.VerticalScrollbarBarColor = true;
-            this.CardSettingsDisable.VerticalScrollbarHighlightOnWheel = false;
-            this.CardSettingsDisable.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel6
-            // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(3, 16);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(464, 19);
-            this.metroLabel6.TabIndex = 33;
-            this.metroLabel6.Text = "For security reasons you can disable single functions over WiFi for the FlashAir." +
-    "";
-            // 
-            // CardSettingsVendor
-            // 
-            this.CardSettingsVendor.AutoScroll = true;
-            this.CardSettingsVendor.Controls.Add(this.metroLabel2);
-            this.CardSettingsVendor.Controls.Add(this.DontDoAnythingStupid);
-            this.CardSettingsVendor.Controls.Add(this.VendorWebDav);
-            this.CardSettingsVendor.Controls.Add(this.VendorFirmware);
-            this.CardSettingsVendor.Controls.Add(this.VendorCode);
-            this.CardSettingsVendor.Controls.Add(this.VendorUploadEnabled);
-            this.CardSettingsVendor.Controls.Add(this.VendorUploadDir);
-            this.CardSettingsVendor.Controls.Add(this.VendorTimezone);
-            this.CardSettingsVendor.Controls.Add(this.VendorStaRetry);
-            this.CardSettingsVendor.Controls.Add(this.VendorProductCode);
-            this.CardSettingsVendor.Controls.Add(this.VendorNoiseCancel);
-            this.CardSettingsVendor.Controls.Add(this.VendorMasterCode);
-            this.CardSettingsVendor.Controls.Add(this.VendorLuaWrite);
-            this.CardSettingsVendor.Controls.Add(this.VendorLuaPathBoot);
-            this.CardSettingsVendor.Controls.Add(this.VendorLock);
-            this.CardSettingsVendor.Controls.Add(this.VendorIfMode);
-            this.CardSettingsVendor.Controls.Add(this.VendorDns);
-            this.CardSettingsVendor.Controls.Add(this.VendorBootScreenPath);
-            this.CardSettingsVendor.Controls.Add(this.VendorAppMode);
-            this.CardSettingsVendor.Controls.Add(this.VendorAppAutoTime);
-            this.CardSettingsVendor.Controls.Add(this.VendorCid);
-            this.CardSettingsVendor.Controls.Add(this.VendorSSID);
-            this.CardSettingsVendor.Controls.Add(this.VendorNetworkKey);
-            this.CardSettingsVendor.Controls.Add(this.VendorAppname);
-            this.CardSettingsVendor.Controls.Add(this.VendorAppInfo);
-            this.CardSettingsVendor.HorizontalScrollbar = true;
-            this.CardSettingsVendor.HorizontalScrollbarBarColor = true;
-            this.CardSettingsVendor.HorizontalScrollbarHighlightOnWheel = false;
-            this.CardSettingsVendor.HorizontalScrollbarSize = 10;
-            this.CardSettingsVendor.Location = new System.Drawing.Point(4, 38);
-            this.CardSettingsVendor.Name = "CardSettingsVendor";
-            this.CardSettingsVendor.Size = new System.Drawing.Size(826, 556);
-            this.CardSettingsVendor.TabIndex = 0;
-            this.CardSettingsVendor.Text = "Vendor";
-            this.CardSettingsVendor.VerticalScrollbar = true;
-            this.CardSettingsVendor.VerticalScrollbarBarColor = true;
-            this.CardSettingsVendor.VerticalScrollbarHighlightOnWheel = false;
-            this.CardSettingsVendor.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(7, 30);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(510, 19);
-            this.metroLabel2.TabIndex = 32;
-            this.metroLabel2.Text = "Better check the documentation BEFORE you change a setting you do not understand." +
-    "";
-            // 
-            // DontDoAnythingStupid
-            // 
-            this.DontDoAnythingStupid.AutoSize = true;
-            this.DontDoAnythingStupid.Location = new System.Drawing.Point(7, 11);
-            this.DontDoAnythingStupid.Name = "DontDoAnythingStupid";
-            this.DontDoAnythingStupid.Size = new System.Drawing.Size(459, 19);
-            this.DontDoAnythingStupid.TabIndex = 31;
-            this.DontDoAnythingStupid.Text = "Please be aware that you can really screw up here if you enter wrong values.. ";
-            // 
-            // CardSettingsNetwork
-            // 
-            this.CardSettingsNetwork.Controls.Add(this.WlansdProxyPort);
-            this.CardSettingsNetwork.Controls.Add(this.Wlansd_ProxyServer);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdUseProxy);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDnsAlternate);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDns);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdGateway);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdSubnet);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdIpAddress);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdDhcp);
-            this.CardSettingsNetwork.Controls.Add(this.WlansdId);
-            this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
-            this.CardSettingsNetwork.HorizontalScrollbarHighlightOnWheel = false;
-            this.CardSettingsNetwork.HorizontalScrollbarSize = 10;
-            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 38);
-            this.CardSettingsNetwork.Name = "CardSettingsNetwork";
-            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 556);
-            this.CardSettingsNetwork.TabIndex = 1;
-            this.CardSettingsNetwork.Text = "WLANSD";
-            this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
-            this.CardSettingsNetwork.VerticalScrollbarHighlightOnWheel = false;
-            this.CardSettingsNetwork.VerticalScrollbarSize = 10;
-            // 
             // Backgroundlocation
             // 
             this.Backgroundlocation.DirectoryOnly = true;
@@ -544,6 +356,15 @@ namespace fad2.UI
             this.BackgroundInterval.ValueType = fad2.UI.UserControls.SettingsTimeSlider.ValueTypes.Second;
             this.BackgroundInterval.Warning = null;
             // 
+            // metroLabel4
+            // 
+            this.metroLabel4.AutoSize = true;
+            this.metroLabel4.Location = new System.Drawing.Point(7, -5);
+            this.metroLabel4.Name = "metroLabel4";
+            this.metroLabel4.Size = new System.Drawing.Size(47, 19);
+            this.metroLabel4.TabIndex = 14;
+            this.metroLabel4.Text = "Styling";
+            // 
             // LoadThumbs
             // 
             this.LoadThumbs.InternalName = null;
@@ -604,6 +425,25 @@ namespace fad2.UI
             this.DeleteFiles.Value = false;
             this.DeleteFiles.Warning = null;
             // 
+            // metroPanel2
+            // 
+            this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel2.Controls.Add(this.ServiceInterval);
+            this.metroPanel2.Controls.Add(this.ServiceActions);
+            this.metroPanel2.Controls.Add(this.CurrentServiceStatus);
+            this.metroPanel2.Controls.Add(this.metroLabel5);
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(3, 765);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(793, 192);
+            this.metroPanel2.TabIndex = 21;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
+            this.metroPanel2.Visible = false;
+            // 
             // ServiceInterval
             // 
             this.ServiceInterval.InternalName = null;
@@ -651,6 +491,15 @@ namespace fad2.UI
             this.CurrentServiceStatus.Value = "Not Installed";
             this.CurrentServiceStatus.Warning = null;
             // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.Location = new System.Drawing.Point(8, 0);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(86, 19);
+            this.metroLabel5.TabIndex = 14;
+            this.metroLabel5.Text = "Fad2 Service:";
+            // 
             // FilesExist
             // 
             this.FilesExist.DataSource = null;
@@ -666,6 +515,26 @@ namespace fad2.UI
             this.FilesExist.Value = null;
             this.FilesExist.Warning = null;
             // 
+            // metroPanel1
+            // 
+            this.metroPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel1.Controls.Add(this.PathPreview);
+            this.metroPanel1.Controls.Add(this.CustomDirHelp);
+            this.metroPanel1.Controls.Add(this.CustomFolderCreation);
+            this.metroPanel1.Controls.Add(this.DateCreation);
+            this.metroPanel1.Controls.Add(this.metroLabel3);
+            this.metroPanel1.Controls.Add(this.MultiCards);
+            this.metroPanel1.HorizontalScrollbarBarColor = true;
+            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.HorizontalScrollbarSize = 10;
+            this.metroPanel1.Location = new System.Drawing.Point(3, 311);
+            this.metroPanel1.Name = "metroPanel1";
+            this.metroPanel1.Size = new System.Drawing.Size(793, 213);
+            this.metroPanel1.TabIndex = 12;
+            this.metroPanel1.VerticalScrollbarBarColor = true;
+            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
             // PathPreview
             // 
             this.PathPreview.InternalName = null;
@@ -680,6 +549,15 @@ namespace fad2.UI
             this.PathPreview.UseSelectable = true;
             this.PathPreview.Value = "D:\\Images\\APPID\\2016-12-31\\Image.png";
             this.PathPreview.Warning = null;
+            // 
+            // CustomDirHelp
+            // 
+            this.CustomDirHelp.Location = new System.Drawing.Point(632, 137);
+            this.CustomDirHelp.Name = "CustomDirHelp";
+            this.CustomDirHelp.Size = new System.Drawing.Size(75, 23);
+            this.CustomDirHelp.TabIndex = 19;
+            this.CustomDirHelp.Text = "Help";
+            this.CustomDirHelp.UseSelectable = true;
             // 
             // CustomFolderCreation
             // 
@@ -714,6 +592,15 @@ namespace fad2.UI
             this.DateCreation.Value = null;
             this.DateCreation.Warning = null;
             this.DateCreation.ComboChanged += new System.EventHandler(this.DateCreation_ComboChanged);
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(8, -3);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(162, 19);
+            this.metroLabel3.TabIndex = 13;
+            this.metroLabel3.Text = "Automatic folder creation:";
             // 
             // MultiCards
             // 
@@ -764,6 +651,35 @@ namespace fad2.UI
             this.ApplicationUrl.UseSelectable = true;
             this.ApplicationUrl.Value = "http://flashair";
             this.ApplicationUrl.Warning = null;
+            // 
+            // CardSettingsDisable
+            // 
+            this.CardSettingsDisable.Controls.Add(this.metroLabel6);
+            this.CardSettingsDisable.Controls.Add(this.DisableUploads);
+            this.CardSettingsDisable.Controls.Add(this.DisableThumbnails);
+            this.CardSettingsDisable.Controls.Add(this.DisableCommand);
+            this.CardSettingsDisable.Controls.Add(this.DisableDownload);
+            this.CardSettingsDisable.HorizontalScrollbarBarColor = true;
+            this.CardSettingsDisable.HorizontalScrollbarHighlightOnWheel = false;
+            this.CardSettingsDisable.HorizontalScrollbarSize = 10;
+            this.CardSettingsDisable.Location = new System.Drawing.Point(4, 38);
+            this.CardSettingsDisable.Name = "CardSettingsDisable";
+            this.CardSettingsDisable.Size = new System.Drawing.Size(826, 556);
+            this.CardSettingsDisable.TabIndex = 3;
+            this.CardSettingsDisable.Text = "Disable Functions";
+            this.CardSettingsDisable.VerticalScrollbarBarColor = true;
+            this.CardSettingsDisable.VerticalScrollbarHighlightOnWheel = false;
+            this.CardSettingsDisable.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel6
+            // 
+            this.metroLabel6.AutoSize = true;
+            this.metroLabel6.Location = new System.Drawing.Point(3, 16);
+            this.metroLabel6.Name = "metroLabel6";
+            this.metroLabel6.Size = new System.Drawing.Size(464, 19);
+            this.metroLabel6.TabIndex = 33;
+            this.metroLabel6.Text = "For security reasons you can disable single functions over WiFi for the FlashAir." +
+    "";
             // 
             // DisableUploads
             // 
@@ -821,6 +737,67 @@ namespace fad2.UI
             this.DisableDownload.UseSelectable = true;
             this.DisableDownload.Value = false;
             this.DisableDownload.Warning = "Makes this program pretty useless (obviously)";
+            // 
+            // CardSettingsVendor
+            // 
+            this.CardSettingsVendor.AutoScroll = true;
+            this.CardSettingsVendor.Controls.Add(this.metroLabel2);
+            this.CardSettingsVendor.Controls.Add(this.DontDoAnythingStupid);
+            this.CardSettingsVendor.Controls.Add(this.VendorWebDav);
+            this.CardSettingsVendor.Controls.Add(this.VendorFirmware);
+            this.CardSettingsVendor.Controls.Add(this.VendorCode);
+            this.CardSettingsVendor.Controls.Add(this.VendorUploadEnabled);
+            this.CardSettingsVendor.Controls.Add(this.VendorUploadDir);
+            this.CardSettingsVendor.Controls.Add(this.VendorTimezone);
+            this.CardSettingsVendor.Controls.Add(this.VendorStaRetry);
+            this.CardSettingsVendor.Controls.Add(this.VendorProductCode);
+            this.CardSettingsVendor.Controls.Add(this.VendorNoiseCancel);
+            this.CardSettingsVendor.Controls.Add(this.VendorMasterCode);
+            this.CardSettingsVendor.Controls.Add(this.VendorLuaWrite);
+            this.CardSettingsVendor.Controls.Add(this.VendorLuaPathBoot);
+            this.CardSettingsVendor.Controls.Add(this.VendorLock);
+            this.CardSettingsVendor.Controls.Add(this.VendorIfMode);
+            this.CardSettingsVendor.Controls.Add(this.VendorDns);
+            this.CardSettingsVendor.Controls.Add(this.VendorBootScreenPath);
+            this.CardSettingsVendor.Controls.Add(this.VendorAppMode);
+            this.CardSettingsVendor.Controls.Add(this.VendorAppAutoTime);
+            this.CardSettingsVendor.Controls.Add(this.VendorCid);
+            this.CardSettingsVendor.Controls.Add(this.VendorSSID);
+            this.CardSettingsVendor.Controls.Add(this.VendorNetworkKey);
+            this.CardSettingsVendor.Controls.Add(this.VendorAppname);
+            this.CardSettingsVendor.Controls.Add(this.VendorAppInfo);
+            this.CardSettingsVendor.HorizontalScrollbar = true;
+            this.CardSettingsVendor.HorizontalScrollbarBarColor = true;
+            this.CardSettingsVendor.HorizontalScrollbarHighlightOnWheel = false;
+            this.CardSettingsVendor.HorizontalScrollbarSize = 10;
+            this.CardSettingsVendor.Location = new System.Drawing.Point(4, 38);
+            this.CardSettingsVendor.Name = "CardSettingsVendor";
+            this.CardSettingsVendor.Size = new System.Drawing.Size(826, 556);
+            this.CardSettingsVendor.TabIndex = 0;
+            this.CardSettingsVendor.Text = "Vendor";
+            this.CardSettingsVendor.VerticalScrollbar = true;
+            this.CardSettingsVendor.VerticalScrollbarBarColor = true;
+            this.CardSettingsVendor.VerticalScrollbarHighlightOnWheel = false;
+            this.CardSettingsVendor.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(7, 30);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(510, 19);
+            this.metroLabel2.TabIndex = 32;
+            this.metroLabel2.Text = "Better check the documentation BEFORE you change a setting you do not understand." +
+    "";
+            // 
+            // DontDoAnythingStupid
+            // 
+            this.DontDoAnythingStupid.AutoSize = true;
+            this.DontDoAnythingStupid.Location = new System.Drawing.Point(7, 11);
+            this.DontDoAnythingStupid.Name = "DontDoAnythingStupid";
+            this.DontDoAnythingStupid.Size = new System.Drawing.Size(459, 19);
+            this.DontDoAnythingStupid.TabIndex = 31;
+            this.DontDoAnythingStupid.Text = "Please be aware that you can really screw up here if you enter wrong values.. ";
             // 
             // VendorWebDav
             // 
@@ -1193,6 +1170,30 @@ namespace fad2.UI
             this.VendorAppInfo.UseSelectable = true;
             this.VendorAppInfo.Value = "";
             this.VendorAppInfo.Warning = "Must be 1-16 characters ";
+            // 
+            // CardSettingsNetwork
+            // 
+            this.CardSettingsNetwork.Controls.Add(this.WlansdProxyPort);
+            this.CardSettingsNetwork.Controls.Add(this.Wlansd_ProxyServer);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdUseProxy);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDnsAlternate);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDns);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdGateway);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdSubnet);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdIpAddress);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdDhcp);
+            this.CardSettingsNetwork.Controls.Add(this.WlansdId);
+            this.CardSettingsNetwork.HorizontalScrollbarBarColor = true;
+            this.CardSettingsNetwork.HorizontalScrollbarHighlightOnWheel = false;
+            this.CardSettingsNetwork.HorizontalScrollbarSize = 10;
+            this.CardSettingsNetwork.Location = new System.Drawing.Point(4, 38);
+            this.CardSettingsNetwork.Name = "CardSettingsNetwork";
+            this.CardSettingsNetwork.Size = new System.Drawing.Size(826, 556);
+            this.CardSettingsNetwork.TabIndex = 1;
+            this.CardSettingsNetwork.Text = "WLANSD";
+            this.CardSettingsNetwork.VerticalScrollbarBarColor = true;
+            this.CardSettingsNetwork.VerticalScrollbarHighlightOnWheel = false;
+            this.CardSettingsNetwork.VerticalScrollbarSize = 10;
             // 
             // WlansdProxyPort
             // 

@@ -21,10 +21,10 @@
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="ImageFileTypes" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">png,ping,jpg,jpeg,tif,tiff,raw</Value>
+      <Value Profile="(Default)">.png,.ping,.jpg,.jpeg,.tif,.tiff,.raw</Value>
     </Setting>
     <Setting Name="VideoFileTypes" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">mov,mpg,mpeg,mkv,avi</Value>
+      <Value Profile="(Default)">.mov,.mpg,.mpeg,.mkv,.avi</Value>
     </Setting>
   </Settings>
 </SettingsFile>

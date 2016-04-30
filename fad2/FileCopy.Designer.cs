@@ -31,7 +31,6 @@
             this.ProgressPanel = new MetroFramework.Controls.MetroPanel();
             this.Progress = new MetroFramework.Controls.MetroProgressBar();
             this.CurrentAction = new MetroFramework.Controls.MetroLabel();
-            this.CancelCopy = new MetroFramework.Controls.MetroButton();
             this.ImageInfoPanel = new MetroFramework.Controls.MetroPanel();
             this.ImageSizeContent = new MetroFramework.Controls.MetroLabel();
             this.ImageFilenameContent = new MetroFramework.Controls.MetroLabel();
@@ -43,12 +42,12 @@
             this.FileSplitter = new System.Windows.Forms.SplitContainer();
             this.LeftPanel = new MetroFramework.Controls.MetroPanel();
             this.RightPanel = new MetroFramework.Controls.MetroPanel();
-            this.FileTooltip = new MetroFramework.Components.MetroToolTip();
-            this.LocalPath = new MetroFramework.Controls.MetroTextBox();
             this.RightTiles = new MetroFramework.Controls.MetroPanel();
             this.CopyPanel = new MetroFramework.Controls.MetroPanel();
-            this.CopyToFlashAir = new MetroFramework.Controls.MetroButton();
             this.CopyFromFlashAir = new MetroFramework.Controls.MetroButton();
+            this.CopyToFlashAir = new MetroFramework.Controls.MetroButton();
+            this.LocalPath = new MetroFramework.Controls.MetroTextBox();
+            this.FileTooltip = new MetroFramework.Components.MetroToolTip();
             this.ProgressPanel.SuspendLayout();
             this.ImageInfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FileSplitter)).BeginInit();
@@ -93,21 +92,8 @@
             this.CurrentAction.TabIndex = 2;
             this.CurrentAction.Text = "Initializing";
             // 
-            // CancelCopy
-            // 
-            this.CancelCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelCopy.Location = new System.Drawing.Point(793, 79);
-            this.CancelCopy.Name = "CancelCopy";
-            this.CancelCopy.Size = new System.Drawing.Size(357, 23);
-            this.CancelCopy.TabIndex = 4;
-            this.CancelCopy.Text = "Start copying files...";
-            this.CancelCopy.UseSelectable = true;
-            this.CancelCopy.Visible = false;
-            this.CancelCopy.Click += new System.EventHandler(this.StartCopy_Click);
-            // 
             // ImageInfoPanel
             // 
-            this.ImageInfoPanel.Controls.Add(this.CancelCopy);
             this.ImageInfoPanel.Controls.Add(this.ImageSizeContent);
             this.ImageInfoPanel.Controls.Add(this.ImageFilenameContent);
             this.ImageInfoPanel.Controls.Add(this.ImageFolderContent);
@@ -257,11 +243,61 @@
             this.RightPanel.VerticalScrollbarSize = 10;
             this.RightPanel.Layout += new System.Windows.Forms.LayoutEventHandler(this.RightPanel_Layout);
             // 
-            // FileTooltip
+            // RightTiles
             // 
-            this.FileTooltip.Style = MetroFramework.MetroColorStyle.Blue;
-            this.FileTooltip.StyleManager = null;
-            this.FileTooltip.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.RightTiles.AutoScroll = true;
+            this.RightTiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightTiles.HorizontalScrollbar = true;
+            this.RightTiles.HorizontalScrollbarBarColor = true;
+            this.RightTiles.HorizontalScrollbarHighlightOnWheel = false;
+            this.RightTiles.HorizontalScrollbarSize = 10;
+            this.RightTiles.Location = new System.Drawing.Point(82, 23);
+            this.RightTiles.Name = "RightTiles";
+            this.RightTiles.Size = new System.Drawing.Size(680, 408);
+            this.RightTiles.TabIndex = 3;
+            this.RightTiles.VerticalScrollbar = true;
+            this.RightTiles.VerticalScrollbarBarColor = true;
+            this.RightTiles.VerticalScrollbarHighlightOnWheel = false;
+            this.RightTiles.VerticalScrollbarSize = 10;
+            // 
+            // CopyPanel
+            // 
+            this.CopyPanel.Controls.Add(this.CopyFromFlashAir);
+            this.CopyPanel.Controls.Add(this.CopyToFlashAir);
+            this.CopyPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.CopyPanel.HorizontalScrollbarBarColor = true;
+            this.CopyPanel.HorizontalScrollbarHighlightOnWheel = false;
+            this.CopyPanel.HorizontalScrollbarSize = 10;
+            this.CopyPanel.Location = new System.Drawing.Point(0, 23);
+            this.CopyPanel.Name = "CopyPanel";
+            this.CopyPanel.Size = new System.Drawing.Size(82, 408);
+            this.CopyPanel.TabIndex = 4;
+            this.CopyPanel.VerticalScrollbarBarColor = true;
+            this.CopyPanel.VerticalScrollbarHighlightOnWheel = false;
+            this.CopyPanel.VerticalScrollbarSize = 10;
+            this.CopyPanel.Visible = false;
+            // 
+            // CopyFromFlashAir
+            // 
+            this.CopyFromFlashAir.Location = new System.Drawing.Point(3, 35);
+            this.CopyFromFlashAir.Name = "CopyFromFlashAir";
+            this.CopyFromFlashAir.Size = new System.Drawing.Size(75, 23);
+            this.CopyFromFlashAir.TabIndex = 3;
+            this.CopyFromFlashAir.Text = ">>>";
+            this.FileTooltip.SetToolTip(this.CopyFromFlashAir, "Copy FROM Flashair");
+            this.CopyFromFlashAir.UseSelectable = true;
+            this.CopyFromFlashAir.Click += new System.EventHandler(this.CopyFromFlashAir_Click);
+            // 
+            // CopyToFlashAir
+            // 
+            this.CopyToFlashAir.Location = new System.Drawing.Point(3, 6);
+            this.CopyToFlashAir.Name = "CopyToFlashAir";
+            this.CopyToFlashAir.Size = new System.Drawing.Size(75, 23);
+            this.CopyToFlashAir.TabIndex = 2;
+            this.CopyToFlashAir.Text = "<<<";
+            this.FileTooltip.SetToolTip(this.CopyToFlashAir, "Copy TO Flashair");
+            this.CopyToFlashAir.UseSelectable = true;
+            this.CopyToFlashAir.Click += new System.EventHandler(this.CopyToFlashAir_Click);
             // 
             // LocalPath
             // 
@@ -294,57 +330,11 @@
             this.LocalPath.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.LocalPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LocalPath_KeyDown);
             // 
-            // RightTiles
+            // FileTooltip
             // 
-            this.RightTiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightTiles.HorizontalScrollbarBarColor = true;
-            this.RightTiles.HorizontalScrollbarHighlightOnWheel = false;
-            this.RightTiles.HorizontalScrollbarSize = 10;
-            this.RightTiles.Location = new System.Drawing.Point(82, 23);
-            this.RightTiles.Name = "RightTiles";
-            this.RightTiles.Size = new System.Drawing.Size(680, 408);
-            this.RightTiles.TabIndex = 3;
-            this.RightTiles.VerticalScrollbarBarColor = true;
-            this.RightTiles.VerticalScrollbarHighlightOnWheel = false;
-            this.RightTiles.VerticalScrollbarSize = 10;
-            // 
-            // CopyPanel
-            // 
-            this.CopyPanel.Controls.Add(this.CopyFromFlashAir);
-            this.CopyPanel.Controls.Add(this.CopyToFlashAir);
-            this.CopyPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.CopyPanel.HorizontalScrollbarBarColor = true;
-            this.CopyPanel.HorizontalScrollbarHighlightOnWheel = false;
-            this.CopyPanel.HorizontalScrollbarSize = 10;
-            this.CopyPanel.Location = new System.Drawing.Point(0, 23);
-            this.CopyPanel.Name = "CopyPanel";
-            this.CopyPanel.Size = new System.Drawing.Size(82, 408);
-            this.CopyPanel.TabIndex = 4;
-            this.CopyPanel.VerticalScrollbarBarColor = true;
-            this.CopyPanel.VerticalScrollbarHighlightOnWheel = false;
-            this.CopyPanel.VerticalScrollbarSize = 10;
-            this.CopyPanel.Visible = false;
-            // 
-            // CopyToFlashAir
-            // 
-            this.CopyToFlashAir.Location = new System.Drawing.Point(3, 6);
-            this.CopyToFlashAir.Name = "CopyToFlashAir";
-            this.CopyToFlashAir.Size = new System.Drawing.Size(75, 23);
-            this.CopyToFlashAir.TabIndex = 2;
-            this.CopyToFlashAir.Text = "<<<";
-            this.FileTooltip.SetToolTip(this.CopyToFlashAir, "Copy TO Flashair");
-            this.CopyToFlashAir.UseSelectable = true;
-            this.CopyToFlashAir.Click += new System.EventHandler(this.CopyToFlashAir_Click);
-            // 
-            // CopyFromFlashAir
-            // 
-            this.CopyFromFlashAir.Location = new System.Drawing.Point(3, 35);
-            this.CopyFromFlashAir.Name = "CopyFromFlashAir";
-            this.CopyFromFlashAir.Size = new System.Drawing.Size(75, 23);
-            this.CopyFromFlashAir.TabIndex = 3;
-            this.CopyFromFlashAir.Text = ">>>";
-            this.FileTooltip.SetToolTip(this.CopyFromFlashAir, "Copy FROM Flashair");
-            this.CopyFromFlashAir.UseSelectable = true;
+            this.FileTooltip.Style = MetroFramework.MetroColorStyle.Blue;
+            this.FileTooltip.StyleManager = null;
+            this.FileTooltip.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // FileCopy
             // 
@@ -385,7 +375,6 @@
         private MetroFramework.Controls.MetroPanel LeftPanel;
         private MetroFramework.Controls.MetroPanel RightPanel;
         private MetroFramework.Components.MetroToolTip FileTooltip;
-        private MetroFramework.Controls.MetroButton CancelCopy;
         private MetroFramework.Controls.MetroPanel RightTiles;
         private MetroFramework.Controls.MetroTextBox LocalPath;
         private MetroFramework.Controls.MetroPanel CopyPanel;

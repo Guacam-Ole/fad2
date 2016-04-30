@@ -209,6 +209,15 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading Flashair - Information.
+        /// </summary>
+        internal static string LoadingInfo {
+            get {
+                return ResourceManager.GetString("LoadingInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading Settings.
         /// </summary>
         internal static string LoadingSettings {
@@ -218,11 +227,38 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading Thumbnails.
+        /// </summary>
+        internal static string LoadingThumbnails {
+            get {
+                return ResourceManager.GetString("LoadingThumbnails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation cancelled.
         /// </summary>
         internal static string OperationCancelled {
             get {
                 return ResourceManager.GetString("OperationCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File &apos;{0}&apos; already exists. Overwrite?.
+        /// </summary>
+        internal static string OverwriteText {
+            get {
+                return ResourceManager.GetString("OverwriteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overwrite local file?.
+        /// </summary>
+        internal static string OverWriteTitle {
+            get {
+                return ResourceManager.GetString("OverWriteTitle", resourceCulture);
             }
         }
         

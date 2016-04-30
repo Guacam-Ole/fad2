@@ -199,4 +199,16 @@ The Author(s) of this program are not related to Toshiba. Feel free to use and m
 
 If you really love this tool feel free to give some love. If you want to give even more, press the button to the left :)</value>
   </data>
+  <data name="OverWriteTitle" xml:space="preserve">
+    <value>Overwrite local file?</value>
+  </data>
+  <data name="OverwriteText" xml:space="preserve">
+    <value>File '{0}' already exists. Overwrite?</value>
+  </data>
+  <data name="LoadingInfo" xml:space="preserve">
+    <value>Loading Flashair - Information</value>
+  </data>
+  <data name="LoadingThumbnails" xml:space="preserve">
+    <value>Loading Thumbnails</value>
+  </data>
 </root>

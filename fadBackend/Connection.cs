@@ -109,60 +109,68 @@ namespace fad2.Backend
 
         public bool UploadFile(string filename, out long filesize)
         {
-            string url = $"{AddSlash(Settings.FlashAirUrl)}{UploadPrefix}";
-            _log.Debug($"Uploading {filename} to {url}");
-            var boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
-            var boundarybytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
-
-            var wr = (HttpWebRequest) WebRequest.Create(url);
-            wr.ServicePoint.Expect100Continue = false;
-            wr.ContentType = "multipart/form-data; boundary=" + boundary;
-            wr.Method = "POST";
-            wr.KeepAlive = true;
-            wr.Credentials = CredentialCache.DefaultCredentials;
-
-            var rs = wr.GetRequestStream();
-            rs.Write(boundarybytes, 0, boundarybytes.Length);
-            var localFileName = Path.GetFileName(filename);
-            var contentType = GetMimeType(filename);
-            string header = $"Content-Disposition: form-data; name=\"file\"; filename=\"{localFileName}\"\r\nContent-Type: {contentType}\r\n\r\n";
-            var headerbytes = Encoding.UTF8.GetBytes(header);
-            rs.Write(headerbytes, 0, headerbytes.Length);
-
-            var fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
-
-            var buffer = new byte[4096];
-            int bytesRead;
-            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
-            {
-                rs.Write(buffer, 0, bytesRead);
-            }
-            fileStream.Close();
-            filesize = bytesRead;
-
-            var trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
-            rs.Write(trailer, 0, trailer.Length);
-            rs.Close();
-
-            WebResponse wresp = null;
-
+            filesize = 0;
             try
             {
-                wresp = wr.GetResponse();
-                var stream2 = wresp.GetResponseStream();
-                var reader2 = new StreamReader(stream2);
-                var response = reader2.ReadToEnd();
-                _log.Debug($"File uploaded, server response is: {response}");
-                return response.ToLower().Contains("success");
+                string url = $"{AddSlash(Settings.FlashAirUrl)}{UploadPrefix}";
+                _log.Debug($"Uploading {filename} to {url}");
+                var boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+                var boundarybytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+
+                var wr = (HttpWebRequest) WebRequest.Create(url);
+                wr.ServicePoint.Expect100Continue = false;
+                wr.ContentType = "multipart/form-data; boundary=" + boundary;
+                wr.Method = "POST";
+                wr.KeepAlive = true;
+                wr.Credentials = CredentialCache.DefaultCredentials;
+
+                var rs = wr.GetRequestStream();
+                rs.Write(boundarybytes, 0, boundarybytes.Length);
+                var localFileName = Path.GetFileName(filename);
+                var contentType = GetMimeType(filename);
+                string header = $"Content-Disposition: form-data; name=\"file\"; filename=\"{localFileName}\"\r\nContent-Type: {contentType}\r\n\r\n";
+                var headerbytes = Encoding.UTF8.GetBytes(header);
+                rs.Write(headerbytes, 0, headerbytes.Length);
+
+                var fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                filesize = fileStream.Length;
+                var buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                {
+                    rs.Write(buffer, 0, bytesRead);
+                }
+                fileStream.Close();
+
+
+                var trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+                rs.Write(trailer, 0, trailer.Length);
+                rs.Close();
+
+                WebResponse wresp = null;
+
+                try
+                {
+                    wresp = wr.GetResponse();
+                    var stream2 = wresp.GetResponseStream();
+                    var reader2 = new StreamReader(stream2);
+                    var response = reader2.ReadToEnd();
+                    _log.Debug($"File uploaded, server response is: {response}");
+                    return response.ToLower().Contains("success");
+                }
+                catch (Exception ex)
+                {
+                    _log.Error("Error uploading file", ex);
+                    wresp?.Close();
+                }
+                finally
+                {
+                    wr = null;
+                }
             }
             catch (Exception ex)
             {
-                _log.Error("Error uploading file", ex);
-                wresp?.Close();
-            }
-            finally
-            {
-                wr = null;
+                _log.Error("Error connecting", ex);
             }
             return false;
         }
@@ -188,7 +196,7 @@ namespace fad2.Backend
                     // No valid Image, no download
                     return null;
                 }
-                var command = string.Format($"{AddSlash(Settings.FlashAirUrl)}{ThumbnailPrefix}{AddSlash(directory)}{filename}");
+                var command = string.Format($"{AddSlash(Settings.FlashAirUrl)}{ThumbnailPrefix}{AddSlash(directory)}{filename.ToLower()}");
                 var thumb = Image.FromStream(new LongRunningWebClient(5, 2).OpenRead(command));
                 return thumb;
             }

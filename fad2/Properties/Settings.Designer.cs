@@ -79,7 +79,7 @@ namespace fad2.UI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("png,ping,jpg,jpeg,tif,tiff,raw")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".png,.ping,.jpg,.jpeg,.tif,.tiff,.raw")]
         public string ImageFileTypes {
             get {
                 return ((string)(this["ImageFileTypes"]));
@@ -88,7 +88,7 @@ namespace fad2.UI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("mov,mpg,mpeg,mkv,avi")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".mov,.mpg,.mpeg,.mkv,.avi")]
         public string VideoFileTypes {
             get {
                 return ((string)(this["VideoFileTypes"]));

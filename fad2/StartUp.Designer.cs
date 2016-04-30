@@ -50,7 +50,7 @@
             this.ConnectionPanel.HorizontalScrollbarBarColor = true;
             this.ConnectionPanel.HorizontalScrollbarHighlightOnWheel = false;
             this.ConnectionPanel.HorizontalScrollbarSize = 10;
-            this.ConnectionPanel.Location = new System.Drawing.Point(378, 258);
+            this.ConnectionPanel.Location = new System.Drawing.Point(57, 28);
             this.ConnectionPanel.Name = "ConnectionPanel";
             this.ConnectionPanel.Size = new System.Drawing.Size(333, 274);
             this.ConnectionPanel.TabIndex = 5;
@@ -126,7 +126,7 @@
             this.BackPicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.BackPicture.Location = new System.Drawing.Point(3, 3);
             this.BackPicture.Name = "BackPicture";
-            this.BackPicture.Size = new System.Drawing.Size(1168, 646);
+            this.BackPicture.Size = new System.Drawing.Size(434, 325);
             this.BackPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.BackPicture.TabIndex = 4;
             this.BackPicture.TabStop = false;
@@ -138,7 +138,7 @@
             this.Controls.Add(this.ConnectionPanel);
             this.Controls.Add(this.BackPicture);
             this.Name = "StartUp";
-            this.Size = new System.Drawing.Size(1174, 652);
+            this.Size = new System.Drawing.Size(440, 331);
             this.Load += new System.EventHandler(this.StartUp_Load);
             this.Resize += new System.EventHandler(this.StartUp_Resize);
             this.ConnectionPanel.ResumeLayout(false);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using log4net;
 
@@ -42,7 +43,7 @@ namespace fad2.Backend
             get
             {
                 if (Filename == null) return string.Empty;
-                return !Filename.Contains(".") ? string.Empty : Filename.Substring(Filename.LastIndexOf('.') + 1);
+                return Path.GetExtension(Filename);
             }
         }
 
