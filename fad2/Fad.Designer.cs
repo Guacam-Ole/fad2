@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fad));
             this.FadMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,6 +182,7 @@
             this.ClientSize = new System.Drawing.Size(1112, 605);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.FadMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.FadMenu;
             this.MinimumSize = new System.Drawing.Size(1050, 500);
             this.Name = "Fad";
