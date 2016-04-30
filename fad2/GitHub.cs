@@ -20,11 +20,7 @@ namespace fad2.UI
 
         private string GetPipeLineForIssue(ZenHubBoard board, int issueNumber)
         {
-            if (board == null)
-            {
-                return null;
-            }
-            return (from pipeline in board.Pipelines where pipeline.Issues.Any(issue => issue.Number == issueNumber) select pipeline.Name).FirstOrDefault();
+            return board == null ? null : (from pipeline in board.Pipelines where pipeline.Issues.Any(issue => issue.Number == issueNumber) select pipeline.Name).FirstOrDefault();
         }
 
 
@@ -59,9 +55,6 @@ namespace fad2.UI
             Controls.Add(gitHubTop);
             gitHubTop.Controls[0].Visible = false;
             gitHubTop.Controls[1].Visible = false;
-
-
-            //  Controls = container.Controls;
         }
     }
 }

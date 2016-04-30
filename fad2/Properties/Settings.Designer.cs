@@ -34,7 +34,7 @@ namespace fad2.UI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("GooglePlusOptimizer")]
+        [global::System.Configuration.DefaultSettingValueAttribute("fad2")]
         public string GithubRepo {
             get {
                 return ((string)(this["GithubRepo"]));
@@ -52,7 +52,7 @@ namespace fad2.UI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3145728")]
+        [global::System.Configuration.DefaultSettingValueAttribute("31457280")]
         public long MaxImageThumbSize {
             get {
                 return ((long)(this["MaxImageThumbSize"]));

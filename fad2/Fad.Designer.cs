@@ -124,12 +124,14 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // apiDocumentationforDevelopersToolStripMenuItem
             // 
             this.apiDocumentationforDevelopersToolStripMenuItem.Name = "apiDocumentationforDevelopersToolStripMenuItem";
             this.apiDocumentationforDevelopersToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.apiDocumentationforDevelopersToolStripMenuItem.Text = "Api Documentation (for Developers)";
+            this.apiDocumentationforDevelopersToolStripMenuItem.Click += new System.EventHandler(this.apiDocumentationforDevelopersToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -148,6 +150,7 @@
             this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
             this.licenseToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.licenseToolStripMenuItem.Text = "License";
+            this.licenseToolStripMenuItem.Click += new System.EventHandler(this.licenseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -159,6 +162,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // MainPanel
             // 

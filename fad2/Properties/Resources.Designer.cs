@@ -70,6 +70,18 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The FlashAirDownloader 2 is a Tool that allows you to download Images from your FlashAir SD-Card.
+        ///The Author(s) of this program are not related to Toshiba. Feel free to use and modify this program that it fits your needs. Limitations and Warranty - stuff can be found under the License section.
+        ///
+        ///If you really love this tool feel free to give some love. If you want to give even more, press the button to the left :).
+        /// </summary>
+        internal static string AboutMe {
+            get {
+                return ResourceManager.GetString("AboutMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flashair cannot be found anymore. This usually means that the card has gone offline. Re-Power your camera and try again..
         /// </summary>
         internal static string CannotFindFlashairMessage {
@@ -129,6 +141,16 @@ namespace fad2.UI.Properties {
         internal static string CopyingFiles {
             get {
                 return ResourceManager.GetString("CopyingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Donate {
+            get {
+                object obj = ResourceManager.GetObject("Donate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

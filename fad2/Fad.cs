@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 
@@ -55,6 +56,26 @@ namespace fad2.UI
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowLoader();
+        }
+
+        private void apiDocumentationforDevelopersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://flashair-developers.com/en/documents/api/");
+        }
+
+        private void licenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Path.Combine(Application.StartupPath,"LICENSE.TXT"));
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new About().ShowDialog();
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/OleAlbers/fad2/wiki");
         }
     }
 }

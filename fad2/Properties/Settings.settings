@@ -1,20 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="fad2.UI.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="fad2.UI.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="GIthubAuthor" Type="System.String" Scope="Application">
       <Value Profile="(Default)">OleAlbers</Value>
     </Setting>
     <Setting Name="GithubRepo" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">GooglePlusOptimizer</Value>
+      <Value Profile="(Default)">fad2</Value>
     </Setting>
     <Setting Name="ProgramSettingsFile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">fad2.json</Value>
     </Setting>
     <Setting Name="MaxImageThumbSize" Type="System.Int64" Scope="Application">
-      <Value Profile="(Default)">3145728</Value>
+      <Value Profile="(Default)">31457280</Value>
     </Setting>
     <Setting Name="MetroTileSize" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">100</Value>
