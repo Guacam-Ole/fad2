@@ -7,10 +7,16 @@ using log4net;
 
 namespace fad2.UI
 {
+    /// <summary>
+    /// Github - Issues displayform
+    /// </summary>
     public partial class GitHub : UserControl
     {
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        /// <summary>
+        /// Githhub display 
+        /// </summary>
         public GitHub()
         {
             InitializeComponent();

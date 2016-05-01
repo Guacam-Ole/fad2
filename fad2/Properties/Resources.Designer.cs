@@ -136,6 +136,15 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copying files from FlashAir.
+        /// </summary>
+        internal static string CopyFromFlashAir {
+            get {
+                return ResourceManager.GetString("CopyFromFlashAir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copying files....
         /// </summary>
         internal static string CopyingFiles {
@@ -159,6 +168,15 @@ namespace fad2.UI.Properties {
         internal static string DoneCopying {
             get {
                 return ResourceManager.GetString("DoneCopying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid IP-Address.
+        /// </summary>
+        internal static string EnterIpWarning {
+            get {
+                return ResourceManager.GetString("EnterIpWarning", resourceCulture);
             }
         }
         

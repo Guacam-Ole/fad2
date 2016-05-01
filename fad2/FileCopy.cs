@@ -50,6 +50,9 @@ namespace fad2.UI
             }
         }
 
+        /// <summary>
+        /// Constructor for Designer
+        /// </summary>
         public FileCopy()
         {
         }
@@ -1033,7 +1036,7 @@ namespace fad2.UI
             try
             {
                 ProgressPanel.Visible = true;
-                CurrentAction.Text = "Copying files from FlashAir";
+                CurrentAction.Text = Resources.CopyFromFlashAir;
                 Progress.Maximum = 100;
                 CopyFilesAsync();
             }

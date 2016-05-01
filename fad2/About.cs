@@ -5,20 +5,24 @@ using MetroFramework.Forms;
 
 namespace fad2.UI
 {
+    /// <summary>
+    /// About Window
+    /// </summary>
     public partial class About : MetroForm
     {
+        /// <summary>
+        /// About Window
+        /// </summary>
         public About()
         {
             InitializeComponent();
             AboutMeText.Text = Resources.AboutMe;
         }
 
-
         private void CloseWin_Click(object sender, EventArgs e)
         {
             Close();
         }
-
 
         private void Donate_Click(object sender, EventArgs e)
         {

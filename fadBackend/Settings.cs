@@ -5,6 +5,7 @@
     /// </summary>
     public class Settings
     {
+#pragma warning disable 1591
         [Setting("ID", Parent = "WLANSD")]
         public string WlanSdCardId { get; set; }
 
@@ -113,6 +114,7 @@
         [Setting("WEBDAV", Parent = "Vendor", Default = "0")]
         public int WebDavMode { get; set; }
 
+#pragma warning restore 1591
 
         /// <summary>
         ///     Version from current Card

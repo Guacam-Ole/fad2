@@ -16,6 +16,8 @@ namespace fad2.Backend
     /// </summary>
     public class Connection
     {
+#pragma warning disable 1591
+
         /// <summary>
         ///     Known CommandIds
         /// </summary>
@@ -36,6 +38,7 @@ namespace fad2.Backend
             Cid = 120
         }
 
+#pragma warning restore 1591
         private const string CommandPrefix = "command.cgi?op=";
         private const string ThumbnailPrefix = "thumbnail.cgi?";
         private const string UploadPrefix = "upload.cgi";
@@ -87,6 +90,11 @@ namespace fad2.Backend
             return value;
         }
 
+        /// <summary>
+        /// Set Upload Directory for following uploads
+        /// </summary>
+        /// <param name="directory">Directory</param>
+        /// <returns>Connection State</returns>
         public bool SetUploadDirectory(string directory)
         {
             string command = $"{AddSlash(Settings.FlashAirUrl)}{UploadPrefix}?WRITEPROTECT=ON&UPDIR={directory}";
@@ -107,6 +115,12 @@ namespace fad2.Backend
             return mimeType;
         }
 
+        /// <summary>
+        /// Upload a single File to FlashAir
+        /// </summary>
+        /// <param name="filename">Local Filename</param>
+        /// <param name="filesize">Filesize</param>
+        /// <returns>Connection status</returns>
         public bool UploadFile(string filename, out long filesize)
         {
             filesize = 0;

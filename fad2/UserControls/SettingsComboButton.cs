@@ -4,16 +4,25 @@ using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
+    /// <summary>
+    /// Click-Event
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public delegate void ClickEventHandler(object sender, EventArgs e);
 
+    /// <summary>
+    /// Combobox with button
+    /// </summary>
     public partial class SettingsComboButton : MetroUserControl
     {
         private string _internalName;
         private string _toolTip;
-
-
         private string _warning;
 
+        /// <summary>
+        /// Combobox with button
+        /// </summary>
         public SettingsComboButton()
         {
             InitializeComponent();
@@ -21,19 +30,27 @@ namespace fad2.UI.UserControls
             Action.Click += Action_Click;
         }
 
-
+        /// <summary>
+        /// Buttontext
+        /// </summary>
         public string ButtonText
         {
             get { return Action.Text; }
             set { Action.Text = value; }
         }
 
+        /// <summary>
+        /// Datasource
+        /// </summary>
         public object DataSource
         {
             get { return SettingValue.DataSource; }
             set { SettingValue.DataSource = value; }
         }
 
+        /// <summary>
+        /// Internal Name
+        /// </summary>
         public string InternalName
         {
             get { return _internalName; }
@@ -44,21 +61,32 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Key
+        /// </summary>
         public string Key
         {
             get { return SettingKey.Text; }
             set { SettingKey.Text = value; }
         }
 
+        /// <summary>
+        /// Value
+        /// </summary>
         public int? Value
         {
             get { return (int?) SettingValue?.SelectedValue; }
             set { SettingValue.SelectedItem = value; }
         }
 
+        /// <summary>
+        /// Value changed
+        /// </summary>
         public bool ValueChanged { get; private set; }
 
-
+        /// <summary>
+        /// Warning
+        /// </summary>
         public string Warning
         {
             get { return _warning; }
@@ -70,6 +98,9 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Tooltip
+        /// </summary>
         public string ToolTip
         {
             get { return _toolTip; }
@@ -81,6 +112,9 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Button clicked
+        /// </summary>
         public event ClickEventHandler ButtonClicked;
 
         private void Action_Click(object sender, EventArgs e)
@@ -95,7 +129,6 @@ namespace fad2.UI.UserControls
                 crtl.Enabled = Enabled;
             }
         }
-
 
         private void SettingValue_SelectionChangeCommitted(object sender, EventArgs e)
         {

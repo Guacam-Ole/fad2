@@ -1,32 +1,35 @@
 ﻿using System;
-using System.Drawing.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
+    /// <summary>
+    /// Settimg with simgle label
+    /// </summary>
     public partial class SettingsLabel : MetroUserControl
     {
         private string _internalName;
-        protected bool _isValid = true;
-
         private string _toolTip;
-
-        protected bool _valueChanged;
-
-
         private string _warning;
 
+        /// <summary>
+        /// Setting with single Label
+        /// </summary>
         public SettingsLabel()
         {
             InitializeComponent();
-            AddFont();
             EnabledChanged += SettingsString_EnabledChanged;
         }
-
+         
+        /// <summary>
+        /// Regex
+        /// </summary>
         public string Regex { get; set; }
 
+        /// <summary>
+        /// Internal Name
+        /// </summary>
         public string InternalName
         {
             get { return _internalName; }
@@ -37,12 +40,18 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Key
+        /// </summary>
         public string Key
         {
             get { return SettingKey.Text; }
             set { SettingKey.Text = value; }
         }
 
+        /// <summary>
+        /// Value
+        /// </summary>
         public string Value
         {
             get { return SettingValue.Text; }
@@ -53,12 +62,18 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Required Version
+        /// </summary>
         public string RequiredVersion
         {
             get { return SettingVersion.Text; }
             set { SettingVersion.Text = value; }
         }
 
+        /// <summary>
+        /// Warning
+        /// </summary>
         public string Warning
         {
             get { return _warning; }
@@ -70,6 +85,9 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Tooltip
+        /// </summary>
         public string ToolTip
         {
             get { return _toolTip; }
@@ -81,15 +99,15 @@ namespace fad2.UI.UserControls
             }
         }
 
-        public bool IsValid
-        {
-            get { return _isValid; }
-        }
+        /// <summary>
+        /// Is valid?
+        /// </summary>
+        public bool IsValid { get; set; } = true;
 
-        public bool ValueChanged
-        {
-            get { return _valueChanged; }
-        }
+        /// <summary>
+        /// Value changed?
+        /// </summary>
+        public bool ValueChanged { get; set; }
 
         private void SettingsString_EnabledChanged(object sender, EventArgs e)
         {
@@ -97,21 +115,6 @@ namespace fad2.UI.UserControls
             {
                 crtl.Enabled = Enabled;
             }
-        }
-
-        private void AddFont()
-        {
-            var pfc = new PrivateFontCollection();
-        }
-
-        private void SettingValue_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (Regex != null)
-            {
-                _isValid = new Regex(Regex).IsMatch(SettingValue.Text);
-                //SettingValue.CustomBackground = !_isValid;
-            }
-            _valueChanged = true;
         }
     }
 }

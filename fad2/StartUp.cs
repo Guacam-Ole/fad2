@@ -26,6 +26,9 @@ namespace fad2.UI
 
         private Timer _imageSwitchTimer;
 
+        /// <summary>
+        /// Start-Control
+        /// </summary>
         public StartUp()
         {
             _connection = new Connection(_programSettingsFile);

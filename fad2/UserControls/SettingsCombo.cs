@@ -4,13 +4,18 @@ using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
+    /// <summary>
+    /// Combobox-Setting
+    /// </summary>
     public partial class SettingsCombo : MetroUserControl
     {
         private string _internalName;
         private string _toolTip;
-
         private string _warning;
 
+        /// <summary>
+        /// Combo-Setting
+        /// </summary>
         public SettingsCombo()
         {
             InitializeComponent();
@@ -18,12 +23,18 @@ namespace fad2.UI.UserControls
             SettingValue.SelectedIndexChanged += Combo_Changed;
         }
 
+        /// <summary>
+        /// Data-Source
+        /// </summary>
         public object DataSource
         {
             get { return SettingValue.DataSource; }
             set { SettingValue.DataSource = value; }
         }
 
+        /// <summary>
+        /// Internal Name
+        /// </summary>
         public string InternalName
         {
             get { return _internalName; }
@@ -34,12 +45,18 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Key
+        /// </summary>
         public string Key
         {
             get { return SettingKey.Text; }
             set { SettingKey.Text = value; }
         }
 
+        /// <summary>
+        /// Value
+        /// </summary>
         public int? Value
         {
             get { return (int?) SettingValue?.SelectedValue; }
@@ -50,15 +67,23 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Required Version
+        /// </summary>
         public string RequiredVersion
         {
             get { return SettingVersion.Text; }
             set { SettingVersion.Text = value; }
         }
 
+        /// <summary>
+        /// Value changed?
+        /// </summary>
         public bool ValueChanged { get; private set; }
 
-
+        /// <summary>
+        /// Warning
+        /// </summary>
         public string Warning
         {
             get { return _warning; }
@@ -70,6 +95,9 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// ToolTip
+        /// </summary>
         public string ToolTip
         {
             get { return _toolTip; }
@@ -81,6 +109,9 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Combo Changed Event
+        /// </summary>
         public event EventHandler ComboChanged;
 
         private void Combo_Changed(object sender, EventArgs e)
@@ -95,7 +126,6 @@ namespace fad2.UI.UserControls
                 crtl.Enabled = Enabled;
             }
         }
-
 
         private void SettingValue_SelectionChangeCommitted(object sender, EventArgs e)
         {

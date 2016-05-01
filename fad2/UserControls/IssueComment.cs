@@ -4,17 +4,26 @@ using fad2.Backend.Github;
 
 namespace fad2.UI.UserControls
 {
+    /// <summary>
+    /// Single Comment from GitHub-Issue
+    /// </summary>
     public partial class IssueComment : UserControl
     {
-        private readonly int _minHeight = 40;
+        private const int MinHeight = 40;
         private DateTime _date;
 
+        /// <summary>
+        /// Create a new Comment
+        /// </summary>
         public IssueComment()
         {
             InitializeComponent();
         }
 
-        public GitHubComment Container
+        /// <summary>
+        /// GithubContainer for a Github-comment
+        /// </summary>
+        public GitHubComment GithubContainer
         {
             get
             {
@@ -28,8 +37,6 @@ namespace fad2.UI.UserControls
             set
             {
                 _date = value.Date;
-                //CommentGroup.Text=$"{_date:yyyy-MM-dd}";
-                //  Avatar.Text = value.Author;
                 Avatar.Tag = value.Picture;
                 AvatarName.SetToolTip(Avatar, value.Author);
                 Comment.Text = value.Comment;
@@ -42,15 +49,11 @@ namespace fad2.UI.UserControls
         private void ReloadAvatar()
         {
             var tag = (string) Avatar.Tag;
-            if (tag != null && Uri.IsWellFormedUriString(tag, UriKind.Absolute))
-            {
-                var image = UiSettings.ResizedImage(new Uri(tag), 255, Avatar.Width, Avatar.Height);
-                if (image != null)
-                {
-                    Avatar.TileImage = image;
-                    Avatar.UseTileImage = true;
-                }
-            }
+            if (tag == null || !Uri.IsWellFormedUriString(tag, UriKind.Absolute)) return;
+            var image = UiSettings.ResizedImage(new Uri(tag), 255, Avatar.Width, Avatar.Height);
+            if (image == null) return;
+            Avatar.TileImage = image;
+            Avatar.UseTileImage = true;
         }
 
         private void RepaintComment()
@@ -59,14 +62,11 @@ namespace fad2.UI.UserControls
             {
                 var size = g.MeasureString(Comment.Text, Comment.Font, Comment.Width);
                 Comment.Height = (int) Math.Ceiling(size.Height) + 20;
-                if (Comment.Height < _minHeight)
+                if (Comment.Height < MinHeight)
                 {
-                    Comment.Height = _minHeight;
+                    Comment.Height = MinHeight;
                 }
             }
-
-            //   CommentGroup.Height = Comment.Height + 10;
-//            this.Height = CommentGroup.Height + 20;
         }
     }
 }

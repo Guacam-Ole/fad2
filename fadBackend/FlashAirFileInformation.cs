@@ -13,6 +13,11 @@ namespace fad2.Backend
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
+        /// New FileInformation
+        /// </summary>
+        public FlashAirFileInformation() { }
+
+        /// <summary>
         ///     Create new Information-Object from returnstring
         /// </summary>
         /// <param name="originalData">String returned by api</param>
@@ -34,16 +39,14 @@ namespace fad2.Backend
             CalcDate();
         }
 
-        public FlashAirFileInformation()
-        {
-        }
-
+        /// <summary>
+        /// Extension
+        /// </summary>
         public string Extension
         {
             get
             {
-                if (Filename == null) return string.Empty;
-                return Path.GetExtension(Filename);
+                return Filename == null ? string.Empty : Path.GetExtension(Filename);
             }
         }
 

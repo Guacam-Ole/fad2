@@ -2,6 +2,7 @@
 
 namespace fad2.Backend
 {
+#pragma warning disable 1591
     /// <summary>
     ///     Program setings
     /// </summary>
@@ -97,6 +98,7 @@ namespace fad2.Backend
             ReadWrite = 2
         }
 
+#pragma warning restore 1591
         /// <summary>
         ///     Flashair-Address
         /// </summary>
@@ -157,11 +159,18 @@ namespace fad2.Backend
         /// </summary>
         public bool LoadThumbs { get; set; } = true;
 
-        public string Theme { get; set; } = "Light";
-
+        /// <summary>
+        /// Interval for Imagechange in Background
+        /// </summary>
         public int BackgroundInterval { get; set; } = 10;
 
+        /// <summary>
+        /// Show Images in Background? (start)
+        /// </summary>
         public bool ShowBackgroundImage { get; set; } = true;
+        /// <summary>
+        /// Show Image-Tiles in Settings-Menu?
+        /// </summary>
         public bool ShowTiles { get; set; } = true;
     }
 }

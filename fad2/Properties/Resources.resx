@@ -214,4 +214,10 @@ If you really love this tool feel free to give some love. If you want to give ev
   <data name="CopyToFlashAir" xml:space="preserve">
     <value>Copying files to FlashAir</value>
   </data>
+  <data name="CopyFromFlashAir" xml:space="preserve">
+    <value>Copying files from FlashAir</value>
+  </data>
+  <data name="EnterIpWarning" xml:space="preserve">
+    <value>Please enter a valid IP-Address</value>
+  </data>
 </root>

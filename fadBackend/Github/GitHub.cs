@@ -93,6 +93,13 @@ namespace fad2.Backend.Github
             return JsonConvert.DeserializeObject<ZenHubBoard>(zenhubContent);
         }
 
+        /// <summary>
+        /// Get Data from ZenHub board
+        /// </summary>
+        /// <param name="cacheFileName">local cachefilename</param>
+        /// <param name="user">GitHub-User - thats me :) </param>
+        /// <param name="repo">Repo</param>
+        /// <returns>Zenhub-Board</returns>
         public static ZenHubBoard GetBoard(string cacheFileName, string user, string repo)
         {
             var board = GetCachedBoard(cacheFileName);

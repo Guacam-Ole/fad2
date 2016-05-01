@@ -98,6 +98,9 @@
 
         #endregion
 
+        /// <summary>
+        /// Unique Key
+        /// </summary>
         public MetroFramework.Controls.MetroLabel SettingKey;
         private MetroFramework.Controls.MetroLabel SettingVersion;
         private System.Windows.Forms.Label WarningLabel;

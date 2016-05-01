@@ -6,14 +6,23 @@ using MetroFramework.Forms;
 
 namespace fad2.UI
 {
+    /// <summary>
+    /// FlashAirDownloader Main Window
+    /// </summary>
     public partial class Fad : MetroForm
     {
+        /// <summary>
+        /// New Main Window
+        /// </summary>
         public Fad()
         {
             InitializeComponent();
             ShowLoader();
         }
 
+        /// <summary>
+        /// Show Loading Tile
+        /// </summary>
         public void ShowLoader()
         {
             MainPanel.Controls.Clear();
@@ -31,7 +40,6 @@ namespace fad2.UI
             MainPanel.Controls.Clear();
             MainPanel.Controls.Add(new GitHub {Dock = DockStyle.Fill});
         }
-
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {

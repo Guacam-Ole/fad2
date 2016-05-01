@@ -5,8 +5,14 @@ using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
+    /// <summary>
+    /// Top Panel for Github Issuedisplay
+    /// </summary>
     public partial class GithubTop : MetroUserControl
     {
+        /// <summary>
+        /// TOp_panel
+        /// </summary>
         public GithubTop()
         {
             InitializeComponent();

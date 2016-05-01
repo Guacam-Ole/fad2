@@ -5,23 +5,32 @@ using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
+    /// <summary>
+    /// Switch
+    /// </summary>
     public partial class SettingsBoolean : MetroUserControl
     {
         private string _internalName;
         private string _toolTip;
-
-
         private string _warning;
 
+        /// <summary>
+        /// Switch
+        /// </summary>
         public SettingsBoolean()
         {
             InitializeComponent();
-            AddFont();
             EnabledChanged += SettingsString_EnabledChanged;
         }
 
+        /// <summary>
+        /// Value changed?
+        /// </summary>
         public bool ValueChanged { get; private set; }
 
+        /// <summary>
+        /// Internal Name
+        /// </summary>
         public string InternalName
         {
             get { return _internalName; }
@@ -32,12 +41,18 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Key
+        /// </summary>
         public string Key
         {
             get { return SettingKey.Text; }
             set { SettingKey.Text = value; }
         }
 
+        /// <summary>
+        /// Value
+        /// </summary>
         public bool Value
         {
             get { return SettingValue.Checked; }
@@ -48,13 +63,19 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Required Version
+        /// </summary>
+
         public string RequiredVersion
         {
             get { return SettingVersion.Text; }
             set { SettingVersion.Text = value; }
         }
 
-
+        /// <summary>
+        /// Warning-Tooltip
+        /// </summary>
         public string Warning
         {
             get { return _warning; }
@@ -66,6 +87,9 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Tooltip
+        /// </summary>
         public string ToolTip
         {
             get { return _toolTip; }
@@ -83,11 +107,6 @@ namespace fad2.UI.UserControls
             {
                 crtl.Enabled = Enabled;
             }
-        }
-
-        private void AddFont()
-        {
-            var pfc = new PrivateFontCollection();
         }
 
         private void SettingValue_Click(object sender, EventArgs e)

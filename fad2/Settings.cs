@@ -14,6 +14,9 @@ using MetroFramework.Controls;
 
 namespace fad2.UI
 {
+    /// <summary>
+    /// Settings-Control
+    /// </summary>
     public partial class Settings : UserControl
     {
         private const int TileSize = 300;
@@ -35,6 +38,9 @@ namespace fad2.UI
 
         private Backend.Settings _settings;
 
+        /// <summary>
+        /// Settings
+        /// </summary>
         public Settings()
         {
             InitializeComponent();

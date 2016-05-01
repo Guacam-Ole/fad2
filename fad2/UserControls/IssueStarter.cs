@@ -11,20 +11,27 @@ using MetroFramework.Controls;
 
 namespace fad2.UI.UserControls
 {
+    /// <summary>
+    /// Issue Starter Panel
+    /// </summary>
     public partial class IssueStarter : UserControl
     {
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private List<GitHubComment> _comments;
         private DateTime _date;
-
-
         private string _pipeline;
 
+        /// <summary>
+        /// New Issue Starter Panel
+        /// </summary>
         public IssueStarter()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Single Comment
+        /// </summary>
         public GitHubComment IssueComment
         {
             get
@@ -59,18 +66,27 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Is this a bug?
+        /// </summary>
         public bool IsBug
         {
             get { return BugTag.Visible; }
             set { BugTag.Visible = value; }
         }
 
+        /// <summary>
+        /// is this a feature?
+        /// </summary>
         public bool IsFeatureRequest
         {
             get { return WishTag.Visible; }
             set { WishTag.Visible = value; }
         }
 
+        /// <summary>
+        /// Current Pipeline (Zenhub(
+        /// </summary>
         public string Pipeline
         {
             get { return _pipeline; }
@@ -81,6 +97,9 @@ namespace fad2.UI.UserControls
             }
         }
 
+        /// <summary>
+        /// Comments to this issue
+        /// </summary>
         public List<GitHubComment> Comments
         {
             get { return _comments; }
@@ -106,7 +125,7 @@ namespace fad2.UI.UserControls
                     var issueComment = new IssueComment
                     {
                         Dock = DockStyle.Top,
-                        Container = comment,
+                        GithubContainer = comment,
                         AutoSize = true,
                         AutoSizeMode = AutoSizeMode.GrowAndShrink
                     };
@@ -146,7 +165,6 @@ namespace fad2.UI.UserControls
                     break;
             }
         }
-
 
         private void ReloadAvatar()
         {
