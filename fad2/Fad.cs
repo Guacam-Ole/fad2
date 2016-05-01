@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
+using fad2.Backend;
+using log4net;
+using MetroFramework;
 using MetroFramework.Forms;
+using NAppUpdate.Framework;
+using NAppUpdate.Framework.Sources;
 
 namespace fad2.UI
 {
@@ -11,6 +17,8 @@ namespace fad2.UI
     /// </summary>
     public partial class Fad : MetroForm
     {
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// New Main Window
         /// </summary>
@@ -18,6 +26,14 @@ namespace fad2.UI
         {
             InitializeComponent();
             ShowLoader();
+            CheckForUpdates();
+
+        }
+
+        private void CheckForUpdates()
+        {
+
+        
         }
 
         /// <summary>
@@ -93,6 +109,39 @@ namespace fad2.UI
         private void setupHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/OleAlbers/fad2/wiki");
+        }
+
+        private Timer _updateCheckStateTimer;
+
+        private void Fad_Load(object sender, EventArgs e)
+        {
+            _updateCheckStateTimer = new Timer {Interval = 60000};
+            _updateCheckStateTimer.Tick += _updateCheckStateTimer_Tick;
+            _updateCheckStateTimer.Start();
+        }
+
+        private void _updateCheckStateTimer_Tick(object sender, EventArgs e)
+        {
+            if (UpdateManager.Instance.State != UpdateManager.UpdateProcessState.Checked) return;
+            UpdateManager.Instance.CleanUp();
+            _log.Debug("Update state was reset to NotChecked");
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var update=new Update();
+            if (update.CheckForUpdate())
+            {
+                bool install = MetroMessageBox.Show(this, "A new Update is available. Do you want to download and install it?", "Updates found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                if (install)
+                {
+                    update.StartDownloading();
+                }
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "You already have the most current version", "No Updates found");
+            }
         }
     }
 }
