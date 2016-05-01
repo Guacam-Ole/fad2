@@ -84,7 +84,10 @@ namespace fad2.UI
             {
                 {(int) ProgramSettings.AppModes.AccessPoint, "AP (Access Point) mode "},
                 {(int) ProgramSettings.AppModes.Station, "STA (Station) mode "},
-                {(int) ProgramSettings.AppModes.PassThru, "Pass-Thru mode"}
+                {(int) ProgramSettings.AppModes.PassThru, "Pass-Thru mode"},
+                {(int) ProgramSettings.AppModes.AccessPointNo, "AP (Access Point) mode (Keep Write-Protect)"},
+                {(int) ProgramSettings.AppModes.StationNo, "STA (Station) mode (Keep Write-Protect)"},
+                {(int) ProgramSettings.AppModes.PassThruNo, "Pass-Thru mode (Keep Write-Protect)"}
             };
             VendorAppMode.DataSource = appModes.ToList();
 
@@ -327,6 +330,7 @@ namespace fad2.UI
             }
 
             UiSettings.CardVersion = _settings.Version;
+            Application.DoEvents();
             foreach (var property in _settings.GetType().GetProperties())
             {
                 try
@@ -359,6 +363,8 @@ namespace fad2.UI
                 VendorNetworkKey.Value = _settings.AppNetworkKey;
                 VendorSSID.Value = _settings.AppSsid;
             }
+
+            
 
             var disableDownload = false;
             var disableCommand = false;

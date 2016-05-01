@@ -44,7 +44,8 @@
             // 
             // SettingVersion
             // 
-            this.SettingVersion.Location = new System.Drawing.Point(681, 9);
+            this.SettingVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SettingVersion.Location = new System.Drawing.Point(664, 9);
             this.SettingVersion.Name = "SettingVersion";
             this.SettingVersion.Size = new System.Drawing.Size(81, 19);
             this.SettingVersion.TabIndex = 2;
@@ -53,10 +54,33 @@
             // SettingValue
             // 
             this.SettingValue.BackColor = System.Drawing.Color.Tomato;
+            // 
+            // 
+            // 
+            this.SettingValue.CustomButton.Image = null;
+            this.SettingValue.CustomButton.Location = new System.Drawing.Point(357, 2);
+            this.SettingValue.CustomButton.Name = "";
+            this.SettingValue.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.SettingValue.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.SettingValue.CustomButton.TabIndex = 1;
+            this.SettingValue.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.SettingValue.CustomButton.UseSelectable = true;
+            this.SettingValue.CustomButton.Visible = false;
+            this.SettingValue.Lines = new string[0];
             this.SettingValue.Location = new System.Drawing.Point(233, 4);
+            this.SettingValue.MaxLength = 32767;
             this.SettingValue.Name = "SettingValue";
+            this.SettingValue.PasswordChar = '\0';
+            this.SettingValue.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.SettingValue.SelectedText = "";
+            this.SettingValue.SelectionLength = 0;
+            this.SettingValue.SelectionStart = 0;
+            this.SettingValue.ShortcutsEnabled = true;
             this.SettingValue.Size = new System.Drawing.Size(383, 28);
             this.SettingValue.TabIndex = 1;
+            this.SettingValue.UseSelectable = true;
+            this.SettingValue.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.SettingValue.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.SettingValue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SettingValue_KeyDown);
             // 
             // WarningLabel
@@ -70,6 +94,12 @@
             this.WarningLabel.TabIndex = 4;
             this.WarningLabel.Text = "i";
             this.MetroToolTip.SetToolTip(this.WarningLabel, "\r\n");
+            // 
+            // MetroToolTip
+            // 
+            this.MetroToolTip.Style = MetroFramework.MetroColorStyle.Blue;
+            this.MetroToolTip.StyleManager = null;
+            this.MetroToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // SettingsString
             // 

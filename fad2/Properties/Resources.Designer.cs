@@ -145,6 +145,15 @@ namespace fad2.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copying files to FlashAir.
+        /// </summary>
+        internal static string CopyToFlashAir {
+            get {
+                return ResourceManager.GetString("CopyToFlashAir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Done copying..
         /// </summary>
         internal static string DoneCopying {

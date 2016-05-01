@@ -12,9 +12,12 @@ namespace fad2.Backend
         /// </summary>
         public enum AppModes
         {
-            AccessPoint = 4,
-            Station = 5,
-            PassThru = 6
+            AccessPoint = 1,
+            Station = 2,
+            PassThru = 3,
+            AccessPointNo = 4,
+            StationNo = 5,
+            PassThruNo = 6
         }
 
         /// <summary>

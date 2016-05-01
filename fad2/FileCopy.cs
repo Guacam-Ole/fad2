@@ -929,17 +929,14 @@ namespace fad2.UI
                 DisablePanels();
                 _connection.SetUploadDirectory(_currentFlashairPath);
 
-                var worker = new BackgroundWorker();
+                var worker = new BackgroundWorker {WorkerReportsProgress = true};
 
-              
-
-                worker.WorkerReportsProgress = true;
                 worker.DoWork += WorkerCopyFilesToFlashAirDoWork;
                 worker.ProgressChanged += WorkerCopyFilesToFlashAirProgressChanged;
                 worker.RunWorkerCompleted += WorkerCopyFilesToFlashAirCompleted;
                 worker.RunWorkerAsync(_selectedFilesRight);
                 ProgressPanel.Visible = true;
-                CurrentAction.Text = "Copying files to FlashAir";
+                CurrentAction.Text = Resources.CopyToFlashAir;
                 Progress.Maximum = 100;
             }
             catch (Exception ex)

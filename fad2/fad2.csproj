@@ -58,16 +58,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="MetroFramework, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net40\MetroFramework.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MetroFramework.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net40\MetroFramework.Design.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\lib\MetroFramework.Design.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework.Fonts, Version=1.3.5.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net40\MetroFramework.Fonts.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\lib\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

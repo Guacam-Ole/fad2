@@ -60,7 +60,7 @@ namespace fad2.UI
 
         private void apiDocumentationforDevelopersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://flashair-developers.com/en/documents/api/");
+           
         }
 
         private void licenseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -74,6 +74,16 @@ namespace fad2.UI
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void apiDocumentationforDevelopers9ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://flashair-developers.com/en/documents/api/");
+        }
+
+        private void setupHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/OleAlbers/fad2/wiki");
         }

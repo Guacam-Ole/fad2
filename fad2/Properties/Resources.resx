@@ -211,4 +211,7 @@ If you really love this tool feel free to give some love. If you want to give ev
   <data name="LoadingThumbnails" xml:space="preserve">
     <value>Loading Thumbnails</value>
   </data>
+  <data name="CopyToFlashAir" xml:space="preserve">
+    <value>Copying files to FlashAir</value>
+  </data>
 </root>

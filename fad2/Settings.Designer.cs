@@ -243,7 +243,7 @@ namespace fad2.UI
             this.CardSettingsTab.Controls.Add(this.CardSettingsNetwork);
             this.CardSettingsTab.Location = new System.Drawing.Point(173, 3);
             this.CardSettingsTab.Name = "CardSettingsTab";
-            this.CardSettingsTab.SelectedIndex = 0;
+            this.CardSettingsTab.SelectedIndex = 2;
             this.CardSettingsTab.Size = new System.Drawing.Size(834, 598);
             this.CardSettingsTab.TabIndex = 2;
             this.CardSettingsTab.UseSelectable = true;

@@ -44,7 +44,8 @@
             // 
             // SettingVersion
             // 
-            this.SettingVersion.Location = new System.Drawing.Point(681, 9);
+            this.SettingVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SettingVersion.Location = new System.Drawing.Point(664, 9);
             this.SettingVersion.Name = "SettingVersion";
             this.SettingVersion.Size = new System.Drawing.Size(81, 19);
             this.SettingVersion.TabIndex = 2;
@@ -62,6 +63,12 @@
             this.WarningLabel.Text = "i";
             this.MetroToolTip.SetToolTip(this.WarningLabel, "\r\n");
             // 
+            // MetroToolTip
+            // 
+            this.MetroToolTip.Style = MetroFramework.MetroColorStyle.Blue;
+            this.MetroToolTip.StyleManager = null;
+            this.MetroToolTip.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
             // SettingValue
             // 
             this.SettingValue.DisplayMember = "Value";
@@ -75,6 +82,7 @@
             this.SettingValue.Name = "SettingValue";
             this.SettingValue.Size = new System.Drawing.Size(383, 29);
             this.SettingValue.TabIndex = 5;
+            this.SettingValue.UseSelectable = true;
             this.SettingValue.ValueMember = "Key";
             this.SettingValue.SelectionChangeCommitted += new System.EventHandler(this.SettingValue_SelectionChangeCommitted);
             // 
