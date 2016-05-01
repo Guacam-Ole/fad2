@@ -364,7 +364,6 @@ namespace fad2.UI
                 VendorSSID.Value = _settings.AppSsid;
             }
 
-            
 
             var disableDownload = false;
             var disableCommand = false;

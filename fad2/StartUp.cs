@@ -35,7 +35,6 @@ namespace fad2.UI
             ImageSwitcher();
             Application.DoEvents();
             StartConnection();
-            
         }
 
         private void ImageSwitcher()

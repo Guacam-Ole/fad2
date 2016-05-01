@@ -78,7 +78,7 @@ namespace fad2.Backend
                 }
                 catch (WebException ex)
                 {
-                   _log.Error(ex);
+                    _log.Error(ex);
 
                     retryCount++;
                     if (retryCount > _maxRetries)
