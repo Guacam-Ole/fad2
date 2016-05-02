@@ -156,12 +156,7 @@ namespace fad2.UI
                 {(int) ProgramSettings.FileTypes.AllFiles, "All Files"}
             };
             FiletypesToCopy.DataSource = fileTypes.ToList();
-
-            var themes = new Dictionary<int, string>
-            {
-                {(int) ProgramSettings.Themes.Light, "Light"},
-                {(int) ProgramSettings.Themes.Dark, "Dark"}
-            };
+          
         }
 
 
