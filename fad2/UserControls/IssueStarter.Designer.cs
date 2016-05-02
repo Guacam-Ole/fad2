@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.Avatar = new MetroFramework.Controls.MetroTile();
+            this.Date = new MetroFramework.Controls.MetroLabel();
             this.BugTag = new MetroFramework.Controls.MetroTile();
             this.WishTag = new MetroFramework.Controls.MetroTile();
             this.Title = new MetroFramework.Controls.MetroLabel();
@@ -38,7 +39,6 @@
             this.PipelineInProgress = new MetroFramework.Controls.MetroTile();
             this.PipelineDone = new MetroFramework.Controls.MetroTile();
             this.PipelineReleased = new MetroFramework.Controls.MetroTile();
-            this.Date = new MetroFramework.Controls.MetroLabel();
             this.CommentPanel = new MetroFramework.Controls.MetroPanel();
             this.AvatarName = new MetroFramework.Components.MetroToolTip();
             this.Content = new MetroFramework.Controls.MetroTextBox();
@@ -46,18 +46,25 @@
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTile4 = new MetroFramework.Controls.MetroTile();
-            this.Avatar.SuspendLayout();
             this.SuspendLayout();
             // 
             // Avatar
             // 
             this.Avatar.ActiveControl = null;
-            this.Avatar.Controls.Add(this.Date);
             this.Avatar.Location = new System.Drawing.Point(65, 17);
             this.Avatar.Name = "Avatar";
             this.Avatar.Size = new System.Drawing.Size(93, 92);
             this.Avatar.TabIndex = 0;
             this.Avatar.UseSelectable = true;
+            // 
+            // Date
+            // 
+            this.Date.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.Date.Location = new System.Drawing.Point(164, 20);
+            this.Date.Name = "Date";
+            this.Date.Size = new System.Drawing.Size(95, 31);
+            this.Date.TabIndex = 15;
+            this.Date.Text = "01.01.2022";
             // 
             // BugTag
             // 
@@ -88,9 +95,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Title.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.Title.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.Title.Location = new System.Drawing.Point(245, 20);
+            this.Title.Location = new System.Drawing.Point(268, 20);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(555, 31);
+            this.Title.Size = new System.Drawing.Size(532, 31);
             this.Title.TabIndex = 3;
             this.Title.Text = "Something is wrong in denmark!";
             // 
@@ -160,15 +167,6 @@
             this.PipelineReleased.TabIndex = 10;
             this.PipelineReleased.Text = "Released";
             this.PipelineReleased.UseSelectable = true;
-            // 
-            // Date
-            // 
-            this.Date.Location = new System.Drawing.Point(3, 3);
-            this.Date.Name = "Date";
-            this.Date.Size = new System.Drawing.Size(87, 23);
-            this.Date.TabIndex = 15;
-            this.Date.Text = "01.01.2022";
-            this.Date.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // CommentPanel
             // 
@@ -276,6 +274,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
+            this.Controls.Add(this.Date);
             this.Controls.Add(this.Content);
             this.Controls.Add(this.CommentPanel);
             this.Controls.Add(this.PipelineReleased);
@@ -291,7 +290,6 @@
             this.MinimumSize = new System.Drawing.Size(0, 300);
             this.Name = "IssueStarter";
             this.Size = new System.Drawing.Size(820, 360);
-            this.Avatar.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

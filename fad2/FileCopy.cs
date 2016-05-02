@@ -15,6 +15,9 @@ using MetroFramework.Controls;
 
 namespace fad2.UI
 {
+    /// <summary>
+    /// Copy Files
+    /// </summary>
     public partial class FileCopy : MetroUserControl
     {
         private readonly bool _autoMode;
@@ -38,7 +41,7 @@ namespace fad2.UI
         /// <summary>
         ///     Automode-Download
         /// </summary>
-        public FileCopy(bool automode)
+        public FileCopy(bool automode=false)
         {
             InitializeComponent();
             _connection = new Connection(_programSettingsFile);
@@ -49,13 +52,7 @@ namespace fad2.UI
                 FileSplitter.Panel2.Hide();
             }
         }
-
-        /// <summary>
-        /// Constructor for Designer
-        /// </summary>
-        public FileCopy()
-        {
-        }
+    
 
         /// <summary>
         ///     Load Contents from Flashair
@@ -554,22 +551,30 @@ namespace fad2.UI
                             }
                         }
                         if (sourceFileStream == null) continue;
-                        using (var fileStream = File.Create(targetFile))
+                        try
                         {
-                            try
+                            using (var fileStream = File.Create(targetFile))
                             {
-                                sourceFileStream.CopyTo(fileStream);
-                                lastSize = fileStream.Length;
+                                try
+                                {
+                                    sourceFileStream.CopyTo(fileStream);
+                                    lastSize = fileStream.Length;
+                                }
+                                catch (Exception ex)
+                                {
+                                    _log.Error(ex);
+                                    doDelete = false;
+                                }
                             }
-                            catch (Exception ex)
+                            duration = DateTime.Now - startTick;
+                            if (doDelete)
                             {
-                                _log.Error(ex);
+                                _connection.DeleteFile(fileInfo.Directory, fileInfo.Filename);
                             }
                         }
-                        duration = DateTime.Now - startTick;
-                        if (doDelete)
+                        catch (Exception ex)
                         {
-                            _connection.DeleteFile(fileInfo.Directory, fileInfo.Filename);
+                               _log.Error(ex);
                         }
                     }
                     counter++;
