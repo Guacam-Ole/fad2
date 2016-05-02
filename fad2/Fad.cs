@@ -26,16 +26,11 @@ namespace fad2.UI
         {
             InitializeComponent();
             ShowLoader();
-            CheckForUpdates();
+            _log.Debug($"FlashAirDownloader v{Application.ProductVersion}");
 
         }
 
-        private void CheckForUpdates()
-        {
-
-        
-        }
-
+      
         /// <summary>
         /// Show Loading Tile
         /// </summary>
