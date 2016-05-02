@@ -18,6 +18,7 @@ namespace fad2.Backend
     {
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+
         public Update()
         {
             UpdateManager updManager = UpdateManager.Instance;
@@ -74,7 +75,7 @@ namespace fad2.Backend
             UpdateManager updManager = UpdateManager.Instance;
             try
             {
-                updManager.ApplyUpdates(true, true,true);
+                updManager.ApplyUpdates(true, true, true);
             }
             catch (Exception ex)
             {

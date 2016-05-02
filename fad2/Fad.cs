@@ -24,13 +24,13 @@ namespace fad2.UI
         /// </summary>
         public Fad()
         {
+            
             InitializeComponent();
             ShowLoader();
+            var update = new Update(); // this finishes waiting updates
             _log.Debug($"FlashAirDownloader v{Application.ProductVersion}");
-
         }
-
-      
+                 
         /// <summary>
         /// Show Loading Tile
         /// </summary>
