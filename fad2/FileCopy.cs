@@ -79,16 +79,18 @@ namespace fad2.UI
                     _selectedFilesLeft.Add(fileInfo.Filename);
                 }
             }
-            var worker = new BackgroundWorker();
+            var worker = new BackgroundWorker
+            {
+                WorkerSupportsCancellation = false,
+                WorkerReportsProgress = true
+            };
 
-            ProgressPanel.Visible = true;
 
-            worker.WorkerSupportsCancellation = false;
-            worker.WorkerReportsProgress = true;
             worker.DoWork += WorkerCopyFilesDoWork;
             worker.ProgressChanged += WorkerCopyFilesProgressChanged;
             worker.RunWorkerCompleted += WorkerCopyFilesCompleted;
-
+            ProgressPanel.Visible = true;
+            Application.DoEvents();
             worker.RunWorkerAsync();
         }
 
@@ -111,6 +113,7 @@ namespace fad2.UI
 
         private void WorkerCopyFilesProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            ProgressPanel.Visible = true;
             var worker = (BackgroundWorker) sender;
             Progress.Maximum = 100;
             Progress.Value = e.ProgressPercentage;
@@ -235,6 +238,7 @@ namespace fad2.UI
         private void WorkerListFilesCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ResizeTiles(LeftPanel);
+            Application.DoEvents();
             if (_connection.Settings.LoadThumbs)
             {
                 LoadFlashairThumbsAsync();
@@ -248,8 +252,8 @@ namespace fad2.UI
             }
             ProgressPanel.Visible = false;
 
-            RemoveMarkedElements();
-            EnablePanels();
+            //RemoveMarkedElements();
+            //EnablePanels();
         }
 
         private void WorkerListFilesProgressChanged(object sender, ProgressChangedEventArgs e)
