@@ -1,6 +1,17 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Feed>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feed BaseUrl="https://files.oles-cloud.de/fad2">
   <Tasks>
-	<!-- initial version. Nothing to update -->
+    <FileUpdateTask localPath="fad2.exe" lastModified="131066933482282811" fileSize="236032" version="2.0.1.39874">
+      <Conditions>
+        <FileExistsCondition type="or-not" />
+        <FileVersionCondition type="or" what="below" version="2.0.1.39874" />
+      </Conditions>
+    </FileUpdateTask>
+    <FileUpdateTask localPath="fadBackend.dll" lastModified="131066933479403062" fileSize="43008" version="2.0.1.39873">
+      <Conditions>
+        <FileExistsCondition type="or-not" />
+        <FileVersionCondition type="or" what="below" version="2.0.1.39873" />
+      </Conditions>
+    </FileUpdateTask>
   </Tasks>
 </Feed>

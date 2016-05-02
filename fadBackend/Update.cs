@@ -74,7 +74,7 @@ namespace fad2.Backend
             UpdateManager updManager = UpdateManager.Instance;
             try
             {
-                updManager.ApplyUpdates(true, true,false);
+                updManager.ApplyUpdates(true, true,true);
             }
             catch (Exception ex)
             {
