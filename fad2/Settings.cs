@@ -200,6 +200,11 @@ namespace fad2.UI
 
         private void SettingsPanel_Resize(object sender, EventArgs e)
         {
+            if (_programSettings == null)
+            {
+                return; // Settings not loaded yet
+            }
+
             if (!_programSettings.ShowTiles)
             {
                 return;
