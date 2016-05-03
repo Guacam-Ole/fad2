@@ -68,9 +68,8 @@
     <Reference Include="MetroFramework.Fonts">
       <HintPath>..\lib\MetroFramework.Fonts.dll</HintPath>
     </Reference>
-    <Reference Include="NAppUpdate.Framework, Version=0.4.0.0, Culture=neutral, PublicKeyToken=d1f1d1f19f9e5a56, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAppUpdate.Framework.0.4.0.0\lib\net35\NAppUpdate.Framework.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="NAppUpdate.Framework">
+      <HintPath>..\..\nappupdate\NAppUpdate-master\src\NAppUpdate.Framework\bin\Release\NAppUpdate.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

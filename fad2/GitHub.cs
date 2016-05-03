@@ -42,7 +42,7 @@ namespace fad2.UI
             var counter = 0;
             Controls.Clear();
 
-            foreach (var issue in allIssues)
+            foreach (var issue in allIssues.OrderBy(issue=>issue.CreatedAt))
             {
                 counter++;
                 var starter = new IssueStarter

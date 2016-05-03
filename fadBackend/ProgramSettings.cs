@@ -74,18 +74,15 @@ namespace fad2.Backend
             Copy = 3
         }
 
+        /// <summary>
+        /// Service-Options
+        /// </summary>
         public enum ServiceOption
         {
             Install = 0,
             Uninstall = 1,
             Start = 2,
             Stop = 3
-        }
-
-        public enum Themes
-        {
-            Light = 0,
-            Dark = 1
         }
 
         /// <summary>

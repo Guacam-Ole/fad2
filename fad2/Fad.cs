@@ -24,9 +24,11 @@ namespace fad2.UI
         /// </summary>
         public Fad()
         {
+            
             InitializeComponent();
             ShowLoader();
             CheckForUpdates();
+                   _log.Debug($"FlashAirDownloader v{Application.ProductVersion}");
         }
 
         private void CheckForUpdates()
@@ -36,9 +38,8 @@ namespace fad2.UI
             {
                 CheckForUpdates(true);
             }
-            _log.Debug($"FlashAirDownloader v{Application.ProductVersion}");
         }
-
+                 
         /// <summary>
         /// Show Loading Tile
         /// </summary>
@@ -64,9 +65,6 @@ namespace fad2.UI
         {
             Close();
         }
-      
-
-      
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -111,7 +109,7 @@ namespace fad2.UI
             _log.Debug("Update state was reset to NotChecked");
         }
 
-        private void CheckForUpdates(bool silent=false)
+        private void CheckForUpdates(bool silent)
         {
             var update = new Update();
             if (update.CheckForUpdate())
@@ -131,7 +129,7 @@ namespace fad2.UI
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-             CheckForUpdates();
+             CheckForUpdates(false);
         }
 
         private void licenseToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -152,6 +150,11 @@ namespace fad2.UI
         private void watchLogfileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start(Path.Combine(Application.StartupPath, "fad2.log"));
+        }
+
+        private void userHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://dotnet.work/fad2");
         }
     }
 }

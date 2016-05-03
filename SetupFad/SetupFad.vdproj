@@ -16,13 +16,13 @@
         "Entry"
         {
         "MsmKey" = "8:_0AD292CBB9BE1A0B426846DF56EAE8CB"
-        "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
+        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_0AD292CBB9BE1A0B426846DF56EAE8CB"
-        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
+        "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -69,6 +69,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8FAD9DAFB21374FE0D1C1F757C887511"
+        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8FAD9DAFB21374FE0D1C1F757C887511"
+        "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_98465858BED7435A8640A469AF06B712"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -76,25 +88,13 @@
         "Entry"
         {
         "MsmKey" = "8:_AAC7F37B32EC45E6F944E67ABA087DFD"
-        "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
+        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_AAC7F37B32EC45E6F944E67ABA087DFD"
-        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C7F575317F12071D833DAC36693D1C39"
         "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C7F575317F12071D833DAC36693D1C39"
-        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,25 +106,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0AD292CBB9BE1A0B426846DF56EAE8CB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AAC7F37B32EC45E6F944E67ABA087DFD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -148,7 +130,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C7F575317F12071D833DAC36693D1C39"
+        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0AD292CBB9BE1A0B426846DF56EAE8CB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AAC7F37B32EC45E6F944E67ABA087DFD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8FAD9DAFB21374FE0D1C1F757C887511"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -169,6 +169,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -179,12 +187,28 @@
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "Compression" = "3:2"
+        "Compression" = "3:3"
         "SignOutput" = "11:FALSE"
         "CertificateFile" = "8:"
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -378,20 +402,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AAC7F37B32EC45E6F944E67ABA087DFD"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8FAD9DAFB21374FE0D1C1F757C887511"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_AAC7F37B32EC45E6F944E67ABA087DFD"
+                    "_8FAD9DAFB21374FE0D1C1F757C887511"
                     {
-                    "Name" = "8:log4net.dll"
+                    "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:log4net.dll"
+            "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_EA4A216377F04539888A4B829256B623"
@@ -409,20 +433,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C7F575317F12071D833DAC36693D1C39"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AAC7F37B32EC45E6F944E67ABA087DFD"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C7F575317F12071D833DAC36693D1C39"
+                    "_AAC7F37B32EC45E6F944E67ABA087DFD"
                     {
-                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Name" = "8:log4net.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_EA4A216377F04539888A4B829256B623"

@@ -15,6 +15,9 @@ using MetroFramework.Controls;
 
 namespace fad2.UI
 {
+    /// <summary>
+    /// Copy Files
+    /// </summary>
     public partial class FileCopy : MetroUserControl
     {
         private readonly bool _autoMode;
@@ -37,7 +40,7 @@ namespace fad2.UI
         /// <summary>
         ///     Automode-Download
         /// </summary>
-        public FileCopy(bool automode)
+        public FileCopy(bool automode=false)
         {
             InitializeComponent();
             _connection = new Connection(_programSettingsFile);
@@ -47,7 +50,8 @@ namespace fad2.UI
                 FileSplitter.Panel2Collapsed = true;
                 FileSplitter.Panel2.Hide();
             }
-        }         
+        }
+    
         /// <summary>
         ///     Load Contents from Flashair
         /// </summary>
@@ -73,16 +77,18 @@ namespace fad2.UI
                     _selectedFilesLeft.Add(fileInfo.Filename);
                 }
             }
-            var worker = new BackgroundWorker();
+            var worker = new BackgroundWorker
+            {
+                WorkerSupportsCancellation = false,
+                WorkerReportsProgress = true
+            };
 
-            ProgressPanel.Visible = true;
 
-            worker.WorkerSupportsCancellation = false;
-            worker.WorkerReportsProgress = true;
             worker.DoWork += WorkerCopyFilesDoWork;
             worker.ProgressChanged += WorkerCopyFilesProgressChanged;
             worker.RunWorkerCompleted += WorkerCopyFilesCompleted;
-
+            ProgressPanel.Visible = true;
+            Application.DoEvents();
             worker.RunWorkerAsync();
         }
 
@@ -105,6 +111,7 @@ namespace fad2.UI
 
         private void WorkerCopyFilesProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            ProgressPanel.Visible = true;
             var worker = (BackgroundWorker) sender;
             Progress.Maximum = 100;
             Progress.Value = e.ProgressPercentage;
@@ -229,6 +236,7 @@ namespace fad2.UI
         private void WorkerListFilesCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             ResizeTiles(LeftPanel);
+            Application.DoEvents();
             if (_connection.Settings.LoadThumbs)
             {
                 LoadFlashairThumbsAsync();
@@ -245,8 +253,6 @@ namespace fad2.UI
                 }
             }
             ProgressPanel.Visible = false;
-            RemoveMarkedElements();
-            EnablePanels();
         }
 
         private void WorkerListFilesProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -548,22 +554,30 @@ namespace fad2.UI
                             }
                         }
                         if (sourceFileStream == null) continue;
-                        using (var fileStream = File.Create(targetFile))
+                        try
                         {
-                            try
+                            using (var fileStream = File.Create(targetFile))
                             {
-                                sourceFileStream.CopyTo(fileStream);
-                                lastSize = fileStream.Length;
+                                try
+                                {
+                                    sourceFileStream.CopyTo(fileStream);
+                                    lastSize = fileStream.Length;
+                                }
+                                catch (Exception ex)
+                                {
+                                    _log.Error(ex);
+                                    doDelete = false;
+                                }
                             }
-                            catch (Exception ex)
+                            duration = DateTime.Now - startTick;
+                            if (doDelete)
                             {
-                                _log.Error(ex);
+                                _connection.DeleteFile(fileInfo.Directory, fileInfo.Filename);
                             }
                         }
-                        duration = DateTime.Now - startTick;
-                        if (doDelete)
+                        catch (Exception ex)
                         {
-                            _connection.DeleteFile(fileInfo.Directory, fileInfo.Filename);
+                               _log.Error(ex);
                         }
                     }
                     counter++;

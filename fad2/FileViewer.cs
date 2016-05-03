@@ -1,31 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.IO;
 using MetroFramework.Forms;
 
 namespace fad2.UI
 {
+    /// <summary>
+    /// Generic File Viewer
+    /// </summary>
     public partial class FileViewer : MetroForm
     {
-        public FileViewer(string title="Text viewer", string filename=null)
+        /// <summary>
+        /// File Viewer
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="filename">Filename</param>
+        public FileViewer(string title = "Text viewer", string filename = null)
         {
             InitializeComponent();
             Text = title;
             if (filename != null)
             {
-                    LoadTextFile(filename);
+                LoadTextFile(filename);
             }
         }
 
         private void LoadTextFile(string filename)
         {
-            using (StreamReader sr = File.OpenText(filename))
+            using (var sr = File.OpenText(filename))
             {
                 TextFileContent.Text = string.Empty;
                 string s;

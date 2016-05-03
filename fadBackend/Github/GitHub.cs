@@ -156,7 +156,7 @@ namespace fad2.Backend.Github
                 issue.IsWish = issue.Labels.Any(lb => lb.Name == "enhancement");
             }
             WriteCachedIssues(cacheFileName, issues);
-            return issues;
+            return issues.OrderBy(issue => issue.CreatedAt).ToList();
         }
     }
 }

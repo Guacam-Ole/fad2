@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Windows.Forms;
 using fad2.UI.Properties;
 using MetroFramework.Forms;
 
@@ -17,6 +18,7 @@ namespace fad2.UI
         {
             InitializeComponent();
             AboutMeText.Text = Resources.AboutMe;
+            Text = $"About FlashAirDownloader V. {Application.ProductVersion}";
         }
 
         private void CloseWin_Click(object sender, EventArgs e)
