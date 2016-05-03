@@ -76,6 +76,7 @@ namespace fad2.UI
             Backgroundlocation.Value = _programSettings.ImageBackgroundFolder;
             ShowBackimages.Value = _programSettings.ShowBackgroundImage;
             ShowTiles.Value = _programSettings.ShowTiles;
+            CheckForUpdates.Value = _programSettings.CheckForUpdates;
         }
 
 
@@ -623,6 +624,7 @@ namespace fad2.UI
             _programSettings.ImageBackgroundFolder = Backgroundlocation.Value;
             _programSettings.ShowBackgroundImage = ShowBackimages.Value;
             _programSettings.ShowTiles = ShowTiles.Value;
+            _programSettings.CheckForUpdates = CheckForUpdates.Value;
 
             new FileLoader().SaveProgramSettings(_programSettings, _programSettingsFile);
         }

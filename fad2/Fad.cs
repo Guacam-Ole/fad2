@@ -27,13 +27,16 @@ namespace fad2.UI
             InitializeComponent();
             ShowLoader();
             CheckForUpdates();
-
         }
 
         private void CheckForUpdates()
         {
-
-        
+            var settings = new FileLoader().LoadProgramSettings(Application.StartupPath + "\\fad2.json");
+            if (settings.CheckForUpdates)
+            {
+                CheckForUpdates(true);
+            }
+            _log.Debug($"FlashAirDownloader v{Application.ProductVersion}");
         }
 
         /// <summary>
@@ -61,17 +64,9 @@ namespace fad2.UI
         {
             Close();
         }
+      
 
-        private void Fad_Resize(object sender, EventArgs e)
-        {
-            //   this.Text = $"{Width}x{Height}";
-        }
-
-        private void supportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowIssues();
-        }
-
+      
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -83,23 +78,12 @@ namespace fad2.UI
             ShowLoader();
         }
 
-        private void apiDocumentationforDevelopersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void licenseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start(Path.Combine(Application.StartupPath, "LICENSE.TXT"));
-        }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new About().ShowDialog();
         }
-
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
+     
 
         private void apiDocumentationforDevelopers9ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -127,9 +111,9 @@ namespace fad2.UI
             _log.Debug("Update state was reset to NotChecked");
         }
 
-        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CheckForUpdates(bool silent=false)
         {
-            var update=new Update();
+            var update = new Update();
             if (update.CheckForUpdate())
             {
                 bool install = MetroMessageBox.Show(this, "A new Update is available. Do you want to download and install it?", "Updates found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
@@ -140,8 +124,34 @@ namespace fad2.UI
             }
             else
             {
+                if (silent) return;
                 MetroMessageBox.Show(this, "You already have the most current version", "No Updates found");
             }
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+             CheckForUpdates();
+        }
+
+        private void licenseToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new FileViewer("License", Path.Combine(Application.StartupPath, "LICENSE.TXT")).ShowDialog();
+        }
+
+        private void releaseNotesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new FileViewer("Release Notes", Path.Combine(Application.StartupPath, "RELEASE.TXT")).ShowDialog();
+        }
+
+        private void supportToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowIssues();
+        }
+
+        private void watchLogfileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Path.Combine(Application.StartupPath, "fad2.log"));
         }
     }
 }

@@ -34,7 +34,6 @@ namespace fad2.UI
 
         private List<string> _selectedFilesRight = new List<string>();
 
-
         /// <summary>
         ///     Automode-Download
         /// </summary>
@@ -48,15 +47,7 @@ namespace fad2.UI
                 FileSplitter.Panel2Collapsed = true;
                 FileSplitter.Panel2.Hide();
             }
-        }
-
-        /// <summary>
-        /// Constructor for Designer
-        /// </summary>
-        public FileCopy()
-        {
-        }
-
+        }         
         /// <summary>
         ///     Load Contents from Flashair
         /// </summary>
@@ -248,9 +239,12 @@ namespace fad2.UI
                 {
                     CopyFilesAsync();
                 }
+                else
+                {
+                    EnablePanels();
+                }
             }
             ProgressPanel.Visible = false;
-
             RemoveMarkedElements();
             EnablePanels();
         }

@@ -37,16 +37,21 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.licenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.onlineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setupHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.userHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.apiDocumentationforDevelopers9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MainPanel = new System.Windows.Forms.Panel();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.troubleshootingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.watchLogfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.licenseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.releaseNotesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MainPanel = new System.Windows.Forms.Panel();
             this.FadMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,30 +116,16 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.supportToolStripMenuItem,
-            this.licenseToolStripMenuItem,
             this.toolStripMenuItem5,
             this.onlineHelpToolStripMenuItem,
+            this.localDocumentsToolStripMenuItem,
+            this.troubleshootingToolStripMenuItem,
             this.toolStripMenuItem3,
             this.checkForUpdatesToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(44, 20);
             this.toolStripMenuItem2.Text = "Help";
-            // 
-            // supportToolStripMenuItem
-            // 
-            this.supportToolStripMenuItem.Name = "supportToolStripMenuItem";
-            this.supportToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.supportToolStripMenuItem.Text = "Support";
-            this.supportToolStripMenuItem.Click += new System.EventHandler(this.supportToolStripMenuItem_Click);
-            // 
-            // licenseToolStripMenuItem
-            // 
-            this.licenseToolStripMenuItem.Name = "licenseToolStripMenuItem";
-            this.licenseToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.licenseToolStripMenuItem.Text = "License";
-            this.licenseToolStripMenuItem.Click += new System.EventHandler(this.licenseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -145,6 +136,7 @@
             // 
             this.onlineHelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setupHelpToolStripMenuItem,
+            this.userHelpToolStripMenuItem,
             this.apiDocumentationforDevelopers9ToolStripMenuItem});
             this.onlineHelpToolStripMenuItem.Name = "onlineHelpToolStripMenuItem";
             this.onlineHelpToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
@@ -156,6 +148,12 @@
             this.setupHelpToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.setupHelpToolStripMenuItem.Text = "General Help";
             this.setupHelpToolStripMenuItem.Click += new System.EventHandler(this.setupHelpToolStripMenuItem_Click);
+            // 
+            // userHelpToolStripMenuItem
+            // 
+            this.userHelpToolStripMenuItem.Name = "userHelpToolStripMenuItem";
+            this.userHelpToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.userHelpToolStripMenuItem.Text = "User Help";
             // 
             // apiDocumentationforDevelopers9ToolStripMenuItem
             // 
@@ -169,12 +167,65 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(168, 6);
             // 
+            // checkForUpdatesToolStripMenuItem
+            // 
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
+            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // troubleshootingToolStripMenuItem
+            // 
+            this.troubleshootingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supportToolStripMenuItem1,
+            this.watchLogfileToolStripMenuItem});
+            this.troubleshootingToolStripMenuItem.Name = "troubleshootingToolStripMenuItem";
+            this.troubleshootingToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.troubleshootingToolStripMenuItem.Text = "Troubleshooting";
+            // 
+            // supportToolStripMenuItem1
+            // 
+            this.supportToolStripMenuItem1.Name = "supportToolStripMenuItem1";
+            this.supportToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.supportToolStripMenuItem1.Text = "Support";
+            this.supportToolStripMenuItem1.Click += new System.EventHandler(this.supportToolStripMenuItem1_Click);
+            // 
+            // watchLogfileToolStripMenuItem
+            // 
+            this.watchLogfileToolStripMenuItem.Name = "watchLogfileToolStripMenuItem";
+            this.watchLogfileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.watchLogfileToolStripMenuItem.Text = "Watch Logfile";
+            this.watchLogfileToolStripMenuItem.Click += new System.EventHandler(this.watchLogfileToolStripMenuItem_Click);
+            // 
+            // localDocumentsToolStripMenuItem
+            // 
+            this.localDocumentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.licenseToolStripMenuItem1,
+            this.releaseNotesToolStripMenuItem1});
+            this.localDocumentsToolStripMenuItem.Name = "localDocumentsToolStripMenuItem";
+            this.localDocumentsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.localDocumentsToolStripMenuItem.Text = "Local Documents";
+            // 
+            // licenseToolStripMenuItem1
+            // 
+            this.licenseToolStripMenuItem1.Name = "licenseToolStripMenuItem1";
+            this.licenseToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.licenseToolStripMenuItem1.Text = "License";
+            this.licenseToolStripMenuItem1.Click += new System.EventHandler(this.licenseToolStripMenuItem1_Click);
+            // 
+            // releaseNotesToolStripMenuItem1
+            // 
+            this.releaseNotesToolStripMenuItem1.Name = "releaseNotesToolStripMenuItem1";
+            this.releaseNotesToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.releaseNotesToolStripMenuItem1.Text = "Release Notes";
+            this.releaseNotesToolStripMenuItem1.Click += new System.EventHandler(this.releaseNotesToolStripMenuItem1_Click);
             // 
             // MainPanel
             // 
@@ -185,13 +236,6 @@
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(1065, 483);
             this.MainPanel.TabIndex = 1;
-            // 
-            // checkForUpdatesToolStripMenuItem
-            // 
-            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates";
-            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // Fad
             // 
@@ -208,7 +252,6 @@
             this.Text = "FlashAir Downloader";
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Load += new System.EventHandler(this.Fad_Load);
-            this.Resize += new System.EventHandler(this.Fad_Resize);
             this.FadMenu.ResumeLayout(false);
             this.FadMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -225,10 +268,8 @@
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.ToolStripMenuItem onlineHelpToolStripMenuItem;
@@ -236,6 +277,13 @@
         private System.Windows.Forms.ToolStripMenuItem apiDocumentationforDevelopers9ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem userHelpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem troubleshootingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem watchLogfileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem localDocumentsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem licenseToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem releaseNotesToolStripMenuItem1;
     }
 }
 

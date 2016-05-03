@@ -172,5 +172,10 @@ namespace fad2.Backend
         /// Show Image-Tiles in Settings-Menu?
         /// </summary>
         public bool ShowTiles { get; set; } = true;
+
+        /// <summary>
+        /// Automatically check for Updates on start
+        /// </summary>
+        public bool CheckForUpdates { get; set; }
     }
 }
