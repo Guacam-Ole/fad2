@@ -88,7 +88,7 @@ namespace fad2.UI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".mov,.mpg,.mpeg,.mkv,.avi")]
+        [global::System.Configuration.DefaultSettingValueAttribute(".mov,.mpg,.mpeg,.mkv,.avi,.mts")]
         public string VideoFileTypes {
             get {
                 return ((string)(this["VideoFileTypes"]));
