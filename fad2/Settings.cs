@@ -61,7 +61,7 @@ namespace fad2.UI
         private void LoadProgramSettings()
         {
             _programSettings = new FileLoader().LoadProgramSettings(_programSettingsFile);
-            ApplicationUrl.Text = _programSettings.FlashAirUrl;
+            ApplicationUrl.Value = _programSettings.FlashAirUrl;
             LocalPath.Value = _programSettings.LocalPath;
             FilesExist.Value = _programSettings.ExistingFiles;
             DeleteFiles.Value = _programSettings.DeleteFiles;
