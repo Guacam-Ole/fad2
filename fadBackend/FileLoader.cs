@@ -83,7 +83,7 @@ namespace fad2.Backend
         /// <param name="version">FAD-Version</param>
         /// <param name="fileName">Filename</param>
         /// <param name="settings">Settings</param>
-        public void SaveToFile(string version, string fileName, Settings settings)
+        public bool SaveToFile(string version, string fileName, Settings settings)
         {
             var configFileContent = new List<string>();
             Dictionary<string, string> vendorValues;
@@ -106,7 +106,27 @@ namespace fad2.Backend
                 configFileContent.AddRange(sdWlanValues.Select(pair => $"{pair.Key}={pair.Value}"));
                 configFileContent.Add(string.Empty);
             }
-            File.WriteAllLines(fileName, configFileContent);
+            try
+            {
+                using (FileStream fs = new FileStream(fileName, FileMode.Open))
+                {
+                    using (TextWriter tw = new StreamWriter(fs))
+                    {
+                        foreach (var line in configFileContent)
+                        {
+                            tw.WriteLine(line);
+                        }
+                        tw.Close();
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                return false;
+            }
+
         }
 
         private void GetCategorizedValues(Settings settings, out Dictionary<string, string> vendorValues, out Dictionary<string, string> sdWlanValues)

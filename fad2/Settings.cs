@@ -436,7 +436,14 @@ namespace fad2.UI
         {
             ReadFlashairSettings();
             var fl = new FileLoader();
-            fl.SaveToFile(Application.ProductVersion, fileName, _settings);
+            if (fl.SaveToFile(Application.ProductVersion, fileName, _settings))
+            {
+                MetroMessageBox.Show(this, "Settings saved", "Flashair-Settings");
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Saving Settings FAILED. Please check if the file/card is write protected.", "Flashair-Settings", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SaveFlashairSettingsToFile()
