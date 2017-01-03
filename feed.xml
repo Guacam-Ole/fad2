@@ -1,16 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Feed BaseUrl="https://files.oles-cloud.de/fad2">
   <Tasks>
-    <FileUpdateTask localPath="fad2.exe" lastModified="131067010838502819" fileSize="236032" version="2.0.1.541">
+    <FileUpdateTask localPath="fad2.exe" lastModified="131078724671888589" fileSize="351232" version="2.0.3.24633">
       <Conditions>
         <FileExistsCondition type="or-not" />
-        <FileVersionCondition type="or" what="below" version="2.0.1.541" />
+        <FileVersionCondition type="or" what="below" version="2.0.3.24633" />
+        <FileDateCondition type="or" what="older" timestamp="131078724671888589" />
       </Conditions>
     </FileUpdateTask>
-    <FileUpdateTask localPath="fadBackend.dll" lastModified="131067010835976333" fileSize="43008" version="2.0.1.541">
+    <FileUpdateTask localPath="fadBackend.dll" lastModified="131078724668771813" fileSize="43520" version="2.0.3.24633">
       <Conditions>
         <FileExistsCondition type="or-not" />
-        <FileVersionCondition type="or" what="below" version="2.0.1.541" />
+        <FileVersionCondition type="or" what="below" version="2.0.3.24633" />
+        <FileDateCondition type="or" what="older" timestamp="131078724668771813" />
+      </Conditions>
+    </FileUpdateTask>
+    <FileUpdateTask localPath="RELEASE.TXT" lastModified="131067771701941194" fileSize="529" version="0.0.0.0">
+      <Conditions>
+        <FileExistsCondition type="or-not" />
+        <FileVersionCondition type="or" what="below" version="0.0.0.0" />
+        <FileDateCondition type="or" what="older" timestamp="131067771701941194" />
       </Conditions>
     </FileUpdateTask>
   </Tasks>

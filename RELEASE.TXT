@@ -1,0 +1,14 @@
+﻿V 2.0
+	Initial Release
+V 2.0.1
+	Bugfixes:
+		Fixed Error which could occur when the Settings-Page is being resized before the Content is loaded		
+		Fixed Issue which stopped the automatic Download if Thumbnails were disabled
+	New Features:
+		Update-Feature
+V 2.0.2
+	Bugfixes:
+		Fixed issue that disabled file selection in Explorer Mode when Thumbnails were disabled
+	New Features:
+		Watch Release Notes, License and Log from within the Application
+		Option added to automaticly check for Updates on Program start

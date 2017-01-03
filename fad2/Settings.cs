@@ -634,6 +634,7 @@ namespace fad2.UI
             _programSettings.CheckForUpdates = CheckForUpdates.Value;
 
             new FileLoader().SaveProgramSettings(_programSettings, _programSettingsFile);
+            new ServiceSettings().Save(_programSettings);
         }
 
         private void SaveProgSettings_Click(object sender, EventArgs e)

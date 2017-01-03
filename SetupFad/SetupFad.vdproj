@@ -15,25 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0AD292CBB9BE1A0B426846DF56EAE8CB"
-        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0AD292CBB9BE1A0B426846DF56EAE8CB"
-        "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_14227C75F5C1A462A2717753846778C9"
-        "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
         "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -69,8 +51,26 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7F49CF477508D495503BE2FDA64898D1"
+        "OwnerKey" = "8:_8B24A438599D15F057066E51C3EFC957"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7F49CF477508D495503BE2FDA64898D1"
+        "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8B24A438599D15F057066E51C3EFC957"
+        "OwnerKey" = "8:_98465858BED7435A8640A469AF06B712"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8FAD9DAFB21374FE0D1C1F757C887511"
-        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
+        "OwnerKey" = "8:_8B24A438599D15F057066E51C3EFC957"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,7 +88,7 @@
         "Entry"
         {
         "MsmKey" = "8:_AAC7F37B32EC45E6F944E67ABA087DFD"
-        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
+        "OwnerKey" = "8:_8B24A438599D15F057066E51C3EFC957"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,6 +112,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8B24A438599D15F057066E51C3EFC957"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_14227C75F5C1A462A2717753846778C9"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -130,13 +136,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_17F31350A1FB90ECCA3BEF73F98AEFC1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0AD292CBB9BE1A0B426846DF56EAE8CB"
+        "OwnerKey" = "8:_7F49CF477508D495503BE2FDA64898D1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -176,6 +176,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0"
+                    }
+                }
             }
         }
         "Release"
@@ -202,10 +210,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    "Name" = "8:Microsoft .NET Framework 4 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0"
                     }
                 }
             }
@@ -230,7 +238,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.5"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.0"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=395269"
                 }
@@ -238,37 +246,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0AD292CBB9BE1A0B426846DF56EAE8CB"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:NAppUpdate.Framework, Version=0.4.0.0, Culture=neutral, PublicKeyToken=d1f1d1f19f9e5a56, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_0AD292CBB9BE1A0B426846DF56EAE8CB"
-                    {
-                    "Name" = "8:NAppUpdate.Framework.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:NAppUpdate.Framework.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_EA4A216377F04539888A4B829256B623"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_14227C75F5C1A462A2717753846778C9"
             {
             "AssemblyRegister" = "3:1"
@@ -283,37 +260,6 @@
                     }
                 }
             "SourcePath" = "8:MetroFramework.Fonts.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_EA4A216377F04539888A4B829256B623"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_17F31350A1FB90ECCA3BEF73F98AEFC1"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:fadBackend, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_17F31350A1FB90ECCA3BEF73F98AEFC1"
-                    {
-                    "Name" = "8:fadBackend.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:fadBackend.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_EA4A216377F04539888A4B829256B623"
@@ -400,6 +346,68 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7F49CF477508D495503BE2FDA64898D1"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:NAppUpdate.Framework, Version=0.4.0.0, Culture=neutral, PublicKeyToken=d1f1d1f19f9e5a56, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_7F49CF477508D495503BE2FDA64898D1"
+                    {
+                    "Name" = "8:NAppUpdate.Framework.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:NAppUpdate.Framework.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_EA4A216377F04539888A4B829256B623"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8B24A438599D15F057066E51C3EFC957"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:fadBackend, Version=2.0.3.34118, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_8B24A438599D15F057066E51C3EFC957"
+                    {
+                    "Name" = "8:fadBackend.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:fadBackend.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_EA4A216377F04539888A4B829256B623"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8FAD9DAFB21374FE0D1C1F757C887511"
@@ -563,7 +571,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FlashairDownloader 2"
         "ProductCode" = "8:{DA9948D9-02B5-4EA1-A43D-D0C4C8A7FA34}"
-        "PackageCode" = "8:{808CC89E-40BE-40C6-A495-067B9128EA15}"
+        "PackageCode" = "8:{85CEFCC4-4AC1-4FD0-A05E-9D5B0DF7D287}"
         "UpgradeCode" = "8:{C36D87AD-1DA2-4CE5-BC44-B04EF964C72E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

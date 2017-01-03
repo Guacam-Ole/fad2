@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="fadAuto.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ProgramSettingsFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">fad2.json</Value>
+    </Setting>
+    <Setting Name="ImageFileTypes" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.png,.ping,.jpg,.jpeg,.tif,.tiff,.raw</Value>
+    </Setting>
+    <Setting Name="VideoFileTypes" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.mov,.mpg,.mpeg,.mkv,.avi,.mts</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
