@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fad2", "fad2\fad2.csproj", "{381A587B-15F6-4E93-8928-A3B16B10BA72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fadBackend", "fadBackend\fadBackend.csproj", "{52246356-773F-45A7-9FED-381B04193C3F}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupFad", "SetupFad\SetupFad.vdproj", "{AE5AE1C4-F8DC-4B12-957F-708BFD03C8CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fadAuto", "fadAuto\fadAuto.csproj", "{EE57D2F5-151B-4C86-85B5-450AA7383E26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{AE5AE1C4-F8DC-4B12-957F-708BFD03C8CB}.Debug|Any CPU.ActiveCfg = Debug
 		{AE5AE1C4-F8DC-4B12-957F-708BFD03C8CB}.Release|Any CPU.ActiveCfg = Release
 		{AE5AE1C4-F8DC-4B12-957F-708BFD03C8CB}.Release|Any CPU.Build.0 = Release
+		{EE57D2F5-151B-4C86-85B5-450AA7383E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE57D2F5-151B-4C86-85B5-450AA7383E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE57D2F5-151B-4C86-85B5-450AA7383E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE57D2F5-151B-4C86-85B5-450AA7383E26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -61,7 +61,7 @@ namespace fad2.UI
         private void LoadProgramSettings()
         {
             _programSettings = new FileLoader().LoadProgramSettings(_programSettingsFile);
-            ApplicationUrl.Text = _programSettings.FlashAirUrl;
+            ApplicationUrl.Value = _programSettings.FlashAirUrl;
             LocalPath.Value = _programSettings.LocalPath;
             FilesExist.Value = _programSettings.ExistingFiles;
             DeleteFiles.Value = _programSettings.DeleteFiles;
@@ -436,7 +436,14 @@ namespace fad2.UI
         {
             ReadFlashairSettings();
             var fl = new FileLoader();
-            fl.SaveToFile(Application.ProductVersion, fileName, _settings);
+            if (fl.SaveToFile(Application.ProductVersion, fileName, _settings))
+            {
+                MetroMessageBox.Show(this, "Settings saved", "Flashair-Settings");
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "Saving Settings FAILED. Please check if the file/card is write protected.", "Flashair-Settings", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SaveFlashairSettingsToFile()
@@ -627,6 +634,7 @@ namespace fad2.UI
             _programSettings.CheckForUpdates = CheckForUpdates.Value;
 
             new FileLoader().SaveProgramSettings(_programSettings, _programSettingsFile);
+            new ServiceSettings().Save(_programSettings);
         }
 
         private void SaveProgSettings_Click(object sender, EventArgs e)
